@@ -1,2 +1,60 @@
-package com.example.tocotoco.feature.login;public class LoginPresenter {
+package com.example.tocotoco.feature.login;
+
+import android.util.Log;
+
+import com.example.tocotoco.dialog.DialogUtils;
+import com.example.tocotoco.model.DataTestResult;
+import com.example.tocotoco.network.TCCCallback;
+import com.example.tocotoco.util.NetworkUtils;
+import com.gemvietnam.base.viper.Presenter;
+import com.gemvietnam.base.viper.interfaces.ContainerView;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Response;
+
+public class LoginPresenter extends Presenter<LoginContract.View, LoginContract.Interactor>
+        implements LoginContract.Presenter {
+
+    public LoginPresenter(ContainerView containerView) {
+        super(containerView);
+    }
+    @Override
+    public void start() {
+
+    }
+
+    @Override
+    public LoginContract.Interactor onCreateInteractor() {
+        return new LoginInteractor(this);
+    }
+
+    @Override
+    public LoginContract.View onCreateView() {
+        return LoginFragment.getInstance();
+    }
+
+    @Override
+    public void getListDataTest() {
+        DialogUtils.showProgressDialog(getViewContext());
+        if (NetworkUtils.isConnect(getViewContext())) {
+            mInteractor.getListDataTest("UserModel.loadData(mView.getViewContext()).getToken()", "fd", "fdsd",
+                    new TCCCallback<DataTestResult>() {
+                        @Override
+                        public void onViettelSuccess(Call<DataTestResult> call, Response<DataTestResult> response) {
+                            if(response != null) {
+                                mView.initListDataTest(response);
+                            }
+                            DialogUtils.dismissProgressDialog();
+                        }
+
+                        @Override
+                        public void onViettelFailure(Call<DataTestResult> call) {
+
+                        }
+                    }
+            );
+        }
+    }
 }

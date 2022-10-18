@@ -1,0 +1,81 @@
+apply plugin: 'com.android.library'
+//apply plugin: 'com.github.dcendents.android-maven' // ADD THIS
+
+group = 'com.github.tuandt-gem'
+android {
+    compileSdkVersion 32
+
+    defaultConfig {
+        compileSdkVersion 30
+        buildToolsVersion '30.0.3'
+        minSdkVersion 24
+        targetSdkVersion 32
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            debuggable false
+        }
+    }
+    buildToolsVersion '30.0.3'
+}
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.3.1'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    implementation "com.jakewharton:butterknife:10.2.3"
+    annotationProcessor "com.jakewharton:butterknife-compiler:10.2.3"
+    implementation "com.squareup.retrofit2:retrofit:2.4.0"
+    implementation "com.squareup.retrofit2:converter-gson:2.4.0"
+    implementation "com.squareup.okhttp3:logging-interceptor:4.9.0"
+    implementation "com.github.bumptech.glide:glide:4.12.0"
+//    implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation "com.google.guava:guava:27.0.1-android"
+    implementation "org.greenrobot:eventbus:3.1.1"
+    // UI test
+//    implementation "com.android.support.test.espresso:espresso-idling-resource:${espressoVersion}"
+    // Resolve conflicts between main and test APK:
+//    androidTestCompile "com.android.support:support-annotations:${supportLibraryVersion}
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
+//    implementation project(':Gensture')
+}
+
+// build a jar with source files
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+
+//task javadoc(type: Javadoc) {
+//    failOnError false
+//    source = android.sourceSets.main.java.sourceFiles
+//    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+//    classpath += configurations.implementation
+//}
+
+// build a jar with javadoc
+//task javadocJar(type: Jar, dependsOn: javadoc) {
+//    classifier = 'javadoc'
+//    from javadoc.destinationDir
+//}
+
+//artifacts {
+//    archives sourcesJar
+//    archives javadocJar
+//}
+
+// uncomment to build a jar file in addition to the default aar file
+//android.libraryVariants.all { variant ->
+//    def name = variant.buildType.name
+//    def task = project.tasks.create "jar${name.capitalize()}", Jar
+//    task.dependsOn variant.javaCompile
+//    task.from variant.javaCompile.destinationDir
+//    artifacts.add('archives', task);
+//}
+
