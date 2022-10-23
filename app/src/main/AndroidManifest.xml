@@ -4,6 +4,8 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <application
         android:allowBackup="true"
@@ -15,15 +17,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Tocotoco"
         tools:targetApi="31">
-
         <activity
-            android:name=".feature.login.LoginActivity"
+            android:name=".home.activityhome.HomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".feature.login.LoginActivity"
+            android:exported="true">
+
 
             <meta-data
                 android:name="android.app.lib_name"
