@@ -6,6 +6,7 @@ import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
 import androidx.annotation.MainThread
 import androidx.fragment.app.Fragment
+import androidx.viewbinding.ViewBinding
 import timber.log.Timber
 import kotlin.LazyThreadSafetyMode.PUBLICATION
 
@@ -14,6 +15,8 @@ abstract class BaseFragment(@LayoutRes layoutRes: Int) : Fragment(layoutRes) {
     // Tag length limit was removed in API 26.
     this::class.java.simpleName
   }
+
+  protected abstract val binding: ViewBinding
 
   protected abstract val viewModel: BaseViewModel
 

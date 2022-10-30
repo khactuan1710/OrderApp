@@ -39,3 +39,13 @@ fun <T : ViewBinding> Activity.viewBinding(bind: (View) -> T): ActivityViewBindi
 @MainThread
 inline fun <reified T : ViewBinding> Activity.viewBinding(): ActivityViewBindingDelegate<T> =
   ActivityViewBindingDelegate.from(viewBindingClazz = T::class.java)
+
+
+@MainThread
+inline fun <reified T : ViewBinding> Fragment.viewBinding(
+  noinline onDestroyView: (T.() -> Unit)? = null
+): FragmentViewBindingDelegate<T> = FragmentViewBindingDelegate.from(
+  fragment = this,
+  viewBindingClazz = T::class.java,
+  onDestroyView = onDestroyView
+)

@@ -13,4 +13,7 @@
     <color name="chungld_black_text">#000000</color>
     <color name="light_blue">#A6AF2E</color>
     <color name="orange">#FFA500</color>
+    <color name="brown">#2E2828</color>
+    <color name="pink">#BD8F8F</color>
+    <color name="grey">#3F3F3F</color>
 </resources>
