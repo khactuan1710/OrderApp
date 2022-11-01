@@ -21,6 +21,12 @@ public class SimpleResult implements Parcelable{
     @SerializedName("needOTP")
     String needOTP;
 
+    @SerializedName("isSuccess")
+    String isSuccess;
+
+    @SerializedName("errorMessage")
+    String errorMessage;
+
     @SerializedName("tranIdTracking")
     String tranIdTracking;
 
@@ -42,6 +48,26 @@ public class SimpleResult implements Parcelable{
                 "errorCode=" + errorCode +
                 ", message='" + message + '\'' +
                 '}';
+    }
+
+    public void setDataVersion(int dataVersion) {
+        this.dataVersion = dataVersion;
+    }
+
+    public String getIsSuccess() {
+        return isSuccess;
+    }
+
+    public void setIsSuccess(String isSuccess) {
+        this.isSuccess = isSuccess;
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 
     public String getNeedOTP() {
