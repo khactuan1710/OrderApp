@@ -7,12 +7,14 @@ import android.location.Location
 import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
+import androidx.core.view.isVisible
 import com.example.tocotoco.R
 import com.example.tocotoco.basekotlin.base.BaseFragment
 import com.example.tocotoco.basekotlin.base.BaseViewModel
 import com.example.tocotoco.basekotlin.extensions.viewBinding
 import com.example.tocotoco.databinding.FragmentHomeBinding
 import com.example.tocotoco.home.activityhome.SpacesItemDecoration
+import com.example.tocotoco.home.homefragment.`object`.Category
 import com.google.android.gms.location.LocationServices
 import java.util.*
 
@@ -26,7 +28,40 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
     override fun setupViews() {
         getLocation()
         setupRecyclerView()
-        requestPermissionLocation()    }
+        requestPermissionLocation()
+    }
+
+    private var viewPagerAdapter: ViewPagerAdapter? = null
+    private var firstPagePosition = 0
+
+    private fun setupTabLayoutWithViewPager(list: List<Category>?, serialStoreId: Int) {
+        list?.let {
+            binding.tabLayout.setData(list.map { it.name.orEmpty() })
+            viewPagerAdapter = ViewPagerAdapter(this, list, serialStoreId)
+            viewPagerAdapter?.let {
+                if (list.isNotEmpty()) {
+                    binding.viewPager.offscreenPageLimit = list.size
+                }
+                binding.viewPager.adapter = it
+            }
+            binding.tabLayout.post {
+                if (isAdded) {
+                    if (firstPagePosition == 0) {
+                        binding.tabLayout.onPagerSelectedAt(firstPagePosition)
+                        binding.viewPager.currentItem = firstPagePosition
+                    } else {
+                        binding.tabLayout.onPagerSelectedAt(binding.viewPager.currentItem)
+                    }
+                    binding.tabLayout.addTabSelectedListener {
+                        binding.viewPager.setCurrentItem(it, true)
+                    }
+                }
+            }
+            binding.viewPager.isVisible = true
+            binding.tabLayout.isVisible = true
+        } ?: kotlin.run {
+        }
+    }
 
     private fun setupRecyclerView() = binding.run {
         val spacingInPixels = resources.getDimensionPixelSize(R.dimen.dimen_16dp)

@@ -1,11 +1,9 @@
-package com.donki.majica.viewbindingdelegate
+package com.example.tocotoco.basekotlin.extensions
 
 import android.app.Activity
 import android.view.View
 import android.view.ViewGroup
 import androidx.viewbinding.ViewBinding
-import com.example.tocotoco.basekotlin.extensions.GetBindMethod
-import com.example.tocotoco.basekotlin.extensions.ensureMainThread
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 

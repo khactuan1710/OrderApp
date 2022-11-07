@@ -66,14 +66,14 @@
             android:layout_marginHorizontal="@dimen/dimen_8dp"
             android:layout_weight="1"
             android:clipToPadding="false"
-            android:hint="Tìm Kiếm"
+            android:hint="@string/home_search"
             android:textColorHint="@color/pink"
             app:endIconDrawable="@drawable/ic_category">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editPassword"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="40dp"
                 android:background="@color/transparent"
                 android:imeOptions="actionDone"
                 android:inputType="text"
@@ -81,7 +81,8 @@
                 android:paddingStart="0dp"
                 android:paddingEnd="0dp"
                 android:singleLine="true"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                tools:ignore="TouchTargetSizeCheck" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -110,8 +111,8 @@
     <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_0dp"
-        android:background="@color/pink"
         android:layout_marginTop="@dimen/dimen_90dp"
+        android:background="@color/pink"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="@+id/materialCardView" />
 
@@ -120,19 +121,21 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_0dp"
         android:layout_marginHorizontal="@dimen/dimen_16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:orientation="vertical"
         android:layout_marginTop="@dimen/dimen_16dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/materialCardView">
 
-        <com.google.android.material.tabs.TabLayout
+        <com.example.tocotoco.basekotlin.extensions.tablayout.TabLayoutView
+            android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_0dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
 
         <androidx.recyclerview.widget.RecyclerView
@@ -141,9 +144,9 @@
             android:layout_height="match_parent"
             android:layout_gravity="fill_horizontal"
             android:layout_marginStart="@dimen/dimen_16dp"
+            android:visibility="gone"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="2"
-            android:visibility="gone"
             tools:listitem="@layout/item_list_tea" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.constraintlayout.widget.ConstraintLayout>

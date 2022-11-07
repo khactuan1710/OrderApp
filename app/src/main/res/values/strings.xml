@@ -6,4 +6,5 @@
 
     <!-- Home -->
     <string name="home_title_location">Location</string>
+    <string name="home_search">Tìm Kiếm</string>
 </resources>

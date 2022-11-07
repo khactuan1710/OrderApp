@@ -1,17 +1,10 @@
 package com.example.tocotoco.basekotlin.extensions
 
 import android.app.Activity
-import android.app.Dialog
-import android.content.Context
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.annotation.IdRes
 import androidx.annotation.MainThread
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
-import com.donki.majica.viewbindingdelegate.ActivityViewBindingDelegate
 
 //
 // Fragment
