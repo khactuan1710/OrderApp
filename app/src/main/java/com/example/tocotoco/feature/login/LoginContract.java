@@ -13,6 +13,7 @@ public interface LoginContract {
     interface Interactor extends IInteractor<Presenter> {
         void getListDataTest(String token, String contractId, String billCycle, TCCCallback<DataTestResult> callback);
         void getListCategories(TCCCallback<CategoriesResult> callback);
+        void getListCategories(TCCCallback<CategoriesResult> callback, int id);
     }
 
     interface View extends PresentView<Presenter> {

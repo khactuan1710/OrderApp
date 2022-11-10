@@ -70,5 +70,9 @@ public class NetWorkController {
         Call<CategoriesResult> call = getAPIBuilder().getListCategories();
         call.enqueue(callback);
     }
+    public static void getListCategories(TCCCallback<CategoriesResult> callback, int id) {
+        Call<CategoriesResult> call = getAPIBuilder().getListCategories(id);
+        call.enqueue(callback);
+    }
 
 }

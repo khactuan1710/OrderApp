@@ -21,4 +21,10 @@ public class LoginInteractor extends Interactor<LoginContract.Presenter>
     public void getListCategories(TCCCallback<CategoriesResult> callback) {
         NetWorkController.getListCategories(callback);
     }
+
+    @Override
+    public void getListCategories(TCCCallback<CategoriesResult> callback, int id) {
+        NetWorkController.getListCategories(callback, id);
+    }
+
 }
