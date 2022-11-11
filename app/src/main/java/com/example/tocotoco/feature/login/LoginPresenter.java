@@ -57,6 +57,41 @@ public class LoginPresenter extends Presenter<LoginContract.View, LoginContract.
 //                    }
 //            );
 //        }
+//        if (NetworkUtils.isConnect(getViewContext())) {
+//            mInteractor.getListCategories(
+//                    new TCCCallback<CategoriesResult>() {
+//                        @Override
+//                        public void onViettelSuccess(Call<CategoriesResult> call, Response<CategoriesResult> response) {
+//                            if(response != null) {
+////                                mView.initListDataTest(response);
+//                            }
+//                            DialogUtils.dismissProgressDialog();
+//                        }
+//
+//                        @Override
+//                        public void onViettelFailure(Call<CategoriesResult> call) {
+//                            if(call != null) {
+//
+//                            }
+//                        }
+//
+//                        @Override
+//                        protected void onViettelFailure(Call<CategoriesResult> call, Response<CategoriesResult> response) {
+//                            super.onViettelFailure(call, response);
+//                        }
+//
+//                        @Override
+//                        public void onFailure(Call<CategoriesResult> call, Throwable t) {
+//                            super.onFailure(call, t);
+//                        }
+//
+//                        @Override
+//                        public void onResponse(Call<CategoriesResult> call, Response<CategoriesResult> response) {
+//                            super.onResponse(call, response);
+//                        }
+//                    }
+//            );
+//        }
         if (NetworkUtils.isConnect(getViewContext())) {
             mInteractor.getListCategories(
                     new TCCCallback<CategoriesResult>() {
@@ -89,7 +124,7 @@ public class LoginPresenter extends Presenter<LoginContract.View, LoginContract.
                         public void onResponse(Call<CategoriesResult> call, Response<CategoriesResult> response) {
                             super.onResponse(call, response);
                         }
-                    }
+                    }, 1
             );
         }
     }
