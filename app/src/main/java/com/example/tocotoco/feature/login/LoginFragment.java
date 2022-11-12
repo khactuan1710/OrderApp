@@ -17,8 +17,6 @@ import retrofit2.Response;
 
 public class LoginFragment extends ViewFragment<LoginContract.Presenter> implements LoginContract.View {
 
-    @BindView(R.id.tv)
-    TextView tv;
 
     public static LoginFragment getInstance() {
         return new LoginFragment();
@@ -31,31 +29,11 @@ public class LoginFragment extends ViewFragment<LoginContract.Presenter> impleme
     @Override
     public void initLayout() {
         super.initLayout();
-        tv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                mPresenter.getListDataTest();
-                NetWorkController.getListCategories(new TCCCallback<CategoriesResult>() {
-                    @Override
-                    public void onViettelSuccess(Call<CategoriesResult> call, Response<CategoriesResult> response) {
-                        if(response != null) {
-                            Log.e("res", response.body().getMessage());
-                        }
-                    }
-
-                    @Override
-                    public void onViettelFailure(Call<CategoriesResult> call) {
-
-                    }
-                }, 1);
-            }
-        });
     }
 
     @Override
     public void initListDataTest(Response<DataTestResult> data) {
         if(data.body() != null) {
-            tv.setText(data.body().getMessage());
         }
     }
 }
