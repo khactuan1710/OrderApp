@@ -34,7 +34,7 @@ public class DomainSwitcher {
         return getApiClient(activeDomain, apiClientClass);
     }
     private String getActiveDomain() {
-        return "https://apivtp.vietteltelecom.vn:6768/myviettel.php/";
+        return "https://www.tocotea.software/api/";
     }
 
     public <T> T getApiClient(String baseUrl, Class<T> apiClientClass) {

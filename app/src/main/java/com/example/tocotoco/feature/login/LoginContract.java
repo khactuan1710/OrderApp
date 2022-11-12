@@ -1,5 +1,6 @@
 package com.example.tocotoco.feature.login;
 
+import com.example.tocotoco.model.CategoriesResult;
 import com.example.tocotoco.model.DataTestResult;
 import com.example.tocotoco.network.TCCCallback;
 import com.gemvietnam.base.viper.interfaces.IInteractor;
@@ -11,6 +12,8 @@ import retrofit2.Response;
 public interface LoginContract {
     interface Interactor extends IInteractor<Presenter> {
         void getListDataTest(String token, String contractId, String billCycle, TCCCallback<DataTestResult> callback);
+        void getListCategories(TCCCallback<CategoriesResult> callback);
+        void getListCategories(TCCCallback<CategoriesResult> callback, int id);
     }
 
     interface View extends PresentView<Presenter> {

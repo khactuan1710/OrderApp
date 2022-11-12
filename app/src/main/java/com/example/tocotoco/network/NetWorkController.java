@@ -7,6 +7,7 @@ import android.os.Build;
 import androidx.annotation.NonNull;
 
 import com.example.tocotoco.domain.DomainSwitcher;
+import com.example.tocotoco.model.CategoriesResult;
 import com.example.tocotoco.model.DataTestResult;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -63,6 +64,14 @@ public class NetWorkController {
 
     public static void getListDataTest(TCCCallback<DataTestResult> callback, String token, String contractId, String billCycle) {
         Call<DataTestResult> call = getAPIBuilder().getListDataTest(token, contractId, billCycle);
+        call.enqueue(callback);
+    }
+    public static void getListCategories(TCCCallback<CategoriesResult> callback) {
+        Call<CategoriesResult> call = getAPIBuilder().getListCategories();
+        call.enqueue(callback);
+    }
+    public static void getListCategories(TCCCallback<CategoriesResult> callback, int id) {
+        Call<CategoriesResult> call = getAPIBuilder().getListCategories(id);
         call.enqueue(callback);
     }
 

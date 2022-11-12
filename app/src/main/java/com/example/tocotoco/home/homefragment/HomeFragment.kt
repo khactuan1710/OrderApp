@@ -13,9 +13,16 @@ import com.example.tocotoco.basekotlin.base.BaseFragment
 import com.example.tocotoco.basekotlin.base.BaseViewModel
 import com.example.tocotoco.basekotlin.extensions.viewBinding
 import com.example.tocotoco.databinding.FragmentHomeBinding
+import com.example.tocotoco.dialog.DialogUtils
 import com.example.tocotoco.home.activityhome.SpacesItemDecoration
-import com.example.tocotoco.home.homefragment.`object`.Category
+import com.example.tocotoco.model.CategoriesResult
+import com.example.tocotoco.network.NetWorkController
+import com.example.tocotoco.network.TCCCallback
+import com.example.tocotoco.util.NetworkUtils
 import com.google.android.gms.location.LocationServices
+import retrofit2.Call
+import retrofit2.Response
+import timber.log.Timber
 import java.util.*
 
 class HomeFragment : BaseFragment(R.layout.fragment_home) {
@@ -25,19 +32,41 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
     override val viewModel: BaseViewModel
         get() = TODO("Not yet implemented")
 
+    private var firstPagePosition = 0
+
     override fun setupViews() {
+        getCategoryList()
         getLocation()
         setupRecyclerView()
         requestPermissionLocation()
     }
 
     private var viewPagerAdapter: ViewPagerAdapter? = null
-    private var firstPagePosition = 0
 
-    private fun setupTabLayoutWithViewPager(list: List<Category>?, serialStoreId: Int) {
+    private fun getCategoryList() {
+        DialogUtils.showProgressDialog(requireActivity())
+        if (NetworkUtils.isConnect(requireActivity())) {
+            NetWorkController.getListCategories(object : TCCCallback<CategoriesResult>() {
+                override fun onViettelSuccess(
+                    call: Call<CategoriesResult>?,
+                    response: Response<CategoriesResult>?
+                ) {
+                    setupTabLayoutWithViewPager(response?.body()?.result)
+                    DialogUtils.dismissProgressDialog()
+                }
+
+                override fun onViettelFailure(call: Call<CategoriesResult>?) {
+                    Timber.tag(call.toString())
+                }
+
+            })
+        }
+    }
+
+    private fun setupTabLayoutWithViewPager(list: List<CategoriesResult.CategoriesResultModel>?) {
         list?.let {
-            binding.tabLayout.setData(list.map { it.name.orEmpty() })
-            viewPagerAdapter = ViewPagerAdapter(this, list, serialStoreId)
+            binding.tabLayout.setData(list.map { it.name })
+            viewPagerAdapter = ViewPagerAdapter(this, list)
             viewPagerAdapter?.let {
                 if (list.isNotEmpty()) {
                     binding.viewPager.offscreenPageLimit = list.size

@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="SliedAnimation">
         <item name="android:windowEnterAnimation">@android:anim/slide_in_left</item>
         <item name="android:windowExitAnimation">@android:anim/slide_out_right</item>
     </style>
+
+    <style name="RadioButtonStyle" parent="Theme.AppCompat.Light">
+        <item name="colorAccent">@color/radiobutton</item>
+        <item name="android:textColorPrimary">@color/black</item>
+        <item name="android:textSize">@dimen/dimen_16sp</item>
+    </style>
+
+    <style name="CheckBoxStyle" parent="Theme.AppCompat.Light">
+        <item name="colorAccent">@color/radiobutton</item>
+        <item name="android:textColorPrimary">@color/black</item>
+        <item name="android:textSize">@dimen/dimen_16sp</item>
+    </style>
+
 </resources>
