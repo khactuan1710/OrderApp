@@ -50,16 +50,21 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
                 override fun onViettelSuccess(
                     call: Call<CategoriesResult>?,
                     response: Response<CategoriesResult>?
-                ) {
-                    setupTabLayoutWithViewPager(response?.body()?.result)
-                    DialogUtils.dismissProgressDialog()
+                )
+                {
+                    if(response != null) {
+
+                    }
+//                    setupTabLayoutWithViewPager(response?.body()?.result)
+//                    DialogUtils.dismissProgressDialog()
                 }
 
                 override fun onViettelFailure(call: Call<CategoriesResult>?) {
                     Timber.tag(call.toString())
+                    DialogUtils.dismissProgressDialog()
                 }
 
-            })
+            }, 1)
         }
     }
 
