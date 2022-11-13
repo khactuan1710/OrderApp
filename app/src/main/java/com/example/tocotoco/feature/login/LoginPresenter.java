@@ -99,6 +99,7 @@ public class LoginPresenter extends Presenter<LoginContract.View, LoginContract.
                         public void onViettelSuccess(Call<CategoriesResult> call, Response<CategoriesResult> response) {
                             if(response != null) {
 //                                mView.initListDataTest(response);
+                                response.body().getResult();
                             }
                             DialogUtils.dismissProgressDialog();
                         }

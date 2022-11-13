@@ -2,6 +2,9 @@ package com.example.tocotoco.network;
 
 import com.example.tocotoco.model.CategoriesResult;
 import com.example.tocotoco.model.DataTestResult;
+import com.example.tocotoco.model.ProductResult;
+import com.example.tocotoco.model.ProductsByCategoryResult;
+import com.example.tocotoco.model.ProductsResult;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -28,4 +31,17 @@ public interface TCCAPI {
     @FormUrlEncoded
     @POST("get_products_by_category")
     Call<CategoriesResult> getListProductById(@Field("id") int id);
+
+    @FormUrlEncoded
+    @POST("product")
+    Call<ProductResult> getProductById(@Field("id") int id);
+
+    @FormUrlEncoded
+    @POST("products")
+    Call<ProductsResult> getListProduct(@Field("token") String token);
+
+    @FormUrlEncoded
+    @POST("get_products_by_category")
+    Call<ProductsByCategoryResult> getListProductByCategory(@Field("id") int id);
+
 }
