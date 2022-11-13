@@ -137,16 +137,5 @@
             android:layout_height="@dimen/dimen_0dp"
             android:layout_weight="1" />
 
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvProduct"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="fill_horizontal"
-            android:layout_marginStart="@dimen/dimen_16dp"
-            android:visibility="gone"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:spanCount="2"
-            tools:listitem="@layout/item_list_tea" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.constraintlayout.widget.ConstraintLayout>

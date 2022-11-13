@@ -14,6 +14,6 @@ internal class ViewPagerAdapter(
 ) {
   override fun getItemCount(): Int = list.size
 
-  override fun createFragment(position: Int): Fragment = ListProductFragment.newInstance(list[position].name)
+  override fun createFragment(position: Int): Fragment = ListProductFragment.newInstance(list[position].id.toString())
 
 }
