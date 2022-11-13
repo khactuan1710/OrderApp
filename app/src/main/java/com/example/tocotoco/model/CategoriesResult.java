@@ -16,7 +16,7 @@ public class CategoriesResult extends SimpleResult{
         this.result = result;
     }
 
-    private class  CategoriesResultModel {
+    public class  CategoriesResultModel {
         @SerializedName("id")
         int id;
         @SerializedName("name")
