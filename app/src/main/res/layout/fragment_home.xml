@@ -68,6 +68,8 @@
             android:clipToPadding="false"
             android:hint="@string/home_search"
             android:textColorHint="@color/pink"
+            app:boxStrokeWidthFocused="0dp"
+            app:boxStrokeWidth="0dp"
             app:endIconDrawable="@drawable/ic_category">
 
             <com.google.android.material.textfield.TextInputEditText
