@@ -4,17 +4,16 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.location.Location
-import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.view.isVisible
+import androidx.viewpager2.widget.ViewPager2
 import com.example.tocotoco.R
 import com.example.tocotoco.basekotlin.base.BaseFragment
 import com.example.tocotoco.basekotlin.base.BaseViewModel
 import com.example.tocotoco.basekotlin.extensions.viewBinding
 import com.example.tocotoco.databinding.FragmentHomeBinding
 import com.example.tocotoco.dialog.DialogUtils
-import com.example.tocotoco.home.activityhome.SpacesItemDecoration
 import com.example.tocotoco.model.CategoriesResult
 import com.example.tocotoco.network.NetWorkController
 import com.example.tocotoco.network.TCCCallback
@@ -36,9 +35,12 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
 
     override fun setupViews() {
         getCategoryList()
-        getLocation()
-        setupRecyclerView()
         requestPermissionLocation()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getLocation()
     }
 
     private var viewPagerAdapter: ViewPagerAdapter? = null
@@ -50,13 +52,9 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
                 override fun onViettelSuccess(
                     call: Call<CategoriesResult>?,
                     response: Response<CategoriesResult>?
-                )
-                {
-                    if(response != null) {
-
-                    }
-//                    setupTabLayoutWithViewPager(response?.body()?.result)
-//                    DialogUtils.dismissProgressDialog()
+                ) {
+                    setupTabLayoutWithViewPager(response?.body()?.result)
+                    DialogUtils.dismissProgressDialog()
                 }
 
                 override fun onViettelFailure(call: Call<CategoriesResult>?) {
@@ -64,7 +62,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
                     DialogUtils.dismissProgressDialog()
                 }
 
-            }, 1)
+            })
         }
     }
 
@@ -87,20 +85,32 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
                         binding.tabLayout.onPagerSelectedAt(binding.viewPager.currentItem)
                     }
                     binding.tabLayout.addTabSelectedListener {
-                        binding.viewPager.setCurrentItem(it, true)
+                        binding.viewPager.setCurrentItem(it, false)
                     }
                 }
             }
+            val callback = object : ViewPager2.OnPageChangeCallback() {
+                override fun onPageScrolled(
+                    position: Int,
+                    positionOffset: Float,
+                    positionOffsetPixels: Int
+                ) {
+                    super.onPageScrolled(position, positionOffset, positionOffsetPixels)
+                    binding.tabLayout.onPagerSelectedAt(position)
+                }
+
+                override fun onPageSelected(position: Int) {
+                    binding.tabLayout.onPagerSelectedAt(position)
+                    firstPagePosition = position
+                }
+            }
+            binding.viewPager.registerOnPageChangeCallback(callback)
             binding.viewPager.isVisible = true
             binding.tabLayout.isVisible = true
         } ?: kotlin.run {
         }
     }
 
-    private fun setupRecyclerView() = binding.run {
-        val spacingInPixels = resources.getDimensionPixelSize(R.dimen.dimen_16dp)
-        rvProduct.addItemDecoration(SpacesItemDecoration(spacingInPixels))
-    }
 
     private fun getLocation() = binding.run {
         val fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
@@ -114,19 +124,22 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         ) {
             requestPermissionLocation()
             return@run
-        }
-        fusedLocationClient.lastLocation
-            .addOnSuccessListener { location: Location? ->
-                val geocoder = Geocoder(requireActivity(), Locale.getDefault())
-                if (location != null) {
-                    val address = geocoder.getFromLocation(
-                        location.latitude,
-                        location.longitude,
-                        1
-                    )[0].getAddressLine(0)
-                    binding.tvLocation.text = address
+        } else {
+            fusedLocationClient.lastLocation
+                .addOnSuccessListener { location: Location? ->
+                    if (activity != null) {
+                        val geocoder = Geocoder(requireActivity(), Locale.getDefault())
+                        if (location != null) {
+                            val address = geocoder.getFromLocation(
+                                location.latitude,
+                                location.longitude,
+                                1
+                            )[0].getAddressLine(0)
+                            binding.tvLocation.text = address
+                        }
+                    }
                 }
-            }
+        }
     }
 
     private fun requestPermissionLocation() = binding.run {
@@ -136,13 +149,13 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         ) { permissions ->
             when {
                 permissions.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) -> {
-                    Log.e("TAG", "setupViews ACCESS_FINE_LOCATION: ")
+                    Timber.tag("setupViews ACCESS_FINE_LOCATION: ")
                 }
                 permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {
-                    Log.e("TAG", "setupViews ACCESS_COARSE_LOCATION: ")
+                    Timber.tag("setupViews ACCESS_COARSE_LOCATION: ")
                 }
                 else -> {
-                    Log.e("TAG", "setupViews no location: ")
+                    Timber.tag("setupViews no location: ")
                 }
             }
         }

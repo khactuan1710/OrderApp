@@ -18,11 +18,14 @@ public interface TCCAPI {
                                          @Field("contractId") String provinceId,
                                          @Field("billCycle") String complainerPhone);
 
-    @FormUrlEncoded
     @POST("product_categories")
     Call<CategoriesResult> getListCategories();
 
     @FormUrlEncoded
-    @POST("product_categories")
+    @POST("product_category")
     Call<CategoriesResult> getListCategories(@Field("id") int id);
+
+    @FormUrlEncoded
+    @POST("get_products_by_category")
+    Call<CategoriesResult> getListProductById(@Field("id") int id);
 }

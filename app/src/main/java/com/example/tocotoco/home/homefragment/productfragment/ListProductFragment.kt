@@ -6,10 +6,19 @@ import com.example.tocotoco.basekotlin.base.BaseFragment
 import com.example.tocotoco.basekotlin.base.BaseViewModel
 import com.example.tocotoco.basekotlin.extensions.viewBinding
 import com.example.tocotoco.databinding.FragmentListProductBinding
+import com.example.tocotoco.dialog.DialogUtils
+import com.example.tocotoco.home.activityhome.SpacesItemDecoration
+import com.example.tocotoco.model.CategoriesResult
+import com.example.tocotoco.network.NetWorkController
+import com.example.tocotoco.network.TCCCallback
+import com.example.tocotoco.util.NetworkUtils
+import retrofit2.Call
+import retrofit2.Response
+import timber.log.Timber
 
 class ListProductFragment : BaseFragment(R.layout.fragment_list_product) {
 
-    private lateinit var titleName: String
+    private var idCategory: String = ""
 
     override val binding: FragmentListProductBinding by viewBinding()
     override val viewModel: BaseViewModel
@@ -17,11 +26,38 @@ class ListProductFragment : BaseFragment(R.layout.fragment_list_product) {
 
 
     override fun setupViews() {
-        binding.tv.text = titleName
+        getProductList(idCategory.toInt())
+        setupRecyclerView()
+    }
+
+    private fun getProductList(id : Int) {
+        DialogUtils.showProgressDialog(requireActivity())
+        if (NetworkUtils.isConnect(requireActivity())) {
+            NetWorkController.getListCategories(object : TCCCallback<CategoriesResult>() {
+                override fun onViettelSuccess(
+                    call: Call<CategoriesResult>?,
+                    response: Response<CategoriesResult>?
+                ) {
+
+                }
+
+                override fun onViettelFailure(call: Call<CategoriesResult>?) {
+                    Timber.tag(call.toString())
+                    DialogUtils.dismissProgressDialog()
+                }
+
+            },id)
+        }
     }
 
     override fun bindViewModel() {
-        TODO()
+        //No TODO here
+    }
+
+    private fun setupRecyclerView() = binding.run {
+        val spacingInPixels = resources.getDimensionPixelSize(R.dimen.dimen_16dp)
+        rvProduct.addItemDecoration(SpacesItemDecoration(spacingInPixels))
+
     }
 
 
@@ -29,7 +65,7 @@ class ListProductFragment : BaseFragment(R.layout.fragment_list_product) {
         @JvmStatic
         fun newInstance(category: String) = ListProductFragment().apply {
             arguments = bundleOf(
-                titleName to category,
+                idCategory to category,
             )
         }
     }
