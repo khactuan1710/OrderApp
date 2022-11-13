@@ -7,14 +7,23 @@
     android:layout_centerHorizontal="true"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_90dp"
         android:orientation="vertical"
-        android:gravity="center"
+        android:paddingHorizontal="@dimen/dimen_15dp"
         android:background="@drawable/subtract"
         >
+        <ImageView
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_back_v4"
+            android:layout_alignParentLeft="true"
+            android:layout_gravity="center_vertical"/>
         <TextView
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
             android:layout_marginBottom="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -22,7 +31,7 @@
             android:textSize="@dimen/dimen_25dp"
             android:fontFamily="@font/fs_pf_beau_sans_pro_bold"
             android:text="Đăng nhập"/>
-    </LinearLayout>
+    </RelativeLayout>
     <ImageView
         android:layout_gravity="center_horizontal"
         android:layout_width="@dimen/dimen_100dp"
