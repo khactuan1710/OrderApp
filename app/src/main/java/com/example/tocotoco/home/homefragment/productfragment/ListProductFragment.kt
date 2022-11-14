@@ -1,6 +1,6 @@
 package com.example.tocotoco.home.homefragment.productfragment
 
-import androidx.core.os.bundleOf
+import android.os.Bundle
 import com.example.tocotoco.R
 import com.example.tocotoco.basekotlin.base.BaseFragment
 import com.example.tocotoco.basekotlin.base.BaseViewModel
@@ -8,7 +8,7 @@ import com.example.tocotoco.basekotlin.extensions.viewBinding
 import com.example.tocotoco.databinding.FragmentListProductBinding
 import com.example.tocotoco.dialog.DialogUtils
 import com.example.tocotoco.home.activityhome.SpacesItemDecoration
-import com.example.tocotoco.model.CategoriesResult
+import com.example.tocotoco.model.ProductsByCategoryResult
 import com.example.tocotoco.network.NetWorkController
 import com.example.tocotoco.network.TCCCallback
 import com.example.tocotoco.util.NetworkUtils
@@ -18,35 +18,50 @@ import timber.log.Timber
 
 class ListProductFragment : BaseFragment(R.layout.fragment_list_product) {
 
-    private var idCategory: String = ""
-
     override val binding: FragmentListProductBinding by viewBinding()
     override val viewModel: BaseViewModel
         get() = TODO()
 
+    private var category: String? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            category = it.getString(ID_CATEGORY)
+        }
+    }
+
+    private val listProductAdapter by lazy(LazyThreadSafetyMode.NONE) {
+        ListProductAdapter()
+    }
 
     override fun setupViews() {
-        getProductList(idCategory.toInt())
         setupRecyclerView()
     }
 
-    private fun getProductList(id : Int) {
+    override fun onResume() {
+        super.onResume()
+        category?.let { getProductList(it.toInt()) }
+    }
+
+    private fun getProductList(id: Int) {
         DialogUtils.showProgressDialog(requireActivity())
         if (NetworkUtils.isConnect(requireActivity())) {
-            NetWorkController.getListCategories(object : TCCCallback<CategoriesResult>() {
+            NetWorkController.getListProductByCategory(object :
+                TCCCallback<ProductsByCategoryResult>() {
                 override fun onViettelSuccess(
-                    call: Call<CategoriesResult>?,
-                    response: Response<CategoriesResult>?
+                    call: Call<ProductsByCategoryResult>?,
+                    response: Response<ProductsByCategoryResult>?
                 ) {
-
-                }
-
-                override fun onViettelFailure(call: Call<CategoriesResult>?) {
-                    Timber.tag(call.toString())
+                    listProductAdapter.submitList(response?.body()?.results)
                     DialogUtils.dismissProgressDialog()
                 }
 
-            },id)
+                override fun onViettelFailure(call: Call<ProductsByCategoryResult>?) {
+                    Timber.tag(call.toString())
+                    DialogUtils.dismissProgressDialog()
+                }
+            }, id)
         }
     }
 
@@ -54,19 +69,21 @@ class ListProductFragment : BaseFragment(R.layout.fragment_list_product) {
         //No TODO here
     }
 
-    private fun setupRecyclerView() = binding.run {
+    private fun setupRecyclerView() = binding.rvProduct.run {
         val spacingInPixels = resources.getDimensionPixelSize(R.dimen.dimen_16dp)
-        rvProduct.addItemDecoration(SpacesItemDecoration(spacingInPixels))
-
+        addItemDecoration(SpacesItemDecoration(spacingInPixels))
+        adapter = listProductAdapter
     }
 
 
     companion object {
+        private var ID_CATEGORY: String = ""
+
         @JvmStatic
         fun newInstance(category: String) = ListProductFragment().apply {
-            arguments = bundleOf(
-                idCategory to category,
-            )
+            arguments = Bundle().apply {
+                putString(ID_CATEGORY, category)
+            }
         }
     }
 }

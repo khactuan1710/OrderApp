@@ -28,9 +28,6 @@ public interface TCCAPI {
     @POST("product_category")
     Call<CategoriesResult> getListCategories(@Field("id") int id);
 
-    @FormUrlEncoded
-    @POST("get_products_by_category")
-    Call<CategoriesResult> getListProductById(@Field("id") int id);
 
     @FormUrlEncoded
     @POST("product")

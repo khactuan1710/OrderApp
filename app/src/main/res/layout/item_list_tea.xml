@@ -20,7 +20,7 @@
         android:layout_marginBottom="@dimen/dimen_16dp">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/appCompatImageView"
+            android:id="@+id/imgProduct"
             android:layout_width="@dimen/dimen_150dp"
             android:layout_height="@dimen/dimen_120dp"
             android:scaleType="centerCrop"
@@ -29,7 +29,7 @@
             app:srcCompat="@drawable/img_tea" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/appCompatTextView2"
+            android:id="@+id/tvTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/dimen_8dp"
@@ -39,7 +39,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appCompatImageView"
+            app:layout_constraintTop_toBottomOf="@+id/imgProduct"
             tools:text="Sữa chua mận hạt sen" />
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -64,25 +64,25 @@
             tools:text="4.9" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/appCompatTextView3"
+            android:id="@+id/tvPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dimen_8dp"
             android:layout_marginTop="@dimen/dimen_8dp"
             android:textColor="@color/light_blue"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appCompatTextView2"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle"
             tools:text="55.000 đ" />
 
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/border_item_button_add"
-            app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView3"
+            app:layout_constraintBottom_toBottomOf="@+id/tvPrice"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias=".9"
-            app:layout_constraintStart_toEndOf="@+id/appCompatTextView3"
-            app:layout_constraintTop_toTopOf="@+id/appCompatTextView3">
+            app:layout_constraintStart_toEndOf="@+id/tvPrice"
+            app:layout_constraintTop_toTopOf="@+id/tvPrice">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="@dimen/dimen_16dp"
