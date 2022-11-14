@@ -2,65 +2,93 @@ package com.example.tocotoco.feature.order;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.tocotoco.R;
+import com.example.tocotoco.databinding.FragmentOrderBinding;
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link OrderFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class OrderFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public OrderFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment OrderFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static OrderFragment newInstance(String param1, String param2) {
-        OrderFragment fragment = new OrderFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private FragmentOrderBinding binding;
+    private int[] titles = new int[]{R.string.giao_hang, R.string.mang_di};
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_order, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_order, container, false);
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        setUpViewPager();
+        onBackActivity();
+    }
+
+    private void onBackActivity() {
+        binding.backActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                requireActivity().onBackPressed();
+            }
+        });
+    }
+
+    private void setUpViewPager() {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(requireActivity());
+        binding.viewPager2.setAdapter(adapter);
+        binding.viewPager2.setOffscreenPageLimit(1);
+        new TabLayoutMediator(binding.tabLayout, binding.viewPager2, new TabLayoutMediator.TabConfigurationStrategy() {
+            @Override
+            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
+                tab.setText(requireContext().getResources().getString(titles[position]));
+            }
+        }).attach();
+
+        for (int i = 0; i < binding.tabLayout.getTabCount(); i++) {
+            TextView textView = (TextView) LayoutInflater.from(requireContext()).inflate(R.layout.custom_tab, null);
+            binding.tabLayout.getTabAt(i).setCustomView(textView);
+        }
+    }
+
+    static class ViewPagerAdapter extends FragmentStateAdapter {
+
+        public ViewPagerAdapter(@NonNull FragmentActivity fragmentActivity) {
+            super(fragmentActivity);
+        }
+
+        @NonNull
+        @Override
+        public Fragment createFragment(int position) {
+            if (position == 0) {
+                return new DeliveryFragment();
+            } else {
+                return new CarriedFragment();
+            }
+        }
+
+        @Override
+        public int getItemCount() {
+            return 2;
+        }
+
     }
 }

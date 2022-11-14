@@ -1,6 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/dp_8">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/img_product"
+        android:layout_width="@dimen/dimen_80dp"
+        android:layout_height="@dimen/dimen_80dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/milk_tea"
+        app:riv_corner_radius="16dp" />
+
+    <TextView
+        android:layout_toStartOf="@id/layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_toEndOf="@id/img_product"
+        android:paddingEnd="@dimen/dimen_20dp"
+        android:text="Trà Sữa Trân Trâu Đường Đen "
+        android:textColor="@color/black"
+        android:textSize="@dimen/dimen_16sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/layout"
+        android:gravity="end"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tv_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_textview2"
+            android:paddingHorizontal="@dimen/dimen_6dp"
+            android:paddingVertical="@dimen/dimen_3dp"
+            android:text="+ thêm"
+            android:gravity="center"
+            android:textColor="@color/radiobutton"
+            android:textSize="@dimen/dimen_12sp"
+            android:textStyle="bold" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_16dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="@dimen/dimen_30dp"
+                android:layout_height="@dimen/dimen_30dp"
+                android:background="@drawable/custom_textview2"
+                android:gravity="center"
+                android:text="-"
+                android:textColor="@color/radiobutton"
+                android:textSize="@dimen/dimen_16dp"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/tv_sl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:paddingStart="@dimen/dimen_20dp"
+                android:paddingEnd="@dimen/dimen_20dp"
+                android:text="1"
+                android:textColor="@color/black"
+                android:textSize="@dimen/dimen_20dp" />
+            <TextView
+                android:layout_width="@dimen/dimen_30dp"
+                android:layout_height="@dimen/dimen_30dp"
+                android:background="@drawable/custom_textview2"
+                android:gravity="center"
+                android:text="+"
+                android:textColor="@color/radiobutton"
+                android:textSize="@dimen/dimen_16dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

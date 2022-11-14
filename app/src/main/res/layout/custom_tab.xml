@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:gravity="center"
+    android:textSize="@dimen/size_20sp"
+    android:layout_gravity="center"
+    android:textStyle="bold"
+    android:id="@android:id/text1"
+    tools:text="nhatthanh"
+    android:padding="16dp"
+    android:background="@drawable/tab_selected"
+    android:textColor="@drawable/tab_text_selected"
+    android:layout_height="wrap_content" />

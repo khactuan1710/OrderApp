@@ -1,98 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".feature.product_detail.ProductDetailActivity">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:gravity="center"
-        android:paddingStart="@dimen/dp_8"
-        android:paddingEnd="@dimen/dp_8">
+    <data>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:src="@drawable/ic_arrow_back_24" />
+    </data>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:text="Chi tiết"
-            android:textColor="@color/black"
-            android:textSize="@dimen/dimen_24dp"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:layout_width="@dimen/dimen_28dp"
-            android:layout_height="@dimen/dimen_28dp"
-            android:layout_alignParentEnd="true"
-            android:src="@drawable/heart" />
-    </RelativeLayout>
-
-    <androidx.core.widget.NestedScrollView
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="?attr/actionBarSize"
+            android:paddingStart="@dimen/dp_8"
+            android:paddingEnd="@dimen/dp_8">
+
+            <ImageView
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:src="@drawable/ic_arrow_back_24" />
+
+            <TextView
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chi tiết"
+                android:textColor="@color/black"
+                android:textSize="@dimen/dimen_24dp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_centerVertical="true"
+                android:layout_width="@dimen/dimen_28dp"
+                android:layout_height="@dimen/dimen_28dp"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/heart" />
+        </RelativeLayout>
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen_16dp"
-                android:layout_marginEnd="@dimen/dimen_16dp"
                 android:orientation="vertical">
 
-                <com.makeramen.roundedimageview.RoundedImageView
-                    android:id="@+id/imageView1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="200dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/dimen_20dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/milk_tea"
-                    app:riv_corner_radius="16dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dimen_16dp"
-                    android:text="Trà sữa trân trâu đường đen "
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/dimen_20dp"
-                    android:textStyle="bold" />
+                    android:layout_marginStart="@dimen/dimen_16dp"
+                    android:layout_marginEnd="@dimen/dimen_16dp"
+                    android:orientation="vertical">
 
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_8"
-                    android:gravity="center">
-
-                    <ImageView
-                        android:id="@+id/img_star"
-                        android:layout_width="@dimen/dimen_20dp"
-                        android:layout_height="@dimen/dimen_20dp"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/star" />
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:id="@+id/imageView1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="200dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/dimen_20dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/milk_tea"
+                        app:riv_corner_radius="16dp" />
 
                     <TextView
-                        android:id="@+id/tv_rate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="4dp"
-                        android:layout_toEndOf="@id/img_star"
-                        android:text="4.9"
+                        android:layout_marginTop="@dimen/dimen_16dp"
+                        android:text="Trà sữa trân trâu đường đen "
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dimen_20dp"
+                        android:textStyle="bold" />
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_8"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:id="@+id/img_star"
+                            android:layout_width="@dimen/dimen_20dp"
+                            android:layout_height="@dimen/dimen_20dp"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/star" />
+
+                        <TextView
+                            android:id="@+id/tv_rate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="4dp"
+                            android:layout_toEndOf="@id/img_star"
+                            android:text="4.9"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/dimen_20dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="4dp"
+                            android:layout_toEndOf="@id/tv_rate"
+                            android:text="(230)"
+                            android:textStyle="normal" />
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_5dp"
+                        android:layout_marginTop="@dimen/dp_8"
+                        android:background="@color/line_large" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_16dp"
+                        android:text="Mô tả"
                         android:textColor="@color/black"
                         android:textSize="@dimen/dimen_20dp"
                         android:textStyle="bold" />
@@ -100,255 +130,17 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="4dp"
-                        android:layout_toEndOf="@id/tv_rate"
-                        android:text="(230)"
-                        android:textStyle="normal" />
-                </RelativeLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dimen_5dp"
-                    android:layout_marginTop="@dimen/dp_8"
-                    android:background="@color/line_large" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dimen_16dp"
-                    android:text="Mô tả"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/dimen_20dp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_8"
-                    android:text="Mỗi ngày với ToCoToCo sẽ là điều tươi mới hơn với trà sữa trân trâu đường đen thơm ngon, bổ dưỡng.
+                        android:layout_marginTop="@dimen/dp_8"
+                        android:text="Mỗi ngày với ToCoToCo sẽ là điều tươi mới hơn với trà sữa trân trâu đường đen thơm ngon, bổ dưỡng.
 Trân trâu đen giòn dai mang lại cmar giác “đã” trong từng ngụm trà sữa"
-                    android:textColor="#B7A9A9"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dimen_16dp"
-                    android:text="Size"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/dimen_20dp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:text="Chọn 1 loại size"
-                    android:textColor="#B7A9A9"
-                    android:textStyle="bold" />
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginTop="@dimen/dimen_22dp"
-                        android:text="55.000đ"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/dimen_16dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:text="50.000đ"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/dimen_16dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginTop="@dimen/dimen_120dp"
-                        android:text="40.000đ"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/dimen_16dp" />
-
-                    <RadioGroup
-                        android:id="@+id/radioGroup"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_8">
-
-                        <RadioButton
-                            android:id="@+id/size_lon"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentStart="true"
-                            android:layout_marginTop="@dimen/dp_8"
-                            android:layout_marginBottom="@dimen/dp_8"
-                            android:text="Lớn"
-                            android:theme="@style/RadioButtonStyle" />
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_alignParentBottom="true"
-                            android:background="@color/line_small" />
-
-                        <RadioButton
-                            android:id="@+id/size_vua"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentStart="true"
-                            android:layout_marginTop="@dimen/dp_8"
-                            android:layout_marginBottom="@dimen/dp_8"
-                            android:text="Vừa"
-                            android:theme="@style/RadioButtonStyle" />
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_alignParentBottom="true"
-                            android:background="@color/line_small" />
-
-                        <RadioButton
-                            android:id="@+id/size_nho"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentStart="true"
-                            android:layout_marginTop="@dimen/dp_8"
-                            android:layout_marginBottom="@dimen/dp_8"
-                            android:text="Nhỏ"
-                            android:theme="@style/RadioButtonStyle" />
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/dimen_5dp"
-                            android:layout_alignParentBottom="true"
-                            android:background="@color/line_large" />
-                    </RadioGroup>
-                </RelativeLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dimen_16dp"
-                    android:text="Topping"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/dimen_20dp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:text="Chọn tối đa 2 loại"
-                    android:textColor="#B7A9A9"
-                    android:textStyle="bold" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dimen_8dp"
-                    android:orientation="vertical">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <CheckBox
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_8"
-                            android:layout_marginBottom="@dimen/dp_8"
-                            android:text="Thạch Trân Trâu Trắng"
-                            android:theme="@style/CheckBoxStyle" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="true"
-                            android:text="10.000đ"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/dimen_16dp" />
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_alignParentBottom="true"
-                            android:background="@color/line_small" />
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <CheckBox
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_8"
-                            android:layout_marginBottom="@dimen/dp_8"
-                            android:text="Kem Phô Mai Macchiato"
-                            android:theme="@style/CheckBoxStyle" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="true"
-                            android:text="10.000đ"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/dimen_16dp" />
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_alignParentBottom="true"
-                            android:background="@color/line_small" />
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <CheckBox
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_8"
-                            android:layout_marginBottom="@dimen/dp_8"
-                            android:text="Sốt Caramel"
-                            android:theme="@style/CheckBoxStyle" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="true"
-                            android:text="10.000đ"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/dimen_16dp" />
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/dimen_5dp"
-                            android:layout_alignParentBottom="true"
-                            android:layout_marginTop="@dimen/dp_8"
-                            android:background="@color/line_large" />
-                    </RelativeLayout>
+                        android:textColor="#B7A9A9"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dimen_16dp"
-                        android:text="Yêu cầu khác (Ghi chú)"
+                        android:text="Size"
                         android:textColor="@color/black"
                         android:textSize="@dimen/dimen_20dp"
                         android:textStyle="bold" />
@@ -357,100 +149,220 @@ Trân trâu đen giòn dai mang lại cmar giác “đã” trong từng ngụm 
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
-                        android:text="Những tùy chọn khác"
+                        android:text="Chọn 1 loại size"
                         android:textColor="#B7A9A9"
                         android:textStyle="bold" />
 
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/dimen_45dp"
-                        android:layout_marginTop="@dimen/dp_8"
-                        android:layout_marginBottom="@dimen/dimen_60dp"
-                        android:background="@drawable/custom_edittext"
-                        android:hint="Thêm ghi chú"
-                        android:paddingLeft="@dimen/dp10" />
-                </LinearLayout>
-
-
-            </LinearLayout>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="@dimen/dimen_16dp"
-                app:cardElevation="@dimen/dimen_16dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingStart="@dimen/dimen_16dp"
-                    android:paddingEnd="@dimen/dimen_16dp">
-
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="@dimen/dp10">
+                        android:layout_height="wrap_content">
 
-                        <TextView
-                            android:layout_width="@dimen/dimen_30dp"
-                            android:layout_height="@dimen/dimen_30dp"
-                            android:layout_toStartOf="@id/tv_sl"
-                            android:background="@drawable/custom_textview"
-                            android:gravity="center"
-                            android:text="-"
-                            android:textColor="@color/radiobutton"
-                            android:textSize="@dimen/dimen_16dp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/tv_sl"
-                            android:layout_width="wrap_content"
+                        <RadioGroup
+                            android:id="@+id/radioGroup"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_centerHorizontal="true"
-                            android:paddingStart="@dimen/dimen_20dp"
-                            android:paddingEnd="@dimen/dimen_20dp"
-                            android:text="1"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/dimen_20dp"
-                            android:textStyle="bold" />
+                            android:layout_marginTop="@dimen/dp_8">
 
-                        <TextView
-                            android:layout_width="@dimen/dimen_30dp"
-                            android:layout_height="@dimen/dimen_30dp"
-                            android:layout_toEndOf="@id/tv_sl"
-                            android:background="@drawable/custom_textview"
-                            android:gravity="center"
-                            android:text="+"
-                            android:textColor="@color/radiobutton"
-                            android:textSize="@dimen/dimen_16dp"
-                            android:textStyle="bold" />
+                            <RadioButton
+                                android:id="@+id/size_lon"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_marginTop="@dimen/dp_8"
+                                android:layout_marginBottom="@dimen/dp_8"
+                                android:text="Lớn"
+                                android:theme="@style/RadioButtonStyle" />
 
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_alignParentBottom="true"
+                                android:background="@color/line_small" />
+
+                            <RadioButton
+                                android:id="@+id/size_vua"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_marginTop="@dimen/dp_8"
+                                android:layout_marginBottom="@dimen/dp_8"
+                                android:text="Vừa"
+                                android:theme="@style/RadioButtonStyle" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_alignParentBottom="true"
+                                android:background="@color/line_small" />
+
+                            <RadioButton
+                                android:id="@+id/size_nho"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_marginTop="@dimen/dp_8"
+                                android:layout_marginBottom="@dimen/dp_8"
+                                android:text="Nhỏ"
+                                android:theme="@style/RadioButtonStyle" />
+
+                        </RadioGroup>
                     </RelativeLayout>
 
-                    <Button
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="@dimen/dp_8"
-                        android:layout_marginBottom="@dimen/dimen_16dp"
-                        android:background="@drawable/custom_buttom"
-                        android:text="Thêm vào giỏ: 53.000đ"
-                        android:textColor="@color/white"
-                        android:textStyle="bold"
-                        app:backgroundTint="@null" />
+                        android:layout_marginTop="@dimen/dimen_16dp"
+                        android:text="Topping"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dimen_20dp"
+                        android:textStyle="bold" />
 
-                    <View
-                        android:layout_width="@dimen/dimen_200dp"
-                        android:layout_height="@dimen/dimen_5dp"
-                        android:layout_gravity="center"
-                        android:background="@drawable/custom_line" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="Chọn 1 loại topping"
+                        android:textColor="#B7A9A9"
+                        android:textStyle="bold" />
+
+                    <RelativeLayout
+                        android:layout_marginBottom="@dimen/dimen_50dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RadioGroup
+                            android:id="@+id/radioGroup2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_8">
+
+                            <RadioButton
+                                android:id="@+id/thach"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_marginTop="@dimen/dp_8"
+                                android:layout_marginBottom="@dimen/dp_8"
+                                android:text="Thạch"
+                                android:theme="@style/RadioButtonStyle" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_alignParentBottom="true"
+                                android:background="@color/line_small" />
+
+                            <RadioButton
+                                android:id="@+id/chanTrauTrang"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_marginTop="@dimen/dp_8"
+                                android:layout_marginBottom="@dimen/dp_8"
+                                android:text="Chân trâu trắng"
+                                android:theme="@style/RadioButtonStyle" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_alignParentBottom="true"
+                                android:background="@color/line_small" />
+
+                            <RadioButton
+                                android:id="@+id/caramen"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_marginTop="@dimen/dp_8"
+                                android:layout_marginBottom="@dimen/dp_8"
+                                android:text="Caramen"
+                                android:theme="@style/RadioButtonStyle" />
+                        </RadioGroup>
+                    </RelativeLayout>
+
                 </LinearLayout>
 
-            </androidx.cardview.widget.CardView>
-        </LinearLayout>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="@dimen/dimen_16dp"
+                    app:cardElevation="@dimen/dimen_16dp">
 
-    </androidx.core.widget.NestedScrollView>
-</LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingStart="@dimen/dimen_16dp"
+                        android:paddingEnd="@dimen/dimen_16dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/dp10">
+
+                            <TextView
+                                android:layout_width="@dimen/dimen_30dp"
+                                android:layout_height="@dimen/dimen_30dp"
+                                android:layout_toStartOf="@id/tv_sl"
+                                android:background="@drawable/custom_textview"
+                                android:gravity="center"
+                                android:text="-"
+                                android:textColor="@color/radiobutton"
+                                android:textSize="@dimen/dimen_16dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tv_sl"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:paddingStart="@dimen/dimen_20dp"
+                                android:paddingEnd="@dimen/dimen_20dp"
+                                android:text="1"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/dimen_20dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="@dimen/dimen_30dp"
+                                android:layout_height="@dimen/dimen_30dp"
+                                android:layout_toEndOf="@id/tv_sl"
+                                android:background="@drawable/custom_textview"
+                                android:gravity="center"
+                                android:text="+"
+                                android:textColor="@color/radiobutton"
+                                android:textSize="@dimen/dimen_16dp"
+                                android:textStyle="bold" />
+
+                        </RelativeLayout>
+
+                        <Button
+                            android:id="@+id/btn_addCard"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/dp_8"
+                            android:layout_marginBottom="@dimen/dimen_16dp"
+                            android:background="@drawable/custom_buttom"
+                            android:text="Thêm vào giỏ: 53.000đ"
+                            android:textAppearance="@style/TextNormal"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            app:backgroundTint="@null" />
+
+                        <View
+                            android:layout_width="@dimen/dimen_200dp"
+                            android:layout_height="@dimen/dimen_5dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/custom_line" />
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+    </LinearLayout>
+
+</layout>
 

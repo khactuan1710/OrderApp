@@ -14,7 +14,7 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="DemoTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="CustomStatusBar" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/black</item>
         <!-- Defining that new color in ColorPrimaryDark -->

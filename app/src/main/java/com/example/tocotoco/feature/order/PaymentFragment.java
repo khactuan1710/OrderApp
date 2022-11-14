@@ -1,38 +1,57 @@
 package com.example.tocotoco.feature.order;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
-import com.example.tocotoco.databinding.ActivityPaymentBinding;
 
 import com.example.tocotoco.R;
+import com.example.tocotoco.databinding.FragmentPaymentBinding;
 
-public class PaymentActivity extends AppCompatActivity {
-    private ActivityPaymentBinding binding;
+public class PaymentFragment extends Fragment {
+    private FragmentPaymentBinding binding;
+    private OrderActivity orderActivity;
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        binding= DataBindingUtil.setContentView(this,R.layout.activity_payment);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_payment, container, false);
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        orderActivity= (OrderActivity) getActivity();
         backActivity();
         payCash();
         payMomo();
     }
 
     private void backActivity() {
-        binding.backActivity.setOnClickListener(view -> onBackPressed());
+        binding.backActivity.setOnClickListener(view -> orderActivity.backFragment());
     }
 
     private void payMomo() {
-        Intent intent = new Intent(this, OrderActivity.class);
-        startActivity(intent);
+        binding.payMomo.setOnClickListener(view -> {
+
+        });
     }
 
     private void payCash() {
-        Intent intent = new Intent(this, OrderActivity.class);
-        startActivity(intent);
+        binding.payCash.setOnClickListener(view -> {
+
+        });
     }
 }

@@ -1,14 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".feature.order.OrderFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <data>
+
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical">
 
-</FrameLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:paddingStart="@dimen/dp_8"
+            android:paddingEnd="@dimen/dp_8">
+
+            <ImageView
+                android:id="@+id/backActivity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_arrow_back_24" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Order"
+                android:textColor="@color/black"
+                android:textSize="@dimen/dimen_24dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:text="Xóa đơn hàng"
+                android:textColor="#FF0000"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_60dp"
+            android:layout_margin="@dimen/dimen_16dp"
+            android:background="@drawable/custom_tablayout"
+            app:tabGravity="fill"
+            app:tabIndicatorHeight="@dimen/dimen_0dp"
+            app:tabMode="fixed"
+            app:tabRippleColor="@null"
+            app:tabTextAppearance="@style/TextNormal" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </androidx.viewpager2.widget.ViewPager2>
+
+    </LinearLayout>
+
+</layout>

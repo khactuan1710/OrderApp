@@ -2,65 +2,96 @@ package com.example.tocotoco.feature.order;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.tocotoco.R;
+import com.example.tocotoco.databinding.FragmentOrderStatusBinding;
+import com.example.tocotoco.model.Status;
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link OrderStatusFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+import java.util.List;
+
 public class OrderStatusFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public OrderStatusFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment OrderStatusFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static OrderStatusFragment newInstance(String param1, String param2) {
-        OrderStatusFragment fragment = new OrderStatusFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private FragmentOrderStatusBinding binding;
+    private OrderActivity orderActivity;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_order_status, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_order_status, container, false);
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        orderActivity = (OrderActivity) getActivity();
+        backFragment();
+        setUpViewPager();
+    }
+
+    private void setUpViewPager() {
+        List<Status> list = getListStatus();
+        ViewPagerAdapter adapter = new ViewPagerAdapter(requireActivity(), list);
+        binding.viewPager2.setAdapter(adapter);
+
+        new TabLayoutMediator(binding.tabLayout, binding.viewPager2, new TabLayoutMediator.TabConfigurationStrategy() {
+            @Override
+            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
+                tab.setText(Status.values()[position].getStatus());
+            }
+        }).attach();
+    }
+
+    private List<Status> getListStatus() {
+        List<Status> list = new ArrayList<>();
+        for (int i = 0; i < Status.values().length; i++) {
+            list.add(Status.values()[i]);
+        }
+        return list;
+    }
+
+    private void backFragment() {
+        binding.backActivity.setOnClickListener(view -> orderActivity.backFragment());
+    }
+
+    static class ViewPagerAdapter extends FragmentStateAdapter {
+        private List<Status> statusList;
+
+        public ViewPagerAdapter(@NonNull FragmentActivity fragmentActivity, List<Status> statusList) {
+            super(fragmentActivity);
+            this.statusList = statusList;
+        }
+
+        @NonNull
+        @Override
+        public Fragment createFragment(int position) {
+            return new OrderDetailFragment();
+        }
+
+        @Override
+        public int getItemCount() {
+            if (statusList != null) {
+                return statusList.size();
+            } else {
+                return 0;
+            }
+        }
     }
 }
