@@ -7,7 +7,6 @@ import com.example.tocotoco.basekotlin.base.BaseViewModel
 import com.example.tocotoco.basekotlin.extensions.viewBinding
 import com.example.tocotoco.databinding.FragmentListProductBinding
 import com.example.tocotoco.dialog.DialogUtils
-import com.example.tocotoco.home.activityhome.SpacesItemDecoration
 import com.example.tocotoco.model.ProductsByCategoryResult
 import com.example.tocotoco.network.NetWorkController
 import com.example.tocotoco.network.TCCCallback
@@ -22,12 +21,10 @@ class ListProductFragment : BaseFragment(R.layout.fragment_list_product) {
     override val viewModel: BaseViewModel
         get() = TODO()
 
-    private var category: String? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            category = it.getString(ID_CATEGORY)
+            it.getString(ID_CATEGORY)?.let { it1 -> getProductList(it1.toInt()) }
         }
     }
 
@@ -39,10 +36,6 @@ class ListProductFragment : BaseFragment(R.layout.fragment_list_product) {
         setupRecyclerView()
     }
 
-    override fun onResume() {
-        super.onResume()
-        category?.let { getProductList(it.toInt()) }
-    }
 
     private fun getProductList(id: Int) {
         DialogUtils.showProgressDialog(requireActivity())
@@ -70,8 +63,6 @@ class ListProductFragment : BaseFragment(R.layout.fragment_list_product) {
     }
 
     private fun setupRecyclerView() = binding.rvProduct.run {
-        val spacingInPixels = resources.getDimensionPixelSize(R.dimen.dimen_16dp)
-        addItemDecoration(SpacesItemDecoration(spacingInPixels))
         adapter = listProductAdapter
     }
 

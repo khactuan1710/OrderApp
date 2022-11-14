@@ -55,6 +55,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
                 ) {
                     setupTabLayoutWithViewPager(response?.body()?.result)
                     DialogUtils.dismissProgressDialog()
+                    binding.root.isVisible = true
                 }
 
                 override fun onViettelFailure(call: Call<CategoriesResult>?) {
