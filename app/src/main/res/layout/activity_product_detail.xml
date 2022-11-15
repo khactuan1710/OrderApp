@@ -77,41 +77,6 @@
                         android:textSize="@dimen/dimen_20dp"
                         android:textStyle="bold" />
 
-                    <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_8"
-                        android:gravity="center">
-
-                        <ImageView
-                            android:id="@+id/img_star"
-                            android:layout_width="@dimen/dimen_20dp"
-                            android:layout_height="@dimen/dimen_20dp"
-                            android:layout_centerVertical="true"
-                            android:src="@drawable/star" />
-
-                        <TextView
-                            android:id="@+id/tv_rate"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_marginStart="4dp"
-                            android:layout_toEndOf="@id/img_star"
-                            android:text="4.9"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/dimen_20dp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_marginStart="4dp"
-                            android:layout_toEndOf="@id/tv_rate"
-                            android:text="(230)"
-                            android:textStyle="normal" />
-                    </RelativeLayout>
-
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dimen_5dp"

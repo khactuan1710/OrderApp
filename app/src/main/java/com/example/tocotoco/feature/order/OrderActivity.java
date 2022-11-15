@@ -34,6 +34,10 @@ public class OrderActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerViewHome,new OrderStatusFragment()).addToBackStack("orderStatusFragment").commit();
     }
 
+    public void goToPayStatusFragment(){
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerViewHome,new PayStatusFragment()).addToBackStack("payStatusFragment").commit();
+    }
+
     public void backFragment(){
         getSupportFragmentManager().popBackStack();
     }

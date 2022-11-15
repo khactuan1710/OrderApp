@@ -40,7 +40,7 @@ public class DeliveryFragment extends Fragment {
     }
 
     private void goToOrderStatusFragment() {
-        binding.btnOrder.setOnClickListener(v -> orderActivity.goToOrderStatusFragment());
+        binding.btnOrder.setOnClickListener(v -> orderActivity.goToPayStatusFragment());
     }
 
     private void goToPaymentFragment() {

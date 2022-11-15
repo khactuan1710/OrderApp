@@ -1,14 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     tools:context=".feature.order.PayStatusFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <data>
+
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical"
+        android:padding="@dimen/dimen_32dp">
 
-</FrameLayout>
+        <ImageView
+            android:layout_marginTop="@dimen/dimen_32dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/logo_success" />
+
+        <TextView
+            android:text="Đơn hàng của bạn đang được giao"
+            android:textSize="@dimen/size_28sp"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/dimen_50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/btn_order"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dimen_100dp"
+            android:layout_marginBottom="@dimen/dimen_16dp"
+            android:background="@drawable/custom_buttom"
+            android:fontFamily="@font/league_spartan_regular"
+            android:padding="@dimen/dp_8"
+            android:text="Theo dõi đơn hàng "
+            android:textAppearance="@style/TextNormal"
+            android:textColor="@color/white"
+            android:textStyle="normal"
+            app:backgroundTint="@null" />
+
+    </LinearLayout>
+
+</layout>
