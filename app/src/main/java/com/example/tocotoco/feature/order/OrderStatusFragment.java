@@ -30,7 +30,7 @@ public class OrderStatusFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_order_status, container, false);
         return binding.getRoot();
@@ -75,7 +75,7 @@ public class OrderStatusFragment extends Fragment {
     }
 
     static class ViewPagerAdapter extends FragmentStateAdapter {
-        private List<Status> statusList;
+        private final List<Status> statusList;
 
         public ViewPagerAdapter(@NonNull FragmentActivity fragmentActivity, List<Status> statusList) {
             super(fragmentActivity);

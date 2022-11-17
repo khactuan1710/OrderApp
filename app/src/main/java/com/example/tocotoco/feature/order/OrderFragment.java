@@ -16,12 +16,11 @@ import android.widget.TextView;
 
 import com.example.tocotoco.R;
 import com.example.tocotoco.databinding.FragmentOrderBinding;
-import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 public class OrderFragment extends Fragment {
     private FragmentOrderBinding binding;
-    private int[] titles = new int[]{R.string.giao_hang, R.string.mang_di};
+    private final int[] titles = new int[]{R.string.giao_hang, R.string.mang_di};
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -30,7 +29,7 @@ public class OrderFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_order, container, false);
         return binding.getRoot();
@@ -45,7 +44,6 @@ public class OrderFragment extends Fragment {
 
     private void onBackActivity() {
         binding.backActivity.setOnClickListener(view -> {
-//                requireActivity().onBackPressed();
             getActivity().getSupportFragmentManager().popBackStack();
         });
     }
@@ -54,12 +52,7 @@ public class OrderFragment extends Fragment {
         ViewPagerAdapter adapter = new ViewPagerAdapter(requireActivity());
         binding.viewPager2.setAdapter(adapter);
         binding.viewPager2.setOffscreenPageLimit(1);
-        new TabLayoutMediator(binding.tabLayout, binding.viewPager2, new TabLayoutMediator.TabConfigurationStrategy() {
-            @Override
-            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-                tab.setText(requireContext().getResources().getString(titles[position]));
-            }
-        }).attach();
+        new TabLayoutMediator(binding.tabLayout, binding.viewPager2, (tab, position) -> tab.setText(requireContext().getResources().getString(titles[position]))).attach();
 
         for (int i = 0; i < binding.tabLayout.getTabCount(); i++) {
             TextView textView = (TextView) LayoutInflater.from(requireContext()).inflate(R.layout.custom_tab, null);
