@@ -86,7 +86,7 @@
             android:id="@+id/tabLayout"
             app:tabGravity="center"
             app:tabIndicatorHeight="@dimen/dimen_0dp"
-            app:tabMode="fixed"
+            app:tabMode="auto"
             app:tabIndicatorGravity="center"
             app:tabRippleColor="@null"
             app:tabTextAppearance="@style/TextNormal"

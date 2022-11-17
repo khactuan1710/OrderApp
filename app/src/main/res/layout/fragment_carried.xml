@@ -32,7 +32,7 @@
                         android:layout_height="wrap_content"
                         android:text="Giao hàng tận nơi"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/dimen_22dp"
+                        android:textSize="@dimen/text_size_22sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -41,7 +41,7 @@
                         android:layout_marginTop="@dimen/dimen_10dp"
                         android:text="ToCo 102 Trần Duy Hưng"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/dimen_20dp"
+                        android:textSize="@dimen/text_size_22sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -49,7 +49,7 @@
                         android:layout_height="wrap_content"
                         android:text="102 Trần Duy Hưng, P.Trung Hòa "
                         android:textColor="@color/color_text_small"
-                        android:textSize="@dimen/dimen_16dp"
+                        android:textSize="@dimen/dimen_16sp"
                         android:textStyle="bold" />
 
                     <EditText
@@ -60,6 +60,7 @@
                         android:background="@drawable/custom_edittext"
                         android:drawableStart="@drawable/icon_edit"
                         android:hint="Thay đổi địa chỉ"
+                        android:gravity="center"
                         android:paddingStart="@dimen/dp10"
                         android:paddingEnd="@dimen/dp10" />
 
@@ -72,6 +73,7 @@
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:layout_width="match_parent"
+                        tools:listitem="@layout/item_product"
                         android:layout_height="wrap_content" />
 
                 </LinearLayout>
@@ -93,7 +95,7 @@
                         android:layout_marginTop="@dimen/dimen_10dp"
                         android:text="Tổng cộng"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/dimen_20dp"
+                        android:textSize="@dimen/size_20sp"
                         android:textStyle="bold" />
 
                     <LinearLayout
@@ -111,9 +113,10 @@
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentStart="true"
                                 android:text="Thành tiền"
-                                android:textSize="@dimen/dimen_16dp" />
+                                android:textSize="@dimen/dimen_16sp" />
 
                             <TextView
+                                android:textSize="@dimen/dimen_16sp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentEnd="true"
@@ -139,7 +142,7 @@
                                 android:layout_alignParentStart="true"
                                 android:text="Số tiền thanh toán"
                                 android:textColor="@color/black"
-                                android:textSize="@dimen/dimen_16dp"
+                                android:textSize="@dimen/dimen_16sp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -149,7 +152,7 @@
                                 android:layout_marginEnd="@dimen/dp10"
                                 android:text="110.000đ"
                                 android:textColor="@color/black"
-                                android:textSize="@dimen/dimen_16dp"
+                                android:textSize="@dimen/dimen_16sp"
                                 android:textStyle="bold" />
                         </RelativeLayout>
                     </LinearLayout>
@@ -169,7 +172,7 @@
                     android:layout_marginTop="@dimen/dimen_20dp"
                     android:text="Thanh toán"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/dimen_20dp"
+                    android:textSize="@dimen/size_20sp"
                     android:textStyle="bold" />
 
                 <RelativeLayout
@@ -188,7 +191,7 @@
                         android:layout_centerVertical="true"
                         android:text="Chọn phương thức thanh toán"
                         android:textColor="#180AC2"
-                        android:textSize="@dimen/dimen_16dp" />
+                        android:textSize="@dimen/dimen_16sp" />
 
                     <ImageView
                         android:layout_width="@dimen/dimen_24dp"
@@ -220,12 +223,11 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/dimen_16dp"
                                 android:layout_marginTop="@dimen/dimen_20dp"
                                 android:text="Giao hàng: 1 Sản phẩm"
                                 android:textColor="#2F2F2F"
                                 android:layout_alignParentStart="true"
-                                android:textSize="@dimen/dimen_20dp"
+                                android:textSize="@dimen/dimen_16sp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -236,7 +238,7 @@
                                 android:text="110.000đ"
                                 android:layout_alignParentEnd="true"
                                 android:textColor="#2F2F2F"
-                                android:textSize="@dimen/dimen_20dp"
+                                android:textSize="@dimen/size_20sp"
                                 android:textStyle="bold" />
 
                         </RelativeLayout>
@@ -246,6 +248,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
+                            android:layout_marginHorizontal="@dimen/dimen_16dp"
                             android:layout_marginTop="@dimen/dp_8"
                             android:layout_marginBottom="@dimen/dimen_16dp"
                             android:background="@drawable/custom_buttom"

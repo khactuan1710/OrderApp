@@ -58,7 +58,7 @@
                 android:gravity="center"
                 android:text="-"
                 android:textColor="@color/radiobutton"
-                android:textSize="@dimen/dimen_16dp"
+                android:textSize="@dimen/dimen_16sp"
                 android:textStyle="bold" />
             <TextView
                 android:id="@+id/tv_sl"
@@ -69,7 +69,7 @@
                 android:paddingEnd="@dimen/dimen_20dp"
                 android:text="1"
                 android:textColor="@color/black"
-                android:textSize="@dimen/dimen_20dp" />
+                android:textSize="@dimen/size_20sp" />
             <TextView
                 android:layout_width="@dimen/dimen_30dp"
                 android:layout_height="@dimen/dimen_30dp"
@@ -77,7 +77,7 @@
                 android:gravity="center"
                 android:text="+"
                 android:textColor="@color/radiobutton"
-                android:textSize="@dimen/dimen_16dp"
+                android:textSize="@dimen/dimen_16sp"
                 android:textStyle="bold" />
         </LinearLayout>
 

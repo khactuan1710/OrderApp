@@ -33,7 +33,7 @@
                         android:layout_height="wrap_content"
                         android:text="Giao hàng tận nơi"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/dimen_22dp"
+                        android:textSize="@dimen/text_size_22sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -42,7 +42,7 @@
                         android:layout_marginTop="@dimen/dimen_10dp"
                         android:text="86. Xuân Phương"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/dimen_20dp"
+                        android:textSize="@dimen/size_20sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -50,7 +50,7 @@
                         android:layout_height="wrap_content"
                         android:text="86 Xuân Phương Đ.Nam Từ Niêm,HN"
                         android:textColor="@color/color_text_small"
-                        android:textSize="@dimen/dimen_16dp"
+                        android:textSize="@dimen/dimen_16sp"
                         android:textStyle="bold" />
 
                     <EditText
@@ -61,6 +61,7 @@
                         android:background="@drawable/custom_edittext"
                         android:drawableStart="@drawable/icon_edit"
                         android:hint="Thay đổi địa chỉ"
+                        android:gravity="center"
                         android:paddingStart="@dimen/dp10"
                         android:paddingEnd="@dimen/dp10" />
 
@@ -94,7 +95,7 @@
                         android:layout_marginTop="@dimen/dimen_10dp"
                         android:text="Tổng cộng"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/dimen_20dp"
+                        android:textSize="@dimen/size_20sp"
                         android:textStyle="bold" />
 
                     <LinearLayout
@@ -112,9 +113,10 @@
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentStart="true"
                                 android:text="Thành tiền"
-                                android:textSize="@dimen/dimen_16dp" />
+                                android:textSize="@dimen/dimen_16sp" />
 
                             <TextView
+                                android:textSize="@dimen/dimen_16sp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentEnd="true"
@@ -139,9 +141,10 @@
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentStart="true"
                                 android:text="Phí giao hàng"
-                                android:textSize="@dimen/dimen_16dp" />
+                                android:textSize="@dimen/dimen_16sp" />
 
                             <TextView
+                                android:textSize="@dimen/dimen_16sp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentEnd="true"
@@ -158,9 +161,10 @@
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentStart="true"
                                 android:text="Miễn phí giao hàng đơn trên 50k"
-                                android:textSize="@dimen/dimen_12dp" />
+                                android:textSize="@dimen/dimen_12sp" />
 
                             <TextView
+                                android:textSize="@dimen/text_size_12sp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentEnd="true"
@@ -186,7 +190,7 @@
                                 android:layout_alignParentStart="true"
                                 android:text="Số tiền thanh toán"
                                 android:textColor="@color/black"
-                                android:textSize="@dimen/dimen_16dp"
+                                android:textSize="@dimen/dimen_16sp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -196,7 +200,7 @@
                                 android:layout_marginEnd="@dimen/dp10"
                                 android:text="110.000đ"
                                 android:textColor="@color/black"
-                                android:textSize="@dimen/dimen_16dp"
+                                android:textSize="@dimen/dimen_16sp"
                                 android:textStyle="bold" />
                         </RelativeLayout>
                     </LinearLayout>
@@ -216,7 +220,7 @@
                     android:layout_marginTop="@dimen/dimen_20dp"
                     android:text="Thanh toán"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/dimen_20dp"
+                    android:textSize="@dimen/dimen_16sp"
                     android:textStyle="bold" />
 
                 <RelativeLayout
@@ -235,7 +239,7 @@
                         android:layout_centerVertical="true"
                         android:text="Chọn phương thức thanh toán"
                         android:textColor="#180AC2"
-                        android:textSize="@dimen/dimen_16dp" />
+                        android:textSize="@dimen/dimen_16sp" />
 
                     <ImageView
                         android:layout_width="@dimen/dimen_24dp"
@@ -268,11 +272,10 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentStart="true"
-                                android:layout_marginStart="@dimen/dimen_16dp"
                                 android:layout_marginTop="@dimen/dimen_20dp"
                                 android:text="Giao hàng: 1 Sản phẩm"
                                 android:textColor="#2F2F2F"
-                                android:textSize="@dimen/dimen_20dp"
+                                android:textSize="@dimen/dimen_16sp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -283,7 +286,7 @@
                                 android:layout_marginTop="@dimen/dimen_28dp"
                                 android:text="110.000đ"
                                 android:textColor="#2F2F2F"
-                                android:textSize="@dimen/dimen_20dp"
+                                android:textSize="@dimen/size_20sp"
                                 android:textStyle="bold" />
 
                         </RelativeLayout>

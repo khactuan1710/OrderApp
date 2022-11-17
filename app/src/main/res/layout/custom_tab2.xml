@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:gravity="center"
+    android:layout_marginVertical="@dimen/dp_8"
     android:orientation="vertical">
 
     <TextView
@@ -11,22 +11,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:layout_gravity="center"
         android:maxLines="2"
+        android:layout_gravity="top"
         android:padding="3dp"
         android:textColor="@drawable/tab_text_selected2"
         android:textSize="@dimen/dimen_14sp"
         android:textStyle="bold"
         tools:text="nhatthanh" />
-<!--    <TextView-->
-<!--        android:id="@android:id/text1"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:gravity="center"-->
-<!--        android:layout_gravity="center"-->
-<!--        android:padding="3dp"-->
-<!--        android:textColor="@drawable/tab_text_selected2"-->
-<!--        android:textSize="@dimen/dimen_14sp"-->
-<!--        android:textStyle="bold"-->
-<!--        tools:text="nhatthanh" />-->
+    <TextView
+        android:id="@android:id/text1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="9:00"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/dp_8"
+        android:padding="3dp"
+        android:textColor="@drawable/tab_text_selected2"
+        android:textSize="@dimen/dimen_14sp"
+        android:textStyle="bold"
+         />
 </LinearLayout>

@@ -26,12 +26,12 @@
                 android:src="@drawable/ic_arrow_back_24" />
 
             <TextView
-                android:layout_centerInParent="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
                 android:text="Chi tiết"
                 android:textColor="@color/black"
-                android:textSize="@dimen/dimen_24dp"
+                android:textSize="@dimen/size_24sp"
                 android:textStyle="bold" />
 
             <ImageView
@@ -74,7 +74,7 @@
                         android:layout_marginTop="@dimen/dimen_16dp"
                         android:text="Trà sữa trân trâu đường đen "
                         android:textColor="@color/black"
-                        android:textSize="@dimen/dimen_20dp"
+                        android:textSize="@dimen/text_size_20sp"
                         android:textStyle="bold" />
 
                     <View
@@ -89,12 +89,13 @@
                         android:layout_marginTop="@dimen/dimen_16dp"
                         android:text="Mô tả"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/dimen_20dp"
+                        android:textSize="@dimen/text_size_20sp"
                         android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_size_16sp"
                         android:layout_marginTop="@dimen/dp_8"
                         android:text="Mỗi ngày với ToCoToCo sẽ là điều tươi mới hơn với trà sữa trân trâu đường đen thơm ngon, bổ dưỡng.
 Trân trâu đen giòn dai mang lại cmar giác “đã” trong từng ngụm trà sữa"
@@ -107,7 +108,7 @@ Trân trâu đen giòn dai mang lại cmar giác “đã” trong từng ngụm 
                         android:layout_marginTop="@dimen/dimen_16dp"
                         android:text="Size"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/dimen_20dp"
+                        android:textSize="@dimen/text_size_20sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -115,6 +116,7 @@ Trân trâu đen giòn dai mang lại cmar giác “đã” trong từng ngụm 
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
                         android:text="Chọn 1 loại size"
+                        android:textSize="@dimen/text_size_16sp"
                         android:textColor="#B7A9A9"
                         android:textStyle="bold" />
 
@@ -136,6 +138,7 @@ Trân trâu đen giòn dai mang lại cmar giác “đã” trong từng ngụm 
                                 android:layout_marginTop="@dimen/dp_8"
                                 android:layout_marginBottom="@dimen/dp_8"
                                 android:text="Lớn"
+                                android:textSize="@dimen/text_size_20sp"
                                 android:theme="@style/RadioButtonStyle" />
 
                             <View
@@ -152,6 +155,7 @@ Trân trâu đen giòn dai mang lại cmar giác “đã” trong từng ngụm 
                                 android:layout_marginTop="@dimen/dp_8"
                                 android:layout_marginBottom="@dimen/dp_8"
                                 android:text="Vừa"
+                                android:textSize="@dimen/text_size_20sp"
                                 android:theme="@style/RadioButtonStyle" />
 
                             <View
@@ -168,6 +172,7 @@ Trân trâu đen giòn dai mang lại cmar giác “đã” trong từng ngụm 
                                 android:layout_marginTop="@dimen/dp_8"
                                 android:layout_marginBottom="@dimen/dp_8"
                                 android:text="Nhỏ"
+                                android:textSize="@dimen/text_size_20sp"
                                 android:theme="@style/RadioButtonStyle" />
 
                         </RadioGroup>
@@ -179,7 +184,7 @@ Trân trâu đen giòn dai mang lại cmar giác “đã” trong từng ngụm 
                         android:layout_marginTop="@dimen/dimen_16dp"
                         android:text="Topping"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/dimen_20dp"
+                        android:textSize="@dimen/size_20sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -187,6 +192,7 @@ Trân trâu đen giòn dai mang lại cmar giác “đã” trong từng ngụm 
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
                         android:text="Chọn 1 loại topping"
+                        android:textSize="@dimen/text_size_16sp"
                         android:textColor="#B7A9A9"
                         android:textStyle="bold" />
 
@@ -203,6 +209,7 @@ Trân trâu đen giòn dai mang lại cmar giác “đã” trong từng ngụm 
 
                             <RadioButton
                                 android:id="@+id/thach"
+                                android:textSize="@dimen/size_20sp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentStart="true"
@@ -223,6 +230,7 @@ Trân trâu đen giòn dai mang lại cmar giác “đã” trong từng ngụm 
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentStart="true"
                                 android:layout_marginTop="@dimen/dp_8"
+                                android:textSize="@dimen/size_20sp"
                                 android:layout_marginBottom="@dimen/dp_8"
                                 android:text="Chân trâu trắng"
                                 android:theme="@style/RadioButtonStyle" />
@@ -239,6 +247,7 @@ Trân trâu đen giòn dai mang lại cmar giác “đã” trong từng ngụm 
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentStart="true"
                                 android:layout_marginTop="@dimen/dp_8"
+                                android:textSize="@dimen/size_20sp"
                                 android:layout_marginBottom="@dimen/dp_8"
                                 android:text="Caramen"
                                 android:theme="@style/RadioButtonStyle" />
@@ -274,7 +283,7 @@ Trân trâu đen giòn dai mang lại cmar giác “đã” trong từng ngụm 
                                 android:gravity="center"
                                 android:text="-"
                                 android:textColor="@color/radiobutton"
-                                android:textSize="@dimen/dimen_16dp"
+                                android:textSize="@dimen/text_size_16sp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -286,7 +295,7 @@ Trân trâu đen giòn dai mang lại cmar giác “đã” trong từng ngụm 
                                 android:paddingEnd="@dimen/dimen_20dp"
                                 android:text="1"
                                 android:textColor="@color/black"
-                                android:textSize="@dimen/dimen_20dp"
+                                android:textSize="@dimen/size_20sp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -297,7 +306,7 @@ Trân trâu đen giòn dai mang lại cmar giác “đã” trong từng ngụm 
                                 android:gravity="center"
                                 android:text="+"
                                 android:textColor="@color/radiobutton"
-                                android:textSize="@dimen/dimen_16dp"
+                                android:textSize="@dimen/dimen_16sp"
                                 android:textStyle="bold" />
 
                         </RelativeLayout>
