@@ -24,5 +24,6 @@
     <color name="color_text_button">#F1C796</color>
     <color name="color_default">#FFA500</color>
     <color name="color_EE0033">#EE0033</color>
+    <color name="green_light">#efece5</color>
 
 </resources>

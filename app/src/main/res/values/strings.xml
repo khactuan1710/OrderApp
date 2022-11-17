@@ -7,4 +7,5 @@
     <!-- Home -->
     <string name="home_title_location">Location</string>
     <string name="home_search">Tìm Kiếm</string>
+    <string name="text_product_favorite">Sản phẩm yêu thích</string>
 </resources>
