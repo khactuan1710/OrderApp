@@ -66,7 +66,7 @@
                 android:layout_height="wrap_content"/>
 
             <ImageView
-                android:src="@drawable/image"
+                android:src="@drawable/order"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/dimen_16dp"
                 android:layout_width="@dimen/dimen_100dp"
@@ -87,22 +87,10 @@
             app:tabGravity="center"
             app:tabIndicatorHeight="@dimen/dimen_0dp"
             app:tabMode="fixed"
+            app:tabIndicatorGravity="center"
             app:tabRippleColor="@null"
             app:tabTextAppearance="@style/TextNormal"
-            android:layout_height="@dimen/dimen_60dp">
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:text="Đang kiểm tra"
-                android:layout_height="wrap_content"/>
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:text="Đang kiểm tra"
-                android:layout_height="wrap_content"/>  <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:text="Đang kiểm tra"
             android:layout_height="wrap_content"/>
-
-        </com.google.android.material.tabs.TabLayout>
 
         <View
             android:layout_width="match_parent"

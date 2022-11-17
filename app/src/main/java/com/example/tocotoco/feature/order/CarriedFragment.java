@@ -1,5 +1,6 @@
 package com.example.tocotoco.feature.order;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,7 +17,6 @@ import com.example.tocotoco.databinding.FragmentCarriedBinding;
 
 public class CarriedFragment extends Fragment {
     private FragmentCarriedBinding binding;
-    private OrderActivity orderActivity;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,16 +34,18 @@ public class CarriedFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        orderActivity = (OrderActivity) getActivity();
         goToFragment();
         goToOrderStatusFragment();
     }
 
     private void goToOrderStatusFragment() {
-        binding.btnOrder.setOnClickListener(v -> orderActivity.goToOrderStatusFragment());
+        binding.btnOrder.setOnClickListener(view -> getActivity().getSupportFragmentManager().
+                beginTransaction().replace(R.id.fragmentContainerViewHome, new OrderStatusFragment()).addToBackStack(null).commit());
     }
 
     private void goToFragment() {
-        binding.btnPayment.setOnClickListener(view -> orderActivity.goToPaymentFragment());
+        binding.btnPayment.setOnClickListener(view ->
+                getActivity().getSupportFragmentManager().
+                        beginTransaction().replace(R.id.fragmentContainerViewHome, new PaymentFragment()).addToBackStack(null).commit());
     }
 }

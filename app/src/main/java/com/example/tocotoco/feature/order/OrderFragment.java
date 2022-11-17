@@ -44,11 +44,9 @@ public class OrderFragment extends Fragment {
     }
 
     private void onBackActivity() {
-        binding.backActivity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                requireActivity().onBackPressed();
-            }
+        binding.backActivity.setOnClickListener(view -> {
+//                requireActivity().onBackPressed();
+            getActivity().getSupportFragmentManager().popBackStack();
         });
     }
 

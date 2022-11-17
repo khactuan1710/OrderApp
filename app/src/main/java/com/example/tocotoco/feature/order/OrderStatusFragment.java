@@ -16,7 +16,6 @@ import android.view.ViewGroup;
 import com.example.tocotoco.R;
 import com.example.tocotoco.databinding.FragmentOrderStatusBinding;
 import com.example.tocotoco.model.Status;
-import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 import java.util.ArrayList;
@@ -24,7 +23,6 @@ import java.util.List;
 
 public class OrderStatusFragment extends Fragment {
     private FragmentOrderStatusBinding binding;
-    private OrderActivity orderActivity;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,7 +39,6 @@ public class OrderStatusFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        orderActivity = (OrderActivity) getActivity();
         backFragment();
         setUpViewPager();
     }
@@ -51,24 +48,30 @@ public class OrderStatusFragment extends Fragment {
         ViewPagerAdapter adapter = new ViewPagerAdapter(requireActivity(), list);
         binding.viewPager2.setAdapter(adapter);
 
-        new TabLayoutMediator(binding.tabLayout, binding.viewPager2, new TabLayoutMediator.TabConfigurationStrategy() {
-            @Override
-            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-                tab.setText(Status.values()[position].getStatus());
-            }
-        }).attach();
+        new TabLayoutMediator(binding.tabLayout, binding.viewPager2, (tab, position) -> tab.setText(Status.values()[position].getStatus())).attach();
+
+        for (int i = 0; i < binding.tabLayout.getTabCount(); i++) {
+            binding.tabLayout.getTabAt(i).setCustomView(R.layout.custom_tab2);
+        }
     }
 
     private List<Status> getListStatus() {
+        Bundle bundle=this.getArguments();
         List<Status> list = new ArrayList<>();
         for (int i = 0; i < Status.values().length; i++) {
-            list.add(Status.values()[i]);
+            if (bundle!=null){
+                list.add(Status.values()[i]);
+            }else {
+                if (!Status.values()[i].getStatus().equals(Status.DA_DEN_NOI.getStatus())) {
+                    list.add(Status.values()[i]);
+                }
+            }
         }
         return list;
     }
 
     private void backFragment() {
-        binding.backActivity.setOnClickListener(view -> orderActivity.backFragment());
+        binding.backActivity.setOnClickListener(view -> getActivity().getSupportFragmentManager().popBackStack());
     }
 
     static class ViewPagerAdapter extends FragmentStateAdapter {

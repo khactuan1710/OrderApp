@@ -16,7 +16,7 @@ import com.example.tocotoco.databinding.FragmentPaymentBinding;
 
 public class PaymentFragment extends Fragment {
     private FragmentPaymentBinding binding;
-    private OrderActivity orderActivity;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,14 +33,13 @@ public class PaymentFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        orderActivity= (OrderActivity) getActivity();
         backActivity();
         payCash();
         payMomo();
     }
 
     private void backActivity() {
-        binding.backActivity.setOnClickListener(view -> orderActivity.backFragment());
+        binding.backActivity.setOnClickListener(view -> getActivity().getSupportFragmentManager().popBackStack());
     }
 
     private void payMomo() {

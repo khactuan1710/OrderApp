@@ -1,7 +1,7 @@
 package com.example.tocotoco.model;
 
 public enum Status {
-    DANG_KIEM_TRA("Đang kiểm tra"), DANG_CHUAN_BI("Đang chuẩn bị"), DA_HOAN_THANH("Đã hoàn thành");
+    DANG_KIEM_TRA("Đang kiểm tra"), DANG_CHUAN_BI("Đang chuẩn bị"), DA_HOAN_THANH("Đã hoàn thành"),DA_DEN_NOI("Đã đến nơi");
 
     private String status;
 
