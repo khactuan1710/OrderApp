@@ -1,5 +1,6 @@
 package com.example.tocotoco.feature.order;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 
 import com.example.tocotoco.R;
 import com.example.tocotoco.databinding.FragmentOrderBinding;
+import com.example.tocotoco.feature.product_detail.ProductDetailActivity;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 public class OrderFragment extends Fragment {
@@ -44,7 +46,8 @@ public class OrderFragment extends Fragment {
 
     private void onBackActivity() {
         binding.backActivity.setOnClickListener(view -> {
-            getActivity().getSupportFragmentManager().popBackStack();
+//            getActivity().getSupportFragmentManager().popBackStack();
+            startActivity(new Intent(requireContext(), ProductDetailActivity.class));
         });
     }
 

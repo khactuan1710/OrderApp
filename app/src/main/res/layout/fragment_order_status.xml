@@ -46,6 +46,7 @@
             <TextView
                 android:text="Đơn hàng đang được kiểm tra"
                 android:layout_gravity="center"
+                android:id="@+id/tv_order_status"
                 android:textSize="@dimen/size_20sp"
                 android:textStyle="bold"
                 android:gravity="center"
@@ -53,6 +54,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <TextView
+                android:id="@+id/btn_destroy"
                 android:background="@drawable/custom_edittext"
                 app:backgroundTint="@null"
                 android:text="Hủy đơn hàng"

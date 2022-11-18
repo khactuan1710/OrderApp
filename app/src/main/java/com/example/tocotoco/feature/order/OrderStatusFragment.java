@@ -43,6 +43,7 @@ public class OrderStatusFragment extends Fragment {
         setUpViewPager();
     }
 
+
     private void setUpViewPager() {
         List<Status> list = getListStatus();
         ViewPagerAdapter adapter = new ViewPagerAdapter(requireActivity(), list);
