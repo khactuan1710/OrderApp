@@ -2,6 +2,7 @@ package com.example.tocotoco.network;
 
 import com.example.tocotoco.model.CategoriesResult;
 import com.example.tocotoco.model.DataTestResult;
+import com.example.tocotoco.model.FavoriteProductsResult;
 import com.example.tocotoco.model.ProductResult;
 import com.example.tocotoco.model.ProductsByCategoryResult;
 import com.example.tocotoco.model.ProductsResult;
@@ -43,5 +44,9 @@ public interface TCCAPI {
     @FormUrlEncoded
     @POST("get_products_by_category")
     Call<ProductsByCategoryResult> getListProductByCategory(@Field("id") int id);
+
+    @FormUrlEncoded
+    @POST("fav/items")
+    Call<FavoriteProductsResult> getUserFavoriteItems(@Field("token") String token);
 
 }

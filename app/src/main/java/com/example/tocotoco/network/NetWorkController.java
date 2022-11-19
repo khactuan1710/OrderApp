@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import com.example.tocotoco.domain.DomainSwitcher;
 import com.example.tocotoco.model.CategoriesResult;
 import com.example.tocotoco.model.DataTestResult;
+import com.example.tocotoco.model.FavoriteProductsResult;
 import com.example.tocotoco.model.ProductResult;
 import com.example.tocotoco.model.ProductsByCategoryResult;
 import com.example.tocotoco.model.ProductsResult;
@@ -91,6 +92,10 @@ public class NetWorkController {
     }
     public static void getListProductByCategory(TCCCallback<ProductsByCategoryResult> callback, int id) {
         Call<ProductsByCategoryResult> call = getAPIBuilder().getListProductByCategory(id);
+        call.enqueue(callback);
+    }
+    public static void getListProductByCategory(TCCCallback<FavoriteProductsResult> callback, String token) {
+        Call<FavoriteProductsResult> call = getAPIBuilder().getUserFavoriteItems(token);
         call.enqueue(callback);
     }
 
