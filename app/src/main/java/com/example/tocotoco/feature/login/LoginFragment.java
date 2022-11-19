@@ -1,6 +1,9 @@
 package com.example.tocotoco.feature.login;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.View;
@@ -8,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tocotoco.R;
+import com.example.tocotoco.home.activityhome.HomeActivity;
 import com.example.tocotoco.model.LoginResult;
 import com.gemvietnam.base.viper.ViewFragment;
 import com.google.android.material.textfield.TextInputEditText;
@@ -24,11 +28,10 @@ public class LoginFragment extends ViewFragment<LoginContract.Presenter> impleme
     @BindView(R.id.etPassword)
     TextInputEditText etPassword;
     Context context;
+    SharedPreferences.Editor editor;
 
-    SharedPreferences sharedPref = context.getSharedPreferences(
-            context.getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-    SharedPreferences.Editor editor = sharedPref.edit();
-
+    private  boolean isFavorite = false;
+    Intent intent;
     public static LoginFragment getInstance() {
         return new LoginFragment();
     }
@@ -42,6 +45,13 @@ public class LoginFragment extends ViewFragment<LoginContract.Presenter> impleme
     public void initLayout() {
         super.initLayout();
         setListener();
+        context = getViewContext();
+        SharedPreferences sharedPref = context.getSharedPreferences(
+                context.getString(R.string.preference_file_key), MODE_PRIVATE);
+        editor = sharedPref.edit();
+
+        intent = getActivity().getIntent();
+        isFavorite = intent.getBooleanExtra("fromFavorite", false);
     }
 
     private void setListener() {
@@ -57,6 +67,12 @@ public class LoginFragment extends ViewFragment<LoginContract.Presenter> impleme
             editor.putString(context.getString(R.string.preference_key_token), data.body().getResult());
             editor.apply();
         }
+        Intent i = new Intent(getViewContext(), HomeActivity.class);
+        if(isFavorite) {
+            i.putExtra("goToFavorite", true);
+        }
+        startActivity(i);
+
         Toast.makeText(getViewContext(), "Tài khoản chính xác", Toast.LENGTH_LONG).show();
     }
 
