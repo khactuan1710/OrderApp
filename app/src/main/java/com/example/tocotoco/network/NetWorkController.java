@@ -10,9 +10,11 @@ import com.example.tocotoco.domain.DomainSwitcher;
 import com.example.tocotoco.model.CategoriesResult;
 import com.example.tocotoco.model.DataTestResult;
 import com.example.tocotoco.model.FavoriteProductsResult;
+import com.example.tocotoco.model.LoginResult;
 import com.example.tocotoco.model.ProductResult;
 import com.example.tocotoco.model.ProductsByCategoryResult;
 import com.example.tocotoco.model.ProductsResult;
+import com.example.tocotoco.model.RegisterResult;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -96,6 +98,15 @@ public class NetWorkController {
     }
     public static void getListProductByCategory(TCCCallback<FavoriteProductsResult> callback, String token) {
         Call<FavoriteProductsResult> call = getAPIBuilder().getUserFavoriteItems(token);
+        call.enqueue(callback);
+    }
+    public static void loginWithPass(TCCCallback<LoginResult> callback, String username, String pass, String type) {
+        Call<LoginResult> call = getAPIBuilder().loginWithPass(username, pass, type);
+        call.enqueue(callback);
+    }
+
+    public static void registerAcc(TCCCallback<RegisterResult> callback, String name, String username, String password, String email, String phoneNumber) {
+        Call<RegisterResult> call = getAPIBuilder().registerAcc(name, username, password, email, phoneNumber);
         call.enqueue(callback);
     }
 

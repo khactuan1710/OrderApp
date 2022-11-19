@@ -3,9 +3,11 @@ package com.example.tocotoco.network;
 import com.example.tocotoco.model.CategoriesResult;
 import com.example.tocotoco.model.DataTestResult;
 import com.example.tocotoco.model.FavoriteProductsResult;
+import com.example.tocotoco.model.LoginResult;
 import com.example.tocotoco.model.ProductResult;
 import com.example.tocotoco.model.ProductsByCategoryResult;
 import com.example.tocotoco.model.ProductsResult;
+import com.example.tocotoco.model.RegisterResult;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -48,5 +50,19 @@ public interface TCCAPI {
     @FormUrlEncoded
     @POST("fav/items")
     Call<FavoriteProductsResult> getUserFavoriteItems(@Field("token") String token);
+
+    @FormUrlEncoded
+    @POST("login")
+    Call<LoginResult> loginWithPass(@Field("username") String username,
+                                    @Field("password") String password,
+                                    @Field("type") String type);
+
+    @FormUrlEncoded
+    @POST("signup")
+    Call<RegisterResult> registerAcc(@Field("name") String name,
+                                     @Field("username") String username,
+                                     @Field("password") String password,
+                                     @Field("email") String email,
+                                     @Field("phoneNumber") String phoneNumber);
 
 }
