@@ -56,7 +56,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dimen_4dp"
-            android:textColor="@color/light_blue"
+            android:textColor="@color/light_green"
             android:textSize="@dimen/text_size_10sp"
             app:layout_constraintBottom_toBottomOf="@+id/appCompatImageView2"
             app:layout_constraintStart_toEndOf="@+id/appCompatImageView2"
@@ -69,7 +69,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dimen_8dp"
             android:layout_marginTop="@dimen/dimen_8dp"
-            android:textColor="@color/light_blue"
+            android:textColor="@color/light_green"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvTitle"
             tools:text="55.000 đ" />

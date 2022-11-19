@@ -1,5 +1,8 @@
 package com.example.tocotoco.home.activityhome
 
+import android.view.View
+import android.view.View.OnApplyWindowInsetsListener
+import android.view.WindowInsets
 import androidx.fragment.app.Fragment
 import com.example.tocotoco.R
 import com.example.tocotoco.basekotlin.base.BaseActivity

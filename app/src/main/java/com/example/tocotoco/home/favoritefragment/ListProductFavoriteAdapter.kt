@@ -9,21 +9,21 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.tocotoco.basekotlin.extensions.decimalFormatted
 import com.example.tocotoco.databinding.ItemListProductFavoriteBinding
-import com.example.tocotoco.model.ProductsByCategoryResultModel
+import com.example.tocotoco.model.FavoriteProductsResult.FavoriteProductsResultModel
 
 class ListProductFavoriteAdapter :
-    ListAdapter<ProductsByCategoryResultModel, ListProductFavoriteAdapter.ViewHolder>(
-        object : DiffUtil.ItemCallback<ProductsByCategoryResultModel>() {
+    ListAdapter<FavoriteProductsResultModel, ListProductFavoriteAdapter.ViewHolder>(
+        object : DiffUtil.ItemCallback<FavoriteProductsResultModel>() {
             override fun areItemsTheSame(
-                oldItem: ProductsByCategoryResultModel,
-                newItem: ProductsByCategoryResultModel
+                oldItem: FavoriteProductsResultModel,
+                newItem: FavoriteProductsResultModel
             ): Boolean {
                 return oldItem == newItem
             }
 
             override fun areContentsTheSame(
-                oldItem: ProductsByCategoryResultModel,
-                newItem: ProductsByCategoryResultModel
+                oldItem: FavoriteProductsResultModel,
+                newItem: FavoriteProductsResultModel
             ): Boolean {
                 return oldItem.id == newItem.id
             }
@@ -43,11 +43,11 @@ class ListProductFavoriteAdapter :
     class ViewHolder(private val binding: ItemListProductFavoriteBinding) :
         RecyclerView.ViewHolder(binding.root) {
             @SuppressLint("SetTextI18n")
-            fun bind(item: ProductsByCategoryResultModel) = binding.run {
-                tvTitle.text = item.name
+            fun bind(item: FavoriteProductsResultModel) = binding.run {
+                tvTitle.text = item.productName
                 tvPrice.text = "${item.price.toInt().decimalFormatted()} đ"
                 Glide.with(root.context)
-                    .load(item.displayimage)
+                    .load(item.displayImage)
                     .fitCenter()
                     .into(imgProduct)
             }

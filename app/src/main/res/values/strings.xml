@@ -8,4 +8,8 @@
     <string name="home_title_location">Location</string>
     <string name="home_search">Tìm Kiếm</string>
     <string name="text_product_favorite">Sản phẩm yêu thích</string>
+    <string name="preference_file_key">preference_file_key</string>
+    <string name="preference_key_token">token</string>
+    <string name="fragment_favorite_null_account">Bạn chưa đăng nhập?</string>
+    <string name="fragment_favorite_login">Đăng nhập</string>
 </resources>

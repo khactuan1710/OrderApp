@@ -5,14 +5,52 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/appCompatImageView"
-        android:layout_width="@dimen/dimen_24dp"
-        android:layout_height="@dimen/dimen_24dp"
-        android:layout_margin="@dimen/size_16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/back" />
+<!--    <androidx.appcompat.widget.AppCompatImageView-->
+<!--        android:id="@+id/imgBack"-->
+<!--        android:layout_width="@dimen/dimen_24dp"-->
+<!--        android:layout_height="@dimen/dimen_24dp"-->
+<!--        android:layout_margin="@dimen/size_16sp"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:srcCompat="@drawable/back" />-->
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/layout_null_product"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/img_empty_checkstore"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fragment_favorite_null_account"
+            android:layout_marginTop="@dimen/dimen_16dp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/dimen_16sp"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/btnLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fragment_favorite_login"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/dimen_16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="@dimen/dp_8"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_product"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/appCompatTextView2"
@@ -23,11 +61,10 @@
         android:textColor="@color/black"
         android:textSize="@dimen/size_24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/appCompatImageView"
+        android:layout_marginTop="@dimen/dimen_16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias=".4"
-        app:layout_constraintStart_toEndOf="@+id/appCompatImageView"
-        app:layout_constraintTop_toTopOf="@+id/appCompatImageView" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvProductFavorite"
@@ -37,5 +74,5 @@
         android:layout_marginTop="@dimen/dimen_16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appCompatTextView2" />
-
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

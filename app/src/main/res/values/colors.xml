@@ -11,7 +11,7 @@
     <color name="transparent">#00000000</color>
     <color name="dark_gray">#44494D</color>
     <color name="chungld_black_text">#000000</color>
-    <color name="light_blue">#A6AF2E</color>
+    <color name="light_green">#A6AF2E</color>
     <color name="orange">#FFA500</color>
     <color name="brown">#2E2828</color>
     <color name="pink">#BD8F8F</color>
@@ -25,5 +25,5 @@
     <color name="color_default">#FFA500</color>
     <color name="color_EE0033">#EE0033</color>
     <color name="green_light">#efece5</color>
-
+    <color name="blue">#1276B5</color>
 </resources>
