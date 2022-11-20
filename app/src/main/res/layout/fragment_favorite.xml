@@ -3,16 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-<!--    <androidx.appcompat.widget.AppCompatImageView-->
-<!--        android:id="@+id/imgBack"-->
-<!--        android:layout_width="@dimen/dimen_24dp"-->
-<!--        android:layout_height="@dimen/dimen_24dp"-->
-<!--        android:layout_margin="@dimen/size_16sp"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:srcCompat="@drawable/back" />-->
+    android:layout_height="match_parent"
+    android:visibility="gone">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/layout_null_product"
@@ -27,6 +19,7 @@
             app:srcCompat="@drawable/img_empty_checkstore"/>
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvDesc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/fragment_favorite_null_account"

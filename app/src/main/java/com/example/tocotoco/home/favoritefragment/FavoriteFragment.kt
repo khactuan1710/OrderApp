@@ -1,5 +1,6 @@
 package com.example.tocotoco.home.favoritefragment
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import androidx.core.view.isVisible
@@ -24,8 +25,11 @@ class FavoriteFragment : BaseFragment(R.layout.fragment_favorite) {
     override val viewModel: BaseViewModel
         get() = TODO("Not yet implemented")
 
-    private val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
-    val keyToken = sharedPref?.getString(getString(R.string.preference_key_token), "")
+    private val sharedPref by lazy {
+        requireContext().getSharedPreferences(
+            requireContext().getString(R.string.preference_file_key), Context.MODE_PRIVATE
+        )
+    }
 
     private val listProductAdapter by lazy(LazyThreadSafetyMode.NONE) {
         ListProductFavoriteAdapter()
@@ -52,24 +56,38 @@ class FavoriteFragment : BaseFragment(R.layout.fragment_favorite) {
         fragmentTransaction.commit()
     }
 
-    private fun getFavoriteProductList() {
+    private fun getFavoriteProductList() = binding.run {
+        binding.root.isVisible = false
+        val keyToken =
+            sharedPref?.getString(requireContext().getString(R.string.preference_key_token), "")
+        if (keyToken.isNullOrEmpty()) {
+            layoutProduct.isVisible = false
+            layoutNullProduct.isVisible = true
+            btnLogin.isVisible = true
+            tvDesc.text = getString(R.string.fragment_favorite_null_account)
+        }
         DialogUtils.showProgressDialog(requireActivity())
         if (NetworkUtils.isConnect(requireActivity())) {
             NetWorkController.getListProductByFavorite(object :
                 TCCCallback<FavoriteProductsResult>() {
+                @SuppressLint("SetTextI18n")
                 override fun onViettelSuccess(
                     call: Call<FavoriteProductsResult>?,
                     response: Response<FavoriteProductsResult>?
                 ) {
-                    if (!response?.body()?.results.isNullOrEmpty()){
+                    if (!response?.body()?.results.isNullOrEmpty()) {
                         listProductAdapter.submitList(response?.body()?.results)
-                        binding.layoutNullProduct.isVisible = false
-                        binding.layoutProduct.isVisible = true
+                        layoutNullProduct.isVisible = false
+                        layoutProduct.isVisible = true
                     } else {
-                        binding.layoutProduct.isVisible = true
-                        binding.layoutNullProduct.isVisible = true
+                        layoutProduct.isVisible = false
+                        layoutNullProduct.isVisible = true
+                        tvDesc.text = "Không có danh sách sản phẩm yêu thích"
+                        btnLogin.isVisible = false
                     }
                     DialogUtils.dismissProgressDialog()
+                    binding.root.isVisible = true
+
                 }
 
                 override fun onViettelFailure(call: Call<FavoriteProductsResult>?) {
