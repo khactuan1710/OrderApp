@@ -94,7 +94,7 @@ class FavoriteFragment : BaseFragment(R.layout.fragment_favorite) {
                     Timber.tag(call.toString())
                     DialogUtils.dismissProgressDialog()
                 }
-            }, keyToken)
+            }, "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIsInVzZXJuYW1lIjoiZGlldW5uMjAxMiIsInBhc3N3b3JkIjoiNWY0ZGNjM2I1YWE3NjVkNjFkODMyN2RlYjg4MmNmOTkiLCJpYXQiOjE2Njg1NjQ2Mzh9.okSWemdE9V38FgsZpTEw4YrpRjjdqnqi4N949p57ZYU")
         }
     }
 
