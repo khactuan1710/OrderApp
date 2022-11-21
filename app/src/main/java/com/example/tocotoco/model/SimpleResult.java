@@ -22,7 +22,7 @@ public class SimpleResult implements Parcelable{
     String needOTP;
 
     @SerializedName("isSuccess")
-    String isSuccess;
+    boolean isSuccess;
 
     @SerializedName("errorMessage")
     String errorMessage;
@@ -54,11 +54,11 @@ public class SimpleResult implements Parcelable{
         this.dataVersion = dataVersion;
     }
 
-    public String getIsSuccess() {
+    public boolean getIsSuccess() {
         return isSuccess;
     }
 
-    public void setIsSuccess(String isSuccess) {
+    public void setIsSuccess(boolean isSuccess) {
         this.isSuccess = isSuccess;
     }
 

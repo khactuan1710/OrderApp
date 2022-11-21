@@ -7,14 +7,23 @@
     android:layout_centerHorizontal="true"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_90dp"
         android:orientation="vertical"
-        android:gravity="center"
+        android:paddingHorizontal="@dimen/dimen_15dp"
         android:background="@drawable/subtract"
         >
+        <ImageView
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_back_v4"
+            android:layout_alignParentLeft="true"
+            android:layout_gravity="center_vertical"/>
         <TextView
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
             android:layout_marginBottom="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -22,7 +31,7 @@
             android:textSize="@dimen/dimen_25dp"
             android:fontFamily="@font/fs_pf_beau_sans_pro_bold"
             android:text="Đăng nhập"/>
-    </LinearLayout>
+    </RelativeLayout>
     <ImageView
         android:layout_gravity="center_horizontal"
         android:layout_width="@dimen/dimen_100dp"
@@ -48,13 +57,11 @@
                 android:id="@+id/ed_sdt"
                 app:boxStrokeWidthFocused="0dp"
                 app:boxStrokeWidth="0dp"
-                android:textColor="@color/color_default"
                 app:boxStrokeColor="@color/color_default"
                 android:layout_width="match_parent"
                 android:background="@drawable/border_default_app"
                 android:layout_height="wrap_content"
-                android:inputType="number"
-                android:hint="Số điện thoại"/>
+                android:hint="Tên đăng nhập"/>
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/etPasswordLayout"
@@ -76,7 +83,29 @@
 
                 android:inputType="textPassword"/>
         </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <CheckBox
+                android:id="@+id/checkBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Đồng ý với "
+                android:buttonTint="@color/color_EE0033"
+                />
+            <TextView
+                android:fontFamily="@font/fs_pf_beau_sans_pro_bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#EE0033"
+                android:text="Điều khoản &amp; Điều kiện"/>
+        </LinearLayout>
+
         <TextView
+            android:id="@+id/tv_login"
             android:layout_marginTop="@dimen/dimen_30dp"
             android:gravity="center"
             android:layout_width="match_parent"
