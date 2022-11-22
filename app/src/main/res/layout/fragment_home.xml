@@ -102,6 +102,7 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/materialCardView"
+                android:theme="@style/Theme.MaterialComponents.Light"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/dimen_16dp"
