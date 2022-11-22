@@ -1,6 +1,7 @@
 package com.example.tocotoco.home.homefragment
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.location.Location
@@ -14,6 +15,7 @@ import com.example.tocotoco.basekotlin.base.BaseViewModel
 import com.example.tocotoco.basekotlin.extensions.viewBinding
 import com.example.tocotoco.databinding.FragmentHomeBinding
 import com.example.tocotoco.dialog.DialogUtils
+import com.example.tocotoco.feature.login.LoginActivity
 import com.example.tocotoco.model.CategoriesResult
 import com.example.tocotoco.network.NetWorkController
 import com.example.tocotoco.network.TCCCallback
@@ -41,6 +43,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
     override fun onResume() {
         super.onResume()
         getLocation()
+        setupClickListener()
     }
 
     private var viewPagerAdapter: ViewPagerAdapter? = null
@@ -64,6 +67,12 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
                 }
 
             })
+        }
+    }
+
+    private fun setupClickListener() = binding.run {
+        appCompatImageView3.setOnClickListener {
+            startActivity(Intent(requireActivity(), LoginActivity::class.java))
         }
     }
 
