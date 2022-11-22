@@ -1,10 +1,16 @@
 package com.example.tocotoco.home.homefragment
 
 import android.Manifest
+import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.location.Location
+import android.location.LocationListener
+import android.location.LocationManager
+import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.NonNull
 import androidx.core.app.ActivityCompat
 import androidx.core.view.isVisible
 import androidx.viewpager2.widget.ViewPager2
@@ -14,11 +20,11 @@ import com.example.tocotoco.basekotlin.base.BaseViewModel
 import com.example.tocotoco.basekotlin.extensions.viewBinding
 import com.example.tocotoco.databinding.FragmentHomeBinding
 import com.example.tocotoco.dialog.DialogUtils
+import com.example.tocotoco.feature.login.LoginActivity
 import com.example.tocotoco.model.CategoriesResult
 import com.example.tocotoco.network.NetWorkController
 import com.example.tocotoco.network.TCCCallback
 import com.example.tocotoco.util.NetworkUtils
-import com.google.android.gms.location.LocationServices
 import retrofit2.Call
 import retrofit2.Response
 import timber.log.Timber
@@ -41,6 +47,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
     override fun onResume() {
         super.onResume()
         getLocation()
+        setupClickListener()
     }
 
     private var viewPagerAdapter: ViewPagerAdapter? = null
@@ -64,6 +71,12 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
                 }
 
             })
+        }
+    }
+
+    private fun setupClickListener() = binding.run {
+        appCompatImageView3.setOnClickListener {
+            startActivity(Intent(requireActivity(),LoginActivity::class.java))
         }
     }
 
@@ -114,7 +127,21 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
 
 
     private fun getLocation() = binding.run {
-        val fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+        val LOCATION_REFRESH_TIME = 15000L // 15 seconds to update
+        val LOCATION_REFRESH_DISTANCE = 500F
+        val mLocationManager = requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        val mLocationListener = LocationListener { location ->
+            if (activity != null) {
+                val geocoder = Geocoder(requireActivity(), Locale.getDefault())
+                val address = geocoder.getFromLocation(
+                    location.latitude,
+                    location.longitude,
+                    1
+                )[0].getAddressLine(0)
+                binding.tvLocation.text = address
+            }
+        }
+//        val fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         if (ActivityCompat.checkSelfPermission(
                 requireActivity(),
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -126,20 +153,9 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
             requestPermissionLocation()
             return@run
         } else {
-            fusedLocationClient.lastLocation
-                .addOnSuccessListener { location: Location? ->
-                    if (activity != null) {
-                        val geocoder = Geocoder(requireActivity(), Locale.getDefault())
-                        if (location != null) {
-                            val address = geocoder.getFromLocation(
-                                location.latitude,
-                                location.longitude,
-                                1
-                            )[0].getAddressLine(0)
-                            binding.tvLocation.text = address
-                        }
-                    }
-                }
+            mLocationManager.requestLocationUpdates(
+                LocationManager.GPS_PROVIDER, LOCATION_REFRESH_TIME,
+                LOCATION_REFRESH_DISTANCE, mLocationListener);
         }
     }
 
