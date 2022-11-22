@@ -69,12 +69,11 @@ public class LoginFragment extends ViewFragment<LoginContract.Presenter> impleme
             editor.putString(context.getString(R.string.preference_key_token), data.body().getResult());
             editor.apply();
         }
-//        Intent i = new Intent(getViewContext(), HomeActivity.class);
-//        if (isFavorite) {
-//            i.putExtra("goToFavorite", true);
-//        }
-//        startActivity(i);
-        onDestroy();
+        Intent i = new Intent(getViewContext(), HomeActivity.class);
+        if (isFavorite) {
+            i.putExtra("goToFavorite", true);
+        }
+        startActivity(i);
         Toast.makeText(getViewContext(), "Tài khoản chính xác", Toast.LENGTH_LONG).show();
     }
 

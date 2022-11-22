@@ -65,37 +65,39 @@ class FavoriteFragment : BaseFragment(R.layout.fragment_favorite) {
             layoutNullProduct.isVisible = true
             btnLogin.isVisible = true
             tvDesc.text = getString(R.string.fragment_favorite_null_account)
-        }
-        DialogUtils.showProgressDialog(requireActivity())
-        if (NetworkUtils.isConnect(requireActivity())) {
-            NetWorkController.getListProductByFavorite(object :
-                TCCCallback<FavoriteProductsResult>() {
-                @SuppressLint("SetTextI18n")
-                override fun onViettelSuccess(
-                    call: Call<FavoriteProductsResult>?,
-                    response: Response<FavoriteProductsResult>?
-                ) {
-                    if (!response?.body()?.results.isNullOrEmpty()) {
-                        listProductAdapter.submitList(response?.body()?.results)
-                        layoutNullProduct.isVisible = false
-                        layoutProduct.isVisible = true
-                    } else {
-                        layoutProduct.isVisible = false
-                        layoutNullProduct.isVisible = true
-                        tvDesc.text = "Không có danh sách sản phẩm yêu thích"
-                        btnLogin.isVisible = false
+            binding.root.isVisible = true
+        } else {
+
+            DialogUtils.showProgressDialog(requireActivity())
+            if (NetworkUtils.isConnect(requireActivity())) {
+                NetWorkController.getListProductByFavorite(object :
+                    TCCCallback<FavoriteProductsResult>() {
+                    @SuppressLint("SetTextI18n")
+                    override fun onViettelSuccess(
+                        call: Call<FavoriteProductsResult>?,
+                        response: Response<FavoriteProductsResult>?
+                    ) {
+                        if (!response?.body()?.results.isNullOrEmpty()) {
+                            listProductAdapter.submitList(response?.body()?.results)
+                            layoutNullProduct.isVisible = false
+                            layoutProduct.isVisible = true
+                        } else {
+                            layoutProduct.isVisible = false
+                            layoutNullProduct.isVisible = true
+                            tvDesc.text = "Không có danh sách sản phẩm yêu thích"
+                            btnLogin.isVisible = false
+                        }
+                        DialogUtils.dismissProgressDialog()
+                        binding.root.isVisible = true
                     }
-                    DialogUtils.dismissProgressDialog()
-                    binding.root.isVisible = true
 
-                }
-
-                override fun onViettelFailure(call: Call<FavoriteProductsResult>?) {
-                    Timber.tag(call.toString())
-                    DialogUtils.dismissProgressDialog()
-                }
-            }, keyToken)
-            //eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIsInVzZXJuYW1lIjoiZGlldW5uMjAxMiIsInBhc3N3b3JkIjoiNWY0ZGNjM2I1YWE3NjVkNjFkODMyN2RlYjg4MmNmOTkiLCJpYXQiOjE2Njg1NjQ2Mzh9.okSWemdE9V38FgsZpTEw4YrpRjjdqnqi4N949p57ZYU
+                    override fun onViettelFailure(call: Call<FavoriteProductsResult>?) {
+                        Timber.tag(call.toString())
+                        DialogUtils.dismissProgressDialog()
+                    }
+                }, keyToken)
+                //eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIsInVzZXJuYW1lIjoiZGlldW5uMjAxMiIsInBhc3N3b3JkIjoiNWY0ZGNjM2I1YWE3NjVkNjFkODMyN2RlYjg4MmNmOTkiLCJpYXQiOjE2Njg1NjQ2Mzh9.okSWemdE9V38FgsZpTEw4YrpRjjdqnqi4N949p57ZYU
+            }
         }
     }
 
