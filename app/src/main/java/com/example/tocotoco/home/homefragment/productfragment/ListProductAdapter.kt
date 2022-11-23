@@ -11,7 +11,9 @@ import com.example.tocotoco.basekotlin.extensions.decimalFormatted
 import com.example.tocotoco.databinding.ItemListTeaBinding
 import com.example.tocotoco.model.ProductsByCategoryResultModel
 
-class ListProductAdapter :
+class ListProductAdapter(
+    private val onItemClick: (Int) -> Unit
+) :
     ListAdapter<ProductsByCategoryResultModel, ListProductAdapter.ViewHolder>(
         object : DiffUtil.ItemCallback<ProductsByCategoryResultModel>() {
             override fun areItemsTheSame(
@@ -42,9 +44,12 @@ class ListProductAdapter :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position))
+        holder.binding.root.setOnClickListener {
+            onItemClick(getItem(position).id)
+        }
     }
 
-    class ViewHolder(private val binding: ItemListTeaBinding) :
+    class ViewHolder(val binding: ItemListTeaBinding) :
         RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
         fun bind(item: ProductsByCategoryResultModel) = binding.run {
