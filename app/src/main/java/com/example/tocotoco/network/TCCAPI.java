@@ -7,7 +7,9 @@ import com.example.tocotoco.model.LoginResult;
 import com.example.tocotoco.model.ProductResult;
 import com.example.tocotoco.model.ProductsByCategoryResult;
 import com.example.tocotoco.model.ProductsResult;
+import com.example.tocotoco.model.ProductsSessionResult;
 import com.example.tocotoco.model.RegisterResult;
+import com.example.tocotoco.model.SessionIdResult;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -61,5 +63,31 @@ public interface TCCAPI {
                                      @Field("password") String password,
                                      @Field("email") String email,
                                      @Field("phoneNumber") String phoneNumber);
+
+    @FormUrlEncoded
+    @POST("shopping_session/get_session_id")
+    Call<SessionIdResult> getUserShoppingSession(@Field("token") String token);
+
+    @FormUrlEncoded
+    @POST("shopping_session/items")
+    Call<ProductsSessionResult> itemsInShoppingSession(@Field("token") String token,
+                                                       @Field("sessionId") int sessionId);
+
+    @FormUrlEncoded
+    @POST("fav/add")
+    Call<RegisterResult> addFavItem(@Field("token") String token,
+                                    @Field("productId") int productId);
+    @FormUrlEncoded
+    @POST("fav/delete")
+    Call<RegisterResult> deleteFavItem(@Field("token") String token,
+                                    @Field("productId") int productId);
+
+    @FormUrlEncoded
+    @POST("shopping_session/add_item")
+    Call<RegisterResult> addItemToShoppingSession(@Field("token") String token,
+                                     @Field("sessionId") int sessionId,
+                                     @Field("productId") int productId,
+                                     @Field("quantity") int quantity,
+                                     @Field("size") String size);
 
 }

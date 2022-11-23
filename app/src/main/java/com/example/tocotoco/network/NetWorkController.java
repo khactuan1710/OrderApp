@@ -14,7 +14,9 @@ import com.example.tocotoco.model.LoginResult;
 import com.example.tocotoco.model.ProductResult;
 import com.example.tocotoco.model.ProductsByCategoryResult;
 import com.example.tocotoco.model.ProductsResult;
+import com.example.tocotoco.model.ProductsSessionResult;
 import com.example.tocotoco.model.RegisterResult;
+import com.example.tocotoco.model.SessionIdResult;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -107,6 +109,31 @@ public class NetWorkController {
 
     public static void registerAcc(TCCCallback<RegisterResult> callback, String name, String username, String password, String email, String phoneNumber) {
         Call<RegisterResult> call = getAPIBuilder().registerAcc(name, username, password, email, phoneNumber);
+        call.enqueue(callback);
+    }
+
+
+    public static void getUserShoppingSession(TCCCallback<SessionIdResult> callback, String token) {
+        Call<SessionIdResult> call = getAPIBuilder().getUserShoppingSession(token);
+        call.enqueue(callback);
+    }
+
+    public static void itemsInShoppingSession(TCCCallback<ProductsSessionResult> callback, String token, int sessionId) {
+        Call<ProductsSessionResult> call = getAPIBuilder().itemsInShoppingSession(token, sessionId);
+        call.enqueue(callback);
+    }
+    public static void addFavItem(TCCCallback<RegisterResult> callback, String token, int sessionId) {
+        Call<RegisterResult> call = getAPIBuilder().addFavItem(token, sessionId);
+        call.enqueue(callback);
+    }
+
+    public static void deleteFavItem(TCCCallback<RegisterResult> callback, String token, int sessionId) {
+        Call<RegisterResult> call = getAPIBuilder().deleteFavItem(token, sessionId);
+        call.enqueue(callback);
+    }
+
+    public static void addItemToShoppingSession(TCCCallback<RegisterResult> callback, String token, int sessionId, int productId, int quantity, String size) {
+        Call<RegisterResult> call = getAPIBuilder().addItemToShoppingSession(token, sessionId, productId, quantity, size);
         call.enqueue(callback);
     }
 

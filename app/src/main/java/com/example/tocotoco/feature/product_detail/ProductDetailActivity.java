@@ -3,17 +3,14 @@ package com.example.tocotoco.feature.product_detail;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import com.example.tocotoco.R;
+import com.example.tocotoco.feature.base.TCCBaseActivity;
+import com.example.tocotoco.feature.login.LoginPresenter;
+import com.gemvietnam.base.viper.ViewFragment;
 
-public class ProductDetailActivity extends AppCompatActivity {
+public class ProductDetailActivity extends TCCBaseActivity {
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_product_detail);
-        checkTopping();
+    public ViewFragment onCreateFirstFragment() {
+        return (ViewFragment) new ProductDetailPresenter(this).getFragment();
     }
-
-
-    private void checkTopping() {
-    }
-
 }

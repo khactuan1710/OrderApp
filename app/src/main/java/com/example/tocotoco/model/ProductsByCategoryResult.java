@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class ProductsByCategoryResult {
+public class ProductsByCategoryResult extends SimpleResult{
     @SerializedName("result")
     List<ProductsByCategoryResultModel> results;
 

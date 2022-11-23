@@ -15,6 +15,7 @@
         android:paddingEnd="@dimen/dp_8">
 
         <ImageView
+            android:id="@+id/img_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -30,10 +31,11 @@
             android:textStyle="bold" />
 
         <ImageView
+            android:id="@+id/img_fav"
             android:layout_width="@dimen/dimen_28dp"
             android:layout_height="@dimen/dimen_28dp"
             android:layout_alignParentEnd="true"
-            android:src="@drawable/heart" />
+            android:src="@drawable/fav_icon_disable" />
     </RelativeLayout>
 
     <androidx.core.widget.NestedScrollView
@@ -54,7 +56,7 @@
                 android:orientation="vertical">
 
                 <com.makeramen.roundedimageview.RoundedImageView
-                    android:id="@+id/imageView1"
+                    android:id="@+id/img_product"
                     android:layout_width="wrap_content"
                     android:layout_height="200dp"
                     android:layout_gravity="center"
@@ -64,6 +66,7 @@
                     app:riv_corner_radius="16dp" />
 
                 <TextView
+                    android:id="@+id/tv_name_product"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen_16dp"
@@ -71,41 +74,6 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/dimen_20dp"
                     android:textStyle="bold" />
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_8"
-                    android:gravity="center">
-
-                    <ImageView
-                        android:id="@+id/img_star"
-                        android:layout_width="@dimen/dimen_20dp"
-                        android:layout_height="@dimen/dimen_20dp"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/star" />
-
-                    <TextView
-                        android:id="@+id/tv_rate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="4dp"
-                        android:layout_toEndOf="@id/img_star"
-                        android:text="4.9"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/dimen_20dp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="4dp"
-                        android:layout_toEndOf="@id/tv_rate"
-                        android:text="(230)"
-                        android:textStyle="normal" />
-                </RelativeLayout>
 
                 <View
                     android:layout_width="match_parent"
@@ -123,6 +91,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/mo_ta_sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_8"
@@ -237,6 +206,7 @@ Trân trâu đen giòn dai mang lại cmar giác “đã” trong từng ngụm 
                 </RelativeLayout>
 
                 <TextView
+                    android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen_16dp"
@@ -246,6 +216,7 @@ Trân trâu đen giòn dai mang lại cmar giác “đã” trong từng ngụm 
                     android:textStyle="bold" />
 
                 <TextView
+                    android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
@@ -254,6 +225,7 @@ Trân trâu đen giòn dai mang lại cmar giác “đã” trong từng ngụm 
                     android:textStyle="bold" />
 
                 <LinearLayout
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen_8dp"
@@ -394,9 +366,10 @@ Trân trâu đen giòn dai mang lại cmar giác “đã” trong từng ngụm 
                         android:layout_marginTop="@dimen/dp10">
 
                         <TextView
+                            android:id="@+id/tv_reduce_quantity"
                             android:layout_width="@dimen/dimen_30dp"
                             android:layout_height="@dimen/dimen_30dp"
-                            android:layout_toStartOf="@id/tv_sl"
+                            android:layout_toStartOf="@id/tv_quantity"
                             android:background="@drawable/custom_textview"
                             android:gravity="center"
                             android:text="-"
@@ -405,7 +378,7 @@ Trân trâu đen giòn dai mang lại cmar giác “đã” trong từng ngụm 
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/tv_sl"
+                            android:id="@+id/tv_quantity"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerHorizontal="true"
@@ -417,9 +390,10 @@ Trân trâu đen giòn dai mang lại cmar giác “đã” trong từng ngụm 
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/tv_raise_quantity"
                             android:layout_width="@dimen/dimen_30dp"
                             android:layout_height="@dimen/dimen_30dp"
-                            android:layout_toEndOf="@id/tv_sl"
+                            android:layout_toEndOf="@id/tv_quantity"
                             android:background="@drawable/custom_textview"
                             android:gravity="center"
                             android:text="+"
@@ -430,6 +404,7 @@ Trân trâu đen giòn dai mang lại cmar giác “đã” trong từng ngụm 
                     </RelativeLayout>
 
                     <Button
+                        android:id="@+id/btn_add_product"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"

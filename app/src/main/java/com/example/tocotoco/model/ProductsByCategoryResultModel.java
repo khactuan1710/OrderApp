@@ -21,6 +21,16 @@ public class ProductsByCategoryResultModel {
     String displayimage;
     @SerializedName("size")
     String size;
+    @SerializedName("active")
+    boolean active;
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 
     public int getId() {
         return id;
