@@ -21,8 +21,17 @@ class HomeActivity : BaseActivity(R.layout.activity_home) {
 
 
     override fun setupViews() {
-        replaceFragment(HomeFragment())
         setupBottomNav()
+        getIntentId()
+    }
+
+    private fun getIntentId() = binding.run {
+        val intent = intent
+        if (intent != null && intent.getBooleanExtra("goToFavorite", false)) {
+            bottomNav.selectedItemId = R.id.favorite
+        } else {
+            replaceFragment(HomeFragment())
+        }
     }
 
     private fun setupBottomNav() = binding.run {

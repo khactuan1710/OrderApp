@@ -65,34 +65,23 @@
                     android:layout_height="@dimen/dimen_24dp"
                     app:srcCompat="@drawable/ic_search" />
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/textInputLayoutPassword"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/dimen_8dp"
-                    android:layout_weight="1"
-                    android:clipToPadding="false"
-                    android:hint="@string/home_search"
-                    android:textColorHint="@color/pink"
-                    app:boxStrokeWidth="0dp"
-                    app:boxStrokeWidthFocused="0dp"
-                    app:endIconDrawable="@drawable/ic_category">
 
-                    <com.google.android.material.textfield.TextInputEditText
+                    <EditText
                         android:id="@+id/editPassword"
+                        android:layout_weight="1"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:background="@color/transparent"
                         android:imeOptions="actionDone"
-                        android:inputType="text"
                         android:maxLines="1"
                         android:paddingStart="0dp"
+                        android:layout_marginStart="@dimen/dimen_8dp"
+                        android:textColorHint="@color/pink"
                         android:paddingEnd="0dp"
+                        android:hint="Tìm kiếm"
                         android:singleLine="true"
                         android:textColor="@color/white"
                         tools:ignore="TouchTargetSizeCheck" />
-
-                </com.google.android.material.textfield.TextInputLayout>
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="@dimen/dimen_24dp"
