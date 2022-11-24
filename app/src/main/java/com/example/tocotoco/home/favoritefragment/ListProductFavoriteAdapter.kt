@@ -45,7 +45,7 @@ class ListProductFavoriteAdapter :
             @SuppressLint("SetTextI18n")
             fun bind(item: FavoriteProductsResultModel) = binding.run {
                 tvTitle.text = item.productName
-                tvPrice.text = "${item.priceAfterDiscount.toInt().decimalFormatted()} đ"
+                tvPrice.text = "${item.priceBeforeDiscount.toInt().decimalFormatted()} đ"
                 Glide.with(root.context)
                     .load(item.displayImage)
                     .fitCenter()
