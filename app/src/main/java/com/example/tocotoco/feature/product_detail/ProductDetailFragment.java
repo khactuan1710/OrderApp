@@ -1,5 +1,6 @@
 package com.example.tocotoco.feature.product_detail;
 
+import android.content.Intent;
 import android.media.Image;
 import android.util.Log;
 import android.view.View;
@@ -50,7 +51,8 @@ public class ProductDetailFragment extends ViewFragment<ProductDetailContract.Pr
     @BindView(R.id.tv_reduce_quantity)
     TextView tv_reduce_quantity;
     private boolean isFav = false;
-
+    private Intent intent;
+    int idProduct;
     public static ProductDetailFragment getInstance() {
         return new ProductDetailFragment();
     }
@@ -62,7 +64,9 @@ public class ProductDetailFragment extends ViewFragment<ProductDetailContract.Pr
     }
 
     private void initData() {
-        mPresenter.getProductDetail(8);
+        intent = getActivity().getIntent();
+        idProduct = intent.getIntExtra("idProduct", 0);
+        mPresenter.getProductDetail(idProduct);
     }
 
     private void setListener() {
