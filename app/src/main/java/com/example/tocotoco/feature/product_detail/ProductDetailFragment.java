@@ -58,8 +58,10 @@ public class ProductDetailFragment extends ViewFragment<ProductDetailContract.Pr
     private boolean isFav = false;
     private Intent intent;
     int idProduct;
+    int idProductFromLogin = 0;
     String token = "";
     SharedPreferences sharedPref;
+    private int quantity = 1;
 
     public static ProductDetailFragment getInstance() {
         return new ProductDetailFragment();
@@ -74,7 +76,13 @@ public class ProductDetailFragment extends ViewFragment<ProductDetailContract.Pr
     private void initData() {
         intent = getActivity().getIntent();
         idProduct = intent.getIntExtra("idProduct", 0);
-        mPresenter.getProductDetail(idProduct);
+        idProductFromLogin = intent.getIntExtra("goToFavoriteDetail", 0);
+        tv_quantity.setText(String.valueOf(quantity));
+        if(idProductFromLogin != 0) {
+            mPresenter.getProductDetail(idProductFromLogin);
+        }else {
+            mPresenter.getProductDetail(idProduct);
+        }
 
         sharedPref = getViewContext().getSharedPreferences(requireContext().getString(R.string.preference_file_key), MODE_PRIVATE);
         token = sharedPref.getString(requireContext().getString(R.string.preference_key_token), "");
@@ -97,12 +105,19 @@ public class ProductDetailFragment extends ViewFragment<ProductDetailContract.Pr
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.img_back:
-                mPresenter.back();
+                if(idProductFromLogin != 0) {
+                    Intent i = new Intent(getViewContext(), HomeActivity.class);
+                    startActivity(i);
+                }else {
+                    mPresenter.back();
+                }
                 break;
             case R.id.img_fav:
                 isFav = !isFav;
-                if(!token.equals("")) {
+                if(token.equals("")) {
                     Intent i = new Intent(getViewContext(), LoginActivity.class);
+                    i.putExtra("isFavProduct", true);
+                    i.putExtra("idProductFromDetail", idProduct);
                     startActivity(i);
                 }else {
                     if(isFav) {
@@ -113,6 +128,16 @@ public class ProductDetailFragment extends ViewFragment<ProductDetailContract.Pr
                         img_fav.setImageResource(R.drawable.fav_icon_disable);
                     }
                 }
+                break;
+            case R.id.tv_reduce_quantity:
+                if(quantity > 1) {
+                    quantity --;
+                    tv_quantity.setText(String.valueOf(quantity));
+                }
+                break;
+            case R.id.tv_raise_quantity:
+                    quantity ++;
+                    tv_quantity.setText(String.valueOf(quantity));
                 break;
         }
     }
@@ -127,7 +152,6 @@ public class ProductDetailFragment extends ViewFragment<ProductDetailContract.Pr
         if(data != null) {
             mo_ta_sp.setText(data.body().getResults().getDescription());
             tv_name_product.setText(data.body().getResults().getName());
-
             RequestOptions options = new RequestOptions()
                     .centerCrop()
                     .placeholder(R.mipmap.ic_launcher_round)

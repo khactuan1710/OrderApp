@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tocotoco.R;
+import com.example.tocotoco.feature.product_detail.ProductDetailActivity;
 import com.example.tocotoco.home.activityhome.HomeActivity;
 import com.example.tocotoco.model.LoginResult;
 import com.gemvietnam.base.viper.ViewFragment;
@@ -31,6 +32,8 @@ public class LoginFragment extends ViewFragment<LoginContract.Presenter> impleme
     SharedPreferences.Editor editor;
 
     private  boolean isFavorite = false;
+    private  boolean isFavDetail = false;
+    private  int idProductFromDetail = 0;
     Intent intent;
     public static LoginFragment getInstance() {
         return new LoginFragment();
@@ -44,14 +47,20 @@ public class LoginFragment extends ViewFragment<LoginContract.Presenter> impleme
     @Override
     public void initLayout() {
         super.initLayout();
-        setListener();
         context = getViewContext();
+        setListener();
+        getActionBackLogin();
         SharedPreferences sharedPref = context.getSharedPreferences(
                 context.getString(R.string.preference_file_key), MODE_PRIVATE);
         editor = sharedPref.edit();
 
+    }
+
+    private void getActionBackLogin() {
         intent = getActivity().getIntent();
         isFavorite = intent.getBooleanExtra("fromFavorite", false);
+        isFavDetail = intent.getBooleanExtra("isFavProduct", false);
+        idProductFromDetail = intent.getIntExtra("idProductFromDetail", 0);
     }
 
     private void setListener() {
@@ -67,9 +76,15 @@ public class LoginFragment extends ViewFragment<LoginContract.Presenter> impleme
             editor.putString(context.getString(R.string.preference_key_token), data.body().getResult());
             editor.apply();
         }
-        Intent i = new Intent(getViewContext(), HomeActivity.class);
-        if(isFavorite) {
-            i.putExtra("goToFavorite", true);
+        Intent i;
+        if (isFavDetail) {
+            i = new Intent(getViewContext(), ProductDetailActivity.class);
+            i.putExtra("goToFavoriteDetail", idProductFromDetail);
+        }else {
+            i = new Intent(getViewContext(), HomeActivity.class);
+            if(isFavorite) {
+                i.putExtra("goToFavorite", true);
+            }
         }
         startActivity(i);
 
