@@ -1,6 +1,9 @@
 package com.example.tocotoco.feature.product_detail;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.Image;
 import android.util.Log;
 import android.view.View;
@@ -13,8 +16,10 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.tocotoco.R;
+import com.example.tocotoco.feature.login.LoginActivity;
 import com.example.tocotoco.feature.login.LoginContract;
 import com.example.tocotoco.feature.login.LoginFragment;
+import com.example.tocotoco.home.activityhome.HomeActivity;
 import com.example.tocotoco.model.LoginResult;
 import com.example.tocotoco.model.ProductResult;
 import com.gemvietnam.base.viper.ViewFragment;
@@ -53,6 +58,9 @@ public class ProductDetailFragment extends ViewFragment<ProductDetailContract.Pr
     private boolean isFav = false;
     private Intent intent;
     int idProduct;
+    String token = "";
+    SharedPreferences sharedPref;
+
     public static ProductDetailFragment getInstance() {
         return new ProductDetailFragment();
     }
@@ -67,6 +75,10 @@ public class ProductDetailFragment extends ViewFragment<ProductDetailContract.Pr
         intent = getActivity().getIntent();
         idProduct = intent.getIntExtra("idProduct", 0);
         mPresenter.getProductDetail(idProduct);
+
+        sharedPref = getViewContext().getSharedPreferences(requireContext().getString(R.string.preference_file_key), MODE_PRIVATE);
+        token = sharedPref.getString(requireContext().getString(R.string.preference_key_token), "");
+
     }
 
     private void setListener() {
@@ -89,12 +101,17 @@ public class ProductDetailFragment extends ViewFragment<ProductDetailContract.Pr
                 break;
             case R.id.img_fav:
                 isFav = !isFav;
-                if(isFav) {
-                    mPresenter.addFavItem("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTgsInVzZXJuYW1lIjoidHVhbm5ndXllbjMiLCJwYXNzd29yZCI6IjBhNDlkZDlhZjAxMDRkNTA1NDAzYTJhYmExZjEyOTNhIiwiaWF0IjoxNjY5MTcwNDExfQ.maLfksT-M6hSGbbYouXInrqJljMIb3f8tbvbs801tpI", idProduct);
-                    img_fav.setImageResource(R.drawable.fav_icon);
+                if(!token.equals("")) {
+                    Intent i = new Intent(getViewContext(), LoginActivity.class);
+                    startActivity(i);
                 }else {
-                    mPresenter.deleteFavItem("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTgsInVzZXJuYW1lIjoidHVhbm5ndXllbjMiLCJwYXNzd29yZCI6IjBhNDlkZDlhZjAxMDRkNTA1NDAzYTJhYmExZjEyOTNhIiwiaWF0IjoxNjY5MTcwNDExfQ.maLfksT-M6hSGbbYouXInrqJljMIb3f8tbvbs801tpI", idProduct);
-                    img_fav.setImageResource(R.drawable.fav_icon_disable);
+                    if(isFav) {
+                        mPresenter.addFavItem(token, idProduct);
+                        img_fav.setImageResource(R.drawable.fav_icon);
+                    }else {
+                        mPresenter.deleteFavItem(token, idProduct);
+                        img_fav.setImageResource(R.drawable.fav_icon_disable);
+                    }
                 }
                 break;
         }
