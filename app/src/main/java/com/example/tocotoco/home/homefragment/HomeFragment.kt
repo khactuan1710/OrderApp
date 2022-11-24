@@ -7,7 +7,6 @@ import android.location.Location
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.view.isVisible
-import androidx.lifecycle.LifecycleOwner
 import androidx.viewpager2.widget.ViewPager2
 import com.example.tocotoco.R
 import com.example.tocotoco.basekotlin.base.BaseFragment
