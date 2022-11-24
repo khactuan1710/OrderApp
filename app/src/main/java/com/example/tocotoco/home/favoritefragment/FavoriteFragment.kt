@@ -12,6 +12,7 @@ import com.example.tocotoco.basekotlin.extensions.viewBinding
 import com.example.tocotoco.databinding.FragmentFavoriteBinding
 import com.example.tocotoco.dialog.DialogUtils
 import com.example.tocotoco.feature.login.LoginActivity
+import com.example.tocotoco.feature.product_detail.ProductDetailActivity
 import com.example.tocotoco.model.FavoriteProductsResult
 import com.example.tocotoco.network.NetWorkController
 import com.example.tocotoco.network.TCCCallback
@@ -32,7 +33,11 @@ class FavoriteFragment : BaseFragment(R.layout.fragment_favorite) {
     }
 
     private val listProductAdapter by lazy(LazyThreadSafetyMode.NONE) {
-        ListProductFavoriteAdapter()
+        ListProductFavoriteAdapter(onItemClick = {
+            val intent = Intent(requireActivity(), ProductDetailActivity::class.java)
+            intent.putExtra("idProduct", it)
+            startActivity(intent)
+        })
     }
 
     override fun setupViews() {

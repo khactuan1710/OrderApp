@@ -1,6 +1,7 @@
 package com.example.tocotoco.home.homefragment
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Geocoder
@@ -16,6 +17,7 @@ import com.example.tocotoco.basekotlin.extensions.viewBinding
 import com.example.tocotoco.databinding.FragmentHomeBinding
 import com.example.tocotoco.dialog.DialogUtils
 import com.example.tocotoco.feature.login.LoginActivity
+import com.example.tocotoco.feature.product_detail.ProductDetailActivity
 import com.example.tocotoco.model.CategoriesResult
 import com.example.tocotoco.network.NetWorkController
 import com.example.tocotoco.network.TCCCallback
@@ -34,6 +36,12 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         get() = TODO("Not yet implemented")
 
     private var firstPagePosition = 0
+
+    private val sharedPref by lazy {
+        requireContext().getSharedPreferences(
+            requireContext().getString(R.string.preference_file_key), Context.MODE_PRIVATE
+        )
+    }
 
     override fun setupViews() {
         getCategoryList()
@@ -72,7 +80,13 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
 
     private fun setupClickListener() = binding.run {
         appCompatImageView3.setOnClickListener {
-            startActivity(Intent(requireActivity(), LoginActivity::class.java))
+            val token =
+                sharedPref?.getString(requireContext().getString(R.string.preference_key_token), "")
+            if (token.isNullOrEmpty()){
+                startActivity(Intent(requireActivity(), LoginActivity::class.java))
+            } else {
+                startActivity(Intent(requireActivity(), ProductDetailActivity::class.java))
+            }
         }
     }
 
