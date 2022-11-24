@@ -5,6 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+<!--    <androidx.appcompat.widget.AppCompatImageView-->
+<!--        android:id="@+id/imgBack"-->
+<!--        android:layout_width="@dimen/dimen_24dp"-->
+<!--        android:layout_height="@dimen/dimen_24dp"-->
+<!--        android:layout_margin="@dimen/size_16sp"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:srcCompat="@drawable/back" />-->
+
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/layout_null_product"
         android:layout_width="match_parent"
@@ -18,7 +27,6 @@
             app:srcCompat="@drawable/img_empty_checkstore"/>
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvDesc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/fragment_favorite_null_account"
@@ -64,7 +72,6 @@
         android:layout_height="@dimen/dimen_0dp"
         tools:listitem="@layout/item_list_product_favorite"
         android:layout_marginTop="@dimen/dimen_16dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appCompatTextView2" />
     </androidx.constraintlayout.widget.ConstraintLayout>

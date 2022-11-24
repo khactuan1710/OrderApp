@@ -26,6 +26,8 @@ public class FavoriteProductsResult extends SimpleResult{
         String productCategoryName;
         @SerializedName("quantity")
         int quantity;
+        @SerializedName("price")
+        String price;
         @SerializedName("discount")
         String discount;
         @SerializedName("discountPercent")
@@ -85,6 +87,14 @@ public class FavoriteProductsResult extends SimpleResult{
 
         public void setQuantity(int quantity) {
             this.quantity = quantity;
+        }
+
+        public String getPrice() {
+            return price;
+        }
+
+        public void setPrice(String price) {
+            this.price = price;
         }
 
         public String getDiscount() {

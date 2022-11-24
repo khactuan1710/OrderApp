@@ -28,12 +28,10 @@ public class LoginFragment extends ViewFragment<LoginContract.Presenter> impleme
     @BindView(R.id.etPassword)
     TextInputEditText etPassword;
     Context context;
-    SharedPreferences sharedPref;
     SharedPreferences.Editor editor;
 
-    private boolean isFavorite = false;
+    private  boolean isFavorite = false;
     Intent intent;
-
     public static LoginFragment getInstance() {
         return new LoginFragment();
     }
@@ -48,7 +46,7 @@ public class LoginFragment extends ViewFragment<LoginContract.Presenter> impleme
         super.initLayout();
         setListener();
         context = getViewContext();
-        sharedPref = context.getSharedPreferences(
+        SharedPreferences sharedPref = context.getSharedPreferences(
                 context.getString(R.string.preference_file_key), MODE_PRIVATE);
         editor = sharedPref.edit();
 
@@ -70,10 +68,11 @@ public class LoginFragment extends ViewFragment<LoginContract.Presenter> impleme
             editor.apply();
         }
         Intent i = new Intent(getViewContext(), HomeActivity.class);
-        if (isFavorite) {
+        if(isFavorite) {
             i.putExtra("goToFavorite", true);
         }
         startActivity(i);
+
         Toast.makeText(getViewContext(), "Tài khoản chính xác", Toast.LENGTH_LONG).show();
     }
 
