@@ -90,10 +90,10 @@ public class ProductDetailFragment extends ViewFragment<ProductDetailContract.Pr
             case R.id.img_fav:
                 isFav = !isFav;
                 if(isFav) {
-                    mPresenter.addFavItem("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTgsInVzZXJuYW1lIjoidHVhbm5ndXllbjMiLCJwYXNzd29yZCI6IjBhNDlkZDlhZjAxMDRkNTA1NDAzYTJhYmExZjEyOTNhIiwiaWF0IjoxNjY5MTcwNDExfQ.maLfksT-M6hSGbbYouXInrqJljMIb3f8tbvbs801tpI", 8);
+                    mPresenter.addFavItem("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTgsInVzZXJuYW1lIjoidHVhbm5ndXllbjMiLCJwYXNzd29yZCI6IjBhNDlkZDlhZjAxMDRkNTA1NDAzYTJhYmExZjEyOTNhIiwiaWF0IjoxNjY5MTcwNDExfQ.maLfksT-M6hSGbbYouXInrqJljMIb3f8tbvbs801tpI", idProduct);
                     img_fav.setImageResource(R.drawable.fav_icon);
                 }else {
-                    mPresenter.deleteFavItem("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTgsInVzZXJuYW1lIjoidHVhbm5ndXllbjMiLCJwYXNzd29yZCI6IjBhNDlkZDlhZjAxMDRkNTA1NDAzYTJhYmExZjEyOTNhIiwiaWF0IjoxNjY5MTcwNDExfQ.maLfksT-M6hSGbbYouXInrqJljMIb3f8tbvbs801tpI", 8);
+                    mPresenter.deleteFavItem("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTgsInVzZXJuYW1lIjoidHVhbm5ndXllbjMiLCJwYXNzd29yZCI6IjBhNDlkZDlhZjAxMDRkNTA1NDAzYTJhYmExZjEyOTNhIiwiaWF0IjoxNjY5MTcwNDExfQ.maLfksT-M6hSGbbYouXInrqJljMIb3f8tbvbs801tpI", idProduct);
                     img_fav.setImageResource(R.drawable.fav_icon_disable);
                 }
                 break;
