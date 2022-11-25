@@ -39,6 +39,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Bạn"
@@ -116,6 +117,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/introduce"
                 android:gravity="center"
                 android:layout_marginTop="@dimen/dp10"
                 android:layout_width="match_parent"
@@ -126,25 +128,6 @@
                     android:layout_height="wrap_content"
                     android:text="Về ToCoToCo "
                     android:textSize="@dimen/dimen_14sp"
-                    android:textStyle="bold"
-                    android:textColor="#787878" />
-                <ImageView
-                    android:layout_alignParentEnd="true"
-                    android:src="@drawable/arrow_left_black"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-            </RelativeLayout>
-            <RelativeLayout
-                android:gravity="center"
-                android:layout_marginTop="@dimen/dp10"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_alignParentStart="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/dimen_14sp"
-                    android:text="Danh sách quán"
                     android:textStyle="bold"
                     android:textColor="#787878" />
                 <ImageView
@@ -251,38 +234,7 @@
                     android:textSize="@dimen/size_20sp"
                     android:textStyle="bold" />
             </RelativeLayout>
-            <RelativeLayout
-                android:gravity="center"
-                android:layout_marginTop="@dimen/dp10"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Ngôn ngữ"
-                    android:textSize="@dimen/dimen_14sp"
-                    android:textStyle="bold"
-                    android:textColor="#787878" />
-                <TextView
-                    android:layout_centerVertical="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Tiếng Việt"
-                    android:layout_marginEnd="@dimen/dimen_20dp"
-                    android:layout_toStartOf="@id/btn_language"
-                    android:textSize="@dimen/dimen_14sp"
-                    android:textStyle="bold"
-                    android:textColor="#EB0E0E" />
-                <ImageView
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentEnd="true"
-                    android:id="@+id/btn_language"
-                    android:src="@drawable/arrow_left_black"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-            </RelativeLayout>
+
             <RelativeLayout
                 android:gravity="center"
                 android:layout_marginTop="@dimen/dp10"
@@ -323,6 +275,7 @@
             </RelativeLayout>
         </LinearLayout>
         <RelativeLayout
+            android:id="@+id/logout"
             android:layout_marginTop="@dimen/dimen_16dp"
             android:background="@color/line_large"
             android:layout_marginEnd="@dimen/dp_8"
@@ -339,6 +292,7 @@
                 android:layout_height="wrap_content"/>
         </RelativeLayout>
         <RelativeLayout
+            android:id="@+id/exit"
             android:layout_marginTop="@dimen/dimen_16dp"
             android:background="@color/line_large"
             android:layout_marginEnd="@dimen/dp_8"

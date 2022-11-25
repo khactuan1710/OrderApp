@@ -7,6 +7,7 @@ import android.os.Build;
 import androidx.annotation.NonNull;
 
 import com.example.tocotoco.domain.DomainSwitcher;
+import com.example.tocotoco.model.AccountResult;
 import com.example.tocotoco.model.CategoriesResult;
 import com.example.tocotoco.model.DataTestResult;
 import com.example.tocotoco.model.FavoriteProductsResult;

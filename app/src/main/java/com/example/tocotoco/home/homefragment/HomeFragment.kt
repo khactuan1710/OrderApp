@@ -8,7 +8,6 @@ import android.location.Location
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.view.isVisible
-import androidx.lifecycle.LifecycleOwner
 import androidx.viewpager2.widget.ViewPager2
 import com.example.tocotoco.R
 import com.example.tocotoco.basekotlin.base.BaseFragment
@@ -17,7 +16,6 @@ import com.example.tocotoco.basekotlin.extensions.viewBinding
 import com.example.tocotoco.databinding.FragmentHomeBinding
 import com.example.tocotoco.dialog.DialogUtils
 import com.example.tocotoco.feature.account.AccountActivity
-import com.example.tocotoco.feature.login.LoginActivity
 import com.example.tocotoco.model.CategoriesResult
 import com.example.tocotoco.network.NetWorkController
 import com.example.tocotoco.network.TCCCallback

@@ -17,53 +17,32 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Tocotoco"
         tools:targetApi="31">
-
-        <!-- Set custom default icon. This is used when no icon is set for incoming notification messages.
-     See README(https://goo.gl/l4GJaQ) for more. -->
-        <meta-data
-            android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/logo_tocotoco" />
-        <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
-             notification message. See README(https://goo.gl/6BKBk7) for more. -->
-        <meta-data
-            android:name="com.google.firebase.messaging.default_notification_color"
-            android:resource="@color/color_default" />
-
-
         <activity
-            android:name=".feature.account.UpdateInforActivity"
-            android:exported="false"
-            android:theme="@style/CustomStatusBar2">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-
-        <activity
-            android:name=".feature.account.AccountActivity"
-            android:exported="false"
-            android:theme="@style/CustomStatusBar">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".feature.order.PaymentFragment"
+            android:name=".feature.account.IntroduceActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+        <!--
+     Set custom default icon. This is used when no icon is set for incoming notification messages.
+     See README(https://goo.gl/l4GJaQ) for more.
+        -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/logo_tocotoco" />
+        <!--
+ Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more.
+        -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/color_default" />
+
         <activity
             android:name=".feature.order.OrderActivity"
             android:exported="false"
             android:theme="@style/CustomStatusBar">
-<!--=======-->
-<!--            android:theme="@style/DemoTheme"-->
-<!--            android:name=".feature.product_detail.ProductDetailActivity"-->
-<!--            android:exported="true">-->
-
-<!--&gt;>>>>>> tuannk-->
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -76,6 +55,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -84,6 +64,22 @@
             android:name=".feature.product_detail.ProductDetailActivity"
             android:exported="false"
             android:theme="@style/CustomStatusBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".feature.account.AccountActivity"
+            android:exported="false"
+            android:theme="@style/CustomStatusBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".feature.account.UpdateInforActivity"
+            android:exported="false"
+            android:theme="@style/CustomStatusBar2">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -110,7 +106,6 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
     </application>
 
 </manifest>
