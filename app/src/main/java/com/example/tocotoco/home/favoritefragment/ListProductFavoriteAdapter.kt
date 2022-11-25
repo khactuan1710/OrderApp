@@ -47,7 +47,7 @@ class ListProductFavoriteAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position))
         holder.binding.root.setOnClickListener {
-            onItemClick(getItem(position).id)
+            onItemClick(getItem(position).productId)
         }
     }
 
