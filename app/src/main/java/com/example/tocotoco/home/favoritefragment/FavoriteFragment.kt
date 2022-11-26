@@ -78,7 +78,7 @@ class FavoriteFragment : BaseFragment(R.layout.fragment_favorite) {
                 NetWorkController.getListProductByFavorite(object :
                     TCCCallback<FavoriteProductsResult>() {
                     @SuppressLint("SetTextI18n")
-                    override fun onViettelSuccess(
+                    override fun onTCTCSuccess(
                         call: Call<FavoriteProductsResult>?,
                         response: Response<FavoriteProductsResult>?
                     ) {
@@ -96,7 +96,7 @@ class FavoriteFragment : BaseFragment(R.layout.fragment_favorite) {
                         binding.root.isVisible = true
                     }
 
-                    override fun onViettelFailure(call: Call<FavoriteProductsResult>?) {
+                    override fun onTCTCFailure(call: Call<FavoriteProductsResult>?) {
                         Timber.tag(call.toString())
                         DialogUtils.dismissProgressDialog()
                     }

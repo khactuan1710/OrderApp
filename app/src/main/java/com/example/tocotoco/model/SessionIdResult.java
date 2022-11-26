@@ -4,13 +4,26 @@ import com.google.gson.annotations.SerializedName;
 
 public class SessionIdResult extends SimpleResult{
     @SerializedName("result")
-    int result;
+    private SessionId result;
 
-    public int getResult() {
+    public class SessionId{
+        @SerializedName("id")
+        int id;
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+    }
+
+    public SessionId getResult() {
         return result;
     }
 
-    public void setResult(int result) {
+    public void setResult(SessionId result) {
         this.result = result;
     }
 }

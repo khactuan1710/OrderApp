@@ -72,7 +72,11 @@ public interface TCCAPI {
     @POST("shopping_session/items")
     Call<ProductsSessionResult> itemsInShoppingSession(@Field("token") String token,
                                                        @Field("sessionId") int sessionId);
-
+    @FormUrlEncoded
+    @POST("shopping_session/delete_item")
+    Call<RegisterResult> deleteItemInShoppingSession(@Field("token") String token,
+                                                     @Field("itemId") int itemId,
+                                                       @Field("sessionId") int sessionId);
     @FormUrlEncoded
     @POST("fav/add")
     Call<RegisterResult> addFavItem(@Field("token") String token,

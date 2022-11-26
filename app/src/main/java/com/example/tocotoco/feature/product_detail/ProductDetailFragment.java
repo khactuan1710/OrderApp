@@ -16,13 +16,19 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.tocotoco.R;
+import com.example.tocotoco.feature.cart.CartActivity;
 import com.example.tocotoco.feature.login.LoginActivity;
 import com.example.tocotoco.feature.login.LoginContract;
 import com.example.tocotoco.feature.login.LoginFragment;
 import com.example.tocotoco.home.activityhome.HomeActivity;
 import com.example.tocotoco.model.LoginResult;
 import com.example.tocotoco.model.ProductResult;
+import com.example.tocotoco.model.ProductSessionModel;
+import com.example.tocotoco.model.ProductsSessionResult;
+import com.example.tocotoco.model.SessionIdResult;
 import com.gemvietnam.base.viper.ViewFragment;
+
+import java.text.DecimalFormat;
 
 import butterknife.BindView;
 import retrofit2.Response;
@@ -55,14 +61,35 @@ public class ProductDetailFragment extends ViewFragment<ProductDetailContract.Pr
     TextView tv_raise_quantity;
     @BindView(R.id.tv_reduce_quantity)
     TextView tv_reduce_quantity;
+    @BindView(R.id.img_cart)
+    ImageView img_cart;
+    @BindView(R.id.tv_quantity_cart)
+    TextView tv_quantity_cart;
+    @BindView(R.id.tv_price)
+    TextView tv_price;
+    @BindView(R.id.tv_show_price)
+    TextView tv_show_price;
+    int totalPrice = 0;
+    int totalPrice2 = 0;
     private boolean isFav = false;
+    private boolean isDetele = false;
     private Intent intent;
     int idProduct;
     int idProductFromLogin = 0;
+    int idProductToQuantity = 0;
     String token = "";
     SharedPreferences sharedPref;
-    private int quantity = 1;
-
+    private int quantity = 0;
+    int idSession = -1;
+    Response<ProductResult> productResult;
+    private boolean isSelectQuantity = false;
+    private int quantityCart = 0;
+    SessionIdResult.SessionId idSessionJs;
+    int itemId = 0;
+    DecimalFormat formatter = new DecimalFormat("#,###,###");
+    private int price = 0;
+    private int quantityOld = 0;
+    private int priceOneItem = 0;
     public static ProductDetailFragment getInstance() {
         return new ProductDetailFragment();
     }
@@ -75,17 +102,21 @@ public class ProductDetailFragment extends ViewFragment<ProductDetailContract.Pr
 
     private void initData() {
         intent = getActivity().getIntent();
+        sharedPref = getViewContext().getSharedPreferences(requireContext().getString(R.string.preference_file_key), MODE_PRIVATE);
+        token = sharedPref.getString(requireContext().getString(R.string.preference_key_token), "");
         idProduct = intent.getIntExtra("idProduct", 0);
         idProductFromLogin = intent.getIntExtra("goToFavoriteDetail", 0);
         tv_quantity.setText(String.valueOf(quantity));
+        mPresenter.getUserShoppingSession(token);
         if(idProductFromLogin != 0) {
             mPresenter.getProductDetail(idProductFromLogin);
+            idProductToQuantity = idProductFromLogin;
         }else {
             mPresenter.getProductDetail(idProduct);
+            idProductToQuantity = idProduct;
         }
 
-        sharedPref = getViewContext().getSharedPreferences(requireContext().getString(R.string.preference_file_key), MODE_PRIVATE);
-        token = sharedPref.getString(requireContext().getString(R.string.preference_key_token), "");
+//        mPresenter.itemsInShoppingSession(token, idSession);
 
     }
 
@@ -114,6 +145,7 @@ public class ProductDetailFragment extends ViewFragment<ProductDetailContract.Pr
                 break;
             case R.id.img_fav:
                 isFav = !isFav;
+                isDetele = false;
                 if(token.equals("")) {
                     Intent i = new Intent(getViewContext(), LoginActivity.class);
                     i.putExtra("isFavProduct", true);
@@ -130,14 +162,42 @@ public class ProductDetailFragment extends ViewFragment<ProductDetailContract.Pr
                 }
                 break;
             case R.id.tv_reduce_quantity:
-                if(quantity > 1) {
-                    quantity --;
-                    tv_quantity.setText(String.valueOf(quantity));
+                isSelectQuantity = false;
+                if(token.equals("")) {
+                    Intent i = new Intent(getViewContext(), LoginActivity.class);
+                    i.putExtra("isFavProduct", true);
+                    i.putExtra("idProductFromDetail", idProduct);
+                    startActivity(i);
+                }else {
+                    if(quantity > 1) {
+                        isDetele = false;
+                        mPresenter.addItemToShoppingSession(token, idSession, productResult.body().getResults().getId(), quantity - 1, "M");
+//                    quantity --;
+//                    tv_quantity.setText(String.valueOf(quantity));
+                    }else if (quantity == 1) {
+                        isDetele = true;
+                        tv_quantity_cart.setText(String.valueOf(quantityCart - 1));
+                        mPresenter.deleteItemInShoppingSession(token, itemId, idSession);
+                    }
                 }
                 break;
             case R.id.tv_raise_quantity:
-                    quantity ++;
-                    tv_quantity.setText(String.valueOf(quantity));
+                isDetele = false;
+                isSelectQuantity = true;
+                if(token.equals("")) {
+                    Intent i = new Intent(getViewContext(), LoginActivity.class);
+                    i.putExtra("isFavProduct", true);
+                    i.putExtra("idProductFromDetail", idProduct);
+                    startActivity(i);
+                }else {
+                    mPresenter.addItemToShoppingSession(token, idSession, productResult.body().getResults().getId(), quantity + 1, "M");
+//                    quantity ++;
+//                    tv_quantity.setText(String.valueOf(quantity));
+                }
+                break;
+            case R.id.img_cart:
+                Intent i = new Intent(getViewContext(), CartActivity.class);
+                startActivity(i);
                 break;
         }
     }
@@ -150,6 +210,11 @@ public class ProductDetailFragment extends ViewFragment<ProductDetailContract.Pr
     @Override
     public void initViewDetail(Response<ProductResult> data) {
         if(data != null) {
+            productResult = data;
+//            tv_price.setText(formatter.format(Integer.parseInt(data.body().getResults().getPrice())) + "đ");
+
+            tv_show_price.setText(formatter.format(Integer.parseInt(data.body().getResults().getPrice())) + "đ");
+            priceOneItem = Integer.parseInt(data.body().getResults().getPrice());
             mo_ta_sp.setText(data.body().getResults().getDescription());
             tv_name_product.setText(data.body().getResults().getName());
             RequestOptions options = new RequestOptions()
@@ -161,5 +226,74 @@ public class ProductDetailFragment extends ViewFragment<ProductDetailContract.Pr
 
             Glide.with(this).load(data.body().getResults().getDisplayimage()).apply(options).into(img_product);
         }
+    }
+
+    @Override
+    public void receiveSession(SessionIdResult.SessionId _idSession) {
+        idSession = _idSession.getId();
+        idSessionJs = _idSession;
+    }
+
+    @Override
+    public void addItemToCartSuccess(boolean isSuccess) {
+        if (isSuccess) {
+            if(isSelectQuantity) {
+                quantity ++;
+                tv_quantity.setText(String.valueOf(quantity));
+            }else {
+                quantity --;
+                tv_quantity.setText(String.valueOf(quantity));
+            }
+//            if(quantityOld != 0) {
+//                quantity = quantityOld;
+//            }
+            int i = quantity - quantityOld;
+            price = priceOneItem * i;
+            totalPrice2 = totalPrice + price;
+            if(totalPrice2 == 0) {
+                tv_price.setVisibility(View.GONE);
+            }else {
+                tv_price.setVisibility(View.VISIBLE);
+                tv_price.setText(formatter.format(totalPrice2) + "đ");
+            }
+            if(!isDetele) {
+                if(itemId != 0) {
+                    tv_quantity_cart.setText(String.valueOf(quantityCart));
+                }else {
+                    tv_quantity_cart.setText(String.valueOf(quantityCart + 1));
+                    quantityCart = quantityCart + 1;
+                }
+            }
+        }
+    }
+
+    @Override
+    public void updateQuantityCart(Response<ProductsSessionResult> response, boolean isUpdate) {
+        if(isUpdate) {
+            for (int i = 0; i < quantityCart; i ++) {
+                ProductSessionModel item = response.body().getResults().get(i);
+                if(idProductToQuantity == item.getProductId()) {
+                    itemId = item.getId();
+                }
+            }
+        }else {
+            tv_quantity_cart.setText(String.valueOf(response.body().getResults().size()));
+            quantityCart = response.body().getResults().size();
+            for (int i = 0; i < quantityCart; i ++) {
+                ProductSessionModel item = response.body().getResults().get(i);
+                totalPrice += Integer.parseInt(item.getPrice()) * item.getQuantity();
+                if(idProductToQuantity == item.getProductId()) {
+                    tv_quantity.setText(String.valueOf(item.getQuantity()));
+                    quantityOld = item.getQuantity();
+                    quantity = item.getQuantity();
+                    itemId = item.getId();
+                }
+            }
+            if(totalPrice != 0) {
+                tv_price.setVisibility(View.VISIBLE);
+                tv_price.setText(formatter.format(totalPrice) + "đ");
+            }
+        }
+
     }
 }

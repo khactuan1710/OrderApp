@@ -60,7 +60,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         DialogUtils.showProgressDialog(requireActivity())
         if (NetworkUtils.isConnect(requireActivity())) {
             NetWorkController.getListCategories(object : TCCCallback<CategoriesResult>() {
-                override fun onViettelSuccess(
+                override fun onTCTCSuccess(
                     call: Call<CategoriesResult>?,
                     response: Response<CategoriesResult>?
                 ) {
@@ -69,7 +69,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
                     binding.root.isVisible = true
                 }
 
-                override fun onViettelFailure(call: Call<CategoriesResult>?) {
+                override fun onTCTCFailure(call: Call<CategoriesResult>?) {
                     Timber.tag(call.toString())
                     DialogUtils.dismissProgressDialog()
                 }

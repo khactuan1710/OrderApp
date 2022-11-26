@@ -39,7 +39,7 @@ public class RegisterAccountPresenter extends Presenter<RegisterAccountContract.
         DialogUtils.showProgressDialog(getViewContext());
         mInteractor.registerAcc(new TCCCallback<RegisterResult>() {
             @Override
-            public void onViettelSuccess(Call<RegisterResult> call, Response<RegisterResult> response) {
+            public void onTCTCSuccess(Call<RegisterResult> call, Response<RegisterResult> response) {
                 DialogUtils.dismissProgressDialog();
                 if(response.body().getIsSuccess()){
                     mView.registerAccSuccess(response);
@@ -49,7 +49,7 @@ public class RegisterAccountPresenter extends Presenter<RegisterAccountContract.
             }
 
             @Override
-            public void onViettelFailure(Call<RegisterResult> call) {
+            public void onTCTCFailure(Call<RegisterResult> call) {
                 DialogUtils.dismissProgressDialog();
             }
         }, name, username, pass, mail, phone);

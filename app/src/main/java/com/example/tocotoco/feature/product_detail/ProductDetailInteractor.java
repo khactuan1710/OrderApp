@@ -3,6 +3,7 @@ package com.example.tocotoco.feature.product_detail;
 import com.example.tocotoco.feature.login.LoginContract;
 import com.example.tocotoco.model.LoginResult;
 import com.example.tocotoco.model.ProductResult;
+import com.example.tocotoco.model.ProductsSessionResult;
 import com.example.tocotoco.model.RegisterResult;
 import com.example.tocotoco.model.SessionIdResult;
 import com.example.tocotoco.network.NetWorkController;
@@ -27,6 +28,11 @@ public class ProductDetailInteractor extends Interactor<ProductDetailContract.Pr
     }
 
     @Override
+    public void itemsInShoppingSession(TCCCallback<ProductsSessionResult> callback, String token, int sessionId) {
+        NetWorkController.itemsInShoppingSession(callback, token, sessionId);
+    }
+
+    @Override
     public void addItemToShoppingSession(TCCCallback<RegisterResult> callback, String token, int sessionId, int productId, int quantity, String size) {
         NetWorkController.addItemToShoppingSession(callback, token, sessionId, productId, quantity, size);
     }
@@ -39,5 +45,10 @@ public class ProductDetailInteractor extends Interactor<ProductDetailContract.Pr
     @Override
     public void deleteFavItem(TCCCallback<RegisterResult> callback, String token, int productId) {
         NetWorkController.deleteFavItem(callback, token, productId);
+    }
+
+    @Override
+    public void deleteItemInShoppingSession(TCCCallback<RegisterResult> callback, String token, int itemId, int sessionId) {
+        NetWorkController.deleteItemInShoppingSession(callback, token, itemId, sessionId);
     }
 }

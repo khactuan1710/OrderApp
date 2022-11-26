@@ -122,6 +122,12 @@ public class NetWorkController {
         Call<ProductsSessionResult> call = getAPIBuilder().itemsInShoppingSession(token, sessionId);
         call.enqueue(callback);
     }
+
+    public static void deleteItemInShoppingSession(TCCCallback<RegisterResult> callback, String token, int itemId, int sessionId) {
+        Call<RegisterResult> call = getAPIBuilder().deleteItemInShoppingSession(token, itemId, sessionId);
+        call.enqueue(callback);
+    }
+
     public static void addFavItem(TCCCallback<RegisterResult> callback, String token, int sessionId) {
         Call<RegisterResult> call = getAPIBuilder().addFavItem(token, sessionId);
         call.enqueue(callback);

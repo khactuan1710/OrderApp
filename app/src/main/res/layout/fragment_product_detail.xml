@@ -57,12 +57,11 @@
 
                 <com.makeramen.roundedimageview.RoundedImageView
                     android:id="@+id/img_product"
-                    android:layout_width="wrap_content"
-                    android:layout_height="200dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="350dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/dimen_20dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/milk_tea"
                     app:riv_corner_radius="16dp" />
 
                 <TextView
@@ -74,6 +73,14 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/dimen_20dp"
                     android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_show_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/color_EE0033"
+                    android:textSize="@dimen/dimen_16dp"
+                    android:fontFamily="@font/sf_pro_regular" />
 
                 <View
                     android:layout_width="match_parent"
@@ -95,8 +102,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_8"
-                    android:text="Mỗi ngày với ToCoToCo sẽ là điều tươi mới hơn với trà sữa trân trâu đường đen thơm ngon, bổ dưỡng.
-Trân trâu đen giòn dai mang lại cmar giác “đã” trong từng ngụm trà sữa"
+                    android:text=""
                     android:textColor="#B7A9A9"
                     android:textStyle="bold" />
 
@@ -384,7 +390,7 @@ Trân trâu đen giòn dai mang lại cmar giác “đã” trong từng ngụm 
                             android:layout_centerHorizontal="true"
                             android:paddingStart="@dimen/dimen_20dp"
                             android:paddingEnd="@dimen/dimen_20dp"
-                            android:text="1"
+                            android:text="0"
                             android:textColor="@color/black"
                             android:textSize="@dimen/dimen_20dp"
                             android:textStyle="bold" />
@@ -414,16 +420,17 @@ Trân trâu đen giòn dai mang lại cmar giác “đã” trong từng ngụm 
                             android:background="#c4c4c4" />
 
                         <TextView
-                            android:gravity="center"
-                            android:layout_width="15dp"
-                            android:layout_height="15dp"
+                            android:id="@+id/tv_quantity_cart"
+                            android:layout_width="@dimen/dimen_15dp"
+                            android:layout_height="@dimen/dimen_15dp"
                             android:layout_alignRight="@+id/img_cart"
+                            android:layout_marginRight="7dp"
                             android:background="@drawable/border_quantity"
-                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:padding="@dimen/dimen_1dp"
                             android:textColor="@color/white"
                             android:textSize="@dimen/text_size_10sp"
-                            android:padding="@dimen/dimen_1dp"
-                            android:text="3" />
+                            android:textStyle="bold" />
 
                         <ImageView
                             android:id="@+id/img_cart"
@@ -433,13 +440,14 @@ Trân trâu đen giòn dai mang lại cmar giác “đã” trong từng ngụm 
                             android:src="@drawable/ic_cart_detail_order" />
 
                         <TextView
+                            android:visibility="gone"
+                            android:id="@+id/tv_price"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_marginRight="@dimen/dimen_15dp"
                             android:layout_toStartOf="@id/btn_add_product"
                             android:fontFamily="@font/sf_pro_text_medium"
-                            android:text="53.000"
                             android:textColor="@color/color_EE0033"
                             android:textSize="@dimen/text_size_20sp" />
 
