@@ -43,6 +43,10 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         )
     }
 
+    private val editor by lazy {
+        sharedPref.edit()
+    }
+
     override fun setupViews() {
         getCategoryList()
         requestPermissionLocation()
@@ -82,7 +86,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         appCompatImageView3.setOnClickListener {
             val token =
                 sharedPref?.getString(requireContext().getString(R.string.preference_key_token), "")
-            if (token.isNullOrEmpty()){
+            if (token.isNullOrEmpty()) {
                 startActivity(Intent(requireActivity(), LoginActivity::class.java))
             } else {
                 startActivity(Intent(requireActivity(), ProductDetailActivity::class.java))
@@ -160,6 +164,8 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
                                 1
                             )[0].getAddressLine(0)
                             binding.tvLocation.text = address
+                            editor.putString(requireContext().getString(R.string.address), address)
+                            editor.apply()
                         }
                     }
                 }
