@@ -2,6 +2,7 @@ package com.example.tocotoco.feature.account;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -67,6 +68,9 @@ public class UpdateInforActivity extends AppCompatActivity {
             public void onResponse(Call<AccountResult> call, Response<AccountResult> response) {
                 DialogUtils.dismissProgressDialog();
                 Toast.makeText(UpdateInforActivity.this, "Lưu thông tin thành công", Toast.LENGTH_SHORT).show();
+//                AccountResult accountResult=response.body();
+//                Intent intent=new Intent(UpdateInforActivity.this,AccountActivity.class);
+//                intent.putExtra("name",accountResult.getResult().getName());
             }
 
             @Override
