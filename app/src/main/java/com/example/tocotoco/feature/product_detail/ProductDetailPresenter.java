@@ -1,5 +1,10 @@
 package com.example.tocotoco.feature.product_detail;
 
+import static android.content.Context.MODE_PRIVATE;
+
+import android.content.SharedPreferences;
+
+import com.example.tocotoco.R;
 import com.example.tocotoco.dialog.DialogUtils;
 import com.example.tocotoco.model.ProductResult;
 import com.example.tocotoco.model.ProductsSessionResult;
@@ -16,12 +21,15 @@ public class ProductDetailPresenter extends Presenter<ProductDetailContract.View
         implements ProductDetailContract.Presenter{
 
     SessionIdResult.SessionId sessionIdJS;
+    SharedPreferences.Editor editor;
     public ProductDetailPresenter(ContainerView containerView) {
         super(containerView);
     }
     @Override
     public void start() {
-
+        SharedPreferences sharedPref = getViewContext().getSharedPreferences(
+                getViewContext().getString(R.string.preference_file_key), MODE_PRIVATE);
+        editor = sharedPref.edit();
     }
 
     @Override
@@ -60,14 +68,35 @@ public class ProductDetailPresenter extends Presenter<ProductDetailContract.View
                 DialogUtils.dismissProgressDialog();
                 if(response.body().getIsSuccess()) {
                     sessionIdJS = response.body().getResult();
+                    editor.putInt(getViewContext().getString(R.string.session_id), response.body().getResult().getId());
+                    editor.apply();
                     itemsInShoppingSession(token, response.body().getResult(), false);
                     mView.receiveSession(response.body().getResult());
+                }else {
+                    if(!token.equals("")) {
+                        createShoppingSession(token);
+                    }
                 }
             }
 
             @Override
             public void onTCTCFailure(Call<SessionIdResult> call) {
                 DialogUtils.dismissProgressDialog();
+            }
+        }, token);
+    }
+
+    @Override
+    public void createShoppingSession(String token) {
+        mInteractor.createShoppingSession(new TCCCallback<RegisterResult>() {
+            @Override
+            public void onTCTCSuccess(Call<RegisterResult> call, Response<RegisterResult> response) {
+                getUserShoppingSession(token);
+            }
+
+            @Override
+            public void onTCTCFailure(Call<RegisterResult> call) {
+
             }
         }, token);
     }

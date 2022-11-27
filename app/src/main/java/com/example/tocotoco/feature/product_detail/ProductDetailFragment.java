@@ -20,15 +20,19 @@ import com.example.tocotoco.feature.cart.CartActivity;
 import com.example.tocotoco.feature.login.LoginActivity;
 import com.example.tocotoco.feature.login.LoginContract;
 import com.example.tocotoco.feature.login.LoginFragment;
+import com.example.tocotoco.feature.order.OrderActivity;
 import com.example.tocotoco.home.activityhome.HomeActivity;
 import com.example.tocotoco.model.LoginResult;
 import com.example.tocotoco.model.ProductResult;
 import com.example.tocotoco.model.ProductSessionModel;
 import com.example.tocotoco.model.ProductsSessionResult;
 import com.example.tocotoco.model.SessionIdResult;
+import com.example.tocotoco.room.TokenDevice;
+import com.example.tocotoco.room.TokenDeviceDatabase;
 import com.gemvietnam.base.viper.ViewFragment;
 
 import java.text.DecimalFormat;
+import java.util.List;
 
 import butterknife.BindView;
 import retrofit2.Response;
@@ -90,6 +94,7 @@ public class ProductDetailFragment extends ViewFragment<ProductDetailContract.Pr
     private int price = 0;
     private int quantityOld = 0;
     private int priceOneItem = 0;
+    List<TokenDevice> list;
     public static ProductDetailFragment getInstance() {
         return new ProductDetailFragment();
     }
@@ -115,9 +120,7 @@ public class ProductDetailFragment extends ViewFragment<ProductDetailContract.Pr
             mPresenter.getProductDetail(idProduct);
             idProductToQuantity = idProduct;
         }
-
-//        mPresenter.itemsInShoppingSession(token, idSession);
-
+        list = TokenDeviceDatabase.getInstance(getViewContext()).tokenDeviceDAO().getListToken();
     }
 
     private void setListener() {
@@ -198,6 +201,18 @@ public class ProductDetailFragment extends ViewFragment<ProductDetailContract.Pr
             case R.id.img_cart:
                 Intent i = new Intent(getViewContext(), CartActivity.class);
                 startActivity(i);
+                break;
+            case R.id.btn_add_product:
+                Intent i2;
+                if(token.equals("")) {
+                    i2 = new Intent(getViewContext(), LoginActivity.class);
+                    i2.putExtra("isFavProduct", true);
+                    i2.putExtra("idProductFromDetail", idProduct);
+                }else {
+                    i2 = new Intent(getViewContext(), OrderActivity.class);
+                    i2.putExtra("tokenToOrder", token);
+                }
+                startActivity(i2);
                 break;
         }
     }

@@ -9,20 +9,23 @@
         android:id="@+id/app_logo"
         android:src="@drawable/logo_tocotoco"/>
     <TextView
+        android:layout_alignParentTop="true"
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/sf_pro_text_bold"
         android:text="title"
+        android:textSize="@dimen/dimen_18dp"
+        android:textColor="@color/color_44494D"
         android:layout_marginLeft="@dimen/dimen_10dp"
-        android:layout_toRightOf="@id/app_logo"
-        android:layout_marginTop="10dp"/>
+        android:layout_toRightOf="@id/app_logo" />
     <TextView
         android:id="@+id/description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="This is description"
         android:layout_marginLeft="@dimen/dimen_10dp"
+        android:textSize="@dimen/text_size_14sp"
         android:layout_toRightOf="@id/app_logo"
-        android:layout_below="@id/title"
-        android:layout_marginTop="10dp"/>
+        android:layout_below="@id/title" />
 </RelativeLayout>

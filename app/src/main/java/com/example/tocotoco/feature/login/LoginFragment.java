@@ -7,13 +7,17 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tocotoco.R;
 import com.example.tocotoco.feature.product_detail.ProductDetailActivity;
+import com.example.tocotoco.feature.registerAcc.RegisterAccountActivity;
 import com.example.tocotoco.home.activityhome.HomeActivity;
 import com.example.tocotoco.model.LoginResult;
+import com.example.tocotoco.room.TokenDevice;
+import com.example.tocotoco.room.TokenDeviceDatabase;
 import com.gemvietnam.base.viper.ViewFragment;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -24,6 +28,10 @@ public class LoginFragment extends ViewFragment<LoginContract.Presenter> impleme
 
     @BindView(R.id.tv_login)
     TextView tv_login;
+    @BindView(R.id.tv_register)
+    TextView tv_register;
+    @BindView(R.id.ic_back)
+    ImageView ic_back;
     @BindView(R.id.ed_sdt)
     TextInputEditText ed_sdt;
     @BindView(R.id.etPassword)
@@ -67,6 +75,8 @@ public class LoginFragment extends ViewFragment<LoginContract.Presenter> impleme
         tv_login.setOnClickListener(this);
         ed_sdt.setOnClickListener(this);
         etPassword.setOnClickListener(this);
+        tv_register.setOnClickListener(this);
+        ic_back.setOnClickListener(this);
     }
 
 
@@ -103,6 +113,14 @@ public class LoginFragment extends ViewFragment<LoginContract.Presenter> impleme
 
             case R.id.etPassword:
                 Log.e("tag:  ", "cdslick");
+                break;
+            case R.id.tv_register:
+                Intent i;
+                i = new Intent(getViewContext(), RegisterAccountActivity.class);
+                startActivity(i);
+                break;
+            case R.id.ic_back:
+                mPresenter.back();
                 break;
         }
     }

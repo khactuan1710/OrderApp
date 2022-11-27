@@ -28,6 +28,11 @@ public class ProductDetailInteractor extends Interactor<ProductDetailContract.Pr
     }
 
     @Override
+    public void createShoppingSession(TCCCallback<RegisterResult> callback, String token) {
+        NetWorkController.createShoppingSession(callback, token);
+    }
+
+    @Override
     public void itemsInShoppingSession(TCCCallback<ProductsSessionResult> callback, String token, int sessionId) {
         NetWorkController.itemsInShoppingSession(callback, token, sessionId);
     }

@@ -1,41 +1,38 @@
-package com.example.tocotoco.feature.cart;
+package com.example.tocotoco.feature.order;
 
 import android.content.Context;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tocotoco.R;
+import com.example.tocotoco.feature.cart.CartProductAdapter;
 import com.example.tocotoco.model.ProductSessionModel;
-import com.gemvietnam.base.log.Logger;
 
 import java.util.ArrayList;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.CartProductHolder>{
+public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHorder>{
     private Context context;
     private ArrayList<ProductSessionModel> data;
 //    private TranferClickListener tranferClickListener;
 
-    public CartProductAdapter(Context context, ArrayList<ProductSessionModel> data) {
+    public OrderAdapter(Context context, ArrayList<ProductSessionModel> data) {
         this.context = context;
         this.data = data;
     }
 
     @Override
-    public CartProductHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.cart_item, parent, false);
-        return new CartProductHolder(view);
+    public OrderAdapter.OrderHorder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.order_item, parent, false);
+        return new OrderAdapter.OrderHorder(view);
     }
 
     @Override
-    public void onBindViewHolder(final CartProductHolder holder, final int position) {
+    public void onBindViewHolder(final OrderAdapter.OrderHorder holder, final int position) {
 
 //        TranferMoneyHisData tranferMoneyHisData = data.get(position);
 //        if (!TextUtils.isEmpty(tranferMoneyHisData.getAmount())) {
@@ -93,7 +90,7 @@ public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.
         return (null == data) ? 0 : data.size();
     }
 
-    class CartProductHolder extends RecyclerView.ViewHolder {
+    class OrderHorder extends RecyclerView.ViewHolder {
 
 //        @BindView(R.id.phone_receive_tv)
 //        TextView mPhoneReceiveTv;
@@ -110,7 +107,7 @@ public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.
 //        @BindView(R.id.time_tv)
 //        TextView mTimeTv;
 
-        private CartProductHolder(View itemView) {
+        private OrderHorder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
 

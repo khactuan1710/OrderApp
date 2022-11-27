@@ -17,6 +17,7 @@ import com.example.tocotoco.model.ProductsResult;
 import com.example.tocotoco.model.ProductsSessionResult;
 import com.example.tocotoco.model.RegisterResult;
 import com.example.tocotoco.model.SessionIdResult;
+import com.example.tocotoco.model.UserInfoResult;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -117,6 +118,15 @@ public class NetWorkController {
         Call<SessionIdResult> call = getAPIBuilder().getUserShoppingSession(token);
         call.enqueue(callback);
     }
+    public static void createShoppingSession(TCCCallback<RegisterResult> callback, String token) {
+        Call<RegisterResult> call = getAPIBuilder().createShoppingSession(token);
+        call.enqueue(callback);
+    }
+
+    public static void getUserInfo(TCCCallback<UserInfoResult> callback, String token) {
+        Call<UserInfoResult> call = getAPIBuilder().getUserInfo(token);
+        call.enqueue(callback);
+    }
 
     public static void itemsInShoppingSession(TCCCallback<ProductsSessionResult> callback, String token, int sessionId) {
         Call<ProductsSessionResult> call = getAPIBuilder().itemsInShoppingSession(token, sessionId);
@@ -137,6 +147,12 @@ public class NetWorkController {
         Call<RegisterResult> call = getAPIBuilder().deleteFavItem(token, sessionId);
         call.enqueue(callback);
     }
+
+    public static void updateUserAddress(TCCCallback<RegisterResult> callback, String token, String address, String phoneNumber) {
+        Call<RegisterResult> call = getAPIBuilder().updateUserAddress(token, address, phoneNumber);
+        call.enqueue(callback);
+    }
+
 
     public static void addItemToShoppingSession(TCCCallback<RegisterResult> callback, String token, int sessionId, int productId, int quantity, String size) {
         Call<RegisterResult> call = getAPIBuilder().addItemToShoppingSession(token, sessionId, productId, quantity, size);

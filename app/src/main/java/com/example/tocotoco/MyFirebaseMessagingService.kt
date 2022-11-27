@@ -10,8 +10,9 @@ import android.os.Build
 import android.util.Log
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
-import com.example.tocotoco.R
 import com.example.tocotoco.feature.login.LoginActivity
+import com.example.tocotoco.room.TokenDevice
+import com.example.tocotoco.room.TokenDeviceDatabase
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
@@ -28,8 +29,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             sendNotification(remoteMessage)
         }
         sendNotification(remoteMessage)
-
     }
+
 
     @SuppressLint("RemoteViewLayout")
     private fun getRemoteView(title: String, mess: String): RemoteViews {
@@ -96,5 +97,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     private fun sendTokenToServer(token: String) {
         Log.e("TOKEN", "onNewToken: $token")
+        val tokenDevice = TokenDevice(token)
+        TokenDeviceDatabase.getInstance(applicationContext).tokenDeviceDAO().insertToken(tokenDevice)
     }
 }
