@@ -15,6 +15,7 @@ import com.example.tocotoco.databinding.ActivityAccountBinding;
 import com.example.tocotoco.dialog.DialogUtils;
 import com.example.tocotoco.feature.account.network.ApiService;
 import com.example.tocotoco.feature.login.LoginActivity;
+import com.example.tocotoco.home.activityhome.HomeActivity;
 import com.example.tocotoco.model.AccountResult;
 import com.example.tocotoco.model.Result;
 
@@ -67,7 +68,7 @@ public class AccountActivity extends AppCompatActivity {
                 .setNegativeButton("Hủy", (dialogInterface, i) -> dialogInterface.dismiss()).setPositiveButton("Thoát", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        System.exit(0);
+                        finishAffinity();
                     }
                 }).create().show();
     }

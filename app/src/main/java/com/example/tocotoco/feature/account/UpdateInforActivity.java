@@ -69,6 +69,10 @@ public class UpdateInforActivity extends AppCompatActivity {
             public void onResponse(Call<UpdateAccountResult> call, Response<UpdateAccountResult> response) {
                 DialogUtils.dismissProgressDialog();
                 Toast.makeText(UpdateInforActivity.this, "Lưu thông tin thành công", Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent(UpdateInforActivity.this,AccountActivity.class);
+                intent.putExtra("name",binding.name.getText().toString());
+                startActivity(intent);
+                finish();
             }
 
             @Override
