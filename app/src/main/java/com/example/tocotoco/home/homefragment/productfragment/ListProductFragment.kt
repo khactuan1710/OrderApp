@@ -48,7 +48,7 @@ class ListProductFragment : BaseFragment(R.layout.fragment_list_product) {
         if (NetworkUtils.isConnect(requireActivity())) {
             NetWorkController.getListProductByCategory(object :
                 TCCCallback<ProductsByCategoryResult>() {
-                override fun onViettelSuccess(
+                override fun onTCTCSuccess(
                     call: Call<ProductsByCategoryResult>?,
                     response: Response<ProductsByCategoryResult>?
                 ) {
@@ -56,7 +56,7 @@ class ListProductFragment : BaseFragment(R.layout.fragment_list_product) {
                     DialogUtils.dismissProgressDialog()
                 }
 
-                override fun onViettelFailure(call: Call<ProductsByCategoryResult>?) {
+                override fun onTCTCFailure(call: Call<ProductsByCategoryResult>?) {
                     Timber.tag(call.toString())
                     DialogUtils.dismissProgressDialog()
                 }

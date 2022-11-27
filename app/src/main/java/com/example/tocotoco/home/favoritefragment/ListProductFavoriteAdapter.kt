@@ -11,7 +11,9 @@ import com.example.tocotoco.basekotlin.extensions.decimalFormatted
 import com.example.tocotoco.databinding.ItemListProductFavoriteBinding
 import com.example.tocotoco.model.FavoriteProductsResult.FavoriteProductsResultModel
 
-class ListProductFavoriteAdapter :
+class ListProductFavoriteAdapter(
+    private val onItemClick: (Int) -> Unit
+) :
     ListAdapter<FavoriteProductsResultModel, ListProductFavoriteAdapter.ViewHolder>(
         object : DiffUtil.ItemCallback<FavoriteProductsResultModel>() {
             override fun areItemsTheSame(
@@ -33,23 +35,32 @@ class ListProductFavoriteAdapter :
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(ItemListProductFavoriteBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+        return ViewHolder(
+            ItemListProductFavoriteBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position))
+        holder.binding.root.setOnClickListener {
+            onItemClick(getItem(position).productId)
+        }
     }
 
-    class ViewHolder(private val binding: ItemListProductFavoriteBinding) :
+    class ViewHolder(val binding: ItemListProductFavoriteBinding) :
         RecyclerView.ViewHolder(binding.root) {
-            @SuppressLint("SetTextI18n")
-            fun bind(item: FavoriteProductsResultModel) = binding.run {
-                tvTitle.text = item.productName
-                tvPrice.text = "${item.price.toInt().decimalFormatted()} đ"
-                Glide.with(root.context)
-                    .load(item.displayImage)
-                    .fitCenter()
-                    .into(imgProduct)
-            }
+        @SuppressLint("SetTextI18n")
+        fun bind(item: FavoriteProductsResultModel) = binding.run {
+            tvTitle.text = item.productName
+            tvPrice.text = "${item.priceBeforeDiscount.toInt().decimalFormatted()} đ"
+            Glide.with(root.context)
+                .load(item.displayImage)
+                .fitCenter()
+                .into(imgProduct)
+        }
     }
 }

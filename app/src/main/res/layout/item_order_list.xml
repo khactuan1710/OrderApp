@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/dimen_16dp"
+    android:layout_marginVertical="@dimen/dimen_8dp"
+    app:cardCornerRadius="@dimen/dimen_16dp"
+    app:cardElevation="@dimen/dimen_8dp"
+    tools:ignore="HardcodedText">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/appCompatImageView"
+            android:layout_width="@dimen/dimen_24dp"
+            android:layout_height="@dimen/dimen_24dp"
+            android:layout_marginStart="@dimen/dimen_16dp"
+            android:layout_marginTop="@dimen/dimen_16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/tick" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/appCompatTextView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_16dp"
+            android:text="Đã giao"
+            android:textColor="@color/black"
+            android:textSize="@dimen/dimen_18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/appCompatImageView"
+            app:layout_constraintStart_toEndOf="@+id/appCompatImageView"
+            app:layout_constraintTop_toTopOf="@+id/appCompatImageView" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/appCompatImageView5"
+            android:layout_width="@dimen/dimen_32dp"
+            android:layout_height="@dimen/dimen_32dp"
+            android:layout_marginTop="@dimen/dimen_4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView3"
+            app:layout_constraintStart_toEndOf="@+id/appCompatTextView3"
+            app:layout_constraintTop_toTopOf="@+id/appCompatTextView3"
+            app:srcCompat="@drawable/dots" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/appCompatTextView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="20/10/2022"
+            android:textColor="@color/black"
+            android:textSize="@dimen/dimen_18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView3"
+            app:layout_constraintStart_toEndOf="@+id/appCompatImageView5"
+            app:layout_constraintTop_toTopOf="@+id/appCompatTextView3" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/appCompatImageView6"
+            android:layout_width="@dimen/dimen_120dp"
+            android:layout_height="@dimen/dimen_120dp"
+            android:layout_margin="@dimen/dimen_16dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appCompatTextView3"
+            app:srcCompat="@drawable/img_tea" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/appCompatTextView5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_8dp"
+            android:text="ToCoToCo - 102 Trần Duy Hưng"
+            android:textColor="@color/black"
+            android:textSize="@dimen/dimen_18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toEndOf="@+id/appCompatImageView6"
+            app:layout_constraintTop_toTopOf="@+id/appCompatImageView6" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/appCompatTextView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_8dp"
+            android:layout_marginTop="@dimen/dimen_8dp"
+            android:text="100,000"
+            android:textColor="@color/black"
+            android:textSize="@dimen/dimen_16sp"
+            app:layout_constraintStart_toEndOf="@+id/appCompatImageView6"
+            app:layout_constraintTop_toBottomOf="@+id/appCompatTextView5" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvSoMon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_4dp"
+            android:text="(3 món) - Ví MoMo"
+            app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView6"
+            app:layout_constraintStart_toEndOf="@+id/appCompatTextView6"
+            app:layout_constraintTop_toTopOf="@+id/appCompatTextView6" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/appCompatTextView8"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_4dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="Địa chỉ giao: ToCoHưngToCoToCoHưngToCoToCoHưngToCoToCoHưngToCoToCoHưngToCoToCoHưngToCoToCo"
+            android:textColor="@color/black"
+            android:textSize="@dimen/dimen_16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/appCompatTextView6"
+            app:layout_constraintTop_toBottomOf="@+id/appCompatTextView6" />
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/dimen_16dp"
+            android:text="Đặt lại"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:backgroundTint="@color/green_light"
+            app:cornerRadius="@dimen/dimen_4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appCompatTextView8"
+            tools:layout_editor_absoluteX="16dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

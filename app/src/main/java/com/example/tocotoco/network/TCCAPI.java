@@ -1,6 +1,5 @@
 package com.example.tocotoco.network;
 
-import com.example.tocotoco.model.AccountResult;
 import com.example.tocotoco.model.CategoriesResult;
 import com.example.tocotoco.model.DataTestResult;
 import com.example.tocotoco.model.FavoriteProductsResult;
@@ -11,14 +10,17 @@ import com.example.tocotoco.model.ProductsResult;
 import com.example.tocotoco.model.ProductsSessionResult;
 import com.example.tocotoco.model.RegisterResult;
 import com.example.tocotoco.model.SessionIdResult;
+import com.example.tocotoco.model.UserInfoResult;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public interface TCCAPI {
-
     @FormUrlEncoded
     @POST("getDebitByContract")
     Call<DataTestResult> getListDataTest(@Field("token") String token,
@@ -68,10 +70,32 @@ public interface TCCAPI {
     Call<SessionIdResult> getUserShoppingSession(@Field("token") String token);
 
     @FormUrlEncoded
+    @POST("shopping_session/create_session")
+    Call<RegisterResult> createShoppingSession(@Field("token") String token);
+
+    @FormUrlEncoded
+    @POST("user_info")
+    Call<UserInfoResult> getUserInfo(@Field("token") String token);
+
+    @FormUrlEncoded
+    @POST("shopping_session/cart_info")
+    Call<UserInfoResult> getCartInfo(@Field("token") String token);
+
+    @FormUrlEncoded
+    @POST("update_user_address")
+    Call<RegisterResult> updateUserAddress(@Field("token") String token,
+                                           @Field("address") String address,
+                                           @Field("phoneNumber") String phoneNumber);
+
+    @FormUrlEncoded
     @POST("shopping_session/items")
     Call<ProductsSessionResult> itemsInShoppingSession(@Field("token") String token,
                                                        @Field("sessionId") int sessionId);
-
+    @FormUrlEncoded
+    @POST("shopping_session/delete_item")
+    Call<RegisterResult> deleteItemInShoppingSession(@Field("token") String token,
+                                                     @Field("itemId") int itemId,
+                                                       @Field("sessionId") int sessionId);
     @FormUrlEncoded
     @POST("fav/add")
     Call<RegisterResult> addFavItem(@Field("token") String token,
@@ -88,5 +112,6 @@ public interface TCCAPI {
                                      @Field("productId") int productId,
                                      @Field("quantity") int quantity,
                                      @Field("size") String size);
+
 
 }

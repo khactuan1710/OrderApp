@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
+        android:visibility="gone"
         android:orientation="vertical">
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -42,30 +43,30 @@
         android:id="@+id/layout_product"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone">
+        android:visibility="visible">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/appCompatTextView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:text="@string/text_product_favorite"
-        android:textColor="@color/black"
-        android:textSize="@dimen/size_24sp"
-        android:textStyle="bold"
-        android:layout_marginTop="@dimen/dimen_16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/appCompatTextView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/text_order_title"
+            android:textColor="@color/black"
+            android:textSize="@dimen/size_24sp"
+            android:textStyle="bold"
+            android:layout_marginTop="@dimen/dimen_16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvProductFavorite"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_0dp"
-        tools:listitem="@layout/item_list_product_favorite"
-        android:layout_marginTop="@dimen/dimen_16dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView2" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvProductFavorite"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_0dp"
+            tools:listitem="@layout/item_order_list"
+            android:layout_marginTop="@dimen/dimen_16dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appCompatTextView2" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

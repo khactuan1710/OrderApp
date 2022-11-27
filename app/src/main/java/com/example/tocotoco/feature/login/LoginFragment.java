@@ -7,12 +7,17 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tocotoco.R;
+import com.example.tocotoco.feature.product_detail.ProductDetailActivity;
+import com.example.tocotoco.feature.registerAcc.RegisterAccountActivity;
 import com.example.tocotoco.home.activityhome.HomeActivity;
 import com.example.tocotoco.model.LoginResult;
+import com.example.tocotoco.room.TokenDevice;
+import com.example.tocotoco.room.TokenDeviceDatabase;
 import com.gemvietnam.base.viper.ViewFragment;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -23,6 +28,10 @@ public class LoginFragment extends ViewFragment<LoginContract.Presenter> impleme
 
     @BindView(R.id.tv_login)
     TextView tv_login;
+    @BindView(R.id.tv_register)
+    TextView tv_register;
+    @BindView(R.id.ic_back)
+    ImageView ic_back;
     @BindView(R.id.ed_sdt)
     TextInputEditText ed_sdt;
     @BindView(R.id.etPassword)
@@ -31,6 +40,8 @@ public class LoginFragment extends ViewFragment<LoginContract.Presenter> impleme
     SharedPreferences.Editor editor;
 
     private  boolean isFavorite = false;
+    private  boolean isFavDetail = false;
+    private  int idProductFromDetail = 0;
     Intent intent;
     public static LoginFragment getInstance() {
         return new LoginFragment();
@@ -44,20 +55,28 @@ public class LoginFragment extends ViewFragment<LoginContract.Presenter> impleme
     @Override
     public void initLayout() {
         super.initLayout();
-        setListener();
         context = getViewContext();
+        setListener();
+        getActionBackLogin();
         SharedPreferences sharedPref = context.getSharedPreferences(
                 context.getString(R.string.preference_file_key), MODE_PRIVATE);
         editor = sharedPref.edit();
 
+    }
+
+    private void getActionBackLogin() {
         intent = getActivity().getIntent();
         isFavorite = intent.getBooleanExtra("fromFavorite", false);
+        isFavDetail = intent.getBooleanExtra("isFavProduct", false);
+        idProductFromDetail = intent.getIntExtra("idProductFromDetail", 0);
     }
 
     private void setListener() {
         tv_login.setOnClickListener(this);
         ed_sdt.setOnClickListener(this);
         etPassword.setOnClickListener(this);
+        tv_register.setOnClickListener(this);
+        ic_back.setOnClickListener(this);
     }
 
 
@@ -67,9 +86,15 @@ public class LoginFragment extends ViewFragment<LoginContract.Presenter> impleme
             editor.putString(context.getString(R.string.preference_key_token), data.body().getResult());
             editor.apply();
         }
-        Intent i = new Intent(getViewContext(), HomeActivity.class);
-        if(isFavorite) {
-            i.putExtra("goToFavorite", true);
+        Intent i;
+        if (isFavDetail) {
+            i = new Intent(getViewContext(), ProductDetailActivity.class);
+            i.putExtra("goToFavoriteDetail", idProductFromDetail);
+        }else {
+            i = new Intent(getViewContext(), HomeActivity.class);
+            if(isFavorite) {
+                i.putExtra("goToFavorite", true);
+            }
         }
         startActivity(i);
 
@@ -88,6 +113,14 @@ public class LoginFragment extends ViewFragment<LoginContract.Presenter> impleme
 
             case R.id.etPassword:
                 Log.e("tag:  ", "cdslick");
+                break;
+            case R.id.tv_register:
+                Intent i;
+                i = new Intent(getViewContext(), RegisterAccountActivity.class);
+                startActivity(i);
+                break;
+            case R.id.ic_back:
+                mPresenter.back();
                 break;
         }
     }

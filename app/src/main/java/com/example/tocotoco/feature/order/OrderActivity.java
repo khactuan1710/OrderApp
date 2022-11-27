@@ -1,20 +1,12 @@
 package com.example.tocotoco.feature.order;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
+import com.example.tocotoco.feature.base.TCCBaseActivity;
+import com.example.tocotoco.feature.product_detail.ProductDetailPresenter;
+import com.gemvietnam.base.viper.ViewFragment;
 
-import android.os.Bundle;
-
-import com.example.tocotoco.R;
-import com.example.tocotoco.databinding.ActivityOrderBinding;
-
-public class OrderActivity extends AppCompatActivity{
-    private ActivityOrderBinding binding;
-
+public class OrderActivity extends TCCBaseActivity {
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_order);
+    public ViewFragment onCreateFirstFragment() {
+        return (ViewFragment) new OrderPresenter(this).getFragment();
     }
-
 }

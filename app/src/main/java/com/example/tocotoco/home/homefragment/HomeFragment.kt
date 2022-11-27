@@ -1,6 +1,7 @@
 package com.example.tocotoco.home.homefragment
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Geocoder
@@ -15,7 +16,8 @@ import com.example.tocotoco.basekotlin.base.BaseViewModel
 import com.example.tocotoco.basekotlin.extensions.viewBinding
 import com.example.tocotoco.databinding.FragmentHomeBinding
 import com.example.tocotoco.dialog.DialogUtils
-import com.example.tocotoco.feature.account.AccountActivity
+import com.example.tocotoco.feature.login.LoginActivity
+import com.example.tocotoco.feature.product_detail.ProductDetailActivity
 import com.example.tocotoco.model.CategoriesResult
 import com.example.tocotoco.network.NetWorkController
 import com.example.tocotoco.network.TCCCallback
@@ -35,6 +37,16 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
 
     private var firstPagePosition = 0
 
+    private val sharedPref by lazy {
+        requireContext().getSharedPreferences(
+            requireContext().getString(R.string.preference_file_key), Context.MODE_PRIVATE
+        )
+    }
+
+    private val editor by lazy {
+        sharedPref.edit()
+    }
+
     override fun setupViews() {
         getCategoryList()
         requestPermissionLocation()
@@ -52,7 +64,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         DialogUtils.showProgressDialog(requireActivity())
         if (NetworkUtils.isConnect(requireActivity())) {
             NetWorkController.getListCategories(object : TCCCallback<CategoriesResult>() {
-                override fun onViettelSuccess(
+                override fun onTCTCSuccess(
                     call: Call<CategoriesResult>?,
                     response: Response<CategoriesResult>?
                 ) {
@@ -61,7 +73,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
                     binding.root.isVisible = true
                 }
 
-                override fun onViettelFailure(call: Call<CategoriesResult>?) {
+                override fun onTCTCFailure(call: Call<CategoriesResult>?) {
                     Timber.tag(call.toString())
                     DialogUtils.dismissProgressDialog()
                 }
@@ -70,13 +82,17 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         }
     }
 
-
     private fun setupClickListener() = binding.run {
         appCompatImageView3.setOnClickListener {
-            startActivity(Intent(requireActivity(), AccountActivity::class.java))
+            val token =
+                sharedPref?.getString(requireContext().getString(R.string.preference_key_token), "")
+            if (token.isNullOrEmpty()) {
+                startActivity(Intent(requireActivity(), LoginActivity::class.java))
+            } else {
+                startActivity(Intent(requireActivity(), ProductDetailActivity::class.java))
+            }
         }
     }
-
 
     private fun setupTabLayoutWithViewPager(list: List<CategoriesResult.CategoriesResultModel>?) {
         list?.let {
@@ -148,6 +164,8 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
                                 1
                             )[0].getAddressLine(0)
                             binding.tvLocation.text = address
+                            editor.putString(requireContext().getString(R.string.address), address)
+                            editor.apply()
                         }
                     }
                 }

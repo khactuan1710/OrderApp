@@ -37,7 +37,7 @@ public class LoginPresenter extends Presenter<LoginContract.View, LoginContract.
         DialogUtils.showProgressDialog(getViewContext());
         mInteractor.loginWithPass(new TCCCallback<LoginResult>() {
             @Override
-            public void onViettelSuccess(Call<LoginResult> call, Response<LoginResult> response) {
+            public void onTCTCSuccess(Call<LoginResult> call, Response<LoginResult> response) {
                 DialogUtils.dismissProgressDialog();
                 if(response.body().getIsSuccess()) {
                     mView.loginSuccess(response);
@@ -47,7 +47,7 @@ public class LoginPresenter extends Presenter<LoginContract.View, LoginContract.
             }
 
             @Override
-            public void onViettelFailure(Call<LoginResult> call) {
+            public void onTCTCFailure(Call<LoginResult> call) {
                 DialogUtils.dismissProgressDialog();
             }
         }, username, pass, type);
