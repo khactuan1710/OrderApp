@@ -3,7 +3,8 @@ package com.example.tocotoco.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Result{
+public class Result {
+
     @SerializedName("id")
     @Expose
     private Integer id;
@@ -82,16 +83,4 @@ public class Result{
         this.address = address;
     }
 
-    @Override
-    public String toString() {
-        return "Result{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", phonenumber='" + phonenumber + '\'' +
-                ", createat='" + createat + '\'' +
-                ", address='" + address + '\'' +
-                '}';
-    }
 }

@@ -2,6 +2,7 @@ package com.example.tocotoco.feature.account.network;
 
 import com.example.tocotoco.model.AccountResult;
 import com.example.tocotoco.model.CategoriesResult;
+import com.example.tocotoco.model.UpdateAccountResult;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -17,7 +18,6 @@ import retrofit2.http.POST;
 public interface ApiService {
     ApiService API_SERVICE = new Retrofit.Builder()
             .baseUrl("https://tocotea.software/api/")
-            .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(ApiService.class);
@@ -27,8 +27,7 @@ public interface ApiService {
     Call<AccountResult> getUserInfor(@Field("token") String token);
 
     @FormUrlEncoded
-    @Headers("Content-Type: application/json")
     @POST("update_user_info")
-    Call<AccountResult> updateUserInfor(@Field("token") String token, @Field("username") String username,
-                                        @Field("name") String name, @Field("email") String email, @Field("phoneNumber") String phoneNumber);
+    Call<UpdateAccountResult> updateUserInfor(@Field("token") String token, @Field("username") String username,
+                                              @Field("name") String name, @Field("email") String email, @Field("phoneNumber") String phoneNumber);
 }

@@ -17,6 +17,7 @@ import com.example.tocotoco.dialog.DialogUtils;
 import com.example.tocotoco.feature.account.network.ApiService;
 import com.example.tocotoco.model.AccountResult;
 import com.example.tocotoco.model.Result;
+import com.example.tocotoco.model.UpdateAccountResult;
 
 import butterknife.BindView;
 import retrofit2.Call;
@@ -63,18 +64,15 @@ public class UpdateInforActivity extends AppCompatActivity {
     private void updateInfor() {
         DialogUtils.showProgressDialog(this);
         ApiService.API_SERVICE.updateUserInfor(getToken(), binding.username.getText().toString(), binding.name.getText().toString(),
-                binding.email.getText().toString(), binding.sdt.getText().toString()).enqueue(new Callback<AccountResult>() {
+                binding.email.getText().toString(), binding.sdt.getText().toString()).enqueue(new Callback<UpdateAccountResult>() {
             @Override
-            public void onResponse(Call<AccountResult> call, Response<AccountResult> response) {
+            public void onResponse(Call<UpdateAccountResult> call, Response<UpdateAccountResult> response) {
                 DialogUtils.dismissProgressDialog();
                 Toast.makeText(UpdateInforActivity.this, "Lưu thông tin thành công", Toast.LENGTH_SHORT).show();
-//                AccountResult accountResult=response.body();
-//                Intent intent=new Intent(UpdateInforActivity.this,AccountActivity.class);
-//                intent.putExtra("name",accountResult.getResult().getName());
             }
 
             @Override
-            public void onFailure(Call<AccountResult> call, Throwable t) {
+            public void onFailure(Call<UpdateAccountResult> call, Throwable t) {
                 DialogUtils.dismissProgressDialog();
                 Toast.makeText(UpdateInforActivity.this, "Lưu thông tin thất bại:"+t.getMessage(), Toast.LENGTH_SHORT).show();
                 Log.e("Loi Update",t.getMessage());
