@@ -18,6 +18,7 @@ import com.example.tocotoco.model.ProductsSessionResult;
 import com.example.tocotoco.model.RegisterResult;
 import com.example.tocotoco.model.SessionIdResult;
 import com.example.tocotoco.model.UserInfoResult;
+import com.example.tocotoco.model.UserOrderResult;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -145,6 +146,11 @@ public class NetWorkController {
 
     public static void deleteFavItem(TCCCallback<RegisterResult> callback, String token, int sessionId) {
         Call<RegisterResult> call = getAPIBuilder().deleteFavItem(token, sessionId);
+        call.enqueue(callback);
+    }
+
+    public static void getUserOrder(TCCCallback<UserOrderResult> callback, String token) {
+        Call<UserOrderResult> call = getAPIBuilder().getUserOrder(token);
         call.enqueue(callback);
     }
 

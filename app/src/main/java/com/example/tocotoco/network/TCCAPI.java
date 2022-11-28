@@ -11,6 +11,7 @@ import com.example.tocotoco.model.ProductsSessionResult;
 import com.example.tocotoco.model.RegisterResult;
 import com.example.tocotoco.model.SessionIdResult;
 import com.example.tocotoco.model.UserInfoResult;
+import com.example.tocotoco.model.UserOrderResult;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -105,6 +106,10 @@ public interface TCCAPI {
     @POST("fav/delete")
     Call<RegisterResult> deleteFavItem(@Field("token") String token,
                                     @Field("productId") int productId);
+
+    @FormUrlEncoded
+    @POST("order/get_user_orders")
+    Call<UserOrderResult> getUserOrder(@Field("token") String token);
 
     @FormUrlEncoded
     @POST("shopping_session/add_item")
