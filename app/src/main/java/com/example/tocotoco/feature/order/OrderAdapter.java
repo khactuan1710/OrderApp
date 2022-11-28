@@ -1,26 +1,35 @@
 package com.example.tocotoco.feature.order;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.tocotoco.R;
 import com.example.tocotoco.feature.cart.CartProductAdapter;
 import com.example.tocotoco.model.ProductSessionModel;
+import com.google.android.gms.common.util.NumberUtils;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.List;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHorder>{
     private Context context;
-    private ArrayList<ProductSessionModel> data;
+    private List<ProductSessionModel> data;
 //    private TranferClickListener tranferClickListener;
-
-    public OrderAdapter(Context context, ArrayList<ProductSessionModel> data) {
+    DecimalFormat formatter = new DecimalFormat("#,###,###");
+    public OrderAdapter(Context context, List<ProductSessionModel> data) {
         this.context = context;
         this.data = data;
     }
@@ -34,28 +43,29 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHorder>
     @Override
     public void onBindViewHolder(final OrderAdapter.OrderHorder holder, final int position) {
 
-//        TranferMoneyHisData tranferMoneyHisData = data.get(position);
-//        if (!TextUtils.isEmpty(tranferMoneyHisData.getAmount())) {
-//            try {
-//                holder.mMoneyTv.setText(String.format("%sđ",
-//                        NumberUtils.formatViettel(Integer.valueOf(tranferMoneyHisData.getAmountInt()))));
-//            } catch (Exception e) {
-//                Logger.w(e);
-//                holder.mMoneyTv.setText("");
-//            }
-//        }
-//        if (!TextUtils.isEmpty(tranferMoneyHisData.getFee())) {
-//            try {
-//                //      holder.mMoneyFeeTv.setText(String.format("(Phí: %sđ)", NumberUtils.formatViettel(Integer.valueOf(tranferMoneyHisData.getFee()))));
-//            } catch (Exception e) {
-//                Logger.w(e);
-//                //         holder.mMoneyFeeTv.setText("");
-//            }
-//        }
-//        if (!TextUtils.isEmpty(tranferMoneyHisData.getDate())) {
-//            holder.mTimeTv.setText(TimeUtils.convertDateToDate(tranferMoneyHisData.getDate(), "hh:mm:ss dd-MM-yyyy ", "hh:mm dd/MM/yyyy ").replace("-","/"));
-//        }
-//
+        ProductSessionModel productSessionModel = data.get(position);
+        if (!TextUtils.isEmpty(productSessionModel.getProductName())) {
+                holder.tv_name_product.setText(productSessionModel.getProductName());
+        }
+        if (!TextUtils.isEmpty(productSessionModel.getPrice())) {
+            holder.tv_name_product.setText(productSessionModel.getProductName());
+        }
+
+        if (!TextUtils.isEmpty(productSessionModel.getPrice())) {
+            holder.tv_price.setText(formatter.format(Integer.parseInt(productSessionModel.getPrice()))  + "đ");
+        }
+
+        holder.tv_quantity.setText(String.valueOf(productSessionModel.getQuantity()));
+
+        RequestOptions options = new RequestOptions()
+                .centerCrop()
+                .placeholder(R.mipmap.ic_launcher_round)
+                .error(R.mipmap.ic_launcher_round);
+
+
+
+        Glide.with(context).load(productSessionModel.getDisplayImage()).apply(options).into(holder.img_product);
+
 //        if (null != tranferMoneyHisData.getReceiver()) {
 //            String numberContactReceive = tranferMoneyHisData.getReceiver();
 //            String nameContactReceive = UtilsPermissions.getNameContact(context,tranferMoneyHisData.getReceiver());
@@ -92,20 +102,18 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHorder>
 
     class OrderHorder extends RecyclerView.ViewHolder {
 
-//        @BindView(R.id.phone_receive_tv)
-//        TextView mPhoneReceiveTv;
+        @BindView(R.id.tv_name_product)
+        TextView tv_name_product;
 
-//        @BindView(R.id.name_receive_tv)
-//        TextView mNameReceiveTv;
+        @BindView(R.id.tv_quantity)
+        TextView tv_quantity;
 
-//        @BindView(R.id.money_tv)
-//        TextView mMoneyTv;
+        @BindView(R.id.tv_price)
+        TextView tv_price;
 
-//        @BindView(R.id.money_fee_tv)
-//        TextView mMoneyFeeTv;
+        @BindView(R.id.img_product)
+        ImageView img_product;
 
-//        @BindView(R.id.time_tv)
-//        TextView mTimeTv;
 
         private OrderHorder(View itemView) {
             super(itemView);

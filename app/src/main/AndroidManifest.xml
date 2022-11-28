@@ -60,7 +60,7 @@
         <activity
             android:name=".feature.product_detail.ProductDetailActivity"
             android:exported="true"
-            android:theme="@style/DemoTheme">
+        >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

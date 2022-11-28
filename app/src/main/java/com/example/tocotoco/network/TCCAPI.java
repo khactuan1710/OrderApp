@@ -1,5 +1,6 @@
 package com.example.tocotoco.network;
 
+import com.example.tocotoco.model.CartInfoResult;
 import com.example.tocotoco.model.CategoriesResult;
 import com.example.tocotoco.model.DataTestResult;
 import com.example.tocotoco.model.FavoriteProductsResult;
@@ -80,8 +81,9 @@ public interface TCCAPI {
     Call<UserInfoResult> getUserInfo(@Field("token") String token);
 
     @FormUrlEncoded
-    @POST("shopping_session/cart_info")
-    Call<UserInfoResult> getCartInfo(@Field("token") String token);
+    @POST("shopping_session/get_cart_info")
+    Call<CartInfoResult> getCartInfo(@Field("token") String token,
+                                     @Field("sessionId") int sessionId);
 
     @FormUrlEncoded
     @POST("update_user_address")
@@ -111,6 +113,7 @@ public interface TCCAPI {
     @POST("order/get_user_orders")
     Call<UserOrderResult> getUserOrder(@Field("token") String token);
 
+
     @FormUrlEncoded
     @POST("shopping_session/add_item")
     Call<RegisterResult> addItemToShoppingSession(@Field("token") String token,
@@ -119,5 +122,11 @@ public interface TCCAPI {
                                      @Field("quantity") int quantity,
                                      @Field("size") String size);
 
-
+    @FormUrlEncoded
+    @POST("order/confirm_order")
+    Call<RegisterResult> confirmOrder(@Field("token") String token,
+                                                  @Field("sessionId") int sessionId,
+                                                  @Field("provider") String provider,
+                                                  @Field("phoneNumber") String phoneNumber,
+                                                  @Field("address") String address);
 }

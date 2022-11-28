@@ -1,8 +1,11 @@
 package com.example.tocotoco.feature.order;
 
+import com.example.tocotoco.dialog.DialogUtils;
 import com.example.tocotoco.feature.product_detail.ProductDetailContract;
 import com.example.tocotoco.feature.product_detail.ProductDetailFragment;
 import com.example.tocotoco.feature.product_detail.ProductDetailInteractor;
+import com.example.tocotoco.model.CartInfoResult;
+import com.example.tocotoco.model.ProductsSessionResult;
 import com.example.tocotoco.model.SessionIdResult;
 import com.example.tocotoco.model.UserInfoResult;
 import com.example.tocotoco.network.TCCCallback;
@@ -33,8 +36,22 @@ public class OrderPresenter extends Presenter<OrderContract.View, OrderContract.
     }
 
     @Override
-    public void itemsInShoppingSession(String token, SessionIdResult.SessionId sessionId, boolean isUpdate) {
+    public void itemsInShoppingSession(String token, int sessionId) {
+        DialogUtils.showProgressDialog(getViewContext());
+        mInteractor.itemsInShoppingSession(new TCCCallback<ProductsSessionResult>() {
+            @Override
+            public void onTCTCSuccess(Call<ProductsSessionResult> call, Response<ProductsSessionResult> response) {
+                DialogUtils.dismissProgressDialog();
+                if(response.body().getIsSuccess()) {
+                    mView.initViewDetail(response);
+                }
+            }
 
+            @Override
+            public void onTCTCFailure(Call<ProductsSessionResult> call) {
+                DialogUtils.dismissProgressDialog();
+            }
+        }, token, sessionId);
     }
 
     @Override
@@ -43,7 +60,7 @@ public class OrderPresenter extends Presenter<OrderContract.View, OrderContract.
             @Override
             public void onTCTCSuccess(Call<UserInfoResult> call, Response<UserInfoResult> response) {
                 if(response.body() != null) {
-
+                    mView.getUserInfoSuccess(response);
                 }
             }
 
@@ -54,5 +71,20 @@ public class OrderPresenter extends Presenter<OrderContract.View, OrderContract.
                 }
             }
         }, token);
+    }
+
+    @Override
+    public void getCartInfo(String token, int sessionId) {
+        mInteractor.getCartInfo(new TCCCallback<CartInfoResult>() {
+            @Override
+            public void onTCTCSuccess(Call<CartInfoResult> call, Response<CartInfoResult> response) {
+                mView.getCartInfoSuccess(response);
+            }
+
+            @Override
+            public void onTCTCFailure(Call<CartInfoResult> call) {
+
+            }
+        }, token, sessionId);
     }
 }

@@ -7,6 +7,7 @@ import android.os.Build;
 import androidx.annotation.NonNull;
 
 import com.example.tocotoco.domain.DomainSwitcher;
+import com.example.tocotoco.model.CartInfoResult;
 import com.example.tocotoco.model.CategoriesResult;
 import com.example.tocotoco.model.DataTestResult;
 import com.example.tocotoco.model.FavoriteProductsResult;
@@ -159,10 +160,18 @@ public class NetWorkController {
         call.enqueue(callback);
     }
 
+    public static void getCartInfo(TCCCallback<CartInfoResult> callback, String token, int sessionId) {
+        Call<CartInfoResult> call = getAPIBuilder().getCartInfo(token, sessionId);
+        call.enqueue(callback);
+    }
 
     public static void addItemToShoppingSession(TCCCallback<RegisterResult> callback, String token, int sessionId, int productId, int quantity, String size) {
         Call<RegisterResult> call = getAPIBuilder().addItemToShoppingSession(token, sessionId, productId, quantity, size);
         call.enqueue(callback);
     }
 
+    public static void confirmOrder(TCCCallback<RegisterResult> callback, String token, int sessionId, String provider, String phoneNumber, String address) {
+        Call<RegisterResult> call = getAPIBuilder().confirmOrder(token, sessionId, provider, phoneNumber, address);
+        call.enqueue(callback);
+    }
 }
