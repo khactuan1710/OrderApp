@@ -12,7 +12,7 @@ import retrofit2.Response;
 
 public interface LoginContract {
     interface Interactor extends IInteractor<Presenter> {
-        void loginWithPass(TCCCallback<LoginResult> callback, String username, String pass, String type);
+        void loginWithPass(TCCCallback<LoginResult> callback, String username, String pass, String type, String token_device);
     }
 
     interface View extends PresentView<Presenter> {
@@ -20,6 +20,6 @@ public interface LoginContract {
     }
 
     interface Presenter extends IPresenter<View, Interactor> {
-        void loginWithPass(String username, String pass, String type);
+        void loginWithPass(String username, String pass, String type, String token_device);
     }
 }

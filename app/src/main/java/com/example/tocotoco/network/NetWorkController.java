@@ -103,8 +103,8 @@ public class NetWorkController {
         Call<FavoriteProductsResult> call = getAPIBuilder().getUserFavoriteItems(token);
         call.enqueue(callback);
     }
-    public static void loginWithPass(TCCCallback<LoginResult> callback, String username, String pass, String type) {
-        Call<LoginResult> call = getAPIBuilder().loginWithPass(username, pass, type);
+    public static void loginWithPass(TCCCallback<LoginResult> callback, String username, String pass, String type, String token_device) {
+        Call<LoginResult> call = getAPIBuilder().loginWithPass(username, pass, type, token_device);
         call.enqueue(callback);
     }
 

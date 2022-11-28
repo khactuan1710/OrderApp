@@ -55,7 +55,8 @@ public interface TCCAPI {
     @POST("login")
     Call<LoginResult> loginWithPass(@Field("username") String username,
                                     @Field("password") String password,
-                                    @Field("type") String type);
+                                    @Field("type") String type,
+                                    @Field("token_device") String token_device);
 
     @FormUrlEncoded
     @POST("signup")

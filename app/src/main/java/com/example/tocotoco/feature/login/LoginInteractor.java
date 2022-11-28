@@ -15,8 +15,8 @@ public class LoginInteractor extends Interactor<LoginContract.Presenter>
 
 
     @Override
-    public void loginWithPass(TCCCallback<LoginResult> callback, String username, String pass, String type) {
-        NetWorkController.loginWithPass(callback, username, pass, type);
+    public void loginWithPass(TCCCallback<LoginResult> callback, String username, String pass, String type, String token_device) {
+        NetWorkController.loginWithPass(callback, username, pass, type, token_device);
     }
 
 }

@@ -13,7 +13,7 @@ import com.gemvietnam.base.viper.interfaces.PresentView;
 
 import retrofit2.Response;
 
-public class OrderContract {
+public interface OrderContract {
     interface Interactor extends IInteractor<OrderContract.Presenter> {
         void itemsInShoppingSession(TCCCallback<ProductsSessionResult> callback, String token, int sessionId);
         void getUserInfo(TCCCallback<UserInfoResult> callback, String token);

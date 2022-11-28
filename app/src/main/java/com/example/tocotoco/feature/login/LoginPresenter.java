@@ -33,7 +33,7 @@ public class LoginPresenter extends Presenter<LoginContract.View, LoginContract.
     }
 
     @Override
-    public void loginWithPass(String username, String pass, String type) {
+    public void loginWithPass(String username, String pass, String type, String token_device) {
         DialogUtils.showProgressDialog(getViewContext());
         mInteractor.loginWithPass(new TCCCallback<LoginResult>() {
             @Override
@@ -50,6 +50,6 @@ public class LoginPresenter extends Presenter<LoginContract.View, LoginContract.
             public void onTCTCFailure(Call<LoginResult> call) {
                 DialogUtils.dismissProgressDialog();
             }
-        }, username, pass, type);
+        }, username, pass, type, token_device);
     }
 }
