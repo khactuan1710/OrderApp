@@ -25,7 +25,7 @@
             app:srcCompat="@drawable/tick" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/appCompatTextView3"
+            android:id="@+id/tvStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dimen_16dp"
@@ -41,21 +41,21 @@
             android:layout_width="@dimen/dimen_32dp"
             android:layout_height="@dimen/dimen_32dp"
             android:layout_marginTop="@dimen/dimen_4dp"
-            app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView3"
-            app:layout_constraintStart_toEndOf="@+id/appCompatTextView3"
-            app:layout_constraintTop_toTopOf="@+id/appCompatTextView3"
+            app:layout_constraintBottom_toBottomOf="@+id/tvStatus"
+            app:layout_constraintStart_toEndOf="@+id/tvStatus"
+            app:layout_constraintTop_toTopOf="@+id/tvStatus"
             app:srcCompat="@drawable/dots" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/appCompatTextView7"
+            android:id="@+id/tvDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="20/10/2022"
             android:textColor="@color/black"
             android:textSize="@dimen/dimen_18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView3"
+            app:layout_constraintBottom_toBottomOf="@+id/tvStatus"
             app:layout_constraintStart_toEndOf="@+id/appCompatImageView5"
-            app:layout_constraintTop_toTopOf="@+id/appCompatTextView3" />
+            app:layout_constraintTop_toTopOf="@+id/tvStatus" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/appCompatImageView6"
@@ -64,7 +64,7 @@
             android:layout_margin="@dimen/dimen_16dp"
             android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appCompatTextView3"
+            app:layout_constraintTop_toBottomOf="@+id/tvStatus"
             app:srcCompat="@drawable/img_tea" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -82,7 +82,7 @@
             app:layout_constraintTop_toTopOf="@+id/appCompatImageView6" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/appCompatTextView6"
+            android:id="@+id/tvMoney"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dimen_8dp"
@@ -99,12 +99,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dimen_4dp"
             android:text="(3 món) - Ví MoMo"
-            app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView6"
-            app:layout_constraintStart_toEndOf="@+id/appCompatTextView6"
-            app:layout_constraintTop_toTopOf="@+id/appCompatTextView6" />
+            app:layout_constraintBottom_toBottomOf="@+id/tvMoney"
+            app:layout_constraintStart_toEndOf="@+id/tvMoney"
+            app:layout_constraintTop_toTopOf="@+id/tvMoney" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/appCompatTextView8"
+            android:id="@+id/tvAddress"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_4dp"
@@ -114,20 +114,22 @@
             android:textColor="@color/black"
             android:textSize="@dimen/dimen_16sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/appCompatTextView6"
-            app:layout_constraintTop_toBottomOf="@+id/appCompatTextView6" />
+            app:layout_constraintStart_toStartOf="@+id/tvMoney"
+            app:layout_constraintTop_toBottomOf="@+id/tvMoney" />
 
         <com.google.android.material.button.MaterialButton
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="@dimen/dimen_16dp"
+            android:layout_marginHorizontal="@dimen/dimen_16dp"
+            android:layout_marginBottom="@dimen/dimen_16dp"
+            android:layout_marginTop="@dimen/dimen_8dp"
             android:text="Đặt lại"
             android:textColor="@color/black"
             android:textStyle="bold"
             app:backgroundTint="@color/green_light"
             app:cornerRadius="@dimen/dimen_4dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appCompatTextView8"
+            app:layout_constraintTop_toBottomOf="@+id/appCompatImageView6"
             tools:layout_editor_absoluteX="16dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

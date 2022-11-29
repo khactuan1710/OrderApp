@@ -48,7 +48,6 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
     }
 
     override fun setupViews() {
-        getCategoryList()
         requestPermissionLocation()
     }
 
@@ -56,6 +55,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         super.onResume()
         getLocation()
         setupClickListener()
+        getCategoryList()
     }
 
     private var viewPagerAdapter: ViewPagerAdapter? = null
