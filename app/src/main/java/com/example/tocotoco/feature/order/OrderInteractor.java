@@ -4,6 +4,7 @@ import com.example.tocotoco.feature.product_detail.ProductDetailContract;
 import com.example.tocotoco.model.CartInfoResult;
 import com.example.tocotoco.model.ProductResult;
 import com.example.tocotoco.model.ProductsSessionResult;
+import com.example.tocotoco.model.RegisterResult;
 import com.example.tocotoco.model.UserInfoResult;
 import com.example.tocotoco.network.NetWorkController;
 import com.example.tocotoco.network.TCCCallback;
@@ -28,5 +29,10 @@ public class OrderInteractor extends Interactor<OrderContract.Presenter>
     @Override
     public void getCartInfo(TCCCallback<CartInfoResult> callback, String token, int sessionId) {
         NetWorkController.getCartInfo(callback, token, sessionId);
+    }
+
+    @Override
+    public void confirmOrder(TCCCallback<RegisterResult> callback, String token, int sessionId, String provider, String phoneNumber, String address, String note) {
+        NetWorkController.confirmOrder(callback, token, sessionId, provider, phoneNumber, address, note);
     }
 }

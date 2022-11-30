@@ -18,6 +18,7 @@ import com.example.tocotoco.model.ProductsResult;
 import com.example.tocotoco.model.ProductsSessionResult;
 import com.example.tocotoco.model.RegisterResult;
 import com.example.tocotoco.model.SessionIdResult;
+import com.example.tocotoco.model.UserCurrentResult;
 import com.example.tocotoco.model.UserInfoResult;
 import com.example.tocotoco.model.UserOrderResult;
 import com.google.gson.Gson;
@@ -150,8 +151,18 @@ public class NetWorkController {
         call.enqueue(callback);
     }
 
+    public static void getItemsInOrder(TCCCallback<ProductsResult> callback, String token, int orderId) {
+        Call<ProductsResult> call = getAPIBuilder().getItemsInOrder(token, orderId);
+        call.enqueue(callback);
+    }
+
     public static void getUserOrder(TCCCallback<UserOrderResult> callback, String token) {
         Call<UserOrderResult> call = getAPIBuilder().getUserOrder(token);
+        call.enqueue(callback);
+    }
+
+    public static void getUserCurrentOrder(TCCCallback<UserCurrentResult> callback, String token) {
+        Call<UserCurrentResult> call = getAPIBuilder().getUserCurrentOrder(token);
         call.enqueue(callback);
     }
 
@@ -170,8 +181,8 @@ public class NetWorkController {
         call.enqueue(callback);
     }
 
-    public static void confirmOrder(TCCCallback<RegisterResult> callback, String token, int sessionId, String provider, String phoneNumber, String address) {
-        Call<RegisterResult> call = getAPIBuilder().confirmOrder(token, sessionId, provider, phoneNumber, address);
+    public static void confirmOrder(TCCCallback<RegisterResult> callback, String token, int sessionId, String provider, String phoneNumber, String address, String note) {
+        Call<RegisterResult> call = getAPIBuilder().confirmOrder(token, sessionId, provider, phoneNumber, address, note);
         call.enqueue(callback);
     }
 }

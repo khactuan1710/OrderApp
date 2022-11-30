@@ -6,9 +6,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,10 +19,12 @@ import com.example.tocotoco.R;
 import com.example.tocotoco.feature.product_detail.ProductDetailContract;
 import com.example.tocotoco.feature.product_detail.ProductDetailFragment;
 import com.example.tocotoco.feature.registerAcc.RegisterAccountActivity;
+import com.example.tocotoco.home.activityhome.HomeActivity;
 import com.example.tocotoco.model.CartInfoResult;
 import com.example.tocotoco.model.ProductResult;
 import com.example.tocotoco.model.ProductSessionModel;
 import com.example.tocotoco.model.ProductsSessionResult;
+import com.example.tocotoco.model.RegisterResult;
 import com.example.tocotoco.model.UserInfoResult;
 import com.gemvietnam.base.viper.ViewFragment;
 
@@ -43,10 +48,17 @@ public class OrderFragment extends ViewFragment<OrderContract.Presenter> impleme
     TextView tv_name;
     @BindView(R.id.tv_phone)
     TextView tv_phone;
+    @BindView(R.id.btn_confirm)
+    Button btn_confirm;
+    @BindView(R.id.ed_note)
+    EditText ed_note;
+    @BindView(R.id.imgClearText)
+    AppCompatImageView imgClearText;
     String address;
     private int sessionId;
     private Intent intent;
     private String token;
+    Response<UserInfoResult> userData;
     OrderAdapter orderAdapter;
     List<ProductSessionModel> list;
     DecimalFormat formatter = new DecimalFormat("#,###,###");
@@ -59,7 +71,21 @@ public class OrderFragment extends ViewFragment<OrderContract.Presenter> impleme
             case R.id.ic_back:
                 mPresenter.back();
                 break;
+            case R.id.btn_confirm:
+                confirmOrder();
+                break;
+            case R.id.imgClearText:
+                ed_note.setText("");
+                break;
         }
+    }
+
+    private void confirmOrder() {
+        String note = "";
+        if(!ed_note.getText().toString().isEmpty()) {
+            note = ed_note.getText().toString();
+        }
+        mPresenter.confirmOrder(token, sessionId, "Tiền mặt", userData.body().getResults().getPhonenumber(), userData.body().getResults().getAddress(), note);
     }
 
     @Override
@@ -70,6 +96,7 @@ public class OrderFragment extends ViewFragment<OrderContract.Presenter> impleme
     }
     private void setListener() {
        ic_back.setOnClickListener(this);
+        btn_confirm.setOnClickListener(this);
     }
     private void initData() {
         intent = getActivity().getIntent();
@@ -104,7 +131,14 @@ public class OrderFragment extends ViewFragment<OrderContract.Presenter> impleme
 
     @Override
     public void getUserInfoSuccess(Response<UserInfoResult> data) {
+        userData =data;
         tv_name.setText(data.body().getResults().getName());
         tv_phone.setText(data.body().getResults().getPhonenumber());
+    }
+
+    @Override
+    public void confirmOrderSuccess(Response<RegisterResult> data) {
+        Intent i = new Intent(getViewContext(), ConfirmSuccessOrderActivty.class);
+        startActivity(i);
     }
 }

@@ -6,7 +6,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -17,6 +18,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Tocotoco"
         tools:targetApi="31">
+        <activity
+            android:name=".feature.order.ConfirmSuccessOrderActivty"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".feature.orderStatus.OrderStatusActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".feature.account.IntroduceActivity"
             android:exported="false">
@@ -59,8 +74,7 @@
 
         <activity
             android:name=".feature.product_detail.ProductDetailActivity"
-            android:exported="true"
-        >
+            android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

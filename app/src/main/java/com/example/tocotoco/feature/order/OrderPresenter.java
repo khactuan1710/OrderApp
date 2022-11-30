@@ -6,6 +6,7 @@ import com.example.tocotoco.feature.product_detail.ProductDetailFragment;
 import com.example.tocotoco.feature.product_detail.ProductDetailInteractor;
 import com.example.tocotoco.model.CartInfoResult;
 import com.example.tocotoco.model.ProductsSessionResult;
+import com.example.tocotoco.model.RegisterResult;
 import com.example.tocotoco.model.SessionIdResult;
 import com.example.tocotoco.model.UserInfoResult;
 import com.example.tocotoco.network.TCCCallback;
@@ -86,5 +87,24 @@ public class OrderPresenter extends Presenter<OrderContract.View, OrderContract.
 
             }
         }, token, sessionId);
+    }
+
+    @Override
+    public void confirmOrder(String token, int sessionId, String provider, String phoneNumber, String address, String note) {
+        DialogUtils.showProgressDialog(getViewContext());
+        mInteractor.confirmOrder(new TCCCallback<RegisterResult>() {
+            @Override
+            public void onTCTCSuccess(Call<RegisterResult> call, Response<RegisterResult> response) {
+                DialogUtils.dismissProgressDialog();
+                if(response.body().getIsSuccess()) {
+                    mView.confirmOrderSuccess(response);
+                }
+            }
+
+            @Override
+            public void onTCTCFailure(Call<RegisterResult> call) {
+                DialogUtils.dismissProgressDialog();
+            }
+        }, token, sessionId, provider, phoneNumber, address, note);
     }
 }
