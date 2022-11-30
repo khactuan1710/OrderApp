@@ -3,11 +3,15 @@ package com.example.tocotoco.feature.orderStatus;
 import static android.content.Context.MODE_PRIVATE;
 
 import android.Manifest;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Paint;
 import android.net.Uri;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -17,6 +21,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.tocotoco.MyFirebaseMessagingService;
 import com.example.tocotoco.R;
 import com.example.tocotoco.feature.order.OrderAdapter;
 import com.example.tocotoco.feature.registerAcc.RegisterAccountContract;
@@ -91,11 +96,30 @@ public class OrderStatusFragment extends ViewFragment<OrderStatusContract.Presen
         mPresenter.getItemsInOrder(token, userCurrentResult.getResults().getOrderId());
     }
 
+
     @Override
     public void getItemsInOrderSuccess(ProductsResult productsResult) {
         list = productsResult.getResults();
         itemsOrderAdapter = new ItemsOrderAdapter(getViewContext(), list);
         rcv_order.setAdapter(itemsOrderAdapter);
         rcv_order.setLayoutManager(new LinearLayoutManager(getViewContext()));
+    }
+
+    private class MyBroadcastReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Bundle extras = intent.getExtras();
+//            String state = extras.getString("extra");
+//            updateView(state);// update your textView in the main layout
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+//        IntentFilter intentFilter = new IntentFilter();
+//        intentFilter.addAction("com.my.app.onMessageReceived");
+//        MyBroadcastReceiver receiver = new MyBroadcastReceiver();
+//        registerReceiver(receiver, intentFilter);
     }
 }

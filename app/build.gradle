@@ -64,5 +64,6 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:31.0.3')
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-messaging-ktx:23.1.0'
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.17'
 }
 apply plugin: 'com.google.gms.google-services'

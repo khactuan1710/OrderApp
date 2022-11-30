@@ -24,11 +24,16 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     // generate the notification
     // attach the notification created with the custom layout
     // show the notification
+
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         if (remoteMessage.notification !== null) {
             sendNotification(remoteMessage)
         }
         sendNotification(remoteMessage)
+//        val intent = Intent()
+//        intent.putExtra("extra", remoteMessage.notification!!.body)
+//        intent.action = "com.my.app.onMessageReceived"
+//        sendBroadcast(intent)
     }
 
 

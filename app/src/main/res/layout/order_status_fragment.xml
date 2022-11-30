@@ -48,8 +48,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
-            <ImageView
-                android:src="@drawable/order"
+            <pl.droidsonroids.gif.GifImageView
+                android:src="@drawable/wait_confirm_order"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/dimen_16dp"
                 android:layout_width="@dimen/dimen_100dp"
