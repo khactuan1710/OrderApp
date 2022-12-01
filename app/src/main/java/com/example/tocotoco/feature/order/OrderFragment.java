@@ -140,5 +140,6 @@ public class OrderFragment extends ViewFragment<OrderContract.Presenter> impleme
     public void confirmOrderSuccess(Response<RegisterResult> data) {
         Intent i = new Intent(getViewContext(), ConfirmSuccessOrderActivty.class);
         startActivity(i);
+        getViewContext().finish();
     }
 }

@@ -50,6 +50,7 @@ public class OrderStatusPresenter extends Presenter<OrderStatusContract.View, Or
         }, token);
     }
 
+
     @Override
     public void getItemsInOrder(String token, int orderId) {
         DialogUtils.showProgressDialog(getViewContext());
@@ -65,5 +66,15 @@ public class OrderStatusPresenter extends Presenter<OrderStatusContract.View, Or
                 DialogUtils.dismissProgressDialog();
             }
         }, token, orderId);
+    }
+
+    @Override
+    public void shipping(String shipping) {
+        mView.updateUIShipping(shipping);
+    }
+
+    @Override
+    public void finishOrder(String finishOrder) {
+        mView.finishOrder(finishOrder);
     }
 }

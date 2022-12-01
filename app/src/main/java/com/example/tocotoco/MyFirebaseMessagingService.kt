@@ -11,6 +11,8 @@ import android.util.Log
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import com.example.tocotoco.feature.login.LoginActivity
+import com.example.tocotoco.feature.orderStatus.OrderStatusActivity
+import com.example.tocotoco.home.activityhome.HomeActivity
 import com.example.tocotoco.room.TokenDevice
 import com.example.tocotoco.room.TokenDeviceDatabase
 import com.google.firebase.messaging.FirebaseMessagingService
@@ -29,13 +31,14 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         if (remoteMessage.notification !== null) {
             sendNotification(remoteMessage)
         }
-        sendNotification(remoteMessage)
-//        val intent = Intent()
-//        intent.putExtra("extra", remoteMessage.notification!!.body)
-//        intent.action = "com.my.app.onMessageReceived"
-//        sendBroadcast(intent)
-    }
+        remoteMessage.notification?.let {
+            val intent = Intent()
+            intent.putExtra("extra", it.body)
+            intent.action = "com.my.app.onMessageReceived"
+            sendBroadcast(intent)
+        }
 
+    }
 
     @SuppressLint("RemoteViewLayout")
     private fun getRemoteView(title: String, mess: String): RemoteViews {
@@ -62,8 +65,13 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
         val notificationManager =
             getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-
-        val intent = Intent(this, LoginActivity::class.java)
+        var intent: Intent? = null
+        if(mess.equals("Đơn hàng của bạn đã được xác nhận")) {
+             intent = Intent(this, OrderStatusActivity::class.java)
+             intent.putExtra("shipping", true)
+        }else {
+             intent = Intent(this, HomeActivity::class.java)
+        }
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
 
         val pendingIntent = PendingIntent.getActivity(

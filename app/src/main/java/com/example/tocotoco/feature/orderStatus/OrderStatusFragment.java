@@ -10,9 +10,13 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -23,18 +27,23 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tocotoco.MyFirebaseMessagingService;
 import com.example.tocotoco.R;
+import com.example.tocotoco.dialog.DialogUtils;
+import com.example.tocotoco.feature.order.ConfirmSuccessOrderActivty;
 import com.example.tocotoco.feature.order.OrderAdapter;
 import com.example.tocotoco.feature.registerAcc.RegisterAccountContract;
 import com.example.tocotoco.feature.registerAcc.RegisterAccountFragment;
+import com.example.tocotoco.home.activityhome.HomeActivity;
 import com.example.tocotoco.model.ProductSessionModel;
 import com.example.tocotoco.model.ProductsResult;
 import com.example.tocotoco.model.RegisterResult;
 import com.example.tocotoco.model.UserCurrentResult;
+import com.example.tocotoco.util.TypefaceNew;
 import com.gemvietnam.base.viper.ViewFragment;
 
 import java.util.List;
 
 import butterknife.BindView;
+import pl.droidsonroids.gif.GifImageView;
 import retrofit2.Response;
 
 public class OrderStatusFragment extends ViewFragment<OrderStatusContract.Presenter> implements OrderStatusContract.View, View.OnClickListener{
@@ -42,14 +51,31 @@ public class OrderStatusFragment extends ViewFragment<OrderStatusContract.Presen
     TextView tv_start_price;
     @BindView(R.id.tv_end_price)
     TextView tv_end_price;
+    @BindView(R.id.tv_order_status)
+    TextView tv_order_status;
+    @BindView(R.id.btn_destroy)
+    TextView btn_destroy;
     @BindView(R.id.btn_confirm)
     Button btn_confirm;
+    @BindView(R.id.btn_go_home)
+    Button btn_go_home;
     @BindView(R.id.rcv_order)
     RecyclerView rcv_order;
+    @BindView(R.id.gifview)
+    GifImageView gifview;
+    @BindView(R.id.tv_status_1)
+    TextView tv_status_1;
+    @BindView(R.id.tv_status_2)
+    TextView tv_status_2;
+    @BindView(R.id.tv_status_3)
+    TextView tv_status_3;
     private String token;
+    private Intent intent;
+    boolean isShipping;
     SharedPreferences sharedPref;
     ItemsOrderAdapter itemsOrderAdapter;
     List<ProductsResult.ProductsResultModel> list;
+
     public static OrderStatusFragment getInstance() {
         return new OrderStatusFragment();
     }
@@ -61,11 +87,16 @@ public class OrderStatusFragment extends ViewFragment<OrderStatusContract.Presen
         initData();
     }
 
+
     private void setListener() {
         btn_confirm.setOnClickListener(this);
+        btn_go_home.setOnClickListener(this);
     }
 
     private void initData() {
+        intent = getViewContext().getIntent();
+        isShipping = intent.getBooleanExtra("shipping", false);
+
         sharedPref = getViewContext().getSharedPreferences(requireContext().getString(R.string.preference_file_key), MODE_PRIVATE);
         token = sharedPref.getString(requireContext().getString(R.string.preference_key_token), "");
         mPresenter.getUserCurrentOrder(token);
@@ -83,6 +114,10 @@ public class OrderStatusFragment extends ViewFragment<OrderStatusContract.Presen
                 else
                     startActivity(intent);
                 break;
+            case R.id.btn_go_home:
+                Intent i = new Intent(getViewContext(), HomeActivity.class);
+                startActivity(i);
+                getViewContext().finish();
         }
     }
 
@@ -105,21 +140,50 @@ public class OrderStatusFragment extends ViewFragment<OrderStatusContract.Presen
         rcv_order.setLayoutManager(new LinearLayoutManager(getViewContext()));
     }
 
-    private class MyBroadcastReceiver extends BroadcastReceiver {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            Bundle extras = intent.getExtras();
-//            String state = extras.getString("extra");
-//            updateView(state);// update your textView in the main layout
-        }
+    @Override
+    public void updateUIShipping(String shipping) {
+        gifview.setImageResource(R.drawable.ship);
+        tv_order_status.setText("Đơn hàng của bạn đang được giao");
+        btn_destroy.setVisibility(View.GONE);
+        tv_status_1.setBackgroundResource(0);
+        tv_status_1.setTypeface(TypefaceNew.getTypefaceSFProTextRegular(getViewContext()));
+        tv_status_1.setTextColor(ContextCompat.getColor(getViewContext(), R.color.color_44494D));
+        tv_status_2.setBackgroundResource(R.drawable.custom_buttom);
+        tv_status_2.setTypeface(TypefaceNew.getTypefaceSFProTextBold(getViewContext()));
+        tv_status_2.setTextColor(ContextCompat.getColor(getViewContext(), R.color.white));
+        ViewGroup.LayoutParams params = gifview.getLayoutParams();
+        params.height = 450;
+        params.width = 450;
+        gifview.setLayoutParams(params);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                DialogUtils.dismissProgressDialog();
+            }
+        }, 300);
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-//        IntentFilter intentFilter = new IntentFilter();
-//        intentFilter.addAction("com.my.app.onMessageReceived");
-//        MyBroadcastReceiver receiver = new MyBroadcastReceiver();
-//        registerReceiver(receiver, intentFilter);
+    public void finishOrder(String finishOrder) {
+        btn_go_home.setVisibility(View.VISIBLE);
+        gifview.setImageResource(R.drawable.ic_success_order);
+        tv_order_status.setText(finishOrder);
+        btn_destroy.setVisibility(View.GONE);
+        tv_status_2.setBackgroundResource(0);
+        tv_status_2.setTypeface(TypefaceNew.getTypefaceSFProTextRegular(getViewContext()));
+        tv_status_2.setTextColor(ContextCompat.getColor(getViewContext(), R.color.color_44494D));
+        tv_status_3.setBackgroundResource(R.drawable.custom_buttom);
+        tv_status_3.setTypeface(TypefaceNew.getTypefaceSFProTextBold(getViewContext()));
+        tv_status_3.setTextColor(ContextCompat.getColor(getViewContext(), R.color.white));
+        ViewGroup.LayoutParams params = gifview.getLayoutParams();
+        params.height = 550;
+        params.width = 550;
+        gifview.setLayoutParams(params);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                DialogUtils.dismissProgressDialog();
+            }
+        }, 300);
     }
 }

@@ -29,6 +29,7 @@ public class ConfirmSuccessOrderActivty extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(), OrderStatusActivity.class);
                 startActivity(i);
+                finish();
             }
         });
         btnBackHome.setOnClickListener(new View.OnClickListener() {
@@ -36,6 +37,7 @@ public class ConfirmSuccessOrderActivty extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(), HomeActivity.class);
                 startActivity(i);
+                finish();
             }
         });
     }

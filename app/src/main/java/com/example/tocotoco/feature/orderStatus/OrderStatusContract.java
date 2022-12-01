@@ -22,10 +22,14 @@ public interface OrderStatusContract {
     interface View extends PresentView<OrderStatusContract.Presenter> {
         void getUserCurrentOrderSuccess(UserCurrentResult userCurrentResult);
         void getItemsInOrderSuccess(ProductsResult productsResult);
+        void updateUIShipping(String shipping);
+        void finishOrder(String finishOrder);
     }
 
     interface Presenter extends IPresenter<OrderStatusContract.View, OrderStatusContract.Interactor> {
         void getUserCurrentOrder(String token);
         void getItemsInOrder(String token, int orderId);
+        void shipping(String shipping);
+        void finishOrder(String finishOrder);
     }
 }
