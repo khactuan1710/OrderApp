@@ -79,7 +79,13 @@ public class OrderPresenter extends Presenter<OrderContract.View, OrderContract.
         mInteractor.getCartInfo(new TCCCallback<CartInfoResult>() {
             @Override
             public void onTCTCSuccess(Call<CartInfoResult> call, Response<CartInfoResult> response) {
-                mView.getCartInfoSuccess(response);
+                if(response.body().getIsSuccess()) {
+                    if(!response.body().getResults().getTotalCategory().equals("0")) {
+                        mView.getCartInfoSuccess(response);
+                    }else {
+                        mView.getCartInfoFail();
+                    }
+                }
             }
 
             @Override
@@ -106,5 +112,45 @@ public class OrderPresenter extends Presenter<OrderContract.View, OrderContract.
                 DialogUtils.dismissProgressDialog();
             }
         }, token, sessionId, provider, phoneNumber, address, note);
+    }
+
+    @Override
+    public void addItemToShoppingSession(String token, int sessionId, int productId, int quantity, String size) {
+        DialogUtils.showProgressDialog(getViewContext());
+        mInteractor.addItemToShoppingSession(new TCCCallback<RegisterResult>() {
+            @Override
+            public void onTCTCSuccess(Call<RegisterResult> call, Response<RegisterResult> response) {
+                DialogUtils.dismissProgressDialog();
+                if(response.body().getIsSuccess()) {
+                    getCartInfo(token, sessionId);
+//                    itemsInShoppingSession(token, sessionId);
+                }
+            }
+
+            @Override
+            public void onTCTCFailure(Call<RegisterResult> call) {
+                DialogUtils.dismissProgressDialog();
+            }
+        }, token, sessionId, productId, quantity, size);
+    }
+
+    @Override
+    public void deleteItemInShoppingSession(String token, int itemId, int sessionId) {
+        DialogUtils.showProgressDialog(getViewContext());
+        mInteractor.deleteItemInShoppingSession(new TCCCallback<RegisterResult>() {
+            @Override
+            public void onTCTCSuccess(Call<RegisterResult> call, Response<RegisterResult> response) {
+                DialogUtils.dismissProgressDialog();
+                if(response.body().getIsSuccess()) {
+                    getCartInfo(token, sessionId);
+                    itemsInShoppingSession(token, sessionId);
+                }
+            }
+
+            @Override
+            public void onTCTCFailure(Call<RegisterResult> call) {
+                DialogUtils.dismissProgressDialog();
+            }
+        }, token, itemId, sessionId);
     }
 }

@@ -28,10 +28,12 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHorder>
     private Context context;
     private List<ProductSessionModel> data;
 //    private TranferClickListener tranferClickListener;
+    ChooseItemListener chooseItemListener;
     DecimalFormat formatter = new DecimalFormat("#,###,###");
-    public OrderAdapter(Context context, List<ProductSessionModel> data) {
+    public OrderAdapter(Context context, List<ProductSessionModel> data, ChooseItemListener chooseItemListener) {
         this.context = context;
         this.data = data;
+        this.chooseItemListener = chooseItemListener;
     }
 
     @Override
@@ -62,37 +64,36 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHorder>
                 .placeholder(R.mipmap.ic_launcher_round)
                 .error(R.mipmap.ic_launcher_round);
 
-
+        final int[] quantity = {productSessionModel.getQuantity()};
 
         Glide.with(context).load(productSessionModel.getDisplayImage()).apply(options).into(holder.img_product);
 
-//        if (null != tranferMoneyHisData.getReceiver()) {
-//            String numberContactReceive = tranferMoneyHisData.getReceiver();
-//            String nameContactReceive = UtilsPermissions.getNameContact(context,tranferMoneyHisData.getReceiver());
-//
-//
-//            if (numberContactReceive.startsWith("84")) {
-//                numberContactReceive = "0" + numberContactReceive.substring(2);
-//                if (nameContactReceive.startsWith("84")) {
-//                    nameContactReceive = "0" + nameContactReceive.substring(2);
-//                }
-//                nameContactReceive =  UtilsPermissions.getNameContact(context,nameContactReceive);
-//            }
-//            if (numberContactReceive.equals(nameContactReceive)) {
-//                //          holder.mNameReceiveTv.setText("");
-//            } else {
-//                //        holder.mNameReceiveTv.setText(String.format("(%s)", nameContactReceive));
-//            }
-//            holder.mPhoneReceiveTv.setText(numberContactReceive);
-//
-//
-//        }
-//        holder.btnChonMau.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                tranferClickListener.onClick(v, data.get(holder.getAdapterPosition()), holder.getAdapterPosition());
-//            }
-//        });
+        holder.tv_add_quantity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                quantity[0]++;
+                chooseItemListener.OnAdd(productSessionModel.getProductId(), quantity[0]);
+                holder.tv_quantity.setText(String.valueOf(quantity[0]));
+            }
+        });
+
+        holder.tv_reduce_quantity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(quantity[0] > 0) {
+                    quantity[0] --;
+                    if(quantity[0] != 0) {
+                        holder.tv_quantity.setText(String.valueOf(quantity[0]));
+                    }
+                }
+                if(quantity[0] != 0) {
+                    chooseItemListener.OnDel(productSessionModel.getProductId(), quantity[0]);
+                }else {
+                    chooseItemListener.OnDel(productSessionModel.getId(), quantity[0]);
+                }
+            }
+        });
+
     }
 
     @Override
@@ -114,11 +115,21 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHorder>
         @BindView(R.id.img_product)
         ImageView img_product;
 
+        @BindView(R.id.tv_reduce_quantity)
+        TextView tv_reduce_quantity;
+
+        @BindView(R.id.tv_add_quantity)
+        TextView tv_add_quantity;
+
 
         private OrderHorder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
 
         }
+    }
+    public interface ChooseItemListener {
+        void OnAdd(int productId, int quantity);
+        void OnDel(int productId, int quantity);
     }
 }

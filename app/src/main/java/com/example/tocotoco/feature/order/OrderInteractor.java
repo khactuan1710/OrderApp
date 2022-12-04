@@ -35,4 +35,14 @@ public class OrderInteractor extends Interactor<OrderContract.Presenter>
     public void confirmOrder(TCCCallback<RegisterResult> callback, String token, int sessionId, String provider, String phoneNumber, String address, String note) {
         NetWorkController.confirmOrder(callback, token, sessionId, provider, phoneNumber, address, note);
     }
+
+    @Override
+    public void addItemToShoppingSession(TCCCallback<RegisterResult> callback, String token, int sessionId, int productId, int quantity, String size) {
+        NetWorkController.addItemToShoppingSession(callback, token, sessionId, productId, quantity, size);
+    }
+
+    @Override
+    public void deleteItemInShoppingSession(TCCCallback<RegisterResult> callback, String token, int itemId, int sessionId) {
+        NetWorkController.deleteItemInShoppingSession(callback, token, itemId, sessionId);
+    }
 }

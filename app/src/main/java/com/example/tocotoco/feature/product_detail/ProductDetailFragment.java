@@ -129,6 +129,7 @@ public class ProductDetailFragment extends ViewFragment<ProductDetailContract.Pr
         btn_add_product.setOnClickListener(this);
         img_back.setOnClickListener(this);
         img_fav.setOnClickListener(this);
+        img_cart.setOnClickListener(this);
         size_nho.setOnClickListener(this);
         size_vua.setOnClickListener(this);
         size_lon.setOnClickListener(this);
@@ -200,6 +201,7 @@ public class ProductDetailFragment extends ViewFragment<ProductDetailContract.Pr
                 break;
             case R.id.img_cart:
                 Intent i = new Intent(getViewContext(), CartActivity.class);
+                i.putExtra("tokenToCart", token);
                 startActivity(i);
                 break;
             case R.id.btn_add_product:
@@ -213,6 +215,7 @@ public class ProductDetailFragment extends ViewFragment<ProductDetailContract.Pr
                     i2.putExtra("tokenToOrder", token);
                 }
                 startActivity(i2);
+                getViewContext().finish();
                 break;
         }
     }

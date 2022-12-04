@@ -20,11 +20,14 @@ public interface OrderContract {
         void getUserInfo(TCCCallback<UserInfoResult> callback, String token);
         void getCartInfo(TCCCallback<CartInfoResult> callback, String token, int sessionId);
         void confirmOrder(TCCCallback<RegisterResult> callback, String token, int sessionId, String provider, String phoneNumber, String address, String note);
+        void addItemToShoppingSession(TCCCallback<RegisterResult> callback, String token, int sessionId, int productId, int quantity, String size);
+        void deleteItemInShoppingSession(TCCCallback<RegisterResult> callback, String token, int itemId,  int sessionId);
     }
 
     interface View extends PresentView<OrderContract.Presenter> {
         void initViewDetail(Response<ProductsSessionResult> data);
         void getCartInfoSuccess(Response<CartInfoResult> data);
+        void getCartInfoFail();
         void getUserInfoSuccess(Response<UserInfoResult> data);
         void confirmOrderSuccess(Response<RegisterResult> data);
     }
@@ -34,5 +37,7 @@ public interface OrderContract {
         void getUserInfo(String token);
         void getCartInfo(String token, int sessionId);
         void confirmOrder(String token, int sessionId, String provider, String phoneNumber, String address, String note);
+        void addItemToShoppingSession(String token, int sessionId, int productId, int quantity, String size);
+        void deleteItemInShoppingSession(String token, int itemId,  int sessionId);
     }
 }

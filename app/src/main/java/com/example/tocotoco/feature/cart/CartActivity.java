@@ -5,12 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.tocotoco.R;
+import com.example.tocotoco.feature.base.TCCBaseActivity;
+import com.example.tocotoco.feature.order.OrderPresenter;
+import com.gemvietnam.base.viper.ViewFragment;
 
-public class CartActivity extends AppCompatActivity {
+public class CartActivity extends TCCBaseActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cart);
+    public ViewFragment onCreateFirstFragment() {
+        return (ViewFragment) new CartPresenter(this).getFragment();
     }
 }
