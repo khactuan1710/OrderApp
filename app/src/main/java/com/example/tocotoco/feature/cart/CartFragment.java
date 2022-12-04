@@ -97,8 +97,8 @@ public class CartFragment extends ViewFragment<CartContract.Presenter> implement
     }
 
     private void setListener() {
-//        ic_back.setOnClickListener(this);
-//        btn_confirm.setOnClickListener(this);
+        ic_back.setOnClickListener(this);
+        btn_confirm.setOnClickListener(this);
     }
 
     @Override
@@ -115,8 +115,20 @@ public class CartFragment extends ViewFragment<CartContract.Presenter> implement
     }
 
     @Override
-    public void getCartInfoSuccess(Response<CartInfoResult> data) {
+    public void onResume() {
+        super.onResume();
+        mPresenter.itemsInShoppingSession(token, sessionId);
+        mPresenter.getCartInfo(token, sessionId);
+    }
 
+
+
+    @Override
+    public void getCartInfoSuccess(Response<CartInfoResult> data) {
+        if(data.body().getResults().getPriceAfterDiscount() != null) {
+            tv_total_money.setText("Tổng cộng: " + formatter.format(Integer.parseInt(data.body().getResults().getPriceAfterDiscount()))  + "đ");
+            btn_confirm.setText("Giao hàng -" + formatter.format(Integer.parseInt(data.body().getResults().getPriceAfterDiscount())) + "đ");
+        }
     }
 
     @Override

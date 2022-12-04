@@ -141,6 +141,7 @@
             android:layout_marginHorizontal="@dimen/dimen_16dp"
             android:layout_marginTop="@dimen/dimen_16dp">
             <TextView
+                android:id="@+id/tv_quan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tổng cộng(2 món)"
@@ -148,6 +149,7 @@
                 android:textColor="@color/color_44494D"
                 android:fontFamily="@font/sf_pro_text_bold"/>
             <TextView
+                android:visibility="gone"
                 android:layout_toLeftOf="@id/tv_end_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -166,7 +168,7 @@
                 android:text="290.000đ"
                 android:textSize="@dimen/dimen_16sp"
                 android:textColor="@color/color_44494D"
-                android:fontFamily="@font/sf_pro_text_regular"/>
+                android:fontFamily="@font/sf_pro_text_medium"/>
         </RelativeLayout>
         <View
             android:layout_marginHorizontal="@dimen/dimen_16dp"

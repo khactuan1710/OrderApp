@@ -40,6 +40,7 @@ import com.example.tocotoco.model.UserCurrentResult;
 import com.example.tocotoco.util.TypefaceNew;
 import com.gemvietnam.base.viper.ViewFragment;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import butterknife.BindView;
@@ -69,13 +70,15 @@ public class OrderStatusFragment extends ViewFragment<OrderStatusContract.Presen
     TextView tv_status_2;
     @BindView(R.id.tv_status_3)
     TextView tv_status_3;
+    @BindView(R.id.tv_quan)
+    TextView tv_quan;
     private String token;
     private Intent intent;
     boolean isShipping;
     SharedPreferences sharedPref;
     ItemsOrderAdapter itemsOrderAdapter;
     List<ProductsResult.ProductsResultModel> list;
-
+    DecimalFormat formatter = new DecimalFormat("#,###,###");
     public static OrderStatusFragment getInstance() {
         return new OrderStatusFragment();
     }
@@ -128,12 +131,19 @@ public class OrderStatusFragment extends ViewFragment<OrderStatusContract.Presen
 
     @Override
     public void getUserCurrentOrderSuccess(UserCurrentResult userCurrentResult) {
+        tv_end_price.setText(formatter.format(Integer.parseInt(userCurrentResult.getResults().getTotal())) + "đ");
         mPresenter.getItemsInOrder(token, userCurrentResult.getResults().getOrderId());
     }
 
 
     @Override
     public void getItemsInOrderSuccess(ProductsResult productsResult) {
+        int count = 0;
+        for (int i = 0; i < productsResult.getResults().size(); i++) {
+            count += productsResult.getResults().get(i).getQuantity();
+        }
+        tv_quan.setText("Tổng cộng(" + count + " món)");
+
         list = productsResult.getResults();
         itemsOrderAdapter = new ItemsOrderAdapter(getViewContext(), list);
         rcv_order.setAdapter(itemsOrderAdapter);

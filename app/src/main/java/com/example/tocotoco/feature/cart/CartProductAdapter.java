@@ -52,13 +52,16 @@ public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.
         }
         if (!TextUtils.isEmpty(productSessionModel.getPriceAfterDiscount())) {
             holder.tv_price.setText(formatter.format(Integer.parseInt(productSessionModel.getPriceAfterDiscount()))  + "đ");
+        }else {
+            holder.tv_old_price.setVisibility(View.GONE);
+            holder.tv_price.setText(formatter.format(productSessionModel.getTotal())  + "đ");
         }
 
         if (!TextUtils.isEmpty(productSessionModel.getPrice())) {
-            holder.tv_old_price.setText(formatter.format(Integer.parseInt(productSessionModel.getPrice()))  + "đ");
+            holder.tv_old_price.setText(formatter.format(Integer.parseInt(productSessionModel.getPrice()) * productSessionModel.getQuantity())  + "đ");
         }
 
-//        tv_start_price.setPaintFlags(tv_start_price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        holder.tv_old_price.setPaintFlags(holder.tv_old_price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
         holder.tv_quantity.setText(String.valueOf(productSessionModel.getQuantity()));
 

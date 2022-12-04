@@ -1,6 +1,7 @@
 package com.example.tocotoco.feature.order;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,9 +54,18 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHorder>
             holder.tv_name_product.setText(productSessionModel.getProductName());
         }
 
-        if (!TextUtils.isEmpty(productSessionModel.getPrice())) {
-            holder.tv_price.setText(formatter.format(Integer.parseInt(productSessionModel.getPrice()))  + "đ");
+        if (!TextUtils.isEmpty(productSessionModel.getPriceAfterDiscount())) {
+            holder.tv_price.setText(formatter.format(Integer.parseInt(productSessionModel.getPriceAfterDiscount()))  + "đ");
+        }else {
+            holder.tv_old_price.setVisibility(View.GONE);
+            holder.tv_price.setText(formatter.format(productSessionModel.getTotal())  + "đ");
         }
+
+        if (!TextUtils.isEmpty(productSessionModel.getPrice())) {
+            holder.tv_old_price.setText(formatter.format(Integer.parseInt(productSessionModel.getPrice()) * productSessionModel.getQuantity())  + "đ");
+        }
+
+        holder.tv_old_price.setPaintFlags(holder.tv_old_price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
         holder.tv_quantity.setText(String.valueOf(productSessionModel.getQuantity()));
 
@@ -68,12 +78,17 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHorder>
 
         Glide.with(context).load(productSessionModel.getDisplayImage()).apply(options).into(holder.img_product);
 
+        String oldMoney = productSessionModel.getPrice();
+        int money = Integer.parseInt(productSessionModel.getPriceAfterDiscount() == null? productSessionModel.getPrice() : productSessionModel.getPriceAfterDiscount());
+        int moneyItem = money/productSessionModel.getQuantity();
         holder.tv_add_quantity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 quantity[0]++;
                 chooseItemListener.OnAdd(productSessionModel.getProductId(), quantity[0]);
                 holder.tv_quantity.setText(String.valueOf(quantity[0]));
+                holder.tv_old_price.setText(formatter.format(Integer.parseInt(oldMoney) * quantity[0]) + "đ");
+                holder.tv_price.setText(formatter.format(moneyItem * quantity[0]) + "đ");
             }
         });
 
@@ -84,6 +99,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHorder>
                     quantity[0] --;
                     if(quantity[0] != 0) {
                         holder.tv_quantity.setText(String.valueOf(quantity[0]));
+                        holder.tv_old_price.setText(formatter.format(Integer.parseInt(oldMoney) * quantity[0]) + "đ");
+                        holder.tv_price.setText(formatter.format(moneyItem * quantity[0]) + "đ");
                     }
                 }
                 if(quantity[0] != 0) {
@@ -120,6 +137,9 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHorder>
 
         @BindView(R.id.tv_add_quantity)
         TextView tv_add_quantity;
+
+        @BindView(R.id.tv_old_price)
+        TextView tv_old_price;
 
 
         private OrderHorder(View itemView) {

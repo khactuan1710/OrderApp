@@ -1,6 +1,7 @@
 package com.example.tocotoco.feature.orderStatus;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,13 +48,18 @@ public class ItemsOrderAdapter extends RecyclerView.Adapter<ItemsOrderAdapter.It
             holder.tv_name_product.setText(productsResultModel.getQuantity() + "x " + productsResultModel.getProductName());
         }
         if (!TextUtils.isEmpty(productsResultModel.getSize())) {
-            holder.tv_size.setText("Cỡ" + productsResultModel.getSize());
+            holder.tv_size.setText("Cỡ " + productsResultModel.getSize());
         }
 
         if (!TextUtils.isEmpty(productsResultModel.getPrice())) {
-            holder.tv_price.setText(formatter.format(Integer.parseInt(productsResultModel.getPrice()))  + "đ");
+            holder.tv_price_old.setText(formatter.format(Integer.parseInt(productsResultModel.getPrice()) * productsResultModel.getQuantity())  + "đ");
         }
 
+        if (!TextUtils.isEmpty(productsResultModel.getPriceAfterDiscount())) {
+            holder.tv_price.setText(formatter.format(Integer.parseInt(productsResultModel.getTotal()))  + "đ");
+        }
+
+        holder.tv_price_old.setPaintFlags(holder.tv_price_old.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 //        holder.tv_quantity.setText(String.valueOf(productSessionModel.getQuantity()));
 
         RequestOptions options = new RequestOptions()
@@ -81,6 +87,9 @@ public class ItemsOrderAdapter extends RecyclerView.Adapter<ItemsOrderAdapter.It
 
         @BindView(R.id.tv_price)
         TextView tv_price;
+
+        @BindView(R.id.tv_price_old)
+        TextView tv_price_old;
 
         @BindView(R.id.img_product)
         ImageView img_product;

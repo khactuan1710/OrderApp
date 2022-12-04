@@ -131,8 +131,10 @@ public class OrderFragment extends ViewFragment<OrderContract.Presenter> impleme
 
     @Override
     public void getCartInfoSuccess(Response<CartInfoResult> data) {
-        tv_total_money.setText(formatter.format(Integer.parseInt(data.body().getResults().getPriceBeforeDiscount()))  + "đ");
-        tv_total_sub_money.setText(formatter.format(Integer.parseInt(data.body().getResults().getPriceBeforeDiscount()))  + "đ");
+        if(data.body().getResults().getPriceAfterDiscount() != null) {
+            tv_total_money.setText(formatter.format(Integer.parseInt(data.body().getResults().getPriceAfterDiscount()))  + "đ");
+            tv_total_sub_money.setText(formatter.format(Integer.parseInt(data.body().getResults().getPriceAfterDiscount()))  + "đ");
+        }
         tv_total_item.setText("Số tiền thanh toán(" + data.body().getResults().getTotalQuantity()+" món)");
     }
 
@@ -148,8 +150,8 @@ public class OrderFragment extends ViewFragment<OrderContract.Presenter> impleme
     @Override
     public void getUserInfoSuccess(Response<UserInfoResult> data) {
         userData =data;
-//        tv_name.setText(data.body().getResults().getName());
-//        tv_phone.setText(data.body().getResults().getPhonenumber());
+        tv_name.setText(data.body().getResults().getName());
+        tv_phone.setText(data.body().getResults().getPhonenumber());
     }
 
     @Override
