@@ -66,13 +66,16 @@ class HomeActivity : BaseActivity(R.layout.activity_home) {
                         call: Call<CartInfoResult>?,
                         response: Response<CartInfoResult>?
                     ) {
-                        frameLayout.isVisible = response?.body() != null
-                        imgCart.isVisible = response?.body() != null
-                        tvNumber.text = response?.body()?.results?.totalCategory
+                        val itemCart = response?.body()?.results?.totalCategory
+                        frameLayout.isVisible = !itemCart.equals("0",true) && itemCart != null
+                        imgCart.isVisible = !itemCart.equals("0",true)
+                        tvNumber.text = itemCart
+                        DialogUtils.dismissProgressDialog()
                     }
 
                     override fun onTCTCFailure(call: Call<CartInfoResult>?) {
                         Timber.tag(call.toString())
+                        DialogUtils.dismissProgressDialog()
                     }
                 }, token, sessionId
             )

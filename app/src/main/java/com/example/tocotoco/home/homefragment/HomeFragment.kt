@@ -19,6 +19,7 @@ import com.example.tocotoco.dialog.DialogUtils
 import com.example.tocotoco.feature.account.AccountActivity
 import com.example.tocotoco.feature.login.LoginActivity
 import com.example.tocotoco.model.CategoriesResult
+import com.example.tocotoco.model.UserInfoResult
 import com.example.tocotoco.network.NetWorkController
 import com.example.tocotoco.network.TCCCallback
 import com.example.tocotoco.util.NetworkUtils
@@ -43,6 +44,10 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         )
     }
 
+    private val token by lazy {
+        sharedPref?.getString(requireContext().getString(R.string.preference_key_token), "")
+    }
+
     private val editor by lazy {
         sharedPref.edit()
     }
@@ -53,6 +58,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
 
     override fun onResume() {
         super.onResume()
+        getUserInfo()
         getLocation()
         setupClickListener()
         getCategoryList()
@@ -83,14 +89,40 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
     }
 
     private fun setupClickListener() = binding.run {
-        appCompatImageView3.setOnClickListener {
-            val token =
-                sharedPref?.getString(requireContext().getString(R.string.preference_key_token), "")
+        imgAccount.setOnClickListener {
+
             if (token.isNullOrEmpty()) {
                 startActivity(Intent(requireActivity(), LoginActivity::class.java))
             } else {
                 startActivity(Intent(requireActivity(), AccountActivity::class.java))
             }
+        }
+    }
+
+    private fun getUserInfo() = binding.run {
+        if (NetworkUtils.isConnect(requireActivity())) {
+            NetWorkController.getUserInfo(object : TCCCallback<UserInfoResult>() {
+                override fun onTCTCSuccess(
+                    call: Call<UserInfoResult>?,
+                    response: Response<UserInfoResult>?
+                ) {
+                    if (response?.body()?.results?.name != null) {
+                        imgAccount.isVisible = false
+                        imgName.text = response.body()!!.results.name.substring(0, 1)
+                            .uppercase(Locale.getDefault())
+                        imgName.isVisible = true
+                    } else {
+                        imgAccount.isVisible = true
+                        imgName.isVisible = false
+                    }
+                }
+
+                override fun onTCTCFailure(call: Call<UserInfoResult>?) {
+                    imgAccount.isVisible = true
+                    imgName.isVisible = false
+                }
+
+            }, token)
         }
     }
 
