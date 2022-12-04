@@ -156,6 +156,16 @@ public class NetWorkController {
         call.enqueue(callback);
     }
 
+    public static void getPromoteNotifications(TCCCallback<ProductsResult> callback) {
+        Call<ProductsResult> call = getAPIBuilder().getPromoteNotifications("");
+        call.enqueue(callback);
+    }
+
+    public static void getNewsNotifications(TCCCallback<ProductsResult> callback) {
+        Call<ProductsResult> call = getAPIBuilder().getNewsNotifications("");
+        call.enqueue(callback);
+    }
+
     public static void getUserOrder(TCCCallback<UserOrderResult> callback, String token) {
         Call<UserOrderResult> call = getAPIBuilder().getUserOrder(token);
         call.enqueue(callback);

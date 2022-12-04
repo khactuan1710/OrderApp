@@ -124,6 +124,16 @@ public interface TCCAPI {
     Call<ProductsResult> getItemsInOrder(@Field("token") String token,
                                             @Field("orderId") int orderId);
 
+    //lấy thông báo khuyến mại
+    @FormUrlEncoded
+    @POST("notification/promote")
+    Call<ProductsResult> getPromoteNotifications(@Field("token") String token);
+
+    //lấy thông báo tin tức
+    @FormUrlEncoded
+    @POST("notification/promote")
+    Call<ProductsResult> getNewsNotifications(@Field("token") String token);
+
     @FormUrlEncoded
     @POST("shopping_session/add_item")
     Call<RegisterResult> addItemToShoppingSession(@Field("token") String token,
