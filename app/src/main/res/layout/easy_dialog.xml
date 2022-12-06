@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_dialog_new"
+    android:layout_gravity="center_vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="20dp">
+
+
+
+        <TextView
+            android:id="@+id/tv_complete_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_8dp"
+            android:gravity="center"
+            android:fontFamily="@font/roboto"
+            android:textStyle="bold"
+            android:textColor="@color/color_44494D"
+            android:text="Thông báo"
+            android:textSize="@dimen/dimen_18sp" />
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/dimen_20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/tv_comfirm_submit_voucher_point_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingBottom="@dimen/dimen_4dp"
+                android:paddingLeft="@dimen/dimen_16dp"
+                android:fontFamily="@font/sf_pro_regular"
+                android:paddingRight="@dimen/dimen_16dp"
+
+                android:text="Giỏ hàng trống vì không còn món nào. Bạn vui lòng quay lại trang mua hàng để kiểm tra lại giỏ nhé."
+                android:textColor="@color/color_44494D"
+                android:textSize="@dimen/text_size_16sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="25dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/dimen_10dp"
+            android:paddingRight="@dimen/dimen_10dp"
+            >
+
+            <TextView
+                android:id="@+id/btn_cancel"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Đóng"
+                android:fontFamily="@font/roboto_bold"
+                android:background="@drawable/custom_button3"
+                android:textAllCaps="false"
+                android:layout_marginRight="6dp"
+                android:textColor="@color/color_44494D"
+                android:textSize="@dimen/text_size_14sp" />
+
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

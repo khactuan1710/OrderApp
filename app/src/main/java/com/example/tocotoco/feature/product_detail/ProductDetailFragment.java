@@ -4,6 +4,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Paint;
 import android.media.Image;
 import android.util.Log;
 import android.view.View;
@@ -73,8 +74,14 @@ public class ProductDetailFragment extends ViewFragment<ProductDetailContract.Pr
     TextView tv_price;
     @BindView(R.id.tv_show_price)
     TextView tv_show_price;
+    @BindView(R.id.tv_price_old)
+    TextView tv_price_old;
+    @BindView(R.id.tv_show_price_old)
+    TextView tv_show_price_old;
     int totalPrice = 0;
+    int totalPriceOld = 0;
     int totalPrice2 = 0;
+    int totalPrice2Old = 0;
     private boolean isFav = false;
     private boolean isDetele = false;
     private Intent intent;
@@ -106,6 +113,7 @@ public class ProductDetailFragment extends ViewFragment<ProductDetailContract.Pr
     }
 
     private void initData() {
+        tv_price_old.setPaintFlags(tv_price_old.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         intent = getActivity().getIntent();
         sharedPref = getViewContext().getSharedPreferences(requireContext().getString(R.string.preference_file_key), MODE_PRIVATE);
         token = sharedPref.getString(requireContext().getString(R.string.preference_key_token), "");
@@ -129,6 +137,7 @@ public class ProductDetailFragment extends ViewFragment<ProductDetailContract.Pr
         btn_add_product.setOnClickListener(this);
         img_back.setOnClickListener(this);
         img_fav.setOnClickListener(this);
+        img_cart.setOnClickListener(this);
         size_nho.setOnClickListener(this);
         size_vua.setOnClickListener(this);
         size_lon.setOnClickListener(this);
@@ -200,6 +209,7 @@ public class ProductDetailFragment extends ViewFragment<ProductDetailContract.Pr
                 break;
             case R.id.img_cart:
                 Intent i = new Intent(getViewContext(), CartActivity.class);
+                i.putExtra("tokenToCart", token);
                 startActivity(i);
                 break;
             case R.id.btn_add_product:
@@ -213,6 +223,7 @@ public class ProductDetailFragment extends ViewFragment<ProductDetailContract.Pr
                     i2.putExtra("tokenToOrder", token);
                 }
                 startActivity(i2);
+                getViewContext().finish();
                 break;
         }
     }
@@ -227,7 +238,7 @@ public class ProductDetailFragment extends ViewFragment<ProductDetailContract.Pr
         if(data != null) {
             productResult = data;
 //            tv_price.setText(formatter.format(Integer.parseInt(data.body().getResults().getPrice())) + "đ");
-
+            tv_show_price_old.setText(formatter.format(Integer.parseInt(data.body().getResults().getPrice())) + "đ");
             tv_show_price.setText(formatter.format(Integer.parseInt(data.body().getResults().getPrice())) + "đ");
             priceOneItem = Integer.parseInt(data.body().getResults().getPrice());
             mo_ta_sp.setText(data.body().getResults().getDescription());
@@ -265,11 +276,14 @@ public class ProductDetailFragment extends ViewFragment<ProductDetailContract.Pr
             int i = quantity - quantityOld;
             price = priceOneItem * i;
             totalPrice2 = totalPrice + price;
+            totalPrice2Old = totalPriceOld + price;
             if(totalPrice2 == 0) {
+                tv_price_old.setVisibility(View.GONE);
                 tv_price.setVisibility(View.GONE);
             }else {
                 tv_price.setVisibility(View.VISIBLE);
                 tv_price.setText(formatter.format(totalPrice2) + "đ");
+                tv_price_old.setText(formatter.format(totalPrice2Old) + "đ");
             }
             if(!isDetele) {
                 if(itemId != 0) {
@@ -296,7 +310,13 @@ public class ProductDetailFragment extends ViewFragment<ProductDetailContract.Pr
             quantityCart = response.body().getResults().size();
             for (int i = 0; i < quantityCart; i ++) {
                 ProductSessionModel item = response.body().getResults().get(i);
-                totalPrice += Integer.parseInt(item.getPrice()) * item.getQuantity();
+//                if(item.getQuantity() != 1) {
+//                    totalPrice += Integer.parseInt(item.getPriceAfterDiscount() == null? item.getPrice(): item.getPriceAfterDiscount()) * item.getQuantity();
+//                }else {
+                totalPrice += Integer.parseInt(item.getPriceAfterDiscount() == null? item.getPrice(): item.getPriceAfterDiscount());
+//                }
+
+                totalPriceOld += Integer.parseInt(item.getPrice()) * item.getQuantity();
                 if(idProductToQuantity == item.getProductId()) {
                     tv_quantity.setText(String.valueOf(item.getQuantity()));
                     quantityOld = item.getQuantity();
@@ -307,6 +327,8 @@ public class ProductDetailFragment extends ViewFragment<ProductDetailContract.Pr
             if(totalPrice != 0) {
                 tv_price.setVisibility(View.VISIBLE);
                 tv_price.setText(formatter.format(totalPrice) + "đ");
+                tv_price_old.setVisibility(View.VISIBLE);
+                tv_price_old.setText(formatter.format(totalPriceOld) + "đ");
             }
         }
 

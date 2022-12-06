@@ -37,6 +37,27 @@ public class ProductsResult extends SimpleResult{
         @SerializedName("displayImage")
         String displayImage;
 
+        @SerializedName("priceBeforeDiscount")
+        String priceBeforeDiscount;
+        @SerializedName("total")
+        String total;
+
+        public String getPriceBeforeDiscount() {
+            return priceBeforeDiscount;
+        }
+
+        public void setPriceBeforeDiscount(String priceBeforeDiscount) {
+            this.priceBeforeDiscount = priceBeforeDiscount;
+        }
+
+        public String getTotal() {
+            return total;
+        }
+
+        public void setTotal(String total) {
+            this.total = total;
+        }
+
         public int getId() {
             return id;
         }

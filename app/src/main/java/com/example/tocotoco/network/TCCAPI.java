@@ -11,6 +11,7 @@ import com.example.tocotoco.model.ProductsResult;
 import com.example.tocotoco.model.ProductsSessionResult;
 import com.example.tocotoco.model.RegisterResult;
 import com.example.tocotoco.model.SessionIdResult;
+import com.example.tocotoco.model.UserCurrentResult;
 import com.example.tocotoco.model.UserInfoResult;
 import com.example.tocotoco.model.UserOrderResult;
 
@@ -115,6 +116,25 @@ public interface TCCAPI {
 
 
     @FormUrlEncoded
+    @POST("user/current-order")
+    Call<UserCurrentResult> getUserCurrentOrder(@Field("token") String token);
+
+    @FormUrlEncoded
+    @POST("order/get_items")
+    Call<ProductsResult> getItemsInOrder(@Field("token") String token,
+                                            @Field("orderId") int orderId);
+
+    //lấy thông báo khuyến mại
+    @FormUrlEncoded
+    @POST("notification/promote")
+    Call<ProductsResult> getPromoteNotifications(@Field("token") String token);
+
+    //lấy thông báo tin tức
+    @FormUrlEncoded
+    @POST("notification/promote")
+    Call<ProductsResult> getNewsNotifications(@Field("token") String token);
+
+    @FormUrlEncoded
     @POST("shopping_session/add_item")
     Call<RegisterResult> addItemToShoppingSession(@Field("token") String token,
                                      @Field("sessionId") int sessionId,
@@ -128,5 +148,6 @@ public interface TCCAPI {
                                                   @Field("sessionId") int sessionId,
                                                   @Field("provider") String provider,
                                                   @Field("phoneNumber") String phoneNumber,
-                                                  @Field("address") String address);
+                                                  @Field("address") String address,
+                                                @Field("note") String note);
 }

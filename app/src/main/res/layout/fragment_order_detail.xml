@@ -18,7 +18,6 @@
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/dimen_80dp"
             android:layout_marginBottom="@dimen/dimen_120dp">
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -35,7 +34,7 @@
                         android:layout_height="wrap_content"
                         android:text="Địa chỉ giao hàng"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_22sp"
+                        android:textSize="@dimen/text_size_20sp"
                         android:textStyle="bold" />
 
 
@@ -104,10 +103,6 @@
 
                 </LinearLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dimen_5dp"
-                    android:background="@color/line_large" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -115,95 +110,13 @@
                     android:layout_margin="@dimen/dimen_16dp"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dimen_10dp"
-                        android:text="Tổng cộng"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/size_20sp"
-                        android:textStyle="bold" />
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_8">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentStart="true"
-                                android:text="Thành tiền"
-                                android:textSize="@dimen/dimen_16sp" />
 
-                            <TextView
-                                android:textSize="@dimen/dimen_16sp"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentEnd="true"
-                                android:layout_marginEnd="@dimen/dp10"
-                                android:text="110.000đ" />
-                        </RelativeLayout>
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_alignParentBottom="true"
-                            android:layout_marginTop="@dimen/dp_8"
-                            android:background="@color/line_small" />
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_8">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentStart="true"
-                                android:text="Phí giao hàng"
-                                android:textSize="@dimen/dimen_16sp" />
-
-                            <TextView
-                                android:textSize="@dimen/dimen_16sp"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentEnd="true"
-                                android:layout_marginEnd="@dimen/dp10"
-                                android:text="0đ" />
-                        </RelativeLayout>
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentStart="true"
-                                android:text="Miễn phí giao hàng đơn trên 50k"
-                                android:textSize="@dimen/dimen_12sp" />
-
-                            <TextView
-                                android:textSize="@dimen/text_size_12sp"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentEnd="true"
-                                android:layout_marginEnd="@dimen/dp10"
-                                android:text="10.000đ" />
-                        </RelativeLayout>
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_alignParentBottom="true"
-                            android:layout_marginTop="@dimen/dp_8"
-                            android:background="@color/line_small" />
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -211,24 +124,31 @@
                             android:layout_marginTop="@dimen/dp10">
 
                             <TextView
+                                android:id="@+id/tv_total_item"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentStart="true"
-                                android:text="Số tiền thanh toán"
+                                android:text="Số tiền thanh toán(5 món)"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/dimen_16sp"
                                 android:textStyle="bold" />
 
                             <TextView
+                                android:id="@+id/tv_total_sub_money"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentEnd="true"
                                 android:layout_marginEnd="@dimen/dp10"
-                                android:text="110.000đ"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/dimen_16sp"
                                 android:textStyle="bold" />
                         </RelativeLayout>
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginTop="@dimen/dp_8"
+                            android:background="@color/line_small" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -277,7 +197,40 @@
 
                     </RadioGroup>
                 </LinearLayout>
+                <RelativeLayout
+                    android:layout_margin="@dimen/dimen_16dp"
+                    android:id="@+id/layoutReason"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_90dp"
+                    android:layout_marginTop="@dimen/dimen_14dp"
+                    android:orientation="vertical"
+                    android:paddingTop="@dimen/dimen_10dp"
+                    android:paddingLeft="@dimen/dimen_12dp"
+                    android:paddingRight="@dimen/dimen_12dp"
+                    android:paddingBottom="@dimen/dimen_10dp"
+                    android:background="@drawable/bg_btn_unselected"
+                    android:layout_below="@+id/relReason">
 
+                    <EditText
+                        android:id="@+id/ed_note"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@id/imgClearText"
+                        android:background="@color/transparent"
+                        android:hint="Nhập ghi chú"
+                        android:maxLength="2000"
+                        android:textColorHint="#b5b4b4"
+                        android:textColor="@color/color_44494D"
+                        android:textSize="@dimen/dimen_14sp" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imgClearText"
+                        android:layout_width="@dimen/text_size_16sp"
+                        android:layout_height="@dimen/text_size_16sp"
+                        android:layout_alignParentRight="true"
+                        app:srcCompat="@drawable/close_gray" />
+
+                </RelativeLayout>
 
             </LinearLayout>
 
@@ -291,6 +244,7 @@
             android:background="@drawable/subtract"
             >
             <ImageView
+                android:padding="@dimen/dimen_10dp"
                 android:id="@+id/ic_back"
                 android:layout_centerVertical="true"
                 android:layout_width="wrap_content"
@@ -306,8 +260,8 @@
                 android:textColor="@color/white"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textSize="@dimen/dimen_24dp"
-                android:fontFamily="@font/fs_pf_beau_sans_pro_bold"
+                android:textSize="@dimen/dimen_20dp"
+                android:fontFamily="@font/sf_pro_text_medium"
                 android:text="Xác nhận đơn hàng"/>
         </RelativeLayout>
         <androidx.cardview.widget.CardView
@@ -355,6 +309,7 @@
                 </RelativeLayout>
 
                 <Button
+                    android:id="@+id/btn_confirm"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
