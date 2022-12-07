@@ -54,7 +54,6 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/border_default_app"
                 android:hint="Họ và tên"
-                android:textColor="@color/color_default"
                 app:boxStrokeColor="@color/color_default"
                 app:boxStrokeWidth="0dp"
                 app:boxStrokeWidthFocused="0dp" />
@@ -75,6 +74,25 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/border_default_app"
                 android:hint="Số điện thoại"
+                android:inputType="number"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/lo_email"
+            android:layout_marginTop="@dimen/dimen_10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:boxStrokeWidthFocused="0dp"
+            app:boxStrokeWidth="0dp"
+            app:hintTextColor="@color/color_default"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ed_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border_default_app"
+                android:hint="Email"
                 android:inputType="number"
                 />
         </com.google.android.material.textfield.TextInputLayout>

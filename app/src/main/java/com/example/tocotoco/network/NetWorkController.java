@@ -12,6 +12,7 @@ import com.example.tocotoco.model.CategoriesResult;
 import com.example.tocotoco.model.DataTestResult;
 import com.example.tocotoco.model.FavoriteProductsResult;
 import com.example.tocotoco.model.LoginResult;
+import com.example.tocotoco.model.NotifiResult;
 import com.example.tocotoco.model.ProductResult;
 import com.example.tocotoco.model.ProductsByCategoryResult;
 import com.example.tocotoco.model.ProductsResult;
@@ -156,13 +157,13 @@ public class NetWorkController {
         call.enqueue(callback);
     }
 
-    public static void getPromoteNotifications(TCCCallback<ProductsResult> callback) {
-        Call<ProductsResult> call = getAPIBuilder().getPromoteNotifications("");
+    public static void getPromoteNotifications(TCCCallback<NotifiResult> callback) {
+        Call<NotifiResult> call = getAPIBuilder().getPromoteNotifications("");
         call.enqueue(callback);
     }
 
-    public static void getNewsNotifications(TCCCallback<ProductsResult> callback) {
-        Call<ProductsResult> call = getAPIBuilder().getNewsNotifications("");
+    public static void getNewsNotifications(TCCCallback<NotifiResult> callback) {
+        Call<NotifiResult> call = getAPIBuilder().getNewsNotifications("");
         call.enqueue(callback);
     }
 
