@@ -84,6 +84,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
 
     private fun setupClickListener() = binding.run {
         appCompatImageView3.setOnClickListener {
+//<<<<<<< HEAD
             val token =
                 sharedPref?.getString(requireContext().getString(R.string.preference_key_token), "")
             if (token.isNullOrEmpty()) {
@@ -91,6 +92,9 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
             } else {
                 startActivity(Intent(requireActivity(), ProductDetailActivity::class.java))
             }
+//=======
+//            startActivity(Intent(requireActivity(), LoginActivity::class.java))
+//>>>>>>> cuonghm
         }
     }
 
