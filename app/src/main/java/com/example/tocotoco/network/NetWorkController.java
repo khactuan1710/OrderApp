@@ -1,11 +1,5 @@
 package com.example.tocotoco.network;
 
-import android.bluetooth.BluetoothAdapter;
-import android.content.Context;
-import android.os.Build;
-
-import androidx.annotation.NonNull;
-
 import com.example.tocotoco.domain.DomainSwitcher;
 import com.example.tocotoco.model.CartInfoResult;
 import com.example.tocotoco.model.CategoriesResult;
@@ -24,42 +18,7 @@ import com.example.tocotoco.model.UserOrderResult;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import java.io.IOException;
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Type;
-import java.security.SecureRandom;
-import java.security.cert.CertificateException;
-import java.security.cert.X509Certificate;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.concurrent.TimeUnit;
-
-import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSession;
-import javax.net.ssl.SSLSocketFactory;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
-
-import okhttp3.CertificatePinner;
-import okhttp3.CipherSuite;
-import okhttp3.ConnectionSpec;
-import okhttp3.HttpUrl;
-import okhttp3.Interceptor;
-import okhttp3.OkHttpClient;
-import okhttp3.Protocol;
-import okhttp3.Request;
-import okhttp3.Response;
-import okhttp3.ResponseBody;
-import okhttp3.TlsVersion;
 import retrofit2.Call;
-import retrofit2.Converter;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
-import retrofit2.http.POST;
-import rx.android.BuildConfig;
 
 public class NetWorkController {
     private NetWorkController() {
