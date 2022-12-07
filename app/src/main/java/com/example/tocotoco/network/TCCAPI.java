@@ -5,6 +5,7 @@ import com.example.tocotoco.model.CategoriesResult;
 import com.example.tocotoco.model.DataTestResult;
 import com.example.tocotoco.model.FavoriteProductsResult;
 import com.example.tocotoco.model.LoginResult;
+import com.example.tocotoco.model.NotifiResult;
 import com.example.tocotoco.model.ProductResult;
 import com.example.tocotoco.model.ProductsByCategoryResult;
 import com.example.tocotoco.model.ProductsResult;
@@ -127,12 +128,12 @@ public interface TCCAPI {
     //lấy thông báo khuyến mại
     @FormUrlEncoded
     @POST("notification/promote")
-    Call<ProductsResult> getPromoteNotifications(@Field("token") String token);
+    Call<NotifiResult> getPromoteNotifications(@Field("token") String token);
 
     //lấy thông báo tin tức
     @FormUrlEncoded
     @POST("notification/promote")
-    Call<ProductsResult> getNewsNotifications(@Field("token") String token);
+    Call<NotifiResult> getNewsNotifications(@Field("token") String token);
 
     @FormUrlEncoded
     @POST("shopping_session/add_item")
