@@ -31,6 +31,9 @@ public class UserOrderResult extends SimpleResult{
         @SerializedName("totalProduct")
         String totalProduct;
 
+        @SerializedName("displayImage")
+        String displayImage;
+
         public int getId() {
             return id;
         }
@@ -93,6 +96,14 @@ public class UserOrderResult extends SimpleResult{
 
         public void setTotalProduct(String totalProduct) {
             this.totalProduct = totalProduct;
+        }
+
+        public String getDisplayImage() {
+            return displayImage;
+        }
+
+        public void setDisplayImage(String displayImage) {
+            this.displayImage = displayImage;
         }
     }
 }

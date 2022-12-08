@@ -132,7 +132,7 @@ public interface TCCAPI {
 
     //lấy thông báo tin tức
     @FormUrlEncoded
-    @POST("notification/promote")
+    @POST("notification/news")
     Call<NotifiResult> getNewsNotifications(@Field("token") String token);
 
     @FormUrlEncoded
