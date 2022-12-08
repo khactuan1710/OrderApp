@@ -93,7 +93,6 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/border_default_app"
                 android:hint="Email"
-                android:inputType="number"
                 />
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout

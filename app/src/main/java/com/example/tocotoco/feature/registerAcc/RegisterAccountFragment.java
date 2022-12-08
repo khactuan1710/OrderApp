@@ -100,7 +100,7 @@ public class RegisterAccountFragment extends ViewFragment<RegisterAccountContrac
                     return;
                 }
                 if(email.equals("")) {
-                    lo_phone_number.setError("Email không được trống!");
+                    lo_email.setError("Email không được trống!");
                     return;
                 }
                 if(username.equals("")) {
