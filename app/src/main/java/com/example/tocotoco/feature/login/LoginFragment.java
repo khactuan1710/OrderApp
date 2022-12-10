@@ -21,6 +21,8 @@ import com.example.tocotoco.room.TokenDeviceDatabase;
 import com.gemvietnam.base.viper.ViewFragment;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.util.List;
+
 import butterknife.BindView;
 import retrofit2.Response;
 
@@ -38,7 +40,7 @@ public class LoginFragment extends ViewFragment<LoginContract.Presenter> impleme
     TextInputEditText etPassword;
     Context context;
     SharedPreferences.Editor editor;
-
+    List<TokenDevice> list;
     private  boolean isFavorite = false;
     private  boolean isFavDetail = false;
     private  int idProductFromDetail = 0;
@@ -61,6 +63,8 @@ public class LoginFragment extends ViewFragment<LoginContract.Presenter> impleme
         SharedPreferences sharedPref = context.getSharedPreferences(
                 context.getString(R.string.preference_file_key), MODE_PRIVATE);
         editor = sharedPref.edit();
+
+        list = TokenDeviceDatabase.getInstance(getViewContext()).tokenDeviceDAO().getListToken();
 
     }
 
@@ -105,7 +109,7 @@ public class LoginFragment extends ViewFragment<LoginContract.Presenter> impleme
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_login:
-                mPresenter.loginWithPass(ed_sdt.getText().toString(), etPassword.getText().toString(), "username");
+                mPresenter.loginWithPass(ed_sdt.getText().toString(), etPassword.getText().toString(), "username", list.get(0).getTokenDevice());
                 break;
             case R.id.ed_sdt:
                 Log.e("tag:  ", "cldsvick");

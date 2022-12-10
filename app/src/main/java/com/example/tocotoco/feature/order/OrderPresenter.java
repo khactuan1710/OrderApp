@@ -1,8 +1,12 @@
 package com.example.tocotoco.feature.order;
 
+import com.example.tocotoco.dialog.DialogUtils;
 import com.example.tocotoco.feature.product_detail.ProductDetailContract;
 import com.example.tocotoco.feature.product_detail.ProductDetailFragment;
 import com.example.tocotoco.feature.product_detail.ProductDetailInteractor;
+import com.example.tocotoco.model.CartInfoResult;
+import com.example.tocotoco.model.ProductsSessionResult;
+import com.example.tocotoco.model.RegisterResult;
 import com.example.tocotoco.model.SessionIdResult;
 import com.example.tocotoco.model.UserInfoResult;
 import com.example.tocotoco.network.TCCCallback;
@@ -33,8 +37,22 @@ public class OrderPresenter extends Presenter<OrderContract.View, OrderContract.
     }
 
     @Override
-    public void itemsInShoppingSession(String token, SessionIdResult.SessionId sessionId, boolean isUpdate) {
+    public void itemsInShoppingSession(String token, int sessionId) {
+        DialogUtils.showProgressDialog(getViewContext());
+        mInteractor.itemsInShoppingSession(new TCCCallback<ProductsSessionResult>() {
+            @Override
+            public void onTCTCSuccess(Call<ProductsSessionResult> call, Response<ProductsSessionResult> response) {
+                DialogUtils.dismissProgressDialog();
+                if(response.body().getIsSuccess()) {
+                    mView.initViewDetail(response);
+                }
+            }
 
+            @Override
+            public void onTCTCFailure(Call<ProductsSessionResult> call) {
+                DialogUtils.dismissProgressDialog();
+            }
+        }, token, sessionId);
     }
 
     @Override
@@ -43,7 +61,7 @@ public class OrderPresenter extends Presenter<OrderContract.View, OrderContract.
             @Override
             public void onTCTCSuccess(Call<UserInfoResult> call, Response<UserInfoResult> response) {
                 if(response.body() != null) {
-
+                    mView.getUserInfoSuccess(response);
                 }
             }
 
@@ -54,5 +72,85 @@ public class OrderPresenter extends Presenter<OrderContract.View, OrderContract.
                 }
             }
         }, token);
+    }
+
+    @Override
+    public void getCartInfo(String token, int sessionId) {
+        mInteractor.getCartInfo(new TCCCallback<CartInfoResult>() {
+            @Override
+            public void onTCTCSuccess(Call<CartInfoResult> call, Response<CartInfoResult> response) {
+                if(response.body().getIsSuccess()) {
+                    if(!response.body().getResults().getTotalCategory().equals("0")) {
+                        mView.getCartInfoSuccess(response);
+                    }else {
+                        mView.getCartInfoFail();
+                    }
+                }
+            }
+
+            @Override
+            public void onTCTCFailure(Call<CartInfoResult> call) {
+
+            }
+        }, token, sessionId);
+    }
+
+    @Override
+    public void confirmOrder(String token, int sessionId, String provider, String phoneNumber, String address, String note) {
+        DialogUtils.showProgressDialog(getViewContext());
+        mInteractor.confirmOrder(new TCCCallback<RegisterResult>() {
+            @Override
+            public void onTCTCSuccess(Call<RegisterResult> call, Response<RegisterResult> response) {
+                DialogUtils.dismissProgressDialog();
+                if(response.body().getIsSuccess()) {
+                    mView.confirmOrderSuccess(response);
+                }
+            }
+
+            @Override
+            public void onTCTCFailure(Call<RegisterResult> call) {
+                DialogUtils.dismissProgressDialog();
+            }
+        }, token, sessionId, provider, phoneNumber, address, note);
+    }
+
+    @Override
+    public void addItemToShoppingSession(String token, int sessionId, int productId, int quantity, String size) {
+        DialogUtils.showProgressDialog(getViewContext());
+        mInteractor.addItemToShoppingSession(new TCCCallback<RegisterResult>() {
+            @Override
+            public void onTCTCSuccess(Call<RegisterResult> call, Response<RegisterResult> response) {
+                DialogUtils.dismissProgressDialog();
+                if(response.body().getIsSuccess()) {
+                    getCartInfo(token, sessionId);
+//                    itemsInShoppingSession(token, sessionId);
+                }
+            }
+
+            @Override
+            public void onTCTCFailure(Call<RegisterResult> call) {
+                DialogUtils.dismissProgressDialog();
+            }
+        }, token, sessionId, productId, quantity, size);
+    }
+
+    @Override
+    public void deleteItemInShoppingSession(String token, int itemId, int sessionId) {
+        DialogUtils.showProgressDialog(getViewContext());
+        mInteractor.deleteItemInShoppingSession(new TCCCallback<RegisterResult>() {
+            @Override
+            public void onTCTCSuccess(Call<RegisterResult> call, Response<RegisterResult> response) {
+                DialogUtils.dismissProgressDialog();
+                if(response.body().getIsSuccess()) {
+                    getCartInfo(token, sessionId);
+                    itemsInShoppingSession(token, sessionId);
+                }
+            }
+
+            @Override
+            public void onTCTCFailure(Call<RegisterResult> call) {
+                DialogUtils.dismissProgressDialog();
+            }
+        }, token, itemId, sessionId);
     }
 }

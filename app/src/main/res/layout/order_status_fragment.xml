@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/dimen_80dp"
+            android:layout_marginBottom="@dimen/dimen_100dp">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_marginStart="@dimen/dimen_50dp"
+            android:layout_marginEnd="@dimen/dimen_50dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="Đơn hàng đang chờ xác nhận"
+                android:layout_gravity="center"
+                android:id="@+id/tv_order_status"
+                android:textSize="@dimen/text_size_20sp"
+                android:fontFamily="@font/sf_pro_text_regular"
+                android:gravity="center"
+                android:textColor="@color/color_44494D"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/btn_destroy"
+                android:background="@drawable/custom_edittext"
+                android:text="Hủy đơn hàng"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/dimen_16dp"
+                android:gravity="center"
+                android:paddingVertical="@dimen/dimen_3dp"
+                android:paddingHorizontal="@dimen/dimen_8dp"
+                android:textSize="@dimen/dimen_14sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <pl.droidsonroids.gif.GifImageView
+                android:id="@+id/gifview"
+                android:src="@drawable/wait_confirm_order"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/dimen_16dp"
+                android:layout_width="@dimen/dimen_100dp"
+                android:layout_height="@dimen/dimen_100dp"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/dimen_16dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/line_small" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:id="@+id/tabLayout"
+            android:orientation="horizontal"
+            android:layout_marginHorizontal="@dimen/dimen_16dp"
+            android:gravity="center"
+            android:layout_height="@dimen/dimen_40dp">
+            <TextView
+                android:id="@+id/tv_status_1"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dimen_64dp"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:fontFamily="@font/sf_pro_text_bold"
+                android:paddingHorizontal="@dimen/dimen_8dp"
+                android:background="@drawable/custom_buttom"
+                android:textSize="@dimen/dimen_16dp"
+                android:text="Chờ xác nhận"/>
+            <TextView
+                android:id="@+id/tv_status_2"
+                android:layout_marginHorizontal="@dimen/dimen_16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dimen_60dp"
+                android:gravity="center"
+                android:paddingHorizontal="@dimen/dimen_8dp"
+                android:textColor="@color/color_44494D"
+                android:fontFamily="@font/sf_pro_text_regular"
+                android:textSize="@dimen/dimen_16dp"
+                android:text="Đang giao"/>
+            <TextView
+                android:id="@+id/tv_status_3"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dimen_60dp"
+                android:gravity="center"
+                android:textColor="@color/color_44494D"
+                android:fontFamily="@font/sf_pro_text_regular"
+                android:textSize="@dimen/dimen_16dp"
+                android:paddingHorizontal="@dimen/dimen_8dp"
+                android:layout_marginRight="@dimen/dp12"
+                android:text="Hoàn thành"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:background="@color/line_large" />
+
+        <TextView
+            android:layout_marginTop="@dimen/dimen_8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Đơn hàng của bạn"
+            android:textSize="@dimen/text_size_16sp"
+            android:textColor="@color/color_44494D"
+            android:fontFamily="@font/sf_pro_text_regular"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/text_size_16sp"
+            android:id="@+id/rcv_order"/>
+        <View
+            android:layout_marginHorizontal="@dimen/dimen_16dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/dimen_16dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/line_small" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginHorizontal="@dimen/dimen_16dp"
+            android:layout_marginTop="@dimen/dimen_16dp">
+            <TextView
+                android:id="@+id/tv_quan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tổng cộng(2 món)"
+                android:textSize="@dimen/dimen_18sp"
+                android:textColor="@color/color_44494D"
+                android:fontFamily="@font/sf_pro_text_bold"/>
+            <TextView
+                android:visibility="gone"
+                android:layout_toLeftOf="@id/tv_end_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="290.000đ"
+                android:layout_marginRight="@dimen/dimen_8dp"
+                android:textSize="@dimen/dimen_16sp"
+                android:textColor="#c4c4c4"
+                android:id="@+id/tv_start_price"
+                android:fontFamily="@font/sf_pro_text_regular"/>
+            <TextView
+                android:id="@+id/tv_end_price"
+                android:layout_marginRight="@dimen/dimen_8dp"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="290.000đ"
+                android:textSize="@dimen/dimen_16sp"
+                android:textColor="@color/color_44494D"
+                android:fontFamily="@font/sf_pro_text_medium"/>
+        </RelativeLayout>
+        <View
+            android:layout_marginHorizontal="@dimen/dimen_16dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/dimen_16dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/line_small" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginHorizontal="@dimen/dimen_16dp"
+            android:layout_marginTop="@dimen/dimen_16dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Thanh toán bằng"
+                android:textSize="@dimen/dimen_18sp"
+                android:textColor="@color/color_44494D"
+                android:fontFamily="@font/sf_pro_text_bold"/>
+            <ImageView
+                android:layout_toLeftOf="@id/tv_method_pay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/dimen_8dp"
+                android:src="@drawable/momo"/>
+            <TextView
+                android:id="@+id/tv_method_pay"
+                android:layout_marginRight="@dimen/dimen_8dp"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ví Momo"
+                android:textSize="@dimen/dimen_16sp"
+                android:textColor="@color/color_44494D"
+                android:fontFamily="@font/sf_pro_text_regular"/>
+        </RelativeLayout>
+        <View
+            android:layout_marginHorizontal="@dimen/dimen_16dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/dimen_16dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/line_small" />
+        <TextView
+            android:layout_marginTop="@dimen/dimen_15dp"
+            android:layout_marginLeft="@dimen/dimen_16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Chi tiết đơn hàng"
+            android:textColor="@color/color_44494D"
+            android:textSize="@dimen/text_size_16sp"
+            android:fontFamily="@font/sf_pro_text_medium"/>
+        <LinearLayout
+            android:layout_marginHorizontal="@dimen/dimen_16dp"
+            android:layout_marginTop="@dimen/dimen_8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="@dimen/dimen_150dp"
+                android:layout_height="wrap_content"
+                android:text="Mã đơn hàng"
+                android:textColor="@color/color_44494D"
+                android:textSize="@dimen/text_size_14sp"
+                android:fontFamily="@font/sf_pro_text_regular"/>
+            <TextView
+                android:id="@+id/tv_order_id"
+                android:layout_width="@dimen/dimen_150dp"
+                android:layout_height="wrap_content"
+                android:text="1"
+                android:textColor="@color/color_44494D"
+                android:textSize="@dimen/text_size_14sp"
+                android:fontFamily="@font/sf_pro_text_regular"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginHorizontal="@dimen/dimen_16dp"
+            android:layout_marginTop="@dimen/dimen_8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="@dimen/dimen_150dp"
+                android:layout_height="wrap_content"
+                android:text="Ghi chú"
+                android:textColor="@color/color_44494D"
+                android:textSize="@dimen/text_size_14sp"
+                android:fontFamily="@font/sf_pro_text_regular"/>
+            <TextView
+                android:id="@+id/tv_note"
+                android:layout_width="@dimen/dimen_150dp"
+                android:layout_height="wrap_content"
+                android:text="Không có"
+                android:textColor="@color/color_44494D"
+                android:textSize="@dimen/text_size_14sp"
+                android:fontFamily="@font/sf_pro_text_regular"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginHorizontal="@dimen/dimen_16dp"
+            android:layout_marginTop="@dimen/dimen_8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="@dimen/dimen_150dp"
+                android:layout_height="wrap_content"
+                android:text="Tên khách hàng"
+                android:textColor="@color/color_44494D"
+                android:textSize="@dimen/text_size_14sp"
+                android:fontFamily="@font/sf_pro_text_regular"/>
+            <TextView
+                android:id="@+id/tv_name_user"
+                android:layout_width="@dimen/dimen_150dp"
+                android:layout_height="wrap_content"
+                android:text="Nguyễn văn a"
+                android:textColor="@color/color_44494D"
+                android:textSize="@dimen/text_size_14sp"
+                android:fontFamily="@font/sf_pro_text_regular"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginHorizontal="@dimen/dimen_16dp"
+            android:layout_marginTop="@dimen/dimen_8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="@dimen/dimen_150dp"
+                android:layout_height="wrap_content"
+                android:text="Số điện thoại"
+                android:textColor="@color/color_44494D"
+                android:textSize="@dimen/text_size_14sp"
+                android:fontFamily="@font/sf_pro_text_regular"/>
+            <TextView
+                android:id="@+id/tv_phone_number"
+                android:layout_width="@dimen/dimen_150dp"
+                android:layout_height="wrap_content"
+                android:text="0987654321"
+                android:textColor="@color/color_44494D"
+                android:textSize="@dimen/text_size_14sp"
+                android:fontFamily="@font/sf_pro_text_regular"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginHorizontal="@dimen/dimen_16dp"
+            android:layout_marginTop="@dimen/dimen_8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="@dimen/dimen_150dp"
+                android:layout_height="wrap_content"
+                android:text="Giao hàng đến"
+                android:textColor="@color/color_44494D"
+                android:textSize="@dimen/text_size_14sp"
+                android:fontFamily="@font/sf_pro_text_regular"/>
+            <TextView
+                android:id="@+id/tv_address"
+                android:layout_width="@dimen/dimen_150dp"
+                android:layout_height="wrap_content"
+                android:text="Cầu Giấy - Hà Nội"
+                android:textColor="@color/color_44494D"
+                android:textSize="@dimen/text_size_14sp"
+                android:fontFamily="@font/sf_pro_text_regular"/>
+        </LinearLayout>
+    </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/dimen_15dp"
+            android:background="@drawable/subtract"
+            >
+            <ImageView
+                android:id="@+id/ic_back"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_back_v4"
+                android:layout_alignParentLeft="true"
+                android:layout_gravity="center_vertical"/>
+            <TextView
+
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:textColor="@color/white"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="@dimen/dimen_20dp"
+                android:fontFamily="@font/sf_pro_text_medium"
+                android:text="Trạng thái đơn hàng"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_reload_order" />
+        </RelativeLayout>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            app:cardCornerRadius="@dimen/dimen_16dp"
+            android:paddingBottom="@dimen/dimen_15dp"
+            app:cardElevation="@dimen/dimen_16dp">
+
+            <LinearLayout
+                android:layout_marginTop="@dimen/dimen_20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingStart="@dimen/dimen_16dp"
+                android:paddingEnd="@dimen/dimen_16dp">
+                <Button
+                    android:visibility="gone"
+                    android:id="@+id/btn_go_home"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:layout_marginBottom="@dimen/dimen_16dp"
+                    android:background="@drawable/custom_button3"
+                    android:text="Về màn hình chính"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/dimen_16dp"
+                    app:backgroundTint="@null" />
+
+                <Button
+                    android:id="@+id/btn_confirm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:layout_marginBottom="@dimen/dimen_16dp"
+                    android:background="@drawable/bg_btn_cskh"
+                    android:text="Liên hệ cửa hàng"
+                    android:textAllCaps="false"
+                    android:textColor="@color/color_default"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/dimen_16dp"
+                    app:backgroundTint="@null" />
+
+                <View
+                    android:layout_width="@dimen/dimen_200dp"
+                    android:layout_height="@dimen/dimen_5dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/custom_line" />
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
+</LinearLayout>

@@ -28,6 +28,17 @@ public class ProductSessionModel {
     @SerializedName("priceAfterDiscount")
     String priceAfterDiscount;
 
+    @SerializedName("displayImage")
+    String displayImage;
+
+    public String getDisplayImage() {
+        return displayImage;
+    }
+
+    public void setDisplayImage(String displayImage) {
+        this.displayImage = displayImage;
+    }
+
     public int getId() {
         return id;
     }

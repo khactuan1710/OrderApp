@@ -1,16 +1,20 @@
 package com.example.tocotoco.network;
 
+import com.example.tocotoco.model.CartInfoResult;
 import com.example.tocotoco.model.CategoriesResult;
 import com.example.tocotoco.model.DataTestResult;
 import com.example.tocotoco.model.FavoriteProductsResult;
 import com.example.tocotoco.model.LoginResult;
+import com.example.tocotoco.model.NotifiResult;
 import com.example.tocotoco.model.ProductResult;
 import com.example.tocotoco.model.ProductsByCategoryResult;
 import com.example.tocotoco.model.ProductsResult;
 import com.example.tocotoco.model.ProductsSessionResult;
 import com.example.tocotoco.model.RegisterResult;
 import com.example.tocotoco.model.SessionIdResult;
+import com.example.tocotoco.model.UserCurrentResult;
 import com.example.tocotoco.model.UserInfoResult;
+import com.example.tocotoco.model.UserOrderResult;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -55,7 +59,8 @@ public interface TCCAPI {
     @POST("login")
     Call<LoginResult> loginWithPass(@Field("username") String username,
                                     @Field("password") String password,
-                                    @Field("type") String type);
+                                    @Field("type") String type,
+                                    @Field("token_device") String token_device);
 
     @FormUrlEncoded
     @POST("signup")
@@ -78,8 +83,9 @@ public interface TCCAPI {
     Call<UserInfoResult> getUserInfo(@Field("token") String token);
 
     @FormUrlEncoded
-    @POST("shopping_session/cart_info")
-    Call<UserInfoResult> getCartInfo(@Field("token") String token);
+    @POST("shopping_session/get_cart_info")
+    Call<CartInfoResult> getCartInfo(@Field("token") String token,
+                                     @Field("sessionId") int sessionId);
 
     @FormUrlEncoded
     @POST("update_user_address")
@@ -106,6 +112,30 @@ public interface TCCAPI {
                                     @Field("productId") int productId);
 
     @FormUrlEncoded
+    @POST("order/get_user_orders")
+    Call<UserOrderResult> getUserOrder(@Field("token") String token);
+
+
+    @FormUrlEncoded
+    @POST("user/current-order")
+    Call<UserCurrentResult> getUserCurrentOrder(@Field("token") String token);
+
+    @FormUrlEncoded
+    @POST("order/get_items")
+    Call<ProductsResult> getItemsInOrder(@Field("token") String token,
+                                            @Field("orderId") int orderId);
+
+    //lấy thông báo khuyến mại
+    @FormUrlEncoded
+    @POST("notification/promote")
+    Call<NotifiResult> getPromoteNotifications(@Field("token") String token);
+
+    //lấy thông báo tin tức
+    @FormUrlEncoded
+    @POST("notification/promote")
+    Call<NotifiResult> getNewsNotifications(@Field("token") String token);
+
+    @FormUrlEncoded
     @POST("shopping_session/add_item")
     Call<RegisterResult> addItemToShoppingSession(@Field("token") String token,
                                      @Field("sessionId") int sessionId,
@@ -113,5 +143,12 @@ public interface TCCAPI {
                                      @Field("quantity") int quantity,
                                      @Field("size") String size);
 
-
+    @FormUrlEncoded
+    @POST("order/confirm_order")
+    Call<RegisterResult> confirmOrder(@Field("token") String token,
+                                                  @Field("sessionId") int sessionId,
+                                                  @Field("provider") String provider,
+                                                  @Field("phoneNumber") String phoneNumber,
+                                                  @Field("address") String address,
+                                                @Field("note") String note);
 }

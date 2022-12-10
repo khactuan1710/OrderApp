@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/confirm_success"
+    android:gravity="center_horizontal"
+    android:paddingHorizontal="@dimen/dimen_20dp"
+    tools:context=".feature.order.ConfirmSuccessOrderActivty">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_success_order"
+        android:layout_marginTop="@dimen/dimen_250dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Đơn hàng của bạn đã được gửi đi."
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:textSize="@dimen/dimen_20dp"
+        android:textColor="@color/color_44494D"
+        android:fontFamily="@font/sf_pro_text_regular"/>
+    <Button
+        android:id="@+id/btn_flow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/dimen_30dp"
+        android:background="@drawable/border_item_button_add"
+        android:text="Theo dõi đơn"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="@dimen/dimen_16dp"
+        app:backgroundTint="@null" />
+    <Button
+        android:id="@+id/btn_back_home"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:background="@drawable/border_item_button_cancel"
+        android:text="Trở về màn hình chính"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="@dimen/dimen_16dp"
+        app:backgroundTint="@null" />
+
+</LinearLayout>

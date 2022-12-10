@@ -8,6 +8,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <ImageView
+            android:id="@+id/img_product"
             android:layout_width="@dimen/dimen_60dp"
             android:layout_height="@dimen/dimen_60dp"
             android:src="@drawable/logo_tocotoco"/>
@@ -17,19 +18,37 @@
             android:layout_marginLeft="@dimen/dimen_8dp"
             android:orientation="vertical">
             <TextView
+                android:id="@+id/tv_name_product"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/text_size_18sp"
                 android:text="Mì trộn thập cẩm"
                 android:textColor="@color/dark_gray"
                 android:fontFamily="@font/fs_pf_beau_sans_pro_bold"/>
-            <TextView
+            <LinearLayout
+                android:layout_marginTop="@dimen/dimen_5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/text_size_18sp"
-                android:text="53.000đ"
-                android:textColor="@color/color_EE0033"
-                android:fontFamily="@font/sf_pro_regular"/>
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/tv_old_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_size_15sp"
+                    android:text="53.000đ"
+                    android:textColor="#c4c4c4"
+                    android:fontFamily="@font/sf_pro_regular"/>
+                <TextView
+                    android:id="@+id/tv_price"
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_size_15sp"
+                    android:text="53.000đ"
+                    android:textColor="@color/color_EE0033"
+                    android:fontFamily="@font/sf_pro_regular"/>
+            </LinearLayout>
+
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
@@ -51,6 +70,7 @@
             android:layout_marginRight="@dimen/dimen_5dp"
             android:textStyle="bold" />
         <TextView
+            android:id="@+id/tv_quantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="3"
@@ -58,6 +78,7 @@
             android:textSize="@dimen/text_size_16sp"
             android:layout_marginHorizontal="@dimen/dimen_5dp"/>
         <TextView
+            android:id="@+id/tv_add_quantity"
             android:layout_marginLeft="@dimen/dimen_5dp"
             android:layout_width="@dimen/dimen_30dp"
             android:layout_height="@dimen/dimen_30dp"

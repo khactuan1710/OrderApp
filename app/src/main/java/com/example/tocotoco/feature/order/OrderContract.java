@@ -1,6 +1,7 @@
 package com.example.tocotoco.feature.order;
 
 import com.example.tocotoco.feature.product_detail.ProductDetailContract;
+import com.example.tocotoco.model.CartInfoResult;
 import com.example.tocotoco.model.ProductResult;
 import com.example.tocotoco.model.ProductsSessionResult;
 import com.example.tocotoco.model.RegisterResult;
@@ -13,18 +14,30 @@ import com.gemvietnam.base.viper.interfaces.PresentView;
 
 import retrofit2.Response;
 
-public class OrderContract {
+public interface OrderContract {
     interface Interactor extends IInteractor<OrderContract.Presenter> {
         void itemsInShoppingSession(TCCCallback<ProductsSessionResult> callback, String token, int sessionId);
         void getUserInfo(TCCCallback<UserInfoResult> callback, String token);
+        void getCartInfo(TCCCallback<CartInfoResult> callback, String token, int sessionId);
+        void confirmOrder(TCCCallback<RegisterResult> callback, String token, int sessionId, String provider, String phoneNumber, String address, String note);
+        void addItemToShoppingSession(TCCCallback<RegisterResult> callback, String token, int sessionId, int productId, int quantity, String size);
+        void deleteItemInShoppingSession(TCCCallback<RegisterResult> callback, String token, int itemId,  int sessionId);
     }
 
     interface View extends PresentView<OrderContract.Presenter> {
         void initViewDetail(Response<ProductsSessionResult> data);
+        void getCartInfoSuccess(Response<CartInfoResult> data);
+        void getCartInfoFail();
+        void getUserInfoSuccess(Response<UserInfoResult> data);
+        void confirmOrderSuccess(Response<RegisterResult> data);
     }
 
     interface Presenter extends IPresenter<OrderContract.View, OrderContract.Interactor> {
-        void itemsInShoppingSession(String token, SessionIdResult.SessionId sessionId, boolean isUpdate);
+        void itemsInShoppingSession(String token, int sessionId);
         void getUserInfo(String token);
+        void getCartInfo(String token, int sessionId);
+        void confirmOrder(String token, int sessionId, String provider, String phoneNumber, String address, String note);
+        void addItemToShoppingSession(String token, int sessionId, int productId, int quantity, String size);
+        void deleteItemInShoppingSession(String token, int itemId,  int sessionId);
     }
 }

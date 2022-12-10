@@ -1,25 +1,85 @@
 package com.example.tocotoco.home.activityhome
 
+import android.content.Context
+import android.content.Intent
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.example.tocotoco.R
 import com.example.tocotoco.basekotlin.base.BaseActivity
 import com.example.tocotoco.basekotlin.base.BaseViewModel
 import com.example.tocotoco.basekotlin.extensions.viewBinding
 import com.example.tocotoco.databinding.ActivityHomeBinding
-import com.example.tocotoco.home.cartfragment.CartFragment
+import com.example.tocotoco.dialog.DialogUtils
+import com.example.tocotoco.feature.order.OrderActivity
 import com.example.tocotoco.home.favoritefragment.FavoriteFragment
 import com.example.tocotoco.home.homefragment.HomeFragment
 import com.example.tocotoco.home.notificationfragment.NotificationFragment
+import com.example.tocotoco.home.orderfragment.OrderListFragment
+import com.example.tocotoco.model.CartInfoResult
+import com.example.tocotoco.network.NetWorkController
+import com.example.tocotoco.network.TCCCallback
+import com.example.tocotoco.util.NetworkUtils
+import retrofit2.Call
+import retrofit2.Response
+import timber.log.Timber
 
 class HomeActivity : BaseActivity(R.layout.activity_home) {
     override val binding by viewBinding<ActivityHomeBinding>()
     override val viewModel: BaseViewModel
         get() = TODO("Not yet implemented")
 
+    private val sharedPref by lazy {
+        getSharedPreferences(
+            getString(R.string.preference_file_key), Context.MODE_PRIVATE
+        )
+    }
+
+    private val token by lazy {
+        sharedPref?.getString(getString(R.string.preference_key_token), "")
+    }
+
+    private val sessionId by lazy {
+        sharedPref.getInt(getString(R.string.session_id), 0)
+    }
 
     override fun setupViews() {
         setupBottomNav()
         getIntentId()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getCartList()
+        binding.imgCart.setOnClickListener {
+            val intent = Intent(this,OrderActivity::class.java)
+            intent.putExtra("tokenToOrder",token)
+            startActivity(intent)
+        }
+    }
+
+    private fun getCartList() = binding.run {
+        DialogUtils.showProgressDialog(this@HomeActivity)
+        if (NetworkUtils.isConnect(this@HomeActivity)) {
+            NetWorkController.getCartInfo(
+                object : TCCCallback<CartInfoResult>() {
+                    override fun onTCTCSuccess(
+                        call: Call<CartInfoResult>?,
+                        response: Response<CartInfoResult>?
+                    ) {
+                        val itemCart = response?.body()?.results?.totalCategory
+                        frameLayout.isVisible = !itemCart.equals("0",true) && itemCart != null
+                        imgCart.isVisible = !itemCart.equals("0",true)
+                        tvNumber.text = itemCart
+                        DialogUtils.dismissProgressDialog()
+                    }
+
+                    override fun onTCTCFailure(call: Call<CartInfoResult>?) {
+                        Timber.tag(call.toString())
+                        DialogUtils.dismissProgressDialog()
+                    }
+                }, token, sessionId
+            )
+        }
     }
 
     private fun getIntentId() = binding.run {
@@ -36,7 +96,7 @@ class HomeActivity : BaseActivity(R.layout.activity_home) {
             when (it.itemId) {
                 R.id.home -> replaceFragment(HomeFragment())
                 R.id.favorite -> replaceFragment(FavoriteFragment())
-                R.id.cart -> replaceFragment(CartFragment())
+                R.id.cart -> replaceFragment(OrderListFragment())
                 R.id.notification -> replaceFragment(NotificationFragment())
                 else -> {}
             }
