@@ -39,11 +39,12 @@ import retrofit2.Response;
 public class ActivityOrderDetail extends AppCompatActivity {
     private ActivityOrderDetailBinding binding;
     SharedPreferences sharedPref;
+    SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
     Locale locale = new Locale("vi", "VN");
     NumberFormat currencyFormat = NumberFormat.getNumberInstance(locale);
-    SimpleDateFormat format=new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
     private List<OrderItemDetailResult> list = new ArrayList<>();
     private OrderItemProductAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,6 +78,9 @@ public class ActivityOrderDetail extends AppCompatActivity {
                     return;
                 }
                 OrderDetail orderDetail = response.body();
+                Date date = new Date(orderDetail.getResult().getCreateat());
+                String ngay = format.format(date);
+                binding.tvTime.setText(ngay);
                 binding.tvAddress.setText(orderDetail.getResult().getAddress());
                 binding.btnOrderStatus.setText(orderDetail.getResult().getStatus());
                 binding.tvQuantity.setText("Tạm tính (" + orderDetail.getResult().getTotalProduct() + "món)");
