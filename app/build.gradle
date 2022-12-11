@@ -66,5 +66,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging-ktx:23.1.0'
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.17'
     implementation 'com.google.firebase:firebase-messaging-directboot:20.2.0'
+
+    implementation("com.squareup.okhttp3:okhttp:4.6.0")
+    implementation("commons-codec:commons-codec:1.14")
+    implementation files('../app/libs/zpdk_release_v3.1.aar')
 }
 apply plugin: 'com.google.gms.google-services'

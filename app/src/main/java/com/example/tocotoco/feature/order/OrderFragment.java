@@ -4,6 +4,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +22,7 @@ import com.example.tocotoco.feature.product_detail.ProductDetailFragment;
 import com.example.tocotoco.feature.registerAcc.RegisterAccountActivity;
 import com.example.tocotoco.home.activityhome.HomeActivity;
 import com.example.tocotoco.model.CartInfoResult;
+import com.example.tocotoco.model.CreateOrder;
 import com.example.tocotoco.model.ProductResult;
 import com.example.tocotoco.model.ProductSessionModel;
 import com.example.tocotoco.model.ProductsSessionResult;
@@ -29,11 +31,17 @@ import com.example.tocotoco.model.UserInfoResult;
 import com.example.tocotoco.util.EasyDialog;
 import com.gemvietnam.base.viper.ViewFragment;
 
+import org.json.JSONObject;
+
 import java.text.DecimalFormat;
 import java.util.List;
 
 import butterknife.BindView;
 import retrofit2.Response;
+import vn.zalopay.sdk.Environment;
+import vn.zalopay.sdk.ZaloPayError;
+import vn.zalopay.sdk.ZaloPaySDK;
+import vn.zalopay.sdk.listeners.PayOrderListener;
 
 public class OrderFragment extends ViewFragment<OrderContract.Presenter> implements OrderContract.View, View.OnClickListener, OrderAdapter.ChooseItemListener , EasyDialog.EnterListenerBack {
     @BindView(R.id.ic_back)
@@ -86,12 +94,50 @@ public class OrderFragment extends ViewFragment<OrderContract.Presenter> impleme
     }
 
     private void confirmOrder() {
-        String note = "";
-        if(!ed_note.getText().toString().isEmpty()) {
-            note = ed_note.getText().toString();
+
+//        Intent i = new Intent(getViewContext(), ConfirmSuccessOrderActivty.class);
+//        startActivity(i);
+//        getViewContext().finish();
+
+
+//        String note = "";
+//        if(!ed_note.getText().toString().isEmpty()) {
+//            note = ed_note.getText().toString();
+//        }
+//        mPresenter.confirmOrder(token, sessionId, "Tiền mặt", userData.body().getResults().getPhonenumber(), userData.body().getResults().getAddress(), note);
+
+        CreateOrder orderApi = new CreateOrder();
+
+        try {
+            JSONObject data = orderApi.createOrder("100000");
+            String code = data.getString("return_code");
+            String token = "";
+            if (code.equals("1")) {
+                token = data.getString("zp_trans_token");
+            }
+                ZaloPaySDK.getInstance().payOrder(getViewContext(), token, "demozpdk://app", new PayOrderListener() {
+                    @Override
+                    public void onPaymentSucceeded(String s, String s1, String s2) {
+                        Log.e("Log", "Log success");
+                    }
+
+                    @Override
+                    public void onPaymentCanceled(String s, String s1) {
+                        Log.e("Log", "Log");
+                    }
+
+                    @Override
+                    public void onPaymentError(ZaloPayError zaloPayError, String s, String s1) {
+                        Log.e("Log", "Log");
+                    }
+                });
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        mPresenter.confirmOrder(token, sessionId, "Tiền mặt", userData.body().getResults().getPhonenumber(), userData.body().getResults().getAddress(), note);
+
     }
+
 
     @Override
     public void initLayout() {
@@ -110,10 +156,20 @@ public class OrderFragment extends ViewFragment<OrderContract.Presenter> impleme
         address = sharedPref.getString(requireContext().getString(R.string.address), "");
         tv_address.setText(address);
         sessionId = sharedPref.getInt(requireContext().getString(R.string.session_id), 0);
-        mPresenter.getUserInfo(token);
+//        mPresenter.getUserInfo(token);
         mPresenter.itemsInShoppingSession(token, sessionId);
-        mPresenter.getUserInfo(token);
+//        mPresenter.getUserInfo(token);
         mPresenter.getCartInfo(token, sessionId);
+
+
+        //zalo
+        StrictMode.ThreadPolicy policy = new
+                StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        // ZaloPay SDK Init
+        ZaloPaySDK.init(2553, Environment.SANDBOX);
+
     }
 
     @Override
@@ -179,4 +235,6 @@ public class OrderFragment extends ViewFragment<OrderContract.Presenter> impleme
     public void onClose() {
         getViewContext().finish();
     }
+
+
 }
