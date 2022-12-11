@@ -10,6 +10,7 @@ import com.example.tocotoco.basekotlin.base.BaseViewModel
 import com.example.tocotoco.basekotlin.extensions.viewBinding
 import com.example.tocotoco.databinding.FragmentOrderListBinding
 import com.example.tocotoco.dialog.DialogUtils
+import com.example.tocotoco.feature.login.LoginActivity
 import com.example.tocotoco.feature.product_detail.ProductDetailActivity
 import com.example.tocotoco.model.UserOrderResult
 import com.example.tocotoco.network.NetWorkController
@@ -42,6 +43,15 @@ class OrderListFragment : BaseFragment(R.layout.fragment_order_list) {
     override fun setupViews() {
         setupRecyclerView()
         getOrderList()
+        setupListener()
+    }
+
+    private fun setupListener() = binding.run {
+        btnLogin.setOnClickListener {
+            val intent = Intent(requireContext(), LoginActivity::class.java)
+            intent.putExtra("fromFavorite", true)
+            startActivity(intent)
+        }
     }
 
     private fun getOrderList() = binding.run {

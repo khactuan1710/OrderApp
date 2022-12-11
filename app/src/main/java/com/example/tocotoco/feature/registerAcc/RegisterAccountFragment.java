@@ -32,6 +32,8 @@ public class RegisterAccountFragment extends ViewFragment<RegisterAccountContrac
     TextInputEditText ed_phone_number;
     @BindView(R.id.ed_username)
     TextInputEditText ed_username;
+    @BindView(R.id.ed_email)
+    TextInputEditText ed_email;
     @BindView(R.id.ed_pass)
     TextInputEditText ed_pass;
     @BindView(R.id.ed_repass)
@@ -46,6 +48,8 @@ public class RegisterAccountFragment extends ViewFragment<RegisterAccountContrac
     TextInputLayout lo_pass;
     @BindView(R.id.lo_repass)
     TextInputLayout lo_repass;
+    @BindView(R.id.lo_email)
+    TextInputLayout lo_email;
 
     public static RegisterAccountFragment getInstance() {
         return new RegisterAccountFragment();
@@ -86,12 +90,17 @@ public class RegisterAccountFragment extends ViewFragment<RegisterAccountContrac
                 String username = ed_username.getText().toString();
                 String pass = ed_pass.getText().toString();
                 String rePass = ed_repass.getText().toString();
+                String email = ed_email.getText().toString();
                 if(name.equals("")) {
                     lo_name.setError("Tên không được trống!");
                     return;
                 }
                 if(phoneNumber.equals("")) {
                     lo_phone_number.setError("Số điện thoại không được trống!");
+                    return;
+                }
+                if(email.equals("")) {
+                    lo_phone_number.setError("Email không được trống!");
                     return;
                 }
                 if(username.equals("")) {
@@ -110,9 +119,8 @@ public class RegisterAccountFragment extends ViewFragment<RegisterAccountContrac
                     lo_repass.setError("Mật khẩu xác nhận không đúng!");
                     return;
                 }
-                mPresenter.registerAcc(name, username, pass, "", phoneNumber);
+                mPresenter.registerAcc(name, username, pass, email, phoneNumber);
                 break;
-
         }
     }
 }

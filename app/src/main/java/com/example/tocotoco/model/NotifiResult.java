@@ -2,9 +2,11 @@ package com.example.tocotoco.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class NotifiResult extends SimpleResult{
     @SerializedName("result")
-    private NotifiModel result;
+    private List<NotifiModel> result;
     public class NotifiModel {
         @SerializedName("id")
         int id;
@@ -58,11 +60,11 @@ public class NotifiResult extends SimpleResult{
         }
     }
 
-    public NotifiModel getResult() {
+    public List<NotifiModel> getResult() {
         return result;
     }
 
-    public void setResult(NotifiModel result) {
+    public void setResult(List<NotifiModel> result) {
         this.result = result;
     }
 }
