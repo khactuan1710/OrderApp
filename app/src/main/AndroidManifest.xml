@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -18,6 +19,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Tocotoco"
         tools:targetApi="31">
+        <activity
+            android:name=".feature.changinfo.ChangeInfoActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".feature.order.ConfirmSuccessOrderActivty"
             android:exported="false">
@@ -54,22 +62,26 @@
             android:name=".feature.order.OrderActivity"
             android:exported="true"
             android:launchMode="singleTask">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-<!--            <meta-data-->
-<!--                android:name="android.app.lib_name"-->
-<!--                android:value="" />-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+            <!-- <meta-data -->
+            <!-- android:name="android.app.lib_name" -->
+            <!-- android:value="" /> -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="demozpdk"
-                    android:host="app" />
-            </intent-filter>
 
+                <data
+                    android:host="app"
+                    android:scheme="demozpdk" />
+            </intent-filter>
         </activity>
         <!--
      Set custom default icon. This is used when no icon is set for incoming notification messages.
@@ -101,7 +113,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
 
             <meta-data
                 android:name="android.app.lib_name"

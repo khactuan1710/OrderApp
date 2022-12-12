@@ -24,10 +24,13 @@ import com.example.tocotoco.feature.login.LoginFragment;
 import com.example.tocotoco.feature.order.OrderActivity;
 import com.example.tocotoco.home.activityhome.HomeActivity;
 import com.example.tocotoco.model.LoginResult;
+import com.example.tocotoco.model.PhuongResult;
 import com.example.tocotoco.model.ProductResult;
 import com.example.tocotoco.model.ProductSessionModel;
 import com.example.tocotoco.model.ProductsSessionResult;
+import com.example.tocotoco.model.QuanResult;
 import com.example.tocotoco.model.SessionIdResult;
+import com.example.tocotoco.network.AddressPublicAPI;
 import com.example.tocotoco.room.TokenDevice;
 import com.example.tocotoco.room.TokenDeviceDatabase;
 import com.gemvietnam.base.viper.ViewFragment;
@@ -36,6 +39,8 @@ import java.text.DecimalFormat;
 import java.util.List;
 
 import butterknife.BindView;
+import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ProductDetailFragment extends ViewFragment<ProductDetailContract.Presenter> implements ProductDetailContract.View, View.OnClickListener{

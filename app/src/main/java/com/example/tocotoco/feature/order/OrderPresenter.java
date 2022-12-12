@@ -1,5 +1,7 @@
 package com.example.tocotoco.feature.order;
 
+import android.widget.Toast;
+
 import com.example.tocotoco.dialog.DialogUtils;
 import com.example.tocotoco.feature.product_detail.ProductDetailContract;
 import com.example.tocotoco.feature.product_detail.ProductDetailFragment;
@@ -104,6 +106,8 @@ public class OrderPresenter extends Presenter<OrderContract.View, OrderContract.
                 DialogUtils.dismissProgressDialog();
                 if(response.body().getIsSuccess()) {
                     mView.confirmOrderSuccess(response);
+                }else {
+                    Toast.makeText(getViewContext(), response.body().getErrorMessage(), Toast.LENGTH_LONG).show();
                 }
             }
 

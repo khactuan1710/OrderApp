@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.appcompat.widget.AppCompatImageView;
@@ -17,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tocotoco.R;
+import com.example.tocotoco.feature.changinfo.ChangeInfoActivity;
 import com.example.tocotoco.feature.product_detail.ProductDetailContract;
 import com.example.tocotoco.feature.product_detail.ProductDetailFragment;
 import com.example.tocotoco.feature.registerAcc.RegisterAccountActivity;
@@ -46,6 +49,8 @@ import vn.zalopay.sdk.listeners.PayOrderListener;
 public class OrderFragment extends ViewFragment<OrderContract.Presenter> implements OrderContract.View, View.OnClickListener, OrderAdapter.ChooseItemListener , EasyDialog.EnterListenerBack {
     @BindView(R.id.ic_back)
     ImageView ic_back;
+    @BindView(R.id.img_change_info)
+    ImageView img_change_info;
     @BindView(R.id.rcv_order)
     RecyclerView rcv_order;
     SharedPreferences sharedPref;
@@ -67,10 +72,24 @@ public class OrderFragment extends ViewFragment<OrderContract.Presenter> impleme
     EditText ed_note;
     @BindView(R.id.imgClearText)
     AppCompatImageView imgClearText;
+    @BindView(R.id.radioGroup)
+    RadioGroup radioGroup;
+    @BindView(R.id.radio_cash)
+    RadioButton radio_cash;
+    @BindView(R.id.radio_zalo_pay)
+    RadioButton radio_zalo_pay;
     String address;
     private int sessionId;
     private Intent intent;
     private String token;
+    private String methodPay = "Tiền mặt";
+
+    String totalPay = "10000";
+    private String nameFromChangeInfo = "";
+    private String phoneFromChangeInfo = "";
+    private String addressFromChangeInfo = "";
+
+
     Response<UserInfoResult> userData;
     OrderAdapter orderAdapter;
     List<ProductSessionModel> list;
@@ -90,52 +109,57 @@ public class OrderFragment extends ViewFragment<OrderContract.Presenter> impleme
             case R.id.imgClearText:
                 ed_note.setText("");
                 break;
+            case R.id.img_change_info:
+                Intent i = new Intent(getViewContext(), ChangeInfoActivity.class);
+                i.putExtra("nameFromOrderFragment", tv_name.getText().toString());
+                i.putExtra("phoneFromOrderFragment", tv_phone.getText().toString());
+                startActivity(i);
+                getViewContext().finish();
+                break;
         }
     }
 
     private void confirmOrder() {
-
-//        Intent i = new Intent(getViewContext(), ConfirmSuccessOrderActivty.class);
-//        startActivity(i);
-//        getViewContext().finish();
-
-
-//        String note = "";
-//        if(!ed_note.getText().toString().isEmpty()) {
-//            note = ed_note.getText().toString();
-//        }
-//        mPresenter.confirmOrder(token, sessionId, "Tiền mặt", userData.body().getResults().getPhonenumber(), userData.body().getResults().getAddress(), note);
-
-        CreateOrder orderApi = new CreateOrder();
-
-        try {
-            JSONObject data = orderApi.createOrder("100000");
-            String code = data.getString("return_code");
-            String token = "";
-            if (code.equals("1")) {
-                token = data.getString("zp_trans_token");
-            }
-                ZaloPaySDK.getInstance().payOrder(getViewContext(), token, "demozpdk://app", new PayOrderListener() {
+        String note = "";
+        if(!ed_note.getText().toString().isEmpty()) {
+            note = ed_note.getText().toString();
+        }
+        if(methodPay.equals("Tiền mặt")) {
+            mPresenter.confirmOrder(token, sessionId, methodPay, userData.body().getResults().getPhonenumber(), userData.body().getResults().getAddress(), note);
+        }else {
+            CreateOrder orderApi = new CreateOrder();
+            try {
+                JSONObject data = orderApi.createOrder(totalPay);
+                String code = data.getString("return_code");
+                String tokenZalo = "";
+                if (code.equals("1")) {
+                    tokenZalo = data.getString("zp_trans_token");
+                }
+                ZaloPaySDK.getInstance().payOrder(getViewContext(), tokenZalo, "demozpdk://app", new PayOrderListener() {
                     @Override
                     public void onPaymentSucceeded(String s, String s1, String s2) {
-                        Log.e("Log", "Log success");
+                        String noteZ = "";
+                        if(!ed_note.getText().toString().isEmpty()) {
+                            noteZ = ed_note.getText().toString();
+                        }
+                        mPresenter.confirmOrder(token, sessionId, methodPay, userData.body().getResults().getPhonenumber(), userData.body().getResults().getAddress(), noteZ);
                     }
 
                     @Override
                     public void onPaymentCanceled(String s, String s1) {
-                        Log.e("Log", "Log");
+                        Log.e("Log", "Log cancel");
                     }
 
                     @Override
                     public void onPaymentError(ZaloPayError zaloPayError, String s, String s1) {
-                        Log.e("Log", "Log");
+                        Log.e("Log", "Log err zalo");
                     }
                 });
 
-        } catch (Exception e) {
-            e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-
     }
 
 
@@ -148,17 +172,29 @@ public class OrderFragment extends ViewFragment<OrderContract.Presenter> impleme
     private void setListener() {
        ic_back.setOnClickListener(this);
         btn_confirm.setOnClickListener(this);
+        img_change_info.setOnClickListener(this);
     }
     private void initData() {
         intent = getActivity().getIntent();
-        token = intent.getStringExtra("tokenToOrder");
+
+
+        nameFromChangeInfo = intent.getStringExtra("nameFromOrderChangeInfo");
+        phoneFromChangeInfo = intent.getStringExtra("phoneFromOrderChangeInfo");
+        addressFromChangeInfo = intent.getStringExtra("addressFromOrderChangeInfo");
+
+
         sharedPref = getViewContext().getSharedPreferences(requireContext().getString(R.string.preference_file_key), MODE_PRIVATE);
         address = sharedPref.getString(requireContext().getString(R.string.address), "");
-        tv_address.setText(address);
+        token = sharedPref.getString(this.getString(R.string.preference_key_token), "");
+        if(addressFromChangeInfo != null) {
+            tv_address.setText(addressFromChangeInfo);
+        }else {
+            tv_address.setText(address);
+        }
         sessionId = sharedPref.getInt(requireContext().getString(R.string.session_id), 0);
 //        mPresenter.getUserInfo(token);
         mPresenter.itemsInShoppingSession(token, sessionId);
-//        mPresenter.getUserInfo(token);
+        mPresenter.getUserInfo(token);
         mPresenter.getCartInfo(token, sessionId);
 
 
@@ -170,6 +206,16 @@ public class OrderFragment extends ViewFragment<OrderContract.Presenter> impleme
         // ZaloPay SDK Init
         ZaloPaySDK.init(2553, Environment.SANDBOX);
 
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                if(i == R.id.radio_cash) {
+                    methodPay = "Tiền mặt";
+                }else if (i == R.id.radio_zalo_pay) {
+                    methodPay = "Zalo Pay";
+                }
+            }
+        });
     }
 
     @Override
@@ -188,6 +234,7 @@ public class OrderFragment extends ViewFragment<OrderContract.Presenter> impleme
     @Override
     public void getCartInfoSuccess(Response<CartInfoResult> data) {
         if(data.body().getResults().getPriceAfterDiscount() != null) {
+            totalPay = data.body().getResults().getPriceAfterDiscount();
             tv_total_money.setText(formatter.format(Integer.parseInt(data.body().getResults().getPriceAfterDiscount()))  + "đ");
             tv_total_sub_money.setText(formatter.format(Integer.parseInt(data.body().getResults().getPriceAfterDiscount()))  + "đ");
         }
@@ -206,8 +253,13 @@ public class OrderFragment extends ViewFragment<OrderContract.Presenter> impleme
     @Override
     public void getUserInfoSuccess(Response<UserInfoResult> data) {
         userData =data;
-        tv_name.setText(data.body().getResults().getName());
-        tv_phone.setText(data.body().getResults().getPhonenumber());
+        if(nameFromChangeInfo != null) {
+            tv_name.setText(nameFromChangeInfo);
+            tv_phone.setText(phoneFromChangeInfo);
+        }else {
+            tv_name.setText(data.body().getResults().getName());
+            tv_phone.setText(data.body().getResults().getPhonenumber());
+        }
     }
 
     @Override
