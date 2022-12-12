@@ -51,8 +51,8 @@ class HomeActivity : BaseActivity(R.layout.activity_home) {
         super.onResume()
         getCartList()
         binding.imgCart.setOnClickListener {
-            val intent = Intent(this,OrderActivity::class.java)
-            intent.putExtra("tokenToOrder",token)
+            val intent = Intent(this, OrderActivity::class.java)
+            intent.putExtra("tokenToOrder", token)
             startActivity(intent)
         }
     }
@@ -67,8 +67,8 @@ class HomeActivity : BaseActivity(R.layout.activity_home) {
                         response: Response<CartInfoResult>?
                     ) {
                         val itemCart = response?.body()?.results?.totalCategory
-                        frameLayout.isVisible = !itemCart.equals("0",true) && itemCart != null
-                        imgCart.isVisible = !itemCart.equals("0",true)
+                        frameLayout.isVisible = !itemCart.equals("0", true) && itemCart != null
+                        imgCart.isVisible = !itemCart.equals("0", true)
                         tvNumber.text = itemCart
                         DialogUtils.dismissProgressDialog()
                     }
@@ -84,11 +84,16 @@ class HomeActivity : BaseActivity(R.layout.activity_home) {
 
     private fun getIntentId() = binding.run {
         val intent = intent
-        if (intent != null && intent.getBooleanExtra("goToFavorite", false)) {
-            bottomNav.selectedItemId = R.id.favorite
-        } else {
-            replaceFragment(HomeFragment())
+        intent?.let {
+            if (it.getBooleanExtra("goToFavorite", false)) {
+                bottomNav.selectedItemId = R.id.favorite
+            } else if (it.getBooleanExtra("goToOrder", false)) {
+                bottomNav.selectedItemId = R.id.cart
+            } else {
+                replaceFragment(HomeFragment())
+            }
         }
+
     }
 
     private fun setupBottomNav() = binding.run {

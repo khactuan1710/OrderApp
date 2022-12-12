@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.tocotoco.R
 import com.example.tocotoco.basekotlin.extensions.decimalFormatted
 import com.example.tocotoco.databinding.ItemOrderListBinding
 import com.example.tocotoco.model.UserOrderResult.UserOrderModel
@@ -55,6 +57,13 @@ class OrderListAdapter(
             tvStatus.text = item.status
             tvSoMon.text = "(${item.totalProduct} món) - ${item.provider}"
             tvDate.text = item.createat
+            Glide
+                .with(root.context)
+                .load(item.displayImage)
+                .centerCrop()
+                .placeholder(R.drawable.img_tea)
+                .dontAnimate()
+                .into(appCompatImageView6)
         }
     }
 }
