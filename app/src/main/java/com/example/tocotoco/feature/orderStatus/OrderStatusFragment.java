@@ -74,7 +74,7 @@ public class OrderStatusFragment extends ViewFragment<OrderStatusContract.Presen
     TextView tv_quan;
     private String token;
     private Intent intent;
-    boolean isShipping;
+    int isShipping;
     SharedPreferences sharedPref;
     ItemsOrderAdapter itemsOrderAdapter;
     List<ProductsResult.ProductsResultModel> list;
@@ -98,14 +98,18 @@ public class OrderStatusFragment extends ViewFragment<OrderStatusContract.Presen
 
     private void initData() {
         intent = getViewContext().getIntent();
-        isShipping = intent.getBooleanExtra("shipping", false);
+        isShipping = intent.getIntExtra("shipping", 0);
+        if(isShipping == 1) {
+            mPresenter.shipping("Đơn hàng của bạn đã được xác nhận");
+        }else if (isShipping == 2) {
+            mPresenter.finishOrder("Đơn hàng của bạn đã giao xong");
+        }
 
         sharedPref = getViewContext().getSharedPreferences(requireContext().getString(R.string.preference_file_key), MODE_PRIVATE);
         token = sharedPref.getString(requireContext().getString(R.string.preference_key_token), "");
         mPresenter.getUserCurrentOrder(token);
         tv_start_price.setPaintFlags(tv_start_price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
     }
-
     @Override
     public void onClick(View view) {
         switch (view.getId()) {

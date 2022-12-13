@@ -82,7 +82,7 @@
                 android:paddingHorizontal="@dimen/dimen_8dp"
                 android:background="@drawable/custom_buttom"
                 android:textSize="@dimen/dimen_16dp"
-                android:text="Chờ xác nhận"/>
+                android:text="Đang chuẩn bị"/>
             <TextView
                 android:id="@+id/tv_status_2"
                 android:layout_marginHorizontal="@dimen/dimen_16dp"

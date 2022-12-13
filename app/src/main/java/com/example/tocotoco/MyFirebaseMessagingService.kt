@@ -68,9 +68,12 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         var intent: Intent? = null
         if(mess.equals("Đơn hàng của bạn đã được xác nhận")) {
              intent = Intent(this, OrderStatusActivity::class.java)
-             intent.putExtra("shipping", true)
+             intent.putExtra("shipping", 1)
+        }else if(mess.equals("Đơn hàng của bạn đã giao xong")){
+            intent = Intent(this, OrderStatusActivity::class.java)
+            intent.putExtra("shipping", 2)
         }else {
-             intent = Intent(this, HomeActivity::class.java)
+            intent = Intent(this, OrderStatusActivity::class.java)
         }
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
 
