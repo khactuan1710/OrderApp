@@ -82,6 +82,13 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".home.search.SearchActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".feature.account.IntroduceActivity"
             android:exported="false">
             <meta-data

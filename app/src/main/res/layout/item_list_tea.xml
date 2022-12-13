@@ -43,27 +43,6 @@
             app:layout_constraintTop_toBottomOf="@+id/imgProduct"
             tools:text="Sữa chua mận hạt sen" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/appCompatImageView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/dimen_8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_star" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/appCompatTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dimen_4dp"
-            android:textColor="@color/light_green"
-            android:textSize="@dimen/text_size_10sp"
-            app:layout_constraintBottom_toBottomOf="@+id/appCompatImageView2"
-            app:layout_constraintStart_toEndOf="@+id/appCompatImageView2"
-            app:layout_constraintTop_toTopOf="@+id/appCompatImageView2"
-            tools:text="4.9" />
-
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvPrice"
             android:layout_width="wrap_content"
