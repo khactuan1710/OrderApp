@@ -227,12 +227,13 @@
                         android:id="@+id/ed_note"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="0dp"
                         android:layout_toLeftOf="@id/imgClearText"
                         android:background="@color/transparent"
                         android:hint="Nhập ghi chú"
                         android:maxLength="2000"
-                        android:textColorHint="#b5b4b4"
                         android:textColor="@color/color_44494D"
+                        android:textColorHint="#b5b4b4"
                         android:textSize="@dimen/dimen_14sp" />
 
                     <androidx.appcompat.widget.AppCompatImageView

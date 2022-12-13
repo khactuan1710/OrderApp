@@ -90,7 +90,6 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
 
     private fun setupClickListener() = binding.run {
         imgAccount.setOnClickListener {
-
             if (token.isNullOrEmpty()) {
                 startActivity(Intent(requireActivity(), LoginActivity::class.java))
             } else {

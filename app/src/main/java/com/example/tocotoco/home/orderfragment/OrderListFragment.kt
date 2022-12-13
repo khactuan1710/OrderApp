@@ -12,6 +12,7 @@ import com.example.tocotoco.databinding.FragmentOrderListBinding
 import com.example.tocotoco.dialog.DialogUtils
 import com.example.tocotoco.feature.login.LoginActivity
 import com.example.tocotoco.feature.product_detail.ProductDetailActivity
+import com.example.tocotoco.home.orderdetail.ActivityOrderDetail
 import com.example.tocotoco.model.UserOrderResult
 import com.example.tocotoco.network.NetWorkController
 import com.example.tocotoco.network.TCCCallback
@@ -34,7 +35,7 @@ class OrderListFragment : BaseFragment(R.layout.fragment_order_list) {
 
     private val listOrderAdapter by lazy(LazyThreadSafetyMode.NONE) {
         OrderListAdapter(onItemClick = {
-            val intent = Intent(requireActivity(), ProductDetailActivity::class.java)
+            val intent = Intent(requireActivity(), ActivityOrderDetail::class.java)
             intent.putExtra("idProduct", it)
             startActivity(intent)
         })
