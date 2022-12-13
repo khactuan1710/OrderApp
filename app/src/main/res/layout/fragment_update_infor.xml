@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".feature.account.UpdateInforActivity">
+    tools:context=".feature.account.activity.UpdateInforFragment">
 
       <LinearLayout
           android:id="@+id/linearLayout"
@@ -45,32 +45,25 @@
           </RelativeLayout>
 
       </LinearLayout>
-      <LinearLayout
-          android:id="@+id/linearLayout2"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginTop="110dp"
-          android:background="@drawable/infor_bg"
-          android:gravity="center"
-          android:orientation="vertical"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintHorizontal_bias="0.498"
-          app:layout_constraintStart_toStartOf="@+id/linearLayout"
-          app:layout_constraintTop_toTopOf="@+id/linearLayout">
 
-          <RelativeLayout
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:background="@drawable/bg_infor">
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/linearLayout2"
+        android:layout_width="@dimen/dimen_150dp"
+        android:layout_height="@dimen/dimen_150dp"
+        android:layout_marginTop="116dp"
+        android:background="@drawable/bg_img_account"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:text="?"
+        android:textSize="80sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout" />
 
-              <ImageView
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:layout_centerInParent="true"
-                  android:src="@drawable/you_infor" />
-          </RelativeLayout>
-      </LinearLayout>
-      <View
+    <View
           android:id="@+id/view"
           android:layout_width="@dimen/dimen_200dp"
           android:layout_height="@dimen/dimen_5dp"
@@ -103,7 +96,7 @@
                   android:id="@+id/icon1"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:background="@drawable/boder_red">
+                  android:background="@drawable/boder_orange">
 
                   <ImageView
                       android:layout_width="wrap_content"
@@ -146,7 +139,7 @@
                   android:id="@+id/icon4"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:background="@drawable/boder_red">
+                  android:background="@drawable/boder_orange">
 
                   <ImageView
                       android:layout_width="wrap_content"
@@ -189,7 +182,7 @@
                   android:id="@+id/icon2"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:background="@drawable/boder_red">
+                  android:background="@drawable/boder_orange">
 
                   <ImageView
                       android:layout_width="wrap_content"
@@ -231,7 +224,7 @@
                   android:id="@+id/icon5"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:background="@drawable/boder_red">
+                  android:background="@drawable/boder_orange">
 
                   <ImageView
                       android:layout_width="wrap_content"

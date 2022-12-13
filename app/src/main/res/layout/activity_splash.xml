@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#C1BFBF"
     android:orientation="vertical"
-    tools:context=".feature.account.SplashActivity">
+    tools:context=".SplashActivity">
 
     <TextView
         android:textColor="@color/black"
