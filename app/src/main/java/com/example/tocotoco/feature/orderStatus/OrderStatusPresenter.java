@@ -5,6 +5,7 @@ import com.example.tocotoco.feature.registerAcc.RegisterAccountContract;
 import com.example.tocotoco.feature.registerAcc.RegisterAccountFragment;
 import com.example.tocotoco.feature.registerAcc.RegisterAccountInteractor;
 import com.example.tocotoco.model.ProductsResult;
+import com.example.tocotoco.model.RegisterResult;
 import com.example.tocotoco.model.UserCurrentResult;
 import com.example.tocotoco.network.TCCCallback;
 import com.gemvietnam.base.viper.Presenter;
@@ -76,5 +77,22 @@ public class OrderStatusPresenter extends Presenter<OrderStatusContract.View, Or
     @Override
     public void finishOrder(String finishOrder) {
         mView.finishOrder(finishOrder);
+    }
+
+    @Override
+    public void userCancelOrder(String token, int orderId) {
+        DialogUtils.showProgressDialog(getViewContext());
+        mInteractor.userCancelOrder(new TCCCallback<RegisterResult>() {
+            @Override
+            public void onTCTCSuccess(Call<RegisterResult> call, Response<RegisterResult> response) {
+                DialogUtils.dismissProgressDialog();
+                mView.cancelOrderSuccess();
+            }
+
+            @Override
+            public void onTCTCFailure(Call<RegisterResult> call) {
+                DialogUtils.dismissProgressDialog();
+            }
+        }, token, orderId);
     }
 }

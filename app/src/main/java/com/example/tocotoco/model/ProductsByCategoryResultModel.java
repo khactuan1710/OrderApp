@@ -9,6 +9,8 @@ public class ProductsByCategoryResultModel {
     String name;
     @SerializedName("description")
     String description;
+    @SerializedName("productDescription")
+    String productDescription;
     @SerializedName("categoryid")
     int categoryid;
     @SerializedName("quantity")
@@ -50,6 +52,14 @@ public class ProductsByCategoryResultModel {
 
     public String getDescription() {
         return description;
+    }
+
+    public String getProductDescription() {
+        return productDescription;
+    }
+
+    public void setProductDescription(String productDescription) {
+        this.productDescription = productDescription;
     }
 
     public void setDescription(String description) {

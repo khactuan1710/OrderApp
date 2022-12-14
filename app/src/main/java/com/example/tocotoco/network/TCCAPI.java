@@ -125,6 +125,11 @@ public interface TCCAPI {
     Call<ProductsResult> getItemsInOrder(@Field("token") String token,
                                             @Field("orderId") int orderId);
 
+    @FormUrlEncoded
+    @POST("order/cancel_order")
+    Call<RegisterResult> userCancelOrder(@Field("token") String token,
+                                         @Field("orderId") int orderId);
+
     //lấy thông báo khuyến mại
     @FormUrlEncoded
     @POST("notification/promote")

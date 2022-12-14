@@ -116,6 +116,11 @@ public class NetWorkController {
         call.enqueue(callback);
     }
 
+    public static void userCancelOrder(TCCCallback<RegisterResult> callback, String token, int orderId) {
+        Call<RegisterResult> call = getAPIBuilder().userCancelOrder(token, orderId);
+        call.enqueue(callback);
+    }
+
     public static void getPromoteNotifications(TCCCallback<NotifiResult> callback) {
         Call<NotifiResult> call = getAPIBuilder().getPromoteNotifications("");
         call.enqueue(callback);

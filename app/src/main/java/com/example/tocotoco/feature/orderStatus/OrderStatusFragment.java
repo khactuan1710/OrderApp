@@ -3,8 +3,10 @@ package com.example.tocotoco.feature.orderStatus;
 import static android.content.Context.MODE_PRIVATE;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
@@ -28,6 +30,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.tocotoco.MyFirebaseMessagingService;
 import com.example.tocotoco.R;
 import com.example.tocotoco.dialog.DialogUtils;
+import com.example.tocotoco.feature.account.AccountActivity;
 import com.example.tocotoco.feature.order.ConfirmSuccessOrderActivty;
 import com.example.tocotoco.feature.order.OrderAdapter;
 import com.example.tocotoco.feature.registerAcc.RegisterAccountContract;
@@ -37,6 +40,7 @@ import com.example.tocotoco.model.ProductSessionModel;
 import com.example.tocotoco.model.ProductsResult;
 import com.example.tocotoco.model.RegisterResult;
 import com.example.tocotoco.model.UserCurrentResult;
+import com.example.tocotoco.util.EasyDialog;
 import com.example.tocotoco.util.TypefaceNew;
 import com.gemvietnam.base.viper.ViewFragment;
 
@@ -47,7 +51,7 @@ import butterknife.BindView;
 import pl.droidsonroids.gif.GifImageView;
 import retrofit2.Response;
 
-public class OrderStatusFragment extends ViewFragment<OrderStatusContract.Presenter> implements OrderStatusContract.View, View.OnClickListener{
+public class OrderStatusFragment extends ViewFragment<OrderStatusContract.Presenter> implements OrderStatusContract.View, View.OnClickListener,  EasyDialog.EnterListenerBack{
     @BindView(R.id.tv_start_price)
     TextView tv_start_price;
     @BindView(R.id.tv_end_price)
@@ -75,6 +79,7 @@ public class OrderStatusFragment extends ViewFragment<OrderStatusContract.Presen
     private String token;
     private Intent intent;
     int isShipping;
+    int orderId;
     SharedPreferences sharedPref;
     ItemsOrderAdapter itemsOrderAdapter;
     List<ProductsResult.ProductsResultModel> list;
@@ -94,6 +99,7 @@ public class OrderStatusFragment extends ViewFragment<OrderStatusContract.Presen
     private void setListener() {
         btn_confirm.setOnClickListener(this);
         btn_go_home.setOnClickListener(this);
+        btn_destroy.setOnClickListener(this);
     }
 
     private void initData() {
@@ -110,6 +116,9 @@ public class OrderStatusFragment extends ViewFragment<OrderStatusContract.Presen
         mPresenter.getUserCurrentOrder(token);
         tv_start_price.setPaintFlags(tv_start_price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
     }
+    private void cancelOrder() {
+        mPresenter.userCancelOrder(token, orderId);
+    }
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -125,6 +134,25 @@ public class OrderStatusFragment extends ViewFragment<OrderStatusContract.Presen
                 Intent i = new Intent(getViewContext(), HomeActivity.class);
                 startActivity(i);
                 getViewContext().finish();
+                break;
+            case R.id.btn_destroy:
+                AlertDialog.Builder alert  = new AlertDialog.Builder(getViewContext());
+                alert.setTitle("Xác nhận huỷ");
+                alert.setMessage("Bạn chắc chắn huỷ đơn hàng?");
+                alert.setPositiveButton("Hủy", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        cancelOrder();
+                    }
+                });
+                alert.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+                alert.create().show();
+                break;
         }
     }
 
@@ -137,6 +165,7 @@ public class OrderStatusFragment extends ViewFragment<OrderStatusContract.Presen
     public void getUserCurrentOrderSuccess(UserCurrentResult userCurrentResult) {
         tv_end_price.setText(formatter.format(Integer.parseInt(userCurrentResult.getResults().getTotal())) + "đ");
         mPresenter.getItemsInOrder(token, userCurrentResult.getResults().getOrderId());
+        orderId = userCurrentResult.getResults().getOrderId();
     }
 
 
@@ -199,5 +228,16 @@ public class OrderStatusFragment extends ViewFragment<OrderStatusContract.Presen
                 DialogUtils.dismissProgressDialog();
             }
         }, 300);
+    }
+
+    @Override
+    public void cancelOrderSuccess() {
+        EasyDialog easyDialog = new EasyDialog(getViewContext(), this, "Huỷ đơn hàng thành công");
+        easyDialog.show(getFragmentManager(), "");
+    }
+
+    @Override
+    public void onClose() {
+        getViewContext().finish();
     }
 }

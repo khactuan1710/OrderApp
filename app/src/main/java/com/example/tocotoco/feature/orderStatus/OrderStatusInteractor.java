@@ -2,6 +2,7 @@ package com.example.tocotoco.feature.orderStatus;
 
 import com.example.tocotoco.feature.registerAcc.RegisterAccountContract;
 import com.example.tocotoco.model.ProductsResult;
+import com.example.tocotoco.model.RegisterResult;
 import com.example.tocotoco.model.UserCurrentResult;
 import com.example.tocotoco.network.NetWorkController;
 import com.example.tocotoco.network.TCCCallback;
@@ -22,5 +23,10 @@ public class OrderStatusInteractor extends Interactor<OrderStatusContract.Presen
     @Override
     public void getItemsInOrder(TCCCallback<ProductsResult> callback, String token, int orderId) {
         NetWorkController.getItemsInOrder(callback, token, orderId);
+    }
+
+    @Override
+    public void userCancelOrder(TCCCallback<RegisterResult> callback, String token, int orderId) {
+        NetWorkController.userCancelOrder(callback, token, orderId);
     }
 }

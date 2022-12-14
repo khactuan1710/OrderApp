@@ -246,7 +246,7 @@ public class ProductDetailFragment extends ViewFragment<ProductDetailContract.Pr
             tv_show_price_old.setText(formatter.format(Integer.parseInt(data.body().getResults().getPrice())) + "đ");
             tv_show_price.setText(formatter.format(Integer.parseInt(data.body().getResults().getPrice())) + "đ");
             priceOneItem = Integer.parseInt(data.body().getResults().getPrice());
-            mo_ta_sp.setText(data.body().getResults().getDescription());
+            mo_ta_sp.setText(data.body().getResults().getProductDescription());
             tv_name_product.setText(data.body().getResults().getName());
             RequestOptions options = new RequestOptions()
                     .centerCrop()

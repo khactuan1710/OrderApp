@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -37,14 +38,22 @@ import retrofit2.Response;
 public class EasyDialog extends DialogFragment {
     Activity mActivity;
     EnterListenerBack listener;
+    String content = "";
     public EasyDialog (Activity activity, EnterListenerBack listener) {
         this.mActivity = activity;
         this.listener = listener;
+    }
+    public EasyDialog (Activity activity, EnterListenerBack listener, String content) {
+        this.mActivity = activity;
+        this.listener = listener;
+        this.content = content;
     }
     @BindView(R.id.tv_complete_status)
     TextView mTvTitle;
     @BindView(R.id.tv_comfirm_submit_voucher_point_money)
     TextView mTVTest;
+    @BindView(R.id.img_cancel_success)
+    ImageView img_cancel_success;
 
 
 
@@ -56,6 +65,10 @@ public class EasyDialog extends DialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.easy_dialog, container, false);
         ButterKnife.bind(this, view);
+        if(content.length() != 0) {
+            img_cancel_success.setVisibility(View.VISIBLE);
+            mTVTest.setText(content);
+        }
         return view;
     }
 

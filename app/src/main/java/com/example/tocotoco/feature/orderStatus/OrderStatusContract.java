@@ -17,6 +17,7 @@ public interface OrderStatusContract {
     interface Interactor extends IInteractor<OrderStatusContract.Presenter> {
         void getUserCurrentOrder(TCCCallback<UserCurrentResult> callback, String token);
         void getItemsInOrder(TCCCallback<ProductsResult> callback, String token, int orderId);
+        void userCancelOrder(TCCCallback<RegisterResult> callback, String token, int orderId);
     }
 
     interface View extends PresentView<OrderStatusContract.Presenter> {
@@ -24,6 +25,7 @@ public interface OrderStatusContract {
         void getItemsInOrderSuccess(ProductsResult productsResult);
         void updateUIShipping(String shipping);
         void finishOrder(String finishOrder);
+        void cancelOrderSuccess();
     }
 
     interface Presenter extends IPresenter<OrderStatusContract.View, OrderStatusContract.Interactor> {
@@ -31,5 +33,6 @@ public interface OrderStatusContract {
         void getItemsInOrder(String token, int orderId);
         void shipping(String shipping);
         void finishOrder(String finishOrder);
+        void userCancelOrder(String token, int orderId);
     }
 }
