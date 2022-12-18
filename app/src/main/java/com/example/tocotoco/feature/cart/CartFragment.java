@@ -20,6 +20,7 @@ import com.example.tocotoco.model.CartInfoResult;
 import com.example.tocotoco.model.ProductSessionModel;
 import com.example.tocotoco.model.ProductsSessionResult;
 import com.example.tocotoco.model.UserInfoResult;
+import com.example.tocotoco.util.EasyDialog;
 import com.gemvietnam.base.viper.ViewFragment;
 
 import java.text.DecimalFormat;
@@ -28,7 +29,7 @@ import java.util.List;
 import butterknife.BindView;
 import retrofit2.Response;
 
-public class CartFragment extends ViewFragment<CartContract.Presenter> implements CartContract.View, View.OnClickListener, CartProductAdapter.ChangeItemListener {
+public class CartFragment extends ViewFragment<CartContract.Presenter> implements CartContract.View, View.OnClickListener, CartProductAdapter.ChangeItemListener, EasyDialog.EnterListenerBack {
     public static CartFragment getInstance() {
         return new CartFragment();
     }
@@ -133,16 +134,28 @@ public class CartFragment extends ViewFragment<CartContract.Presenter> implement
 
     @Override
     public void getCartInfoFail() {
-
+        tv_total_money.setText("0đ");
+        btn_confirm.setText("Giao hàng -0đ");
+        EasyDialog easyDialog = new EasyDialog(getViewContext(), this);
+        easyDialog.show(getFragmentManager(), "");
     }
 
     @Override
     public void AddItem(int productId, int quantity) {
-
+        mPresenter.addItemToShoppingSession(token, sessionId, productId, quantity, "M");
     }
 
     @Override
     public void DelItem(int productId, int quantity) {
+        if(quantity == 0) {
+            mPresenter.deleteItemInShoppingSession(token, productId, sessionId);
+        }else {
+            mPresenter.addItemToShoppingSession(token, sessionId, productId, quantity, "M");
+        }
+    }
 
+    @Override
+    public void onClose() {
+        getViewContext().finish();
     }
 }

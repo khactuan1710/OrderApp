@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".feature.account.fragment.RulesFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:paddingStart="@dimen/dp_8"
+        android:paddingEnd="@dimen/dp_8">
+
+        <ImageView
+            android:id="@+id/img_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_arrow_back_24" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Điều khoản ứng dụng"
+            android:textColor="#FFA500"
+            android:textSize="@dimen/dimen_24dp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/dimen_16dp"
+        android:text="ToCoToCo- Trà sữa hạnh phúc"
+        android:textColor="#A586FF"
+        android:textSize="@dimen/text_size_22sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dimen_16dp"
+        android:layout_marginTop="@dimen/dp_8"
+        android:text="Tại TocoToco, chúng tôi cam kết đem đến cho khách hàng những ly trà sữa thơm ngon và an toàn nhất. Đây chính là sứ mệnh và cũng là điều cốt lõi của công việc chúng tôi làm – bắt đầu từ những ngày đầu tiên thành lập thương hiệu cho đến những chặng đường phát triển về sau.
+Trở về những ngày đầu tiên khi TocoToco là một cửa hàng nhỏ nhưng luôn tấp nập phục vụ khách hàng những sản phẩm được làm từ nguồn nguyên liệu sạch và chất lượng hàng đầu.Tháng 11/2013, thương hiệu trà sữa TocoToco chính thức được thành lập bởi công ty cổ phần thương mại dịch vụ Taco Việt Nam. Tính đến thời điểm hiện tại, TocoToco hiện có khoảng 150 cửa hàng phủ sóng trên toàn quốc và là tên tuổi được người tiêu dùng yêu mến và tin cậy hàng đầu tại thị trường Việt Nam.
+"
+        android:textAppearance="@style/TextNormal2"
+        android:textColor="@color/black" />
+</LinearLayout>

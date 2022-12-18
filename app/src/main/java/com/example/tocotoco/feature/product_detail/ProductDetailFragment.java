@@ -136,6 +136,13 @@ public class ProductDetailFragment extends ViewFragment<ProductDetailContract.Pr
         list = TokenDeviceDatabase.getInstance(getViewContext()).tokenDeviceDAO().getListToken();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+//        mPresenter.getUserShoppingSession(token);
+//        initData();
+    }
+
     private void setListener() {
         tv_reduce_quantity.setOnClickListener(this);
         tv_raise_quantity.setOnClickListener(this);
@@ -216,6 +223,7 @@ public class ProductDetailFragment extends ViewFragment<ProductDetailContract.Pr
                 Intent i = new Intent(getViewContext(), CartActivity.class);
                 i.putExtra("tokenToCart", token);
                 startActivity(i);
+                getViewContext().finish();
                 break;
             case R.id.btn_add_product:
                 Intent i2;

@@ -27,35 +27,13 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".feature.account.SupportActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".feature.account.VersionActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".feature.account.ListStoreActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".feature.account.SplashActivity"
+            android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -83,13 +61,6 @@
         </activity>
         <activity
             android:name=".home.search.SearchActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".feature.account.IntroduceActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -161,17 +132,8 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".feature.account.AccountActivity"
-            android:exported="false"
-            android:theme="@style/CustomStatusBar">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".feature.account.UpdateInforActivity"
-            android:exported="false"
-            android:theme="@style/CustomStatusBar2">
+            android:name=".feature.account.activity.AccountActivity"
+            android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

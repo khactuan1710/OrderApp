@@ -1,11 +1,10 @@
-package com.example.tocotoco.feature.account;
+package com.example.tocotoco;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.tocotoco.R;
 import com.example.tocotoco.home.activityhome.HomeActivity;
 
 import java.util.Timer;

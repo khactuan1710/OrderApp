@@ -6,6 +6,7 @@ import com.example.tocotoco.feature.order.OrderFragment;
 import com.example.tocotoco.feature.order.OrderInteractor;
 import com.example.tocotoco.model.CartInfoResult;
 import com.example.tocotoco.model.ProductsSessionResult;
+import com.example.tocotoco.model.RegisterResult;
 import com.example.tocotoco.network.TCCCallback;
 import com.gemvietnam.base.viper.Presenter;
 import com.gemvietnam.base.viper.interfaces.ContainerView;
@@ -71,5 +72,45 @@ public class CartPresenter extends Presenter<CartContract.View, CartContract.Int
 
             }
         }, token, sessionId);
+    }
+
+    @Override
+    public void addItemToShoppingSession(String token, int sessionId, int productId, int quantity, String size) {
+        DialogUtils.showProgressDialog(getViewContext());
+        mInteractor.addItemToShoppingSession(new TCCCallback<RegisterResult>() {
+            @Override
+            public void onTCTCSuccess(Call<RegisterResult> call, Response<RegisterResult> response) {
+                DialogUtils.dismissProgressDialog();
+                if(response.body().getIsSuccess()) {
+                    getCartInfo(token, sessionId);
+//                    itemsInShoppingSession(token, sessionId);
+                }
+            }
+
+            @Override
+            public void onTCTCFailure(Call<RegisterResult> call) {
+                DialogUtils.dismissProgressDialog();
+            }
+        }, token, sessionId, productId, quantity, size);
+    }
+
+    @Override
+    public void deleteItemInShoppingSession(String token, int itemId, int sessionId) {
+        DialogUtils.showProgressDialog(getViewContext());
+        mInteractor.deleteItemInShoppingSession(new TCCCallback<RegisterResult>() {
+            @Override
+            public void onTCTCSuccess(Call<RegisterResult> call, Response<RegisterResult> response) {
+                DialogUtils.dismissProgressDialog();
+                if(response.body().getIsSuccess()) {
+                    getCartInfo(token, sessionId);
+                    itemsInShoppingSession(token, sessionId);
+                }
+            }
+
+            @Override
+            public void onTCTCFailure(Call<RegisterResult> call) {
+                DialogUtils.dismissProgressDialog();
+            }
+        }, token, itemId, sessionId);
     }
 }

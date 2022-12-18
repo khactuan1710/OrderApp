@@ -16,6 +16,8 @@ public interface CartContract {
     interface Interactor extends IInteractor<CartContract.Presenter> {
         void itemsInShoppingSession(TCCCallback<ProductsSessionResult> callback, String token, int sessionId);
         void getCartInfo(TCCCallback<CartInfoResult> callback, String token, int sessionId);
+        void addItemToShoppingSession(TCCCallback<RegisterResult> callback, String token, int sessionId, int productId, int quantity, String size);
+        void deleteItemInShoppingSession(TCCCallback<RegisterResult> callback, String token, int itemId,  int sessionId);
     }
 
     interface View extends PresentView<CartContract.Presenter> {
@@ -27,5 +29,7 @@ public interface CartContract {
     interface Presenter extends IPresenter<CartContract.View, CartContract.Interactor> {
         void itemsInShoppingSession(String token, int sessionId);
         void getCartInfo(String token, int sessionId);
+        void addItemToShoppingSession(String token, int sessionId, int productId, int quantity, String size);
+        void deleteItemInShoppingSession(String token, int itemId,  int sessionId);
     }
 }

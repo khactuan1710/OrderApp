@@ -74,13 +74,17 @@ public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.
 
         Glide.with(context).load(productSessionModel.getDisplayImage()).apply(options).into(holder.img_product);
 
-
+        String oldMoney = productSessionModel.getPrice();
+        int money = Integer.parseInt(productSessionModel.getPriceAfterDiscount() == null? productSessionModel.getPrice() : productSessionModel.getPriceAfterDiscount());
+        int moneyItem = money/productSessionModel.getQuantity();
         holder.tv_add_quantity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 quantity[0]++;
                 changeItemListener.AddItem(productSessionModel.getProductId(), quantity[0]);
                 holder.tv_quantity.setText(String.valueOf(quantity[0]));
+                holder.tv_old_price.setText(formatter.format(Integer.parseInt(oldMoney) * quantity[0]) + "đ");
+                holder.tv_price.setText(formatter.format(moneyItem * quantity[0]) + "đ");
             }
         });
 
@@ -91,6 +95,8 @@ public class CartProductAdapter extends RecyclerView.Adapter<CartProductAdapter.
                     quantity[0] --;
                     if(quantity[0] != 0) {
                         holder.tv_quantity.setText(String.valueOf(quantity[0]));
+                        holder.tv_old_price.setText(formatter.format(Integer.parseInt(oldMoney) * quantity[0]) + "đ");
+                        holder.tv_price.setText(formatter.format(moneyItem * quantity[0]) + "đ");
                     }
                 }
                 if(quantity[0] != 0) {

@@ -16,8 +16,9 @@ import com.example.tocotoco.basekotlin.base.BaseViewModel
 import com.example.tocotoco.basekotlin.extensions.viewBinding
 import com.example.tocotoco.databinding.FragmentHomeBinding
 import com.example.tocotoco.dialog.DialogUtils
-import com.example.tocotoco.feature.account.AccountActivity
 import com.example.tocotoco.home.search.SearchActivity
+import com.example.tocotoco.feature.account.activity.AccountActivity
+import com.example.tocotoco.feature.login.LoginActivity
 import com.example.tocotoco.model.CategoriesResult
 import com.example.tocotoco.model.UserInfoResult
 import com.example.tocotoco.network.NetWorkController
@@ -93,7 +94,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
 
     private fun setupClickListener() = binding.run {
         imgAccount.setOnClickListener {
-            startActivity(Intent(requireActivity(), AccountActivity::class.java))
+                startActivity(Intent(requireActivity(), AccountActivity::class.java))
         }
     }
 

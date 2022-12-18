@@ -30,7 +30,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.tocotoco.MyFirebaseMessagingService;
 import com.example.tocotoco.R;
 import com.example.tocotoco.dialog.DialogUtils;
-import com.example.tocotoco.feature.account.AccountActivity;
 import com.example.tocotoco.feature.order.ConfirmSuccessOrderActivty;
 import com.example.tocotoco.feature.order.OrderAdapter;
 import com.example.tocotoco.feature.registerAcc.RegisterAccountContract;

@@ -28,7 +28,7 @@
                             android:id="@+id/tv_total_money"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Tổng cộng: 200.000đ"
+                            android:text="Tổng cộng: 0đ"
                             android:layout_alignParentLeft="true"
                             android:fontFamily="@font/sf_pro_text_medium"
                             android:textSize="@dimen/text_size_16sp"

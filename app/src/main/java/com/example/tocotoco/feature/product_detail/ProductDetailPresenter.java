@@ -135,32 +135,26 @@ public class ProductDetailPresenter extends Presenter<ProductDetailContract.View
 
     @Override
     public void addFavItem(String token, int productId) {
-        DialogUtils.showProgressDialog(getViewContext());
         mInteractor.addFavItem(new TCCCallback<RegisterResult>() {
             @Override
             public void onTCTCSuccess(Call<RegisterResult> call, Response<RegisterResult> response) {
-                DialogUtils.dismissProgressDialog();
             }
 
             @Override
             public void onTCTCFailure(Call<RegisterResult> call) {
-                DialogUtils.dismissProgressDialog();
             }
         }, token, productId);
     }
 
     @Override
     public void deleteFavItem(String token, int productId) {
-        DialogUtils.showProgressDialog(getViewContext());
         mInteractor.deleteFavItem(new TCCCallback<RegisterResult>() {
             @Override
             public void onTCTCSuccess(Call<RegisterResult> call, Response<RegisterResult> response) {
-                DialogUtils.dismissProgressDialog();
             }
 
             @Override
             public void onTCTCFailure(Call<RegisterResult> call) {
-                DialogUtils.dismissProgressDialog();
             }
         }, token, productId);
     }
