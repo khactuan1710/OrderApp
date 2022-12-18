@@ -7,6 +7,8 @@ public class ProductsByCategoryResultModel {
     int id;
     @SerializedName("name")
     String name;
+    @SerializedName("productName")
+    String productName;
     @SerializedName("description")
     String description;
     @SerializedName("productDescription")
@@ -17,6 +19,8 @@ public class ProductsByCategoryResultModel {
     int quantity;
     @SerializedName("price")
     String price;
+    @SerializedName("priceAfterDiscount")
+    String priceAfterDiscount;
     @SerializedName("discountid")
     int discountid;
     @SerializedName("displayimage")
@@ -25,6 +29,22 @@ public class ProductsByCategoryResultModel {
     String size;
     @SerializedName("active")
     boolean active;
+
+    public String getPriceAfterDiscount() {
+        return priceAfterDiscount;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public void setPriceAfterDiscount(String priceAfterDiscount) {
+        this.priceAfterDiscount = priceAfterDiscount;
+    }
 
     public boolean isActive() {
         return active;

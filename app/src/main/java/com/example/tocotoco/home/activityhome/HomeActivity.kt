@@ -71,26 +71,49 @@ class HomeActivity : BaseActivity(R.layout.activity_home) {
                     call: Call<SessionIdResult>?,
                     response: Response<SessionIdResult>?
                 ) {
-                    secId = response?.body()?.result?.id!!
-                    NetWorkController.getCartInfo(
-                        object : TCCCallback<CartInfoResult>() {
-                            override fun onTCTCSuccess(
-                                call: Call<CartInfoResult>?,
-                                response: Response<CartInfoResult>?
-                            ) {
-                                val itemCart = response?.body()?.results?.totalCategory
-                                frameLayout.isVisible = !itemCart.equals("0", true) && itemCart != null
-                                imgCart.isVisible = !itemCart.equals("0", true)
-                                tvNumber.text = itemCart
-                                DialogUtils.dismissProgressDialog()
-                            }
+                    if(response?.body()?.isSuccess == true) {
+                        secId = response?.body()?.result?.id!!
+                        NetWorkController.getCartInfo(
+                            object : TCCCallback<CartInfoResult>() {
+                                override fun onTCTCSuccess(
+                                    call: Call<CartInfoResult>?,
+                                    response: Response<CartInfoResult>?
+                                ) {
+                                    val itemCart = response?.body()?.results?.totalCategory
+                                    frameLayout.isVisible = !itemCart.equals("0", true) && itemCart != null
+                                    imgCart.isVisible = !itemCart.equals("0", true)
+                                    tvNumber.text = itemCart
+                                    DialogUtils.dismissProgressDialog()
+                                }
 
-                            override fun onTCTCFailure(call: Call<CartInfoResult>?) {
-                                Timber.tag(call.toString())
-                                DialogUtils.dismissProgressDialog()
-                            }
-                        }, token, secId
-                    )
+                                override fun onTCTCFailure(call: Call<CartInfoResult>?) {
+                                    Timber.tag(call.toString())
+                                    DialogUtils.dismissProgressDialog()
+                                }
+                            }, token, secId
+                        )
+                    }else {
+                        NetWorkController.getCartInfo(
+                            object : TCCCallback<CartInfoResult>() {
+                                override fun onTCTCSuccess(
+                                    call: Call<CartInfoResult>?,
+                                    response: Response<CartInfoResult>?
+                                ) {
+                                    val itemCart = response?.body()?.results?.totalCategory
+                                    frameLayout.isVisible = !itemCart.equals("0", true) && itemCart != null
+                                    imgCart.isVisible = !itemCart.equals("0", true)
+                                    tvNumber.text = itemCart
+                                    DialogUtils.dismissProgressDialog()
+                                }
+
+                                override fun onTCTCFailure(call: Call<CartInfoResult>?) {
+                                    Timber.tag(call.toString())
+                                    DialogUtils.dismissProgressDialog()
+                                }
+                            }, token, sessionId
+                        )
+                    }
+
                 }
 
                 override fun onTCTCFailure(call: Call<SessionIdResult>?) {

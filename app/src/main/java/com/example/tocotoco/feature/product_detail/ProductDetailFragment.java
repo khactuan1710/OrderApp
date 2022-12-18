@@ -104,8 +104,10 @@ public class ProductDetailFragment extends ViewFragment<ProductDetailContract.Pr
     int itemId = 0;
     DecimalFormat formatter = new DecimalFormat("#,###,###");
     private int price = 0;
+    private int priceOld = 0;
     private int quantityOld = 0;
     private int priceOneItem = 0;
+    private int priceOneItemOld = 0;
     List<TokenDevice> list;
     public static ProductDetailFragment getInstance() {
         return new ProductDetailFragment();
@@ -252,10 +254,12 @@ public class ProductDetailFragment extends ViewFragment<ProductDetailContract.Pr
             productResult = data;
 //            tv_price.setText(formatter.format(Integer.parseInt(data.body().getResults().getPrice())) + "đ");
             tv_show_price_old.setText(formatter.format(Integer.parseInt(data.body().getResults().getPrice())) + "đ");
-            tv_show_price.setText(formatter.format(Integer.parseInt(data.body().getResults().getPrice())) + "đ");
-            priceOneItem = Integer.parseInt(data.body().getResults().getPrice());
+            tv_show_price_old.setPaintFlags(tv_price_old.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            tv_show_price.setText(formatter.format(Integer.parseInt(data.body().getResults().getPriceAfterDiscount())) + "đ");
+            priceOneItem = Integer.parseInt(data.body().getResults().getPriceAfterDiscount());
+            priceOneItemOld = Integer.parseInt(data.body().getResults().getPrice());
             mo_ta_sp.setText(data.body().getResults().getProductDescription());
-            tv_name_product.setText(data.body().getResults().getName());
+            tv_name_product.setText(data.body().getResults().getProductName());
             RequestOptions options = new RequestOptions()
                     .centerCrop()
                     .placeholder(R.mipmap.ic_launcher_round)
@@ -288,8 +292,9 @@ public class ProductDetailFragment extends ViewFragment<ProductDetailContract.Pr
 //            }
             int i = quantity - quantityOld;
             price = priceOneItem * i;
+            priceOld = priceOneItemOld * i;
             totalPrice2 = totalPrice + price;
-            totalPrice2Old = totalPriceOld + price;
+            totalPrice2Old = totalPriceOld + priceOld;
             if(totalPrice2 == 0) {
                 tv_price_old.setVisibility(View.GONE);
                 tv_price.setVisibility(View.GONE);
