@@ -41,8 +41,13 @@ public class OrderStatusActivity extends TCCBaseActivity {
             }else if(state.equals("Đơn hàng của bạn đã giao xong")) {
                 orderStatusPresenter.finishOrder(state);
             }
+            getOrderIcon();
 //            updateView(state);// update your textView in the main layout
         }
+    }
+
+    private void getOrderIcon() {
+
     }
 
     @Override

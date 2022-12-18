@@ -112,6 +112,7 @@ public class OrderStatusFragment extends ViewFragment<OrderStatusContract.Presen
 
         sharedPref = getViewContext().getSharedPreferences(requireContext().getString(R.string.preference_file_key), MODE_PRIVATE);
         token = sharedPref.getString(requireContext().getString(R.string.preference_key_token), "");
+        //.
         mPresenter.getUserCurrentOrder(token);
         tv_start_price.setPaintFlags(tv_start_price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
     }

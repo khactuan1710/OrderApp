@@ -29,13 +29,13 @@
         app:layout_constraintEnd_toEndOf="parent">
 
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <pl.droidsonroids.gif.GifImageView
             android:id="@+id/img_cart2"
             android:layout_width="@dimen/dimen_70dp"
             android:layout_height="@dimen/dimen_70dp"
             android:background="@drawable/bg_button_cart"
             android:padding="@dimen/dimen_12dp"
-            app:srcCompat="@drawable/ic_milk_tea"
+            android:src="@drawable/ship"
             android:layout_marginTop="@dimen/dimen_8dp"/>
     </FrameLayout>
 

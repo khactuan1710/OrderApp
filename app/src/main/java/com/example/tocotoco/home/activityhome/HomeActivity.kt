@@ -48,14 +48,6 @@ class HomeActivity : BaseActivity(R.layout.activity_home) {
         sharedPref.getInt(getString(R.string.session_id), 0)
     }
 
-     class MyBroadcastReceiver : BroadcastReceiver(){
-        override fun onReceive(context: Context, intent: Intent) {
-            val extras = intent.extras
-            val state = extras!!.getString("extra")
-            Log.e("XXX", state!!)
-
-        }
-    }
 
     override fun setupViews() {
         setupBottomNav()
@@ -79,7 +71,10 @@ class HomeActivity : BaseActivity(R.layout.activity_home) {
         }
     }
 
-    private fun getCartList() = binding.run {
+
+
+
+    fun getCartList() = binding.run {
         DialogUtils.showProgressDialog(this@HomeActivity)
         var secId = 0;
         if (NetworkUtils.isConnect(this@HomeActivity)) {
@@ -140,7 +135,15 @@ class HomeActivity : BaseActivity(R.layout.activity_home) {
         }
     }
 
+    private class MyBroadcastReceiver : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            val extras = intent.extras
+            val state = extras!!.getString("extra")
 
+        }
+
+
+    }
      private fun getOrderIcon() = binding.run {
         DialogUtils.showProgressDialog(this@HomeActivity)
         if (NetworkUtils.isConnect(this@HomeActivity)) {
