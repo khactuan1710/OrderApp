@@ -10,7 +10,13 @@ import android.util.Log;
 import com.example.tocotoco.dialog.DialogUtils;
 import com.example.tocotoco.feature.base.TCCBaseActivity;
 import com.example.tocotoco.feature.registerAcc.RegisterAccountPresenter;
+import com.example.tocotoco.model.UserInfoResult;
+import com.example.tocotoco.network.NetWorkController;
+import com.example.tocotoco.network.TCCCallback;
 import com.gemvietnam.base.viper.ViewFragment;
+
+import retrofit2.Call;
+import retrofit2.Response;
 
 public class OrderStatusActivity extends TCCBaseActivity {
 
@@ -47,6 +53,7 @@ public class OrderStatusActivity extends TCCBaseActivity {
         intentFilter.addAction("com.my.app.onMessageReceived");
         registerReceiver(receiver, intentFilter);
     }
+
 
     @Override
     public void onDestroy() {

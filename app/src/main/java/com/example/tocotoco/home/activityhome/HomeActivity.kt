@@ -1,7 +1,10 @@
 package com.example.tocotoco.home.activityhome
 
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
+import android.util.Log
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.example.tocotoco.R
@@ -30,7 +33,7 @@ class HomeActivity : BaseActivity(R.layout.activity_home) {
     override val binding by viewBinding<ActivityHomeBinding>()
     override val viewModel: BaseViewModel
         get() = TODO("Not yet implemented")
-
+    private var receiver: MyBroadcastReceiver? = null
     private val sharedPref by lazy {
         getSharedPreferences(
             getString(R.string.preference_file_key), Context.MODE_PRIVATE
@@ -45,10 +48,24 @@ class HomeActivity : BaseActivity(R.layout.activity_home) {
         sharedPref.getInt(getString(R.string.session_id), 0)
     }
 
+     class MyBroadcastReceiver : BroadcastReceiver(){
+        override fun onReceive(context: Context, intent: Intent) {
+            val extras = intent.extras
+            val state = extras!!.getString("extra")
+            Log.e("XXX", state!!)
+
+        }
+    }
+
     override fun setupViews() {
         setupBottomNav()
         getIntentId()
         getOrderIcon()
+
+        receiver = MyBroadcastReceiver()
+        val intentFilter = IntentFilter()
+        intentFilter.addAction("com.my.app.onMessageReceived")
+        registerReceiver(receiver, intentFilter)
     }
 
     override fun onResume() {
@@ -123,7 +140,8 @@ class HomeActivity : BaseActivity(R.layout.activity_home) {
         }
     }
 
-    private fun getOrderIcon() = binding.run {
+
+     private fun getOrderIcon() = binding.run {
         DialogUtils.showProgressDialog(this@HomeActivity)
         if (NetworkUtils.isConnect(this@HomeActivity)) {
             NetWorkController.getUserCurrentOrder(
