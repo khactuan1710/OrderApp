@@ -11,11 +11,14 @@ import com.example.tocotoco.basekotlin.extensions.viewBinding
 import com.example.tocotoco.databinding.ActivityHomeBinding
 import com.example.tocotoco.dialog.DialogUtils
 import com.example.tocotoco.feature.order.OrderActivity
+import com.example.tocotoco.feature.orderStatus.OrderStatusActivity
 import com.example.tocotoco.home.favoritefragment.FavoriteFragment
 import com.example.tocotoco.home.homefragment.HomeFragment
 import com.example.tocotoco.home.notificationfragment.NotificationFragment
 import com.example.tocotoco.home.orderfragment.OrderListFragment
 import com.example.tocotoco.model.CartInfoResult
+import com.example.tocotoco.model.SessionIdResult
+import com.example.tocotoco.model.UserCurrentResult
 import com.example.tocotoco.network.NetWorkController
 import com.example.tocotoco.network.TCCCallback
 import com.example.tocotoco.util.NetworkUtils
@@ -45,11 +48,13 @@ class HomeActivity : BaseActivity(R.layout.activity_home) {
     override fun setupViews() {
         setupBottomNav()
         getIntentId()
+        getOrderIcon()
     }
 
     override fun onResume() {
         super.onResume()
         getCartList()
+        getOrderIcon()
         binding.imgCart.setOnClickListener {
             val intent = Intent(this, OrderActivity::class.java)
             intent.putExtra("tokenToOrder", token)
@@ -59,25 +64,81 @@ class HomeActivity : BaseActivity(R.layout.activity_home) {
 
     private fun getCartList() = binding.run {
         DialogUtils.showProgressDialog(this@HomeActivity)
+        var secId = 0;
         if (NetworkUtils.isConnect(this@HomeActivity)) {
-            NetWorkController.getCartInfo(
-                object : TCCCallback<CartInfoResult>() {
+            NetWorkController.getUserShoppingSession(object : TCCCallback<SessionIdResult>() {
+                override fun onTCTCSuccess(
+                    call: Call<SessionIdResult>?,
+                    response: Response<SessionIdResult>?
+                ) {
+                    secId = response?.body()?.result?.id!!
+                    NetWorkController.getCartInfo(
+                        object : TCCCallback<CartInfoResult>() {
+                            override fun onTCTCSuccess(
+                                call: Call<CartInfoResult>?,
+                                response: Response<CartInfoResult>?
+                            ) {
+                                val itemCart = response?.body()?.results?.totalCategory
+                                frameLayout.isVisible = !itemCart.equals("0", true) && itemCart != null
+                                imgCart.isVisible = !itemCart.equals("0", true)
+                                tvNumber.text = itemCart
+                                DialogUtils.dismissProgressDialog()
+                            }
+
+                            override fun onTCTCFailure(call: Call<CartInfoResult>?) {
+                                Timber.tag(call.toString())
+                                DialogUtils.dismissProgressDialog()
+                            }
+                        }, token, secId
+                    )
+                }
+
+                override fun onTCTCFailure(call: Call<SessionIdResult>?) {
+                }
+            }, token)
+
+        }
+    }
+
+    private fun getOrderIcon() = binding.run {
+        DialogUtils.showProgressDialog(this@HomeActivity)
+        if (NetworkUtils.isConnect(this@HomeActivity)) {
+            NetWorkController.getUserCurrentOrder(
+                object : TCCCallback<UserCurrentResult>() {
                     override fun onTCTCSuccess(
-                        call: Call<CartInfoResult>?,
-                        response: Response<CartInfoResult>?
+                        call: Call<UserCurrentResult>?,
+                        response: Response<UserCurrentResult>?
                     ) {
-                        val itemCart = response?.body()?.results?.totalCategory
-                        frameLayout.isVisible = !itemCart.equals("0", true) && itemCart != null
-                        imgCart.isVisible = !itemCart.equals("0", true)
-                        tvNumber.text = itemCart
+                        if (response != null) {
+                            if(response?.body()?.isSuccess == true) {
+                                frameLayout2?.isVisible = response.isSuccessful
+                                frameLayout2?.setOnClickListener {
+                                    val intent =
+                                        Intent(this@HomeActivity, OrderStatusActivity::class.java)
+                                    response.body()?.results.apply {
+                                        intent.putExtra("orderId", this?.orderId)
+                                        intent.putExtra("total", this?.total)
+                                        intent.putExtra("paymentId", this?.paymentId)
+                                        intent.putExtra("status", this?.status)
+                                        intent.putExtra("provider", this?.provider)
+                                        intent.putExtra("address", this?.address)
+                                        intent.putExtra("phoneNumber", this?.phoneNumber)
+                                    }
+                                    startActivity(intent)
+                                }
+                            }else {
+                                frameLayout2?.isVisible = false;
+                            }
+
+                        }
                         DialogUtils.dismissProgressDialog()
                     }
 
-                    override fun onTCTCFailure(call: Call<CartInfoResult>?) {
+                    override fun onTCTCFailure(call: Call<UserCurrentResult>?) {
                         Timber.tag(call.toString())
                         DialogUtils.dismissProgressDialog()
                     }
-                }, token, sessionId
+                }, token
             )
         }
     }

@@ -19,27 +19,6 @@
         app:menu="@menu/bottom_nav"/>
 
     <FrameLayout
-        android:id="@+id/frameLayout2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/frameLayout"
-        app:layout_constraintEnd_toEndOf="parent">
-
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/img_cart2"
-            android:layout_width="@dimen/dimen_70dp"
-            android:layout_height="@dimen/dimen_70dp"
-            android:background="@drawable/bg_button_cart"
-            android:padding="@dimen/dimen_12dp"
-            app:srcCompat="@drawable/ic_milk_tea"
-            android:layout_marginTop="@dimen/dimen_8dp"/>
-    </FrameLayout>
-
-    <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
