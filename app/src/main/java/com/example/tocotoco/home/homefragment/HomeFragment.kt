@@ -95,6 +95,9 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         imgAccount.setOnClickListener {
             startActivity(Intent(requireActivity(), AccountActivity::class.java))
         }
+        imgName.setOnClickListener {
+            startActivity(Intent(requireActivity(), AccountActivity::class.java))
+        }
     }
 
     private fun getUserInfo() = binding.run {
