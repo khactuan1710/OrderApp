@@ -135,14 +135,12 @@ class HomeActivity : BaseActivity(R.layout.activity_home) {
         }
     }
 
-    private class MyBroadcastReceiver : BroadcastReceiver() {
+    inner class MyBroadcastReceiver : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             val extras = intent.extras
             val state = extras!!.getString("extra")
-
+            getOrderIcon()
         }
-
-
     }
      private fun getOrderIcon() = binding.run {
         DialogUtils.showProgressDialog(this@HomeActivity)
