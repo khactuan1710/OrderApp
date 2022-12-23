@@ -51,10 +51,9 @@
         android:layout_width="@dimen/dimen_150dp"
         android:layout_height="@dimen/dimen_150dp"
         android:layout_marginTop="116dp"
-        android:background="@drawable/bg_img_account"
+        android:background="@drawable/user"
         android:gravity="center"
         android:orientation="vertical"
-        android:text="?"
         android:textSize="80sp"
         android:textStyle="bold"
         android:textColor="@color/black"
@@ -209,6 +208,7 @@
                   <EditText
                       android:id="@+id/email"
                       android:hint="Nhập email của bạn"
+                      android:enabled="false"
                       android:layout_width="match_parent"
                       android:layout_height="wrap_content"
                       android:inputType="textEmailAddress" />
@@ -250,6 +250,7 @@
 
                   <EditText
                       android:id="@+id/sdt"
+                      android:enabled="false"
                       android:inputType="number"
                       android:hint="Nhập số điện thoại của bạn"
                       android:layout_width="match_parent"

@@ -150,11 +150,16 @@ public class AccountFragment extends Fragment {
 
     private void checkUserNull() {
         if (getToken().isEmpty()) {
-            binding.imgName.setText("?");
+            binding.imgName.setVisibility(View.GONE);
+            binding.imgUser.setVisibility(View.VISIBLE);
             binding.name.setText("Bạn");
+            binding.logout.setVisibility(View.GONE);
             binding.tvUpdateInfor.setText("Đăng ký tài khoản và nhận ngay quà tặng hấp dận ");
             binding.tvUpdateInfor.setOnClickListener(view -> startActivity(new Intent(requireActivity(), LoginActivity.class)));
         } else {
+            binding.imgName.setVisibility(View.VISIBLE);
+            binding.imgUser.setVisibility(View.GONE);
+            binding.logout.setVisibility(View.VISIBLE);
             getUserInfor();
             updateInfor();
         }

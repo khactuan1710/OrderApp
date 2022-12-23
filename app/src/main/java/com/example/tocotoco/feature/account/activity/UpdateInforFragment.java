@@ -118,6 +118,7 @@ private FragmentUpdateInforBinding binding;
                     AccountResult accountResult = response.body();
                     Result result = accountResult.getResult();
                     binding.name.setText(result.getName());
+                    binding.linearLayout2.setBackgroundResource(R.drawable.bg_img_account);
                     binding.linearLayout2.setText(result.getName().substring(0,1).toUpperCase(Locale.getDefault()));
                     binding.username.setText(result.getUsername());
                     binding.email.setText(result.getEmail());
