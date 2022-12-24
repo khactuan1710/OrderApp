@@ -4,7 +4,6 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.util.Log
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.example.tocotoco.R
