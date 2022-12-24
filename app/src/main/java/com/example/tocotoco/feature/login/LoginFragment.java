@@ -101,8 +101,9 @@ public class LoginFragment extends ViewFragment<LoginContract.Presenter> impleme
             }
         }
         startActivity(i);
+        getViewContext().finish();
 
-        Toast.makeText(getViewContext(), "Tài khoản chính xác", Toast.LENGTH_LONG).show();
+//        Toast.makeText(getViewContext(), "Tài khoản chính xác", Toast.LENGTH_LONG).show();
     }
 
     @Override
