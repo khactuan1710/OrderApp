@@ -130,6 +130,11 @@ public interface TCCAPI {
     Call<RegisterResult> userCancelOrder(@Field("token") String token,
                                          @Field("orderId") int orderId);
 
+    @FormUrlEncoded
+    @POST("fav/check_loved")
+    Call<RegisterResult> checkFav(@Field("token") String token,
+                                         @Field("productId") int productId);
+
     //lấy thông báo khuyến mại
     @FormUrlEncoded
     @POST("notification/promote")

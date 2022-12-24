@@ -47,6 +47,9 @@ class HomeActivity : BaseActivity(R.layout.activity_home) {
     private val sessionId by lazy {
         sharedPref.getInt(getString(R.string.session_id), 0)
     }
+    private val editor by lazy {
+        sharedPref.edit()
+    }
 
 
     override fun setupViews() {
@@ -139,6 +142,19 @@ class HomeActivity : BaseActivity(R.layout.activity_home) {
         override fun onReceive(context: Context, intent: Intent) {
             val extras = intent.extras
             val state = extras!!.getString("extra")
+            if(state.equals("Đơn hàng của bạn đã được xác nhận")) {
+                Log.e("","");
+                editor.putInt("shipping",
+                    1
+                )
+                editor.apply()
+            }else if(state.equals("Đơn hàng của bạn đã giao xong")){
+                Log.e("","");
+                editor.putInt("shipping",
+                    2
+                )
+                editor.apply()
+            }
             getOrderIcon()
         }
     }

@@ -20,6 +20,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.core.app.ActivityCompat;
@@ -75,12 +77,34 @@ public class OrderStatusFragment extends ViewFragment<OrderStatusContract.Presen
     TextView tv_status_3;
     @BindView(R.id.tv_quan)
     TextView tv_quan;
+    @BindView(R.id.tv_method_pay)
+    TextView tv_method_pay;
+    @BindView(R.id.tv_name_user)
+    TextView tv_name_user;
+    @BindView(R.id.tv_note)
+    TextView tv_note;
+    @BindView(R.id.tv_phone_number)
+    TextView tv_phone_number;
+    @BindView(R.id.tv_address)
+    TextView tv_address;
+    @BindView(R.id.tv_order_id)
+    TextView tv_order_id;
+    @BindView(R.id.img_method_pay)
+    ImageView img_method_pay;
+    @BindView(R.id.rcv_data)
+    LinearLayout rcv_data;
+    @BindView(R.id.rcv_no_data)
+    LinearLayout rcv_no_data;
+
     private String token;
     private Intent intent;
     int isShipping;
     int orderId;
+    String orderFinish = "noon";
     SharedPreferences sharedPref;
+    SharedPreferences sharedPref2;
     ItemsOrderAdapter itemsOrderAdapter;
+    SharedPreferences.Editor editor;
     List<ProductsResult.ProductsResultModel> list;
     DecimalFormat formatter = new DecimalFormat("#,###,###");
     public static OrderStatusFragment getInstance() {
@@ -103,18 +127,60 @@ public class OrderStatusFragment extends ViewFragment<OrderStatusContract.Presen
 
     private void initData() {
         intent = getViewContext().getIntent();
-        isShipping = intent.getIntExtra("shipping", 0);
-        if(isShipping == 1) {
-            mPresenter.shipping("Đơn hàng của bạn đã được xác nhận");
-        }else if (isShipping == 2) {
-            mPresenter.finishOrder("Đơn hàng của bạn đã giao xong");
-        }
+        sharedPref2 = getViewContext().getSharedPreferences(requireContext().getString(R.string.preference_file_key), MODE_PRIVATE);
+        editor = sharedPref2.edit();
+        isShipping = sharedPref2.getInt("shipping", 0);
+        orderFinish = intent.getStringExtra("statusOrder");
+        if(orderFinish != null) {
+            if(orderFinish.equals("TrangThaiOrder")) {
+                finishOrder("Đơn hàng của bạn đã giao xong");
+                rcv_data.setVisibility(View.GONE);
+                rcv_no_data.setVisibility(View.VISIBLE);
+            }else {
+                if(isShipping == 1) {
+                    mPresenter.shipping("Đơn hàng của bạn đã được xác nhận");
+                    sharedPref = getViewContext().getSharedPreferences(requireContext().getString(R.string.preference_file_key), MODE_PRIVATE);
+                    token = sharedPref.getString(requireContext().getString(R.string.preference_key_token), "");
+                    //.
+                    mPresenter.getUserCurrentOrder(token);
+                }else if (isShipping == 2) {
+                    mPresenter.finishOrder("Đơn hàng của bạn đã giao xong");
+                    rcv_data.setVisibility(View.GONE);
+                    rcv_no_data.setVisibility(View.VISIBLE);
+                }else {
+                    sharedPref = getViewContext().getSharedPreferences(requireContext().getString(R.string.preference_file_key), MODE_PRIVATE);
+                    token = sharedPref.getString(requireContext().getString(R.string.preference_key_token), "");
+                    //.
+                    mPresenter.getUserCurrentOrder(token);
+                }
+                editor.putInt("shipping", 0);
+                editor.apply();
 
-        sharedPref = getViewContext().getSharedPreferences(requireContext().getString(R.string.preference_file_key), MODE_PRIVATE);
-        token = sharedPref.getString(requireContext().getString(R.string.preference_key_token), "");
-        //.
-        mPresenter.getUserCurrentOrder(token);
-        tv_start_price.setPaintFlags(tv_start_price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                tv_start_price.setPaintFlags(tv_start_price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            }
+        }else {
+            if(isShipping == 1) {
+                mPresenter.shipping("Đơn hàng của bạn đã được xác nhận");
+
+                sharedPref = getViewContext().getSharedPreferences(requireContext().getString(R.string.preference_file_key), MODE_PRIVATE);
+                token = sharedPref.getString(requireContext().getString(R.string.preference_key_token), "");
+                //.
+                mPresenter.getUserCurrentOrder(token);
+            }else if (isShipping == 2) {
+                mPresenter.finishOrder("Đơn hàng của bạn đã giao xong");
+                rcv_data.setVisibility(View.GONE);
+                rcv_no_data.setVisibility(View.VISIBLE);
+            }else {
+                sharedPref = getViewContext().getSharedPreferences(requireContext().getString(R.string.preference_file_key), MODE_PRIVATE);
+                token = sharedPref.getString(requireContext().getString(R.string.preference_key_token), "");
+                //.
+                mPresenter.getUserCurrentOrder(token);
+            }
+
+            editor.putInt("shipping", 0);
+            editor.apply();
+            tv_start_price.setPaintFlags(tv_start_price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        }
     }
     private void cancelOrder() {
         mPresenter.userCancelOrder(token, orderId);
@@ -163,9 +229,37 @@ public class OrderStatusFragment extends ViewFragment<OrderStatusContract.Presen
 
     @Override
     public void getUserCurrentOrderSuccess(UserCurrentResult userCurrentResult) {
+        sharedPref2 = getViewContext().getSharedPreferences(requireContext().getString(R.string.preference_file_key), MODE_PRIVATE);
+        String note = sharedPref2.getString("noteOrder", "");
+        String username = sharedPref2.getString("usernameOrder", "");
+        String address = sharedPref2.getString("addressOrder", "");
         tv_end_price.setText(formatter.format(Integer.parseInt(userCurrentResult.getResults().getTotal())) + "đ");
         mPresenter.getItemsInOrder(token, userCurrentResult.getResults().getOrderId());
         orderId = userCurrentResult.getResults().getOrderId();
+        int id = getViewContext().getResources().getIdentifier("drawable/"+"img_tien_mat", null, getViewContext().getPackageName());
+        int id2 = getViewContext().getResources().getIdentifier("drawable/"+"zalo_pay_logo_inkythuatso", null, getViewContext().getPackageName());
+        if(userCurrentResult.getResults().getProvider().equals("Tiền mặt")) {
+            img_method_pay.setImageResource(id);
+            tv_method_pay.setText("Tiền mặt");
+        }else {
+            img_method_pay.setImageResource(id2);
+            tv_method_pay.setText("Zalo pay");
+        }
+        tv_address.setText(address);
+        if(!userCurrentResult.getResults().getPhoneNumber().isEmpty()) {
+            tv_phone_number.setText(userCurrentResult.getResults().getPhoneNumber());
+        }
+        tv_order_id.setText(String.valueOf(userCurrentResult.getResults().getPaymentId()));
+        if(userCurrentResult.getResults().getStatus().equals("Đang giao")) {
+            updateUIShipping("Đơn hàng của bạn đang được giao");
+        }
+        if(note.length() > 0) {
+            tv_note.setText(note);
+        }else {
+            tv_note.setText("Không có");
+        }
+        tv_name_user.setText(username);
+
     }
 
 
@@ -212,6 +306,9 @@ public class OrderStatusFragment extends ViewFragment<OrderStatusContract.Presen
         gifview.setImageResource(R.drawable.ic_success_order);
         tv_order_status.setText(finishOrder);
         btn_destroy.setVisibility(View.GONE);
+        tv_status_1.setBackgroundResource(0);
+        tv_status_1.setTypeface(TypefaceNew.getTypefaceSFProTextRegular(getViewContext()));
+        tv_status_1.setTextColor(ContextCompat.getColor(getViewContext(), R.color.color_44494D));
         tv_status_2.setBackgroundResource(0);
         tv_status_2.setTypeface(TypefaceNew.getTypefaceSFProTextRegular(getViewContext()));
         tv_status_2.setTextColor(ContextCompat.getColor(getViewContext(), R.color.color_44494D));

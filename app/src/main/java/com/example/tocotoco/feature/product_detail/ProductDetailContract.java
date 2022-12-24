@@ -21,6 +21,7 @@ public interface ProductDetailContract {
         void itemsInShoppingSession(TCCCallback<ProductsSessionResult> callback, String token, int sessionId);
         void addItemToShoppingSession(TCCCallback<RegisterResult> callback, String token, int sessionId, int productId, int quantity, String size);
         void addFavItem(TCCCallback<RegisterResult> callback, String token, int productId);
+        void checkFav(TCCCallback<RegisterResult> callback, String token, int productId);
         void deleteFavItem(TCCCallback<RegisterResult> callback, String token, int productId);
         void deleteItemInShoppingSession(TCCCallback<RegisterResult> callback, String token, int itemId,  int sessionId);
     }
@@ -29,12 +30,14 @@ public interface ProductDetailContract {
         void initViewDetail(Response<ProductResult> data);
         void receiveSession(SessionIdResult.SessionId idSession);
         void addItemToCartSuccess(boolean isSuccess);
+        void checkFav(boolean isFav);
         void updateQuantityCart(Response<ProductsSessionResult> response, boolean isUpdate);
     }
 
     interface Presenter extends IPresenter<View, Interactor> {
         void getProductDetail(int id);
         void getUserShoppingSession(String token);
+        void checkFav(String token, int productId);
         void createShoppingSession(String token);
         void itemsInShoppingSession(String token, SessionIdResult.SessionId sessionId, boolean isUpdate);
         void addItemToShoppingSession(String token, int sessionId, int productId, int quantity, String size);

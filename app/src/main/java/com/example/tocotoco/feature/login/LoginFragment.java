@@ -109,7 +109,8 @@ public class LoginFragment extends ViewFragment<LoginContract.Presenter> impleme
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_login:
-                mPresenter.loginWithPass(ed_sdt.getText().toString(), etPassword.getText().toString(), "username", list.get(0).getTokenDevice());
+                String tokenDevice = list.get(0).getTokenDevice();
+                mPresenter.loginWithPass(ed_sdt.getText().toString(), etPassword.getText().toString(), "username", tokenDevice.isEmpty()? "" : tokenDevice);
                 break;
             case R.id.ed_sdt:
                 Log.e("tag:  ", "cldsvick");

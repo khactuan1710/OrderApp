@@ -125,6 +125,7 @@ public class ProductDetailFragment extends ViewFragment<ProductDetailContract.Pr
         sharedPref = getViewContext().getSharedPreferences(requireContext().getString(R.string.preference_file_key), MODE_PRIVATE);
         token = sharedPref.getString(requireContext().getString(R.string.preference_key_token), "");
         idProduct = intent.getIntExtra("idProduct", 0);
+        mPresenter.checkFav(token, idProduct);
         idProductFromLogin = intent.getIntExtra("goToFavoriteDetail", 0);
         tv_quantity.setText(String.valueOf(quantity));
         mPresenter.getUserShoppingSession(token);
@@ -311,6 +312,15 @@ public class ProductDetailFragment extends ViewFragment<ProductDetailContract.Pr
                     quantityCart = quantityCart + 1;
                 }
             }
+        }
+    }
+
+    @Override
+    public void checkFav(boolean isFav) {
+        if(isFav) {
+            img_fav.setImageResource(R.drawable.fav_icon);
+        }else {
+            img_fav.setImageResource(R.drawable.fav_icon_disable);
         }
     }
 

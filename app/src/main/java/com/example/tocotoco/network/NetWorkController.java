@@ -121,6 +121,12 @@ public class NetWorkController {
         call.enqueue(callback);
     }
 
+    public static void checkFav(TCCCallback<RegisterResult> callback, String token, int productId) {
+        Call<RegisterResult> call = getAPIBuilder().checkFav(token, productId);
+        call.enqueue(callback);
+    }
+
+
     public static void getPromoteNotifications(TCCCallback<NotifiResult> callback) {
         Call<NotifiResult> call = getAPIBuilder().getPromoteNotifications("");
         call.enqueue(callback);

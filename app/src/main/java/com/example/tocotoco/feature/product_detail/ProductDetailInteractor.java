@@ -48,6 +48,11 @@ public class ProductDetailInteractor extends Interactor<ProductDetailContract.Pr
     }
 
     @Override
+    public void checkFav(TCCCallback<RegisterResult> callback, String token, int productId) {
+        NetWorkController.checkFav(callback, token, productId);
+    }
+
+    @Override
     public void deleteFavItem(TCCCallback<RegisterResult> callback, String token, int productId) {
         NetWorkController.deleteFavItem(callback, token, productId);
     }

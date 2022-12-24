@@ -10,6 +10,7 @@ import com.example.tocotoco.model.ProductResult;
 import com.example.tocotoco.model.ProductsSessionResult;
 import com.example.tocotoco.model.RegisterResult;
 import com.example.tocotoco.model.SessionIdResult;
+import com.example.tocotoco.network.NetWorkController;
 import com.example.tocotoco.network.TCCCallback;
 import com.gemvietnam.base.viper.Presenter;
 import com.gemvietnam.base.viper.interfaces.ContainerView;
@@ -84,6 +85,21 @@ public class ProductDetailPresenter extends Presenter<ProductDetailContract.View
                 DialogUtils.dismissProgressDialog();
             }
         }, token);
+    }
+
+    @Override
+    public void checkFav(String token, int productId) {
+        NetWorkController.checkFav(new TCCCallback<RegisterResult>() {
+            @Override
+            public void onTCTCSuccess(Call<RegisterResult> call, Response<RegisterResult> response) {
+                mView.checkFav(response.body().isResult());
+            }
+
+            @Override
+            public void onTCTCFailure(Call<RegisterResult> call) {
+
+            }
+        }, token, productId);
     }
 
     @Override

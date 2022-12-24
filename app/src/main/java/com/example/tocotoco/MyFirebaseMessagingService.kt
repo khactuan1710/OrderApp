@@ -66,15 +66,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         val notificationManager =
             getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         var intent: Intent? = null
-        if(mess.equals("Đơn hàng của bạn đã được xác nhận")) {
-             intent = Intent(this, OrderStatusActivity::class.java)
-             intent.putExtra("shipping", 1)
-        }else if(mess.equals("Đơn hàng của bạn đã giao xong")){
-            intent = Intent(this, OrderStatusActivity::class.java)
-            intent.putExtra("shipping", 2)
-        }else {
-            intent = Intent(this, OrderStatusActivity::class.java)
-        }
+        intent = Intent(this, OrderStatusActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
 
         val pendingIntent = PendingIntent.getActivity(

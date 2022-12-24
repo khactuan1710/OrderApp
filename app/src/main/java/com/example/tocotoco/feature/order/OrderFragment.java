@@ -83,6 +83,8 @@ public class OrderFragment extends ViewFragment<OrderContract.Presenter> impleme
     private Intent intent;
     private String token;
     private String methodPay = "Tiền mặt";
+    private String username;
+    private String address2;
 
     String totalPay = "10000";
     private String nameFromChangeInfo = "";
@@ -93,6 +95,8 @@ public class OrderFragment extends ViewFragment<OrderContract.Presenter> impleme
     Response<UserInfoResult> userData;
     OrderAdapter orderAdapter;
     List<ProductSessionModel> list;
+    SharedPreferences.Editor editor;
+    SharedPreferences sharedPref2;
     DecimalFormat formatter = new DecimalFormat("#,###,###");
     public static OrderFragment getInstance() {
         return new OrderFragment();
@@ -124,6 +128,10 @@ public class OrderFragment extends ViewFragment<OrderContract.Presenter> impleme
         if(!ed_note.getText().toString().isEmpty()) {
             note = ed_note.getText().toString();
         }
+        editor.putString("noteOrder", note);
+        editor.putString("usernameOrder", username);
+        editor.putString("addressOrder", address2);
+        editor.apply();
         if(methodPay.equals("Tiền mặt")) {
             mPresenter.confirmOrder(token, sessionId, methodPay, userData.body().getResults().getPhonenumber(), userData.body().getResults().getAddress(), note);
         }else {
@@ -177,6 +185,8 @@ public class OrderFragment extends ViewFragment<OrderContract.Presenter> impleme
     private void initData() {
         intent = getActivity().getIntent();
 
+        sharedPref2 = getViewContext().getSharedPreferences(getViewContext().getString(R.string.preference_file_key), MODE_PRIVATE);
+        editor = sharedPref2.edit();
 
         nameFromChangeInfo = intent.getStringExtra("nameFromOrderChangeInfo");
         phoneFromChangeInfo = intent.getStringExtra("phoneFromOrderChangeInfo");
@@ -188,8 +198,10 @@ public class OrderFragment extends ViewFragment<OrderContract.Presenter> impleme
         token = sharedPref.getString(this.getString(R.string.preference_key_token), "");
         if(addressFromChangeInfo != null) {
             tv_address.setText(addressFromChangeInfo);
+            address2 =addressFromChangeInfo;
         }else {
             tv_address.setText(address);
+            address2 =address;
         }
         sessionId = sharedPref.getInt(requireContext().getString(R.string.session_id), 0);
 //        mPresenter.getUserInfo(token);
@@ -256,8 +268,10 @@ public class OrderFragment extends ViewFragment<OrderContract.Presenter> impleme
         if(nameFromChangeInfo != null) {
             tv_name.setText(nameFromChangeInfo);
             tv_phone.setText(phoneFromChangeInfo);
+            username = nameFromChangeInfo;
         }else {
             tv_name.setText(data.body().getResults().getName());
+            username = data.body().getResults().getName();
             tv_phone.setText(data.body().getResults().getPhonenumber());
         }
     }

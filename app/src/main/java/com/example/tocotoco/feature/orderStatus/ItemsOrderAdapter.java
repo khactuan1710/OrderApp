@@ -52,7 +52,7 @@ public class ItemsOrderAdapter extends RecyclerView.Adapter<ItemsOrderAdapter.It
         }
 
         if (!TextUtils.isEmpty(productsResultModel.getPrice())) {
-            holder.tv_price_old.setText(formatter.format(Integer.parseInt(productsResultModel.getPrice()) * productsResultModel.getQuantity())  + "đ");
+            holder.tv_price_old.setText(formatter.format(Integer.parseInt(productsResultModel.getPriceAfterDiscount()) * productsResultModel.getQuantity())  + "đ");
         }
 
         if (!TextUtils.isEmpty(productsResultModel.getPriceAfterDiscount())) {

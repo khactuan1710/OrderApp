@@ -1,7 +1,11 @@
 package com.example.tocotoco.feature.order;
 
+import static android.content.Context.MODE_PRIVATE;
+
+import android.content.SharedPreferences;
 import android.widget.Toast;
 
+import com.example.tocotoco.R;
 import com.example.tocotoco.dialog.DialogUtils;
 import com.example.tocotoco.feature.product_detail.ProductDetailContract;
 import com.example.tocotoco.feature.product_detail.ProductDetailFragment;
@@ -25,7 +29,6 @@ public class OrderPresenter extends Presenter<OrderContract.View, OrderContract.
     }
     @Override
     public void start() {
-
     }
 
     @Override
