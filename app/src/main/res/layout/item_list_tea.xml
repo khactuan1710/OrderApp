@@ -54,6 +54,16 @@
             app:layout_constraintTop_toBottomOf="@+id/tvTitle"
             tools:text="55.000 đ" />
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvPriceOld"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="abc"
+            android:textColor="@color/grey"
+            android:layout_marginTop="@dimen/dimen_4dp"
+            app:layout_constraintStart_toStartOf="@+id/tvPrice"
+            app:layout_constraintTop_toBottomOf="@+id/tvPrice" />
+
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

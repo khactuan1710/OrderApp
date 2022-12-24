@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingVertical="@dimen/dimen_8dp"
-        android:background="@color/color_default">
+        android:background="@color/grey">
         <ImageView
             android:layout_gravity="center_vertical"
             android:id="@+id/ic_back"

@@ -42,6 +42,9 @@ class SearchActivity : BaseActivity(R.layout.fragment_search) {
                 binding.rvSearch.scrollToPosition(0)
             }
         }
+        binding.icBack.setOnClickListener {
+            finish()
+        }
     }
 
     private fun searchProduct(name: String) {

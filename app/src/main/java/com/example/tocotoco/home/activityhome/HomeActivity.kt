@@ -4,7 +4,6 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.util.Log
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.example.tocotoco.R
@@ -74,7 +73,7 @@ class HomeActivity : BaseActivity(R.layout.activity_home) {
 
 
 
-    fun getCartList() = binding.run {
+    private fun getCartList() = binding.run {
         DialogUtils.showProgressDialog(this@HomeActivity)
         var secId = 0;
         if (NetworkUtils.isConnect(this@HomeActivity)) {
@@ -84,7 +83,7 @@ class HomeActivity : BaseActivity(R.layout.activity_home) {
                     response: Response<SessionIdResult>?
                 ) {
                     if(response?.body()?.isSuccess == true) {
-                        secId = response?.body()?.result?.id!!
+                        secId = response.body()?.result?.id!!
                         NetWorkController.getCartInfo(
                             object : TCCCallback<CartInfoResult>() {
                                 override fun onTCTCSuccess(

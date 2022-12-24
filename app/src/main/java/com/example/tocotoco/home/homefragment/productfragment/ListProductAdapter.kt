@@ -1,8 +1,10 @@
 package com.example.tocotoco.home.homefragment.productfragment
 
 import android.annotation.SuppressLint
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -55,6 +57,13 @@ class ListProductAdapter(
         fun bind(item: ProductsByCategoryResultModel) = binding.run {
             tvTitle.text = item.name
             tvPrice.text = "${item.price.toInt().decimalFormatted()} đ"
+            binding.tvPriceOld.paintFlags = binding.tvPriceOld.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+            if (item.priceAfterDiscount.isNullOrEmpty()){
+                tvPriceOld.isVisible = false
+            }else{
+                tvPriceOld.text = "${item.priceAfterDiscount.toInt().decimalFormatted()} đ"
+                tvPriceOld.isVisible = true
+            }
             Glide.with(root.context)
                 .load(item.displayimage)
                 .fitCenter()
