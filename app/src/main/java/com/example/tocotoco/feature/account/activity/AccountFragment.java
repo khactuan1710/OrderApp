@@ -139,7 +139,9 @@ public class AccountFragment extends Fragment {
                                 sharedPref = requireActivity().getSharedPreferences(
                                         getString(R.string.preference_file_key), MODE_PRIVATE);
                                 editor = sharedPref.edit();
-                                editor.clear().commit();
+//                                editor.clear().commit();
+                                editor.putString(getString(R.string.preference_key_token), "");
+                                editor.apply();
                                 checkUserNull();
                             }).create().show();
                 }

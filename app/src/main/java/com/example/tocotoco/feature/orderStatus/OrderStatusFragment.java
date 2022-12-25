@@ -95,7 +95,7 @@ public class OrderStatusFragment extends ViewFragment<OrderStatusContract.Presen
     LinearLayout rcv_data;
     @BindView(R.id.rcv_no_data)
     LinearLayout rcv_no_data;
-
+    String fromdetail = "ds";
     private String token;
     private Intent intent;
     int isShipping;
@@ -131,6 +131,7 @@ public class OrderStatusFragment extends ViewFragment<OrderStatusContract.Presen
         editor = sharedPref2.edit();
         isShipping = sharedPref2.getInt("shipping", 0);
         orderFinish = intent.getStringExtra("statusOrder");
+        fromdetail = intent.getStringExtra("fromDetail");
         if(orderFinish != null) {
             if(orderFinish.equals("TrangThaiOrder")) {
                 finishOrder("Đơn hàng của bạn đã giao xong");
@@ -238,13 +239,28 @@ public class OrderStatusFragment extends ViewFragment<OrderStatusContract.Presen
         orderId = userCurrentResult.getResults().getOrderId();
         int id = getViewContext().getResources().getIdentifier("drawable/"+"img_tien_mat", null, getViewContext().getPackageName());
         int id2 = getViewContext().getResources().getIdentifier("drawable/"+"zalo_pay_logo_inkythuatso", null, getViewContext().getPackageName());
-        if(userCurrentResult.getResults().getProvider().equals("Tiền mặt")) {
-            img_method_pay.setImageResource(id);
-            tv_method_pay.setText("Tiền mặt");
-        }else {
-            img_method_pay.setImageResource(id2);
-            tv_method_pay.setText("Zalo pay");
-        }
+       if(fromdetail != null) {
+           if(fromdetail.equals("tienmat") ) {
+               img_method_pay.setImageResource(id);
+               tv_method_pay.setText("Tiền mặt");
+           }else {
+               if(userCurrentResult.getResults().getProvider().equals("Tiền mặt")) {
+                   img_method_pay.setImageResource(id);
+                   tv_method_pay.setText("Tiền mặt");
+               }else {
+                   img_method_pay.setImageResource(id2);
+                   tv_method_pay.setText("Zalo pay");
+               }
+           }
+       }else {
+           if(userCurrentResult.getResults().getProvider().equals("Tiền mặt")) {
+               img_method_pay.setImageResource(id);
+               tv_method_pay.setText("Tiền mặt");
+           }else {
+               img_method_pay.setImageResource(id2);
+               tv_method_pay.setText("Zalo pay");
+           }
+       }
         tv_address.setText(address);
         if(!userCurrentResult.getResults().getPhoneNumber().isEmpty()) {
             tv_phone_number.setText(userCurrentResult.getResults().getPhoneNumber());

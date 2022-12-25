@@ -51,12 +51,12 @@
             android:id="@+id/imgName"
             android:layout_width="@dimen/dimen_42dp"
             android:layout_height="@dimen/dimen_42dp"
+            android:layout_marginEnd="@dimen/dimen_16dp"
+            android:background="@drawable/bg_img_account"
             android:gravity="center"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_22sp"
             android:textStyle="bold"
-            android:layout_marginEnd="@dimen/dimen_16dp"
-            android:background="@drawable/bg_img_account"
             app:layout_constraintBottom_toBottomOf="@+id/tvLocation"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/appCompatTextView4"
@@ -80,22 +80,16 @@
                 app:srcCompat="@drawable/ic_search" />
 
 
-            <EditText
-                android:id="@+id/editPassword"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvSearch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dimen_8dp"
                 android:layout_marginStart="@dimen/dimen_8dp"
                 android:layout_weight="1"
-                android:background="@color/transparent"
-                android:hint="Tìm kiếm"
-                android:imeOptions="actionDone"
-                android:maxLines="1"
-                android:paddingStart="0dp"
-                android:paddingEnd="0dp"
-                android:singleLine="true"
-                android:textColor="@color/white"
-                android:textColorHint="@color/pink"
-                tools:ignore="TouchTargetSizeCheck" />
+                android:text="Tìm kiếm"
+                android:textColor="@color/pink"
+                android:textSize="@dimen/dimen_18sp" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="@dimen/dimen_24dp"
@@ -103,22 +97,24 @@
                 app:srcCompat="@drawable/ic_category" />
         </androidx.appcompat.widget.LinearLayoutCompat>
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/materialCardView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/dimen_16dp"
-            android:layout_marginTop="@dimen/dimen_16dp"
-            android:theme="@style/Theme.MaterialComponents.Light"
-            app:cardCornerRadius="@dimen/dimen_16dp"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat"
-            tools:layout_editor_absoluteX="16dp">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="match_parent"
-                android:layout_height="197dp"
-                app:srcCompat="@drawable/ic_item_home" />
-        </com.google.android.material.card.MaterialCardView>
+        <!--        <com.google.android.material.card.MaterialCardView-->
+        <!--            android:visibility="gone"-->
+        <!--            android:id="@+id/materialCardView"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginHorizontal="@dimen/dimen_16dp"-->
+        <!--            android:layout_marginTop="@dimen/dimen_16dp"-->
+        <!--            android:theme="@style/Theme.MaterialComponents.Light"-->
+        <!--            app:cardCornerRadius="@dimen/dimen_16dp"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat"-->
+        <!--            tools:layout_editor_absoluteX="16dp">-->
+
+        <!--            <androidx.appcompat.widget.AppCompatImageView-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="197dp"-->
+        <!--                app:srcCompat="@drawable/ic_item_home" />-->
+        <!--        </com.google.android.material.card.MaterialCardView>-->
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/appCompatImageView4"
@@ -127,7 +123,7 @@
             android:layout_marginTop="@dimen/dimen_90dp"
             android:background="@color/green_light"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/materialCardView" />
+            app:layout_constraintTop_toTopOf="@+id/viewPagerSlide" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/linearLayoutCompat2"
@@ -135,7 +131,7 @@
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/dimen_16dp"
             android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@+id/materialCardView">
+            app:layout_constraintTop_toBottomOf="@+id/viewPagerSlide">
 
             <com.example.tocotoco.basekotlin.extensions.tablayout.TabLayoutView
                 android:id="@+id/tabLayout"
@@ -150,5 +146,17 @@
                 android:layout_marginBottom="@dimen/height_actionbar" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPagerSlide"
+            android:layout_width="match_parent"
+            android:layout_height="197dp"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat" />
+
+        <me.relex.circleindicator.CircleIndicator
+            android:id="@+id/indicator"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/width_48dp"
+            app:layout_constraintBottom_toBottomOf="@+id/viewPagerSlide" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

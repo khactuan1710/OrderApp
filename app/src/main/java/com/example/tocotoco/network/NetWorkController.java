@@ -58,6 +58,10 @@ public class NetWorkController {
         Call<ProductsResult> call = getAPIBuilder().getListProduct("");
         call.enqueue(callback);
     }
+    public static void sendResetPasswordEmail(TCCCallback<LoginResult> callback, String email) {
+        Call<LoginResult> call = getAPIBuilder().sendResetPasswordEmail(email);
+        call.enqueue(callback);
+    }
     public static void getListProductByCategory(TCCCallback<ProductsByCategoryResult> callback, int id) {
         Call<ProductsByCategoryResult> call = getAPIBuilder().getListProductByCategory(id);
         call.enqueue(callback);
@@ -103,6 +107,11 @@ public class NetWorkController {
 
     public static void addFavItem(TCCCallback<RegisterResult> callback, String token, int sessionId) {
         Call<RegisterResult> call = getAPIBuilder().addFavItem(token, sessionId);
+        call.enqueue(callback);
+    }
+
+    public static void reOrder(TCCCallback<RegisterResult> callback, String token, int orderId, String note) {
+        Call<RegisterResult> call = getAPIBuilder().reOrder(token, orderId, note);
         call.enqueue(callback);
     }
 
@@ -154,6 +163,11 @@ public class NetWorkController {
 
     public static void getCartInfo(TCCCallback<CartInfoResult> callback, String token, int sessionId) {
         Call<CartInfoResult> call = getAPIBuilder().getCartInfo(token, sessionId);
+        call.enqueue(callback);
+    }
+
+    public static void deleteShoppingSession(TCCCallback<RegisterResult> callback, String token, int sessionId) {
+        Call<RegisterResult> call = getAPIBuilder().deleteShoppingSession(token, sessionId);
         call.enqueue(callback);
     }
 

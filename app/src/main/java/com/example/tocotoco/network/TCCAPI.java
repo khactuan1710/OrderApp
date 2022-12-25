@@ -48,6 +48,10 @@ public interface TCCAPI {
     Call<ProductsResult> getListProduct(@Field("token") String token);
 
     @FormUrlEncoded
+    @POST("user/send_reset_email")
+    Call<LoginResult> sendResetPasswordEmail(@Field("email") String email);
+
+    @FormUrlEncoded
     @POST("get_products_by_category")
     Call<ProductsByCategoryResult> getListProductByCategory(@Field("categoryId") int id);
 
@@ -88,6 +92,11 @@ public interface TCCAPI {
                                      @Field("sessionId") int sessionId);
 
     @FormUrlEncoded
+    @POST("shopping_session/delete_session")
+    Call<RegisterResult> deleteShoppingSession(@Field("token") String token,
+                                     @Field("sessionId") int sessionId);
+
+    @FormUrlEncoded
     @POST("update_user_address")
     Call<RegisterResult> updateUserAddress(@Field("token") String token,
                                            @Field("address") String address,
@@ -106,6 +115,13 @@ public interface TCCAPI {
     @POST("fav/add")
     Call<RegisterResult> addFavItem(@Field("token") String token,
                                     @Field("productId") int productId);
+
+    @FormUrlEncoded
+    @POST("order/re_order")
+    Call<RegisterResult> reOrder(@Field("token") String token,
+                                    @Field("orderId") int orderId,
+                                    @Field("note") String note);
+
     @FormUrlEncoded
     @POST("fav/delete")
     Call<RegisterResult> deleteFavItem(@Field("token") String token,

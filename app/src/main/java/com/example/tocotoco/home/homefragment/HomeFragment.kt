@@ -6,6 +6,9 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.location.Location
+import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.view.isVisible
@@ -16,9 +19,9 @@ import com.example.tocotoco.basekotlin.base.BaseViewModel
 import com.example.tocotoco.basekotlin.extensions.viewBinding
 import com.example.tocotoco.databinding.FragmentHomeBinding
 import com.example.tocotoco.dialog.DialogUtils
-import com.example.tocotoco.home.search.SearchActivity
 import com.example.tocotoco.feature.account.activity.AccountActivity
-import com.example.tocotoco.feature.login.LoginActivity
+import com.example.tocotoco.home.homefragment.productfragment.SlideBannerAdapter
+import com.example.tocotoco.home.search.SearchActivity
 import com.example.tocotoco.model.CategoriesResult
 import com.example.tocotoco.model.UserInfoResult
 import com.example.tocotoco.network.NetWorkController
@@ -53,8 +56,25 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         sharedPref.edit()
     }
 
+    private val listPhoto = listOf(
+        R.drawable.banner_2,
+        R.drawable.ic_item_home,
+        R.drawable.banner_3,
+        R.drawable.banner_4,
+        R.drawable.banner_5
+    )
+    private val slideAdapter by lazy {
+        SlideBannerAdapter(listPhoto)
+    }
+
+    private var timber: Timer? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
     override fun setupViews() {
         requestPermissionLocation()
+        setSlideBanner()
     }
 
     override fun onResume() {
@@ -63,9 +83,41 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         getLocation()
         setupClickListener()
         getCategoryList()
+        autoSlideImage()
         binding.linearLayoutCompat.setOnClickListener {
-            startActivity(Intent(requireContext(),SearchActivity::class.java))
+            startActivity(Intent(requireContext(), SearchActivity::class.java))
         }
+        binding.tvSearch.setOnClickListener {
+            startActivity(Intent(requireContext(), SearchActivity::class.java))
+        }
+    }
+
+    private fun setSlideBanner() = binding.run {
+        viewPagerSlide.adapter = slideAdapter
+        indicator.setViewPager(viewPagerSlide)
+        slideAdapter.registerDataSetObserver(indicator.dataSetObserver)
+    }
+
+    private fun autoSlideImage() = binding.run {
+        if (timber == null) {
+            timber = Timer()
+        }
+
+        timber!!.schedule(object : TimerTask() {
+            override fun run() {
+                Handler(Looper.getMainLooper()).post {
+                    var currentItem = viewPagerSlide.currentItem
+                    val totalItem = listPhoto.size - 1
+                    if (currentItem < totalItem) {
+                        currentItem++
+                        viewPagerSlide.currentItem = currentItem
+                    } else {
+                        viewPagerSlide.currentItem = 0
+                    }
+                }
+            }
+
+        }, 3000, 3000)
     }
 
     private var viewPagerAdapter: ViewPagerAdapter? = null
@@ -94,7 +146,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
 
     private fun setupClickListener() = binding.run {
         imgAccount.setOnClickListener {
-                startActivity(Intent(requireActivity(), AccountActivity::class.java))
+            startActivity(Intent(requireActivity(), AccountActivity::class.java))
         }
         imgName.setOnClickListener {
             startActivity(Intent(requireActivity(), AccountActivity::class.java))
@@ -233,6 +285,14 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
 
     override fun bindViewModel() {
         //No TODO here
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (timber != null){
+            timber!!.cancel()
+            timber = null
+        }
     }
 
 }
