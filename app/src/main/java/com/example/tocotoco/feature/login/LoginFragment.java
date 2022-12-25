@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tocotoco.R;
+import com.example.tocotoco.feature.login.repass.RePassActivity;
 import com.example.tocotoco.feature.product_detail.ProductDetailActivity;
 import com.example.tocotoco.feature.registerAcc.RegisterAccountActivity;
 import com.example.tocotoco.home.activityhome.HomeActivity;
@@ -20,6 +21,7 @@ import com.example.tocotoco.room.TokenDevice;
 import com.example.tocotoco.room.TokenDeviceDatabase;
 import com.gemvietnam.base.viper.ViewFragment;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.List;
 
@@ -30,6 +32,8 @@ public class LoginFragment extends ViewFragment<LoginContract.Presenter> impleme
 
     @BindView(R.id.tv_login)
     TextView tv_login;
+    @BindView(R.id.tv_re_pass)
+    TextView tv_re_pass;
     @BindView(R.id.tv_register)
     TextView tv_register;
     @BindView(R.id.ic_back)
@@ -38,6 +42,10 @@ public class LoginFragment extends ViewFragment<LoginContract.Presenter> impleme
     TextInputEditText ed_sdt;
     @BindView(R.id.etPassword)
     TextInputEditText etPassword;
+    @BindView(R.id.etPasswordLayout)
+    TextInputLayout etPasswordLayout;
+    @BindView(R.id.lo_sdt)
+    TextInputLayout lo_sdt;
     Context context;
     SharedPreferences.Editor editor;
     List<TokenDevice> list;
@@ -81,6 +89,7 @@ public class LoginFragment extends ViewFragment<LoginContract.Presenter> impleme
         etPassword.setOnClickListener(this);
         tv_register.setOnClickListener(this);
         ic_back.setOnClickListener(this);
+        tv_re_pass.setOnClickListener(this);
     }
 
 
@@ -110,6 +119,14 @@ public class LoginFragment extends ViewFragment<LoginContract.Presenter> impleme
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_login:
+                if (ed_sdt.getText().toString().length() == 0) {
+                    lo_sdt.setError("Tên đăng nhập trống");
+                    return;
+                }
+                if (etPassword.getText().toString().length() == 0) {
+                    etPasswordLayout.setError("Mật khẩu đăng nhập nhập trống");
+                    return;
+                }
                 String tokenDevice = list.get(0).getTokenDevice();
                 mPresenter.loginWithPass(ed_sdt.getText().toString(), etPassword.getText().toString(), "username", tokenDevice.isEmpty()? "" : tokenDevice);
                 break;
@@ -127,6 +144,11 @@ public class LoginFragment extends ViewFragment<LoginContract.Presenter> impleme
                 break;
             case R.id.ic_back:
                 mPresenter.back();
+                break;
+            case R.id.tv_re_pass:
+                Intent i2;
+                i2 = new Intent(getViewContext(), RePassActivity.class);
+                startActivity(i2);
                 break;
         }
     }

@@ -22,6 +22,7 @@
             android:layout_alignParentLeft="true"
             android:layout_gravity="center_vertical"/>
         <TextView
+            android:textColor="@color/white"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:layout_marginBottom="20dp"
@@ -182,6 +183,7 @@
             android:layout_height="45dp"
             android:text="Đăng ký"
             android:textSize="@dimen/dimen_20dp"
+            android:textColor="@color/white"
             android:fontFamily="@font/fs_pf_beau_sans_pro_bold"
             android:background="@drawable/boder_button_new"/>
         <LinearLayout

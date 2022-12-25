@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_centerVertical="true"
+    android:orientation="vertical"
+    android:layout_centerHorizontal="true"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_90dp"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/dimen_15dp"
+        >
+        <ImageView
+            android:id="@+id/ic_back"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow_back_24"
+            android:layout_alignParentLeft="true"
+            android:layout_gravity="center_vertical"/>
+        <TextView
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="@dimen/dimen_25dp"
+            android:textColor="@color/color_default"
+            android:fontFamily="@font/fs_pf_beau_sans_pro_bold"
+            android:text="Quên mật khẩu"/>
+    </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/lnl_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_marginTop="@dimen/dimen_20dp"
+            android:paddingHorizontal="@dimen/dimen_15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nhập Email mà bạn đã đăng ký tài khoản này để chúng tôi gửi Mã xác nhận đặt lại mật khẩu cho bạn"/>
+        <LinearLayout
+            android:layout_marginTop="@dimen/dimen_5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/dimen_15dp">
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/lo_sdt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxStrokeColor="@color/color_default"
+                app:boxStrokeWidthFocused="0dp"
+                app:boxStrokeWidth="0dp"
+                app:hintTextColor="@color/color_default"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ed_email"
+                    app:boxStrokeWidthFocused="0dp"
+                    app:boxStrokeWidth="0dp"
+                    app:boxStrokeColor="@color/color_default"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/border_default_app"
+                    android:layout_height="wrap_content"
+                    android:hint="Email tài khoản"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <TextView
+                android:id="@+id/tv_login"
+                android:layout_marginTop="@dimen/dimen_30dp"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:text="Tiếp tục"
+                android:textSize="@dimen/dimen_20dp"
+                android:textColor="@color/white"
+                android:fontFamily="@font/fs_pf_beau_sans_pro_bold"
+                android:background="@drawable/boder_button_new"/>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginBottom="@dimen/dimen_30dp"
+        android:id="@+id/lnl_no_data"
+        android:visibility="gone"
+        android:layout_marginHorizontal="@dimen/dimen_15dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/success"/>
+        <TextView
+            android:layout_marginTop="@dimen/dimen_8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_16sp"
+            android:textColor="@color/color_44494D"
+            android:fontFamily="@font/sf_pro_regular"
+            android:text="Một email đặt lại mật khẩu đã được gửi tới hòm thư của bạn, kiểm tra hòm thư và làm theo hướng dẫn!"/>
+    </LinearLayout>
+
+</LinearLayout>

@@ -48,10 +48,6 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         )
     }
 
-    private val token by lazy {
-        sharedPref?.getString(requireContext().getString(R.string.preference_key_token), "")
-    }
-
     private val editor by lazy {
         sharedPref.edit()
     }
@@ -72,6 +68,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
+
     override fun setupViews() {
         requestPermissionLocation()
         setSlideBanner()
@@ -154,6 +151,8 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
     }
 
     private fun getUserInfo() = binding.run {
+        val token =
+            sharedPref?.getString(requireContext().getString(R.string.preference_key_token), "")
         if (NetworkUtils.isConnect(requireActivity())) {
             NetWorkController.getUserInfo(object : TCCCallback<UserInfoResult>() {
                 override fun onTCTCSuccess(
@@ -289,7 +288,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
 
     override fun onDestroy() {
         super.onDestroy()
-        if (timber != null){
+        if (timber != null) {
             timber!!.cancel()
             timber = null
         }

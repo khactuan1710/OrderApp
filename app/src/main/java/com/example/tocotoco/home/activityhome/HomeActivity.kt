@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.example.tocotoco.R
@@ -67,6 +68,8 @@ class HomeActivity : BaseActivity(R.layout.activity_home) {
 
         getCartList()
         getOrderIcon()
+        val token =
+            sharedPref?.getString(getString(R.string.preference_key_token), "")
         binding.imgCart.setOnClickListener {
             val intent = Intent(this, OrderActivity::class.java)
             intent.putExtra("tokenToOrder", token)
@@ -80,6 +83,8 @@ class HomeActivity : BaseActivity(R.layout.activity_home) {
     private fun getCartList() = binding.run {
         DialogUtils.showProgressDialog(this@HomeActivity)
         var secId = 0;
+        val token =
+            sharedPref?.getString(getString(R.string.preference_key_token), "")
         if (NetworkUtils.isConnect(this@HomeActivity)) {
             NetWorkController.getUserShoppingSession(object : TCCCallback<SessionIdResult>() {
                 override fun onTCTCSuccess(
@@ -158,6 +163,8 @@ class HomeActivity : BaseActivity(R.layout.activity_home) {
     }
      private fun getOrderIcon() = binding.run {
         DialogUtils.showProgressDialog(this@HomeActivity)
+         val token =
+             sharedPref?.getString(getString(R.string.preference_key_token), "")
         if (NetworkUtils.isConnect(this@HomeActivity)) {
             NetWorkController.getUserCurrentOrder(
                 object : TCCCallback<UserCurrentResult>() {

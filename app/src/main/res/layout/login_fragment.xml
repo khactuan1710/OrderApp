@@ -30,6 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textSize="@dimen/dimen_25dp"
+            android:textColor="@color/white"
             android:fontFamily="@font/fs_pf_beau_sans_pro_bold"
             android:text="Đăng nhập"/>
     </RelativeLayout>
@@ -85,25 +86,20 @@
                 android:inputType="textPassword"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:gravity="center_vertical">
-            <CheckBox
-                android:id="@+id/checkBox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Đồng ý với "
-                android:buttonTint="@color/color_EE0033"
-                />
             <TextView
-                android:fontFamily="@font/fs_pf_beau_sans_pro_bold"
+                android:id="@+id/tv_re_pass"
+                android:padding="@dimen/dimen_5dp"
+                android:layout_alignParentRight="true"
+                android:fontFamily="@font/sf_pro_regular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#EE0033"
-                android:text="Điều khoản &amp; Điều kiện"/>
-        </LinearLayout>
+                android:textColor="@color/color_default"
+                android:text="Quên mật khẩu?"/>
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/tv_login"
@@ -113,6 +109,7 @@
             android:layout_height="45dp"
             android:text="Đăng nhập"
             android:textSize="@dimen/dimen_20dp"
+            android:textColor="@color/white"
             android:fontFamily="@font/fs_pf_beau_sans_pro_bold"
             android:background="@drawable/boder_button_new"/>
         <LinearLayout
