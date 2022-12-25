@@ -58,6 +58,7 @@
             android:id="@+id/tvPriceOld"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:text="abc"
             android:textColor="@color/grey"
             android:layout_marginTop="@dimen/dimen_4dp"
