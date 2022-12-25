@@ -234,7 +234,9 @@ public class OrderStatusFragment extends ViewFragment<OrderStatusContract.Presen
         String note = sharedPref2.getString("noteOrder", "");
         String username = sharedPref2.getString("usernameOrder", "");
         String address = sharedPref2.getString("addressOrder", "");
-        tv_end_price.setText(formatter.format(Integer.parseInt(userCurrentResult.getResults().getTotal())) + "đ");
+        if(userCurrentResult.getResults().getTotal() != null) {
+            tv_end_price.setText(formatter.format(Integer.parseInt(userCurrentResult.getResults().getTotal())) + "đ");
+        }
         mPresenter.getItemsInOrder(token, userCurrentResult.getResults().getOrderId());
         orderId = userCurrentResult.getResults().getOrderId();
         int id = getViewContext().getResources().getIdentifier("drawable/"+"img_tien_mat", null, getViewContext().getPackageName());

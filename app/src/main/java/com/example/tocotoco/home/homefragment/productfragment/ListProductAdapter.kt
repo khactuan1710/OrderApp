@@ -55,13 +55,15 @@ class ListProductAdapter(
         RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
         fun bind(item: ProductsByCategoryResultModel) = binding.run {
-            tvTitle.text = item.name
-            tvPrice.text = "${item.price.toInt().decimalFormatted()} đ"
+            tvTitle.text = item.productName
+            if(item.priceAfterDiscount != null) {
+                tvPrice.text = "${item.priceAfterDiscount.toInt().decimalFormatted()} đ"
+            }
             binding.tvPriceOld.paintFlags = binding.tvPriceOld.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
-            if (item.priceAfterDiscount.isNullOrEmpty()){
+            if (item.price.isNullOrEmpty()){
                 tvPriceOld.isVisible = false
             }else{
-                tvPriceOld.text = "${item.priceAfterDiscount.toInt().decimalFormatted()} đ"
+                tvPriceOld.text = "${item.price.toInt().decimalFormatted()} đ"
                 tvPriceOld.isVisible = true
             }
             Glide.with(root.context)

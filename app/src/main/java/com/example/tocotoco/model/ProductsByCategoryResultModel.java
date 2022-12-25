@@ -23,7 +23,7 @@ public class ProductsByCategoryResultModel {
     String priceAfterDiscount;
     @SerializedName("discountid")
     int discountid;
-    @SerializedName("displayimage")
+    @SerializedName("displayImage")
     String displayimage;
     @SerializedName("size")
     String size;
