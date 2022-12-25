@@ -114,7 +114,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
                 }
             }
 
-        }, 3000, 3000)
+        }, 500, 3000)
     }
 
     private var viewPagerAdapter: ViewPagerAdapter? = null
