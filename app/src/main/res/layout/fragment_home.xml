@@ -33,34 +33,36 @@
             android:textColor="@color/white"
             android:textSize="@dimen/size_15sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/imgAccount"
+            app:layout_constraintEnd_toStartOf="@+id/frameLayout"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/appCompatTextView4" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/imgAccount"
-            android:layout_width="@dimen/dimen_42dp"
-            android:layout_height="@dimen/dimen_42dp"
+        <FrameLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/dimen_16dp"
             app:layout_constraintBottom_toBottomOf="@+id/tvLocation"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/appCompatTextView4"
-            app:srcCompat="@drawable/ic_user" />
+            app:layout_constraintTop_toTopOf="@+id/appCompatTextView4">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/imgName"
-            android:layout_width="@dimen/dimen_42dp"
-            android:layout_height="@dimen/dimen_42dp"
-            android:layout_marginEnd="@dimen/dimen_16dp"
-            android:background="@drawable/bg_img_account"
-            android:gravity="center"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_22sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/tvLocation"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/appCompatTextView4"
-            tools:text="C" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgAccount"
+                android:layout_width="@dimen/dimen_42dp"
+                android:layout_height="@dimen/dimen_42dp"
+                app:srcCompat="@drawable/ic_user" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/imgName"
+                android:layout_width="@dimen/dimen_42dp"
+                android:layout_height="@dimen/dimen_42dp"
+                android:background="@drawable/bg_img_account"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_22sp"
+                android:textStyle="bold"
+                tools:text="C" />
+        </FrameLayout>
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/linearLayoutCompat"

@@ -72,6 +72,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
     override fun setupViews() {
         requestPermissionLocation()
         setSlideBanner()
+        autoSlideImage()
     }
 
     override fun onResume() {
@@ -80,7 +81,6 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         getLocation()
         setupClickListener()
         getCategoryList()
-        autoSlideImage()
         binding.linearLayoutCompat.setOnClickListener {
             startActivity(Intent(requireContext(), SearchActivity::class.java))
         }
@@ -114,7 +114,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
                 }
             }
 
-        }, 3000, 3000)
+        }, 500, 3000)
     }
 
     private var viewPagerAdapter: ViewPagerAdapter? = null

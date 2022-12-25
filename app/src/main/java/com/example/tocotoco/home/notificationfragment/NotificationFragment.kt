@@ -9,6 +9,7 @@ import com.example.tocotoco.basekotlin.base.BaseViewModel
 import com.example.tocotoco.basekotlin.extensions.viewBinding
 import com.example.tocotoco.databinding.FragmentNotificationBinding
 import com.example.tocotoco.dialog.DialogUtils
+import com.example.tocotoco.feature.notifi.NotifiActivity
 import com.example.tocotoco.feature.product_detail.ProductDetailActivity
 import com.example.tocotoco.model.NotifiResult
 import com.example.tocotoco.network.NetWorkController
@@ -23,16 +24,20 @@ class NotificationFragment : BaseFragment(R.layout.fragment_notification){
 
     private val promoteAdapter by lazy(LazyThreadSafetyMode.NONE) {
         NotificationAdapter(onItemClick = {
-            val intent = Intent(requireActivity(), ProductDetailActivity::class.java)
-            intent.putExtra("idProduct", it)
+            val intent = Intent(requireActivity(), NotifiActivity::class.java)
+            intent.putExtra("titleNotifi", it.title)
+            intent.putExtra("contentNotifi", it.message)
+            intent.putExtra("imageNotifi", it.image)
             startActivity(intent)
         })
     }
 
     private val newsAdapter by lazy(LazyThreadSafetyMode.NONE) {
         NotificationAdapter(onItemClick = {
-            val intent = Intent(requireActivity(), ProductDetailActivity::class.java)
-            intent.putExtra("idProduct", it)
+            val intent = Intent(requireActivity(), NotifiActivity::class.java)
+            intent.putExtra("titleNotifi", it.title)
+            intent.putExtra("contentNotifi", it.message)
+            intent.putExtra("imageNotifi", it.image)
             startActivity(intent)
         })
     }

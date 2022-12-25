@@ -20,6 +20,13 @@
         android:theme="@style/Theme.Tocotoco"
         tools:targetApi="31">
         <activity
+            android:name=".feature.notifi.NotifiActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".feature.login.repass.RePassActivity"
             android:exported="false">
             <meta-data

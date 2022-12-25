@@ -10,7 +10,7 @@ import com.example.tocotoco.databinding.ItemNotificationBinding
 import com.example.tocotoco.model.NotifiResult.NotifiModel
 
 class NotificationAdapter(
-    private val onItemClick: (Int) -> Unit
+    private val onItemClick: (NotifiModel) -> Unit
 ) : ListAdapter<NotifiModel, NotificationAdapter.ViewHolder>(
     object : DiffUtil.ItemCallback<NotifiModel>() {
         override fun areItemsTheSame(
@@ -44,7 +44,7 @@ class NotificationAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position))
         holder.binding.root.setOnClickListener {
-            onItemClick(getItem(position).id)
+            onItemClick(getItem(position))
         }
     }
 
